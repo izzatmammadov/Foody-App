@@ -1,23 +1,31 @@
 import Image from "next/image";
+interface FooterParamTypes {
+  isTop: boolean;
+}
 
-export const Footer = () => {
+export const Footer = ({ isTop }: FooterParamTypes) => {
   return (
     <footer className="flex flex-col justify-center items-center relative mt-96 pt-44 pb-6 bg-black w-full">
       {/* UPPER FOOTER */}
-      <section className=" w-3/4 flex justify-around bg-blackLight absolute -top-52 items-center rounded-3xl py-12 px-9 text-white">
-        <Image width={200} height={0} src={"footerPizza.svg"} alt="footer" />
 
-        <div className="flex flex-col items-center gap-5">
-          <p className=" font-medium text-4xl w-9/12 text-center leading-tight">
-            Discover Restaurants Near From you
-          </p>
-          <button className=" bg-orange px-12 py-4 font-medium text-md rounded-full hover:scale-95 transition-all duration-500">
-            Explore Now
-          </button>
-        </div>
+      {isTop ? (
+        <section className=" w-3/4 flex justify-around bg-blackLight absolute -top-52 items-center rounded-3xl py-12 px-9 text-white">
+          <Image width={200} height={0} src={"footerPizza.svg"} alt="footer" />
 
-        <Image width={250} height={0} src={"mainBurger.svg"} alt="burger" />
-      </section>
+          <div className="flex flex-col items-center gap-5">
+            <p className=" font-medium text-4xl w-9/12 text-center leading-tight">
+              Discover Restaurants Near From you
+            </p>
+            <button className=" bg-orange px-12 py-4 font-medium text-md rounded-full hover:scale-95 transition-all duration-500">
+              Explore Now
+            </button>
+          </div>
+
+          <Image width={250} height={0} src={"mainBurger.svg"} alt="burger" />
+        </section>
+      ) : (
+        <></>
+      )}
       {/* UPPER FOOTER END */}
 
       {/* LOWER FOOTER */}

@@ -353,7 +353,7 @@ const Restaurants: NextPage = () => {
           </div>
         </section>
 
-        <Footer />
+        <Footer isTop={false} />
       </main>
     </>
   );
