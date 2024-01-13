@@ -202,7 +202,7 @@ const Home: NextPage = () => {
       </section>
       {/* FIFTH SECTION COMPONENT END */}
 
-    <Footer/>
+    <Footer isTop={true}/>
 
       </main>
       </>
