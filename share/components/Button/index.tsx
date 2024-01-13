@@ -1,9 +1,9 @@
 import React from "react";
 
 interface Props {
-  className?: string;
+  className: string;
   onClick?: () => void;
-  innerText?: string;
+  innerText: string;
 }
 
 export const Button = ({ className, onClick, innerText = "BUTTON" }: Props) => {
