@@ -148,7 +148,7 @@ const Home: NextPage = () => {
       {/* FOURTH SECTION COMPONENT END */}
 
       {/* FIFTH SECTION COMPONENT */}
-      <section className="flex flex-col gap-10 justify-center px-14 mb-40">
+      <section className="flex flex-col gap-10 justify-center px-14 mb-96">
         <div className="flex flex-col gap-6 items-center text-center">
           <h3 className=" text-5xl font-black w-1/3 leading-tight">
             Our Popular Update New Foods
