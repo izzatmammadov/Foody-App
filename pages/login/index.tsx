@@ -3,14 +3,11 @@ import Head from "next/head";
 import Image from "next/image";
 import { useState } from "react";
 import { Button } from "../../share/components/Button";
+import { Langugages } from "../../share/components/Languages";
+import { t } from "i18next";
 
 const Login: NextPage = () => {
-  const [langDropdown, setLangDropdown] = useState(false);
   const [showLoginForm, setShowLoginForm] = useState(true);
-
-  const toggleDropDown = () => {
-    setLangDropdown(!langDropdown);
-  };
 
   const switchForm = () => {
     setShowLoginForm(!showLoginForm);
@@ -28,42 +25,7 @@ const Login: NextPage = () => {
           Foody<span className=" text-white">.</span>
         </h1>
 
-        <Image
-          className="cursor-pointer relative"
-          width={40}
-          height={0}
-          src={"en.svg"}
-          alt="EnFlag"
-          onClick={toggleDropDown}
-        />
-
-        {langDropdown && (
-          <div className=" flex flex-col gap-4 w-max bg-white px-2 py-4 absolute shadow-lg z-10 top-32 right-[4.4%]">
-            <Image
-              className="cursor-pointer hover:scale-95 transition-all duration-500"
-              width={40}
-              height={0}
-              src={"en.svg"}
-              alt="EnFlag"
-            />
-            <hr />
-            <Image
-              className="cursor-pointer hover:scale-95 transition-all duration-500"
-              width={40}
-              height={0}
-              src={"fr.svg"}
-              alt="FrFlag"
-            />
-            <hr />
-            <Image
-              className="cursor-pointer hover:scale-95 transition-all duration-500"
-              width={40}
-              height={0}
-              src={"az.svg"}
-              alt="AzFlag"
-            />
-          </div>
-        )}
+        <Langugages />
       </nav>
 
       <main>
@@ -86,7 +48,7 @@ const Login: NextPage = () => {
                 } font-medium`}
                 onClick={() => switchForm()}
               >
-                Login
+                {t("login")}
               </button>
               <button
                 className={`text-3xl ${
@@ -94,7 +56,7 @@ const Login: NextPage = () => {
                 } font-medium`}
                 onClick={() => switchForm()}
               >
-                Register
+                {t("register")}
               </button>
             </div>
 
@@ -102,7 +64,7 @@ const Login: NextPage = () => {
               <form className="flex flex-col w-4/5 mx-auto gap-8 items-center">
                 <div className="flex flex-col gap-2 w-full">
                   <label className="text-xl font-medium text-grayText2">
-                    Username
+                    {t("username")}
                   </label>
                   <input
                     className="p-4 rounded-md outline-none bg-[#ffe6e6]"
@@ -112,7 +74,7 @@ const Login: NextPage = () => {
 
                 <div className="flex flex-col gap-2 w-full mb-8">
                   <label className="text-xl font-medium text-grayText2">
-                    Password
+                  {t("password")}
                   </label>
                   <input
                     className=" p-4 rounded-md outline-none bg-[#ffe6e6]"
@@ -121,15 +83,15 @@ const Login: NextPage = () => {
                 </div>
 
                 <Button
-                  className="w-full bg-lightRed text-xl font-medium p-4 rounded-md text-white"
-                  innerText="Login"
+                  className="w-full bg-lightRed text-xl font-medium p-4 rounded-md text-white" innerText={t("login")}
                 />
               </form>
             ) : (
               <form className="flex flex-col w-4/5 mx-auto gap-8 items-center">
                 <div className="flex flex-col gap-2 w-full">
                   <label className="text-xl font-medium text-grayText2">
-                    Fullname
+                  {t("fullname")}
+
                   </label>
                   <input
                     className="p-4 rounded-md outline-none bg-[#ffe6e6]"
@@ -139,7 +101,7 @@ const Login: NextPage = () => {
 
                 <div className="flex flex-col gap-2 w-full">
                   <label className="text-xl font-medium text-grayText2">
-                    Username
+                  {t("username")}
                   </label>
                   <input
                     className=" p-4 rounded-md outline-none bg-[#ffe6e6]"
@@ -159,7 +121,8 @@ const Login: NextPage = () => {
 
                 <div className="flex flex-col gap-2 w-full mb-8">
                   <label className="text-xl font-medium text-grayText2">
-                    Password
+                  {t("password")}
+
                   </label>
                   <input
                     className=" p-4 rounded-md outline-none mb-8 bg-[#ffe6e6]"
@@ -168,8 +131,7 @@ const Login: NextPage = () => {
                 </div>
 
                 <Button
-                  className="w-full bg-lightRed text-xl font-medium p-4 rounded-md text-white"
-                  innerText="Register"
+                  className="w-full bg-lightRed text-xl font-medium p-4 rounded-md text-white" innerText={t("register")}
                 />
               </form>
             )}
