@@ -3,6 +3,7 @@ import { Navbar } from "../Navbar";
 import styles from "./header.module.css";
 
 export const Header = () => {
+  
   return (
     <header className="m-8 flex-col rounded-md bg-whiteLight1">
       <Navbar isRegister={false}/>
