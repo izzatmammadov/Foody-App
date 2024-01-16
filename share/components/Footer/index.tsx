@@ -5,7 +5,7 @@ interface FooterParamTypes {
 
 export const Footer = ({ isTop }: FooterParamTypes) => {
   return (
-    <footer className="flex flex-col justify-center items-center relative mt-96 pt-44 pb-6 bg-black w-full">
+    <footer className="flex flex-col justify-center items-center relative pt-44 pb-6 bg-black w-full">
       {/* UPPER FOOTER */}
 
       {isTop ? (

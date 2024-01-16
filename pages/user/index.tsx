@@ -14,7 +14,7 @@ const User: NextPage = () => {
       </Head>
 
       <main>
-        <Navbar />
+        <Navbar isRegister={true}/>
 
         <section className="m-8 flex justify-center gap-10">
           <div className="rounded-md flex flex-col max-h-screen overflow-y-auto gap-8 bg-whiteLight1 w-1/6 p-4">
@@ -25,7 +25,7 @@ const User: NextPage = () => {
                 src={"profile.svg"}
                 alt="profileIcon"
               />
-              <p className="font-semibold text-grayText2 text-[20px] ">
+              <p className="font-semibold text-grayText2 text-lg ">
                 Profile
               </p>
             </div>
@@ -37,21 +37,21 @@ const User: NextPage = () => {
                 src={"basketIcon.svg"}
                 alt="basketIcon"
               />
-              <p className="font-semibold text-grayText2 text-[20px] ">
+              <p className="font-semibold text-grayText2 text-lg ">
                 Your Basket
               </p>
             </div>
 
             <div className="flex items-center gap-4 cursor-pointer hover:bg-mainRedLight transition-all p-2">
-              <Image width={25} height={0} src={".svg"} alt="orderIcon" />
-              <p className="font-semibold text-grayText2 text-[20px] ">
+              <Image width={25} height={0} src={"order.svg"} alt="orderIcon" />
+              <p className="font-semibold text-grayText2 text-lg ">
                 Your Orders
               </p>
             </div>
 
             <div className="flex items-center gap-4 cursor-pointer hover:bg-mainRedLight transition-all p-2">
-              <Image width={25} height={0} src={".svg"} alt="checkoutIcon" />
-              <p className="font-semibold text-grayText2 text-[20px] ">
+              <Image width={25} height={0} src={"checkout.svg"} alt="checkoutIcon" />
+              <p className="font-semibold text-grayText2 text-lg ">
                 Checkout
               </p>
             </div>
@@ -63,7 +63,7 @@ const User: NextPage = () => {
                 src={"logout.svg"}
                 alt="logoutIcon"
               />
-              <p className="font-semibold text-grayText2 text-[20px] ">
+              <p className="font-semibold text-grayText2 text-lg ">
                 Logout
               </p>
             </div>
@@ -187,7 +187,7 @@ const User: NextPage = () => {
           </div>
         </section>
 
-        <Footer />
+        <Footer isTop={false}/>
       </main>
     </>
   );

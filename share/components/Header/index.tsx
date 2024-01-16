@@ -3,37 +3,10 @@ import { Navbar } from "../Navbar";
 import styles from "./header.module.css";
 
 export const Header = () => {
+  
   return (
     <header className="m-8 flex-col rounded-md bg-whiteLight1">
-      <Navbar />
-
-      {/* LANGUAGE DIV*/}
-      <div className=" flex flex-col gap-4 w-max bg-white px-2 py-4 absolute shadow-lg z-10 top-32 right-[13.7%]">
-        <Image
-          className="cursor-pointer hover:scale-95 transition-all duration-500"
-          width={40}
-          height={0}
-          src={"en.svg"}
-          alt="EnFlag"
-        />
-        <hr />
-        <Image
-          className="cursor-pointer hover:scale-95 transition-all duration-500"
-          width={40}
-          height={0}
-          src={"fr.svg"}
-          alt="FrFlag"
-        />
-        <hr />
-        <Image
-          className="cursor-pointer hover:scale-95 transition-all duration-500"
-          width={40}
-          height={0}
-          src={"az.svg"}
-          alt="AzFlag"
-        />
-      </div>
-      {/* LANGUAGE DIV END*/}
+      <Navbar isRegister={false}/>
 
       {/* MAIN SECTION */}
       <section className="flex justify-center items-center h-screen px-11 -mt-24">
