@@ -1,6 +1,7 @@
 import Image from "next/image";
 import { Button } from "../Button";
 import  {Langugages}  from "../Languages/index";
+import { useTranslation } from "react-i18next";
 
 interface NavbarParamTypes {
   isRegister: boolean;
@@ -13,6 +14,8 @@ export const Navbar = ({
   forLogin,
   forAdmin,
 }: NavbarParamTypes) => {
+  const { t, i18n } = useTranslation();
+
   return (
     <nav
       className={`flex justify-between m-8 items-center ${
@@ -32,16 +35,16 @@ export const Navbar = ({
         <>
           <ul className="flex justify-around text-lg w-1/2 font-medium text-grayText1 ">
             <li className="cursor-pointer hover:text-mainRed transition-all">
-              Home
+            {t("home")}
             </li>
             <li className="cursor-pointer hover:text-mainRed transition-all">
-              Restaurants
+            {t("restaurants")}
             </li>
             <li className="cursor-pointer hover:text-mainRed transition-all">
-              About Us
+            {t("about_us")}
             </li>
             <li className="cursor-pointer hover:text-mainRed transition-all">
-              How It Works
+            {t("how_it_works")}
             </li>
             <li className="cursor-pointer hover:text-mainRed transition-all">
               FAQs
@@ -93,7 +96,7 @@ export const Navbar = ({
               className={`px-6 py-2 rounded-3xl bg-mainRed text-white font-medium shadow-md hover:scale-95 transition-all duration-500 ${
                 forLogin ? "hidden" : "block"
               }`}
-              innerText="Sign Up"
+              innerText={t("signUp")}
             />
           </div>
         </>

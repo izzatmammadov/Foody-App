@@ -1,9 +1,12 @@
 import Image from "next/image";
+import { useTranslation } from "react-i18next";
 interface FooterParamTypes {
   isTop: boolean;
 }
 
 export const Footer = ({ isTop }: FooterParamTypes) => {
+  const { t, i18n } = useTranslation();
+
   return (
     <footer className="flex flex-col justify-center items-center relative pt-44 pb-6 bg-black w-full">
       {/* UPPER FOOTER */}
@@ -14,10 +17,10 @@ export const Footer = ({ isTop }: FooterParamTypes) => {
 
           <div className="flex flex-col items-center gap-5">
             <p className=" font-medium text-4xl w-9/12 text-center leading-tight">
-              Discover Restaurants Near From you
+            {t("footerDesc")}
             </p>
             <button className=" bg-orange px-12 py-4 font-medium text-md rounded-full hover:scale-95 transition-all duration-500">
-              Explore Now
+            {t("footerDesc2")}
             </button>
           </div>
 

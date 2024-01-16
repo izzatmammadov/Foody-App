@@ -3,8 +3,11 @@ import Head from "next/head";
 import Image from "next/image";
 import { Header } from "../share/components/Header";
 import { Footer } from "../share/components/Footer";
+import { useTranslation } from "react-i18next";
 
 const Home: NextPage = () => {
+  const { t, i18n } = useTranslation();
+
   return (
     <>
       <Head>
@@ -19,7 +22,7 @@ const Home: NextPage = () => {
         {/* FIRST SECTION COMPONENT */}
         <section className="flex flex-col gap-10 justify-center my-14 px-14">
           <div className="flex flex-col gap-6 items-center text-center">
-            <h3 className=" text-5xl font-black">Features</h3>
+            <h3 className=" text-5xl font-black">{t("homeDesc5")}</h3>
             <p className=" w-2/3 text-2xl text-grayText1">
               Lorem ipsum is placeholder text commonly used in the graphic,
               print, and publishing industries for previewing layouts and visual
@@ -83,7 +86,7 @@ const Home: NextPage = () => {
         <section className="flex justify-center items-center px-11 mt-52">
           <div className="flex flex-col gap-8 w-1/2">
             <h4 className="text-6xl font-black leading-tight">
-              Menu That Always <br /> Make You Fall In Love
+              {t("homeDesc6")}
             </h4>
             <p className="text-xl text-grayText1 w-3/5">
               Lorem ipsum is placeholder text commonly used in the graphic,
@@ -109,7 +112,7 @@ const Home: NextPage = () => {
         <section className="flex flex-row-reverse justify-between items-center px-11 mt-36">
           <div className="flex flex-col gap-8 w-1/2">
             <h4 className="text-6xl font-black leading-tight">
-              Yummy Always Papa John’s Pizza.Agree?
+              {t("homeDesc7")}
             </h4>
             <p className="text-xl text-grayText1 w-3/5">
               Lorem ipsum is placeholder text commonly used in the graphic,
@@ -135,7 +138,7 @@ const Home: NextPage = () => {
         <section className="flex justify-center items-center px-11 my-36">
           <div className="flex flex-col gap-8 w-1/2">
             <h4 className="text-6xl font-black leading-tight">
-              Do You Like French Fries?Mmm...
+              {t("homeDesc8")}
             </h4>
             <p className="text-xl text-grayText1 w-3/5">
               Lorem ipsum is placeholder text commonly used in the graphic,
@@ -161,7 +164,7 @@ const Home: NextPage = () => {
         <section className="flex flex-col gap-10 justify-center px-14 mb-96">
           <div className="flex flex-col gap-6 items-center text-center">
             <h3 className=" text-5xl font-black w-1/3 leading-tight">
-              Our Popular Update New Foods
+              {t("homeDesc9")}
             </h3>
             <p className=" w-2/3 text-2xl text-grayText1">
               Lorem ipsum is placeholder text commonly used in the graphic,
