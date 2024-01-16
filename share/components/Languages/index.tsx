@@ -4,14 +4,18 @@ import { useTranslation } from "react-i18next";
 
 export const Langugages = () => {
   const { t, i18n } = useTranslation();
-  const [LangDropdown, setLangDropdown] = useState(false);
+  const [langDropdown, setLangDropdown] = useState(false);
+  const [selectedLanguage, setSelectedLanguage] = useState("en");
 
   const clickHandle = async (lang: string) => {
     await i18n.changeLanguage(lang);
+    setSelectedLanguage(lang);
+    setLangDropdown(false); 
+    
   };
 
   const toggleDropDown = () => {
-    setLangDropdown(!LangDropdown);
+    setLangDropdown(!langDropdown);
   };
 
   return (
@@ -20,12 +24,12 @@ export const Langugages = () => {
         className="cursor-pointer relative"
         width={40}
         height={0}
-        src={"en.svg"}
-        alt="EnFlag"
+        src={`${selectedLanguage}.svg`} 
+        alt={`${selectedLanguage}Flag`}
         onClick={toggleDropDown}
       />
-      {LangDropdown && (
-        <div className=" flex flex-col gap-4 w-max bg-white px-2 py-4 absolute shadow-lg z-10 top-32 -ml-[132px]">
+      {langDropdown && (
+        <div className="flex flex-col gap-4 w-max bg-white px-2 py-4 absolute shadow-lg z-10 top-32 -ml-[132px]">
           <Image
             className="cursor-pointer hover:scale-95 transition-all duration-500"
             width={40}

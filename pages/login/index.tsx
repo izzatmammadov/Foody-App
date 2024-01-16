@@ -3,11 +3,13 @@ import Head from "next/head";
 import Image from "next/image";
 import { useState } from "react";
 import { Button } from "../../share/components/Button";
-import { Langugages } from "../../share/components/Languages";
-import { t } from "i18next";
+import { Navbar } from "../../share/components/Navbar";
+import { useTranslation } from "react-i18next";
 
 const Login: NextPage = () => {
   const [showLoginForm, setShowLoginForm] = useState(true);
+  const { t, i18n } = useTranslation();
+
 
   const switchForm = () => {
     setShowLoginForm(!showLoginForm);
@@ -20,23 +22,17 @@ const Login: NextPage = () => {
         <link rel="icon" href="/mainBurger.svg" />
       </Head>
 
-      <nav className="flex justify-between m-8 items-center rounded-md bg-lightRed p-11">
-        <h1 className="text-4xl text-white font-extrabold">
-          Foody<span className=" text-white">.</span>
-        </h1>
-
-        <Langugages />
-      </nav>
+      <Navbar isRegister={false} forLogin={true} forAdmin={true} />
 
       <main>
-        <section className="flex justify-center bg-lightRed mx-8 mb-8">
+        <section className="flex justify-center bg-lightRed mx-8 mb-8 ">
           <div className="bg-lightRed m-auto w-1/2">
             <Image
               className="w-4/5 m-auto"
               width={0}
               height={0}
-              src={"loginClient.svg"}
-              alt="login"
+              src={showLoginForm ? "loginClient.svg" : "registerClient.svg"}
+              alt={showLoginForm ? "loginClient.svg" : "registerClient.svg"}
             />
           </div>
           {/* FORM DIV */}
@@ -74,7 +70,7 @@ const Login: NextPage = () => {
 
                 <div className="flex flex-col gap-2 w-full mb-8">
                   <label className="text-xl font-medium text-grayText2">
-                  {t("password")}
+                    {t("password")}
                   </label>
                   <input
                     className=" p-4 rounded-md outline-none bg-[#ffe6e6]"
@@ -83,15 +79,15 @@ const Login: NextPage = () => {
                 </div>
 
                 <Button
-                  className="w-full bg-lightRed text-xl font-medium p-4 rounded-md text-white" innerText={t("login")}
+                  className="w-full bg-lightRed text-xl font-medium p-4 rounded-md text-white hover:scale-95 hover:bg-mainRed transition-all duration-500"
+                  innerText={t("login")}
                 />
               </form>
             ) : (
               <form className="flex flex-col w-4/5 mx-auto gap-8 items-center">
                 <div className="flex flex-col gap-2 w-full">
                   <label className="text-xl font-medium text-grayText2">
-                  {t("fullname")}
-
+                    {t("fullname")}
                   </label>
                   <input
                     className="p-4 rounded-md outline-none bg-[#ffe6e6]"
@@ -101,7 +97,7 @@ const Login: NextPage = () => {
 
                 <div className="flex flex-col gap-2 w-full">
                   <label className="text-xl font-medium text-grayText2">
-                  {t("username")}
+                    {t("username")}
                   </label>
                   <input
                     className=" p-4 rounded-md outline-none bg-[#ffe6e6]"
@@ -121,17 +117,17 @@ const Login: NextPage = () => {
 
                 <div className="flex flex-col gap-2 w-full mb-8">
                   <label className="text-xl font-medium text-grayText2">
-                  {t("password")}
-
+                    {t("password")}
                   </label>
                   <input
-                    className=" p-4 rounded-md outline-none mb-8 bg-[#ffe6e6]"
+                    className=" p-4 rounded-md outline-none bg-[#ffe6e6]"
                     type="password"
                   />
                 </div>
 
                 <Button
-                  className="w-full bg-lightRed text-xl font-medium p-4 rounded-md text-white" innerText={t("register")}
+                  className="w-full bg-lightRed text-xl font-medium p-4 rounded-md text-white hover:scale-95 hover:bg-mainRed transition-all duration-500"
+                  innerText={t("register")}
                 />
               </form>
             )}

@@ -20,10 +20,19 @@ const resources = {
       fullname: "Ad Soyad",
     },
   },
+  fr: {
+    translation: {
+      login: "makaka",
+      register: "salala",
+      username: "asdasd Adı",
+      password: "asdasd",
+      fullname: "sdas asd",
+    },
+  },
 };
 
 i18n.use(initReactI18next).init({
-  lng: "az",
+  lng: "en",
   resources,
 });
 
