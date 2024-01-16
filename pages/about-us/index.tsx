@@ -7,9 +7,9 @@ const AboutUs = () => {
   return (
     <>
       <div className="max-w-[1440px] p-8 mx-auto ">
-        <Navbar isRegister={true} />
+        <Navbar forAdmin={false} forLogin={false} isRegister={true} />
       </div>
-        {/* //* for big screen --------------------------------------------------------------- */}
+      {/* //* for big screen --------------------------------------------------------------- */}
       <main className="hidden sm:block">
         <section className="max-w-[1440px] flex flex-wrap p-8 mx-auto gap-[60px] justify-between">
           <div className="max-w-[565px] flex flex-col gap-8 ml-8">

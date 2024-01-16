@@ -11,7 +11,7 @@ const Faq = () => {
   };
   return (
     <>
-      <Navbar isRegister={true} />
+      <Navbar forAdmin={false} forLogin={false} isRegister={true} />
       <main className=" flex flex-col items-center gap-5 mb-8">
         <p className=" text-5xl font-medium pb-5">F.A.Q</p>
 
