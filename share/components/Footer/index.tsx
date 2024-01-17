@@ -12,7 +12,7 @@ export const Footer = ({ isTop }: FooterParamTypes) => {
       {/* UPPER FOOTER */}
 
       {isTop ? (
-        <section className=" w-3/4 flex justify-around bg-blackLight absolute -top-52 items-center rounded-3xl py-12 px-9 text-white">
+        <section className=" w-3/4 flex justify-around bg-blackLight absolute -top-52 items-center rounded-3xl py-12 px-9 text-white ">
           <Image width={200} height={0} src={"footerPizza.svg"} alt="footer" />
 
           <div className="flex flex-col items-center gap-5">

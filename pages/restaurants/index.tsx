@@ -5,6 +5,7 @@ import { Footer } from "../../share/components/Footer";
 import { Navbar } from "../../share/components/Navbar";
 
 const Restaurants: NextPage = () => {
+
   return (
     <>
       <Head>

@@ -2,8 +2,11 @@ import React from "react";
 import Image from "next/image";
 import { Navbar } from "../../share/components/Navbar";
 import { Footer } from "../../share/components/Footer";
+import { useTranslation } from "react-i18next";
 
 const HowItWorks = () => {
+  const { t, i18n } = useTranslation();
+
   return (
     <>
       <main>
@@ -13,21 +16,14 @@ const HowItWorks = () => {
         <section className=" hidden sm:block">
           <div className="text-center">
             <p className=" text-5xl font-semibold leading-8 tracking-widest">
-              How it works
+              {t("how_it_works")}
             </p>
             <p className=" mt-5 text-[#828282] max-w-[1034px] font-medium  leading-8 tracking-widest mx-auto">
-              Delivery may be extended during sale periods. Please refer to the
-              checkout page for an updated estimate for your location. Kindly
-              note that once you have placed an order, it is no longer possible
-              to modify your order. Taxes and duties are included in all product
-              prices.It is possible to place an order with shipment to a
-              different address than your home or billing address when paying
-              with a credit card. Please note that Klarna payments require that
-              your order is shipped to your registered home address.
+              {t("howItWorksDesc")}
             </p>
           </div>
         </section>
-        <section className=" hidden sm:block">
+        <section className="hidden sm:block">
           <div className="flex justify-center mt-7 relative">
             <Image
               className=" z-40"
