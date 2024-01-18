@@ -8,19 +8,17 @@ const HowItWorks = () => {
   const { t, i18n } = useTranslation();
 
   return (
-
     <>
+      <Navbar forAdmin={false} forLogin={false} isRegister={true} />
+
       <main>
-        <div>
-          <Navbar forAdmin={false} forLogin={false} isRegister={true} />
-        </div>
         <section className=" hidden sm:block">
           <div className="text-center">
             <p className=" text-5xl font-semibold leading-8 tracking-widest">
               {t("how_it_works")}
             </p>
             <p className=" mt-5 text-[#828282] max-w-[1034px] font-medium  leading-8 tracking-widest mx-auto">
-            {t("how_it_worksDesc")}
+              {t("how_it_worksDesc")}
             </p>
           </div>
         </section>
