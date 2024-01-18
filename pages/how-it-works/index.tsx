@@ -10,7 +10,7 @@ const HowItWorks = () => {
   return (
     <>
       <Navbar forAdmin={false} forLogin={false} isRegister={true} />
-
+{/*  */}
       <main>
         <section className=" hidden sm:block">
           <div className="text-center">
