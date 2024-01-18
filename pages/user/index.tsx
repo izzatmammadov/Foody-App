@@ -18,7 +18,7 @@ const User: NextPage = () => {
       </Head>
 
       <main>
-        <Navbar isRegister={true} />
+        <Navbar isRegister={true} forAdmin={null} forLogin={null} />
 
         <section className="m-8 flex justify-center gap-10">
           <div className="rounded-md flex flex-col max-h-screen overflow-y-auto gap-8 bg-whiteLight1 w-1/6 p-4">
