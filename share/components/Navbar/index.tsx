@@ -4,9 +4,9 @@ import  {Langugages}  from "../Languages/index";
 import { useTranslation } from "react-i18next";
 
 interface NavbarParamTypes {
-  isRegister: boolean;
-  forLogin: boolean;
-  forAdmin: boolean;
+  isRegister: boolean | null;
+  forLogin: boolean | null;
+  forAdmin: boolean | null;
 }
 
 export const Navbar = ({

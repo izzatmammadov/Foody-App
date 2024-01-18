@@ -9,7 +9,7 @@ export const Header = () => {
 
   return (
     <header className="m-8 flex-col rounded-md bg-whiteLight1">
-      <Navbar isRegister={false} />
+      <Navbar isRegister={false} forAdmin={null} forLogin={null} />
 
       {/* MAIN SECTION */}
       <section className="flex justify-center items-center h-screen px-11 -mt-24">
