@@ -13,6 +13,7 @@ const resources = {
       restaurants: "Restaurants",
       about_us: "About Us",
       how_it_works: "How It Works",
+      how_it_worksDesc: "Delivery may be extended during sale periods. Please refer to the checkout page for an updated estimate for your location. Kindly note that once you have placed an order, it is no longer possible to modify your order. Taxes and duties are included in all product prices.It is possible to place an order with shipment to a different address than your home or billing address when paying with a credit card. Please note that Klarna payments require that your order is shipped to your registered home address.",
       signUp: "Sign Up",
       homeDesc: "Our Food site makes it easy to find local food",
       homeDesc2:
@@ -55,6 +56,7 @@ const resources = {
       restaurants: "Restoranlar",
       about_us: "Haqqımızda",
       how_it_works: "Necə İşləyirik",
+      how_it_worksDesc:"Satış müddətində çatdırılma uzadıla bilər. Məkanınız üçün yenilənmiş təxmin üçün yoxlama səhifəsinə baxın. Nəzərə alın ki, sifariş verdikdən sonra sifarişinizi dəyişdirmək artıq mümkün deyil. Vergilər və rüsumlar bütün məhsul qiymətlərinə daxildir. Kredit kartı ilə ödəniş edərkən evinizdən və ya faktura ünvanınızdan fərqli ünvana çatdırılma ilə sifariş vermək mümkündür. Nəzərə alın ki, Klarna ödənişləri sifarişinizin qeydiyyatdan keçmiş ev ünvanınıza göndərilməsini tələb edir.",
       signUp: "Giriş Et",
       homeDesc: "Qida saytımız yerli yeməkləri tapmağı asanlaşdırır",
       homeDesc2:
