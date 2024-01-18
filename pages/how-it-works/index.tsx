@@ -41,34 +41,10 @@ const HowItWorks = () => {
             />
           </div>
         </section>
-        <section className="block sm:hidden">
-          <div className="text-center">
-            <p className=" text-3xl font-semibold leading-8 tracking-widest">
-              How it works
-            </p>
-            <p className=" mt-3 text-[#828282] p-4 font-medium  leading-8 tracking-widest mx-auto">
-              Lorem ipsum is placeholder text commonly used in the graphic,
-              print, and publishing industries for previewing layouts and ver
-              text commonly used in the graphic, print, and publishing
-              industries for previewing layouts and visual mockups.
-            </p>
-          </div>
-        </section>
-        <section className=" block sm:hidden">
-          <div className=" bg-[#FFB64F]  rounded-[100px] h-[480px]">
-            <Image
-              className=" w-full pt-16"
-              width={0}
-              height={0}
-              src={"how-it-works-deliverman.svg"}
-              alt="error"
-            />
-          </div>
-        </section>
-        <footer>
-          <Footer isTop={false} />
-        </footer>
+        
       </main>
+
+      <Footer isTop={false} />
     </>
   );
 };
