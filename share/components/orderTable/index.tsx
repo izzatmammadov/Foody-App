@@ -173,7 +173,7 @@ export const Table = () => {
           </tr>
         </tbody>
       </table>
-      {/* MODAL CONTENT */}
+      {/* MODAL CONTENT FOR DELETE */}
       <Modal isOpen={isModalOpen} onClose={handleModalClose}>
         <div className="flex justify-between items-center">
           <p className="mx-auto text-3xl font-medium">{t("modalDesc")}</p>
@@ -200,6 +200,8 @@ export const Table = () => {
           />
         </div>
       </Modal>
+      {/* MODAL CONTENT FOR SHOW */}
+      
     </>
   );
 };

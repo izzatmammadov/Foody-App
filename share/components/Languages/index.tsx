@@ -11,7 +11,6 @@ export const Langugages = () => {
     await i18n.changeLanguage(lang);
     setSelectedLanguage(lang);
     setLangDropdown(false); 
-    
   };
 
   const toggleDropDown = () => {
@@ -38,15 +37,15 @@ export const Langugages = () => {
             alt="EnFlag"
             onClick={() => clickHandle("en")}
           />
-          <hr />
-          <Image
+          {/* <hr /> */}
+          {/* <Image
             className="cursor-pointer hover:scale-95 transition-all duration-500"
             width={40}
             height={0}
             src={"fr.svg"}
             alt="FrFlag"
             onClick={() => clickHandle("fr")}
-          />
+          /> */}
           <hr />
           <Image
             className="cursor-pointer hover:scale-95 transition-all duration-500"

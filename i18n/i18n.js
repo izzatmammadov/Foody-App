@@ -53,7 +53,7 @@ const resources = {
   },
   az: {
     translation: {
-      login: "Login",
+      login: "Giriş",
       register: "Qeydiyyat",
       username: "İstifadəçi Adı",
       password: "Şifrə",
