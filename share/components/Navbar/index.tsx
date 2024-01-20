@@ -2,6 +2,7 @@ import Image from "next/image";
 import { Button } from "../Button";
 import  {Langugages}  from "../Languages/index";
 import { useTranslation } from "react-i18next";
+import { useRouter } from "next/router";
 
 interface NavbarParamTypes {
   isRegister: boolean | null;
@@ -15,6 +16,7 @@ export const Navbar = ({
   forAdmin,
 }: NavbarParamTypes) => {
   const { t, i18n } = useTranslation();
+  const navigate = useRouter()
 
   return (
     <nav
@@ -34,19 +36,19 @@ export const Navbar = ({
       ) : (
         <>
           <ul className="flex justify-around text-lg w-1/2 font-medium text-grayText1 ">
-            <li className="cursor-pointer hover:text-mainRed transition-all">
+            <li onClick={()=>navigate.push("/")} className="cursor-pointer hover:text-mainRed transition-all">
             {t("home")}
             </li>
-            <li className="cursor-pointer hover:text-mainRed transition-all">
+            <li onClick={()=>navigate.push("/restaurants")} className="cursor-pointer hover:text-mainRed transition-all">
             {t("restaurants")}
             </li>
-            <li className="cursor-pointer hover:text-mainRed transition-all">
+            <li onClick={()=>navigate.push("/about-us")} className="cursor-pointer hover:text-mainRed transition-all">
             {t("about_us")}
             </li>
-            <li className="cursor-pointer hover:text-mainRed transition-all">
+            <li onClick={()=>navigate.push("/how-it-works")} className="cursor-pointer hover:text-mainRed transition-all">
             {t("how_it_works")}
             </li>
-            <li className="cursor-pointer hover:text-mainRed transition-all">
+            <li onClick={()=>navigate.push("/faqs")} className="cursor-pointer hover:text-mainRed transition-all">
               FAQs
             </li>
           </ul>
