@@ -23,8 +23,8 @@ export const Langugages = () => {
         className="cursor-pointer relative"
         width={40}
         height={0}
-        src={`${selectedLanguage}.svg`} 
-        alt={`${selectedLanguage}Flag`}
+        src={`/${selectedLanguage}.svg`} 
+        alt={`/${selectedLanguage}Flag`}
         onClick={toggleDropDown}
       />
       {langDropdown && (
@@ -33,7 +33,7 @@ export const Langugages = () => {
             className="cursor-pointer hover:scale-95 transition-all duration-500"
             width={40}
             height={0}
-            src={"en.svg"}
+            src={"/en.svg"}
             alt="EnFlag"
             onClick={() => clickHandle("en")}
           />
@@ -51,7 +51,7 @@ export const Langugages = () => {
             className="cursor-pointer hover:scale-95 transition-all duration-500"
             width={40}
             height={0}
-            src={"az.svg"}
+            src={"/az.svg"}
             alt="AzFlag"
             onClick={() => clickHandle("az")}
           />

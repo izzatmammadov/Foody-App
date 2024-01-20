@@ -48,7 +48,9 @@ const resources = {
       faqsDesc3:"Website reponse taking time, how to improve?",
       faqsDesc4:"How do I create a account?",
       faqsDesc5:"Website reponse taking time, how to improve?",
-      faqsDesc6:"Our Customer Experience Team is available 7 days a week and we offer 2 ways to get in contact. Email and Chat. We try to reply quickly, so you need not to wait too long for a response!",
+      faqsDesc6: "Our Customer Experience Team is available 7 days a week and we offer 2 ways to get in contact. Email and Chat. We try to reply quickly, so you need not to wait too long for a response!",
+      adminDesc: "Welcome Admin",
+      signIn:"Sign in",
     },
   },
   az: {
@@ -98,6 +100,8 @@ const resources = {
       faqsDesc4:"Hesabı necə yarada bilərəm?",
       faqsDesc5:"Veb saytın cavabı vaxt alır, necə yaxşılaşdırmaq olar?",
       faqsDesc6:"Müştəri Təcrübəsi Qrupumuz həftənin 7 günü mövcuddur və biz əlaqə saxlamağın 2 yolunu təklif edirik. E-poçt və Çat. Tez cavab verməyə çalışırıq, ona görə də cavab üçün çox gözləməyinizə ehtiyac yoxdur!",
+      adminDesc: "Xoş gəlmisiniz Admin",
+      signIn:"Daxil olun",
     },
   },
 };

@@ -17,6 +17,7 @@ module.exports = {
       grayText1: "#828282",
       grayText2: "#4F4F4F",
       white: "#FFFFFF",
+      adminLogin:" #FFFEFE",
       whiteLight: "#F2F2F2",
       whiteLight1: "#F3F4F6",
       whiteLight2: "#E0E0E0",
