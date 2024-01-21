@@ -2,6 +2,10 @@ import type { NextPage } from "next";
 import Head from "next/head";
 import { AdminHeader } from "../../share/components/adminHeader";
 import { AdminAside } from "../../share/components/adminAside";
+import OrdersChart from "../../share/components/ordersChart";
+import Barchart from "../../share/components/LineChart";
+import { AdminLeftModal } from "../../share/components/adminLeftModal";
+
 
 const AdminDashboard: NextPage = () => {
   return (
@@ -16,9 +20,14 @@ const AdminDashboard: NextPage = () => {
     
         <AdminHeader />
 
-       
+       <AdminLeftModal/>
         <main>
-<AdminAside />
+          <AdminAside />
+          <div className="flex gap-4">
+          <OrdersChart />
+     <Barchart/>
+          </div>
+       
         </main>
 </div>
     </>
