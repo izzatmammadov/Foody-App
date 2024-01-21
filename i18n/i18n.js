@@ -50,7 +50,21 @@ const resources = {
       faqsDesc5:"Website reponse taking time, how to improve?",
       faqsDesc6: "Our Customer Experience Team is available 7 days a week and we offer 2 ways to get in contact. Email and Chat. We try to reply quickly, so you need not to wait too long for a response!",
       adminDesc: "Welcome Admin",
-      signIn:"Sign in",
+      signIn: "Sign in",
+      adminLeftBarComponent: "Dashboard",
+      adminLeftBarComponent2: "Products",
+      adminLeftBarComponent3: "Restaurants",
+      adminLeftBarComponent4: "Category",
+      adminLeftBarComponent5: "Orders",
+      adminLeftBarComponent6: "Offers",
+      adminLeftBarComponent7: "Logout",
+
+
+
+
+
+      
+      
     },
   },
   az: {
@@ -101,7 +115,14 @@ const resources = {
       faqsDesc5:"Veb saytın cavabı vaxt alır, necə yaxşılaşdırmaq olar?",
       faqsDesc6:"Müştəri Təcrübəsi Qrupumuz həftənin 7 günü mövcuddur və biz əlaqə saxlamağın 2 yolunu təklif edirik. E-poçt və Çat. Tez cavab verməyə çalışırıq, ona görə də cavab üçün çox gözləməyinizə ehtiyac yoxdur!",
       adminDesc: "Xoş gəlmisiniz Admin",
-      signIn:"Daxil olun",
+      signIn: "Daxil olun",
+      adminLeftBarComponent: "İdarə paneli",
+      adminLeftBarComponent2: "Məhsullar",
+      adminLeftBarComponent3: "Restoranlar",
+      adminLeftBarComponent4: "Kateqoriya",
+      adminLeftBarComponent5: "Sifarişlər",
+      adminLeftBarComponent6: "Təkliflər",
+      adminLeftBarComponent7: "Çıxış",
     },
   },
 };
