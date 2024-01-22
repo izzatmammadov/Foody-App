@@ -1,10 +1,12 @@
 import React from "react";
-
-export const AdminModalDropdown = () => {
+interface Props{
+  p?: string;
+}
+export const AdminModalDropdown = ({p="Restaurants"}:Props) => {
   return (
       <div>
-          <p className=' text-grayText font-medium  mb-2   text-base'>Restaurants</p>
-      <select className=" w-full bg-darkBlue_4 rounded-2xl font-medium text-base text-whiteLight pl-3  py-3">
+      <p className=' text-grayText font-medium  mb-4   text-base'>{ p}</p>
+      <select className=" w-full bg-darkBlue_4 rounded-2xl font-medium text-base text-whiteLight pl-3  py-4">
         <option value="" disabled selected>
           Choose...
         </option>
