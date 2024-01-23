@@ -61,11 +61,21 @@ const resources = {
       adminLeftBarComponent5: "Orders",
       adminLeftBarComponent6: "Offers",
       adminLeftBarComponent7: "Logout",
+<<<<<<< HEAD
+      items:"items",
+
+
+
+
+      
+      
+=======
       userProfileContact: "Contact",
       userProfileUsarname: "Usarname",
       userProfileAddress: "Address",
       userProfileFullname: "Fullname",
       userProfileSave: "Save",
+>>>>>>> 210a1451842f414e76224db3dbc67e8732533793
     },
   },
   az: {
@@ -127,11 +137,16 @@ const resources = {
       adminLeftBarComponent5: "Sifarişlər",
       adminLeftBarComponent6: "Təkliflər",
       adminLeftBarComponent7: "Çıxış",
+<<<<<<< HEAD
+      items:"maddə",
+
+=======
       userProfileContact: "Əlaqə",
       userProfileUsarname: "İstifadəci adı",
       userProfileAddress: "Ünvanınız",
       userProfileFullname: "Adınız Soyadınız",
       userProfileSave: "Qeydə al",
+>>>>>>> 210a1451842f414e76224db3dbc67e8732533793
     },
   },
 };
