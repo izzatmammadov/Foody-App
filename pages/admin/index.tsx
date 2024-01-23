@@ -5,9 +5,16 @@ import { AdminAside } from "../../share/components/adminAside";
 import OrdersChart from "../../share/components/ordersChart";
 import Barchart from "../../share/components/LineChart";
 import { AdminLeftModal } from "../../share/components/adminLeftModal";
+import { useState } from "react";
 
 
 const AdminDashboard: NextPage = () => {
+  const [isHiddenModal, setIsHiddenModal] = useState<boolean>(true)
+  function changeHidden() {
+    setIsHiddenModal(prev => !prev)
+    console.log(isHiddenModal);
+    
+  }
   return (
     <>
       <Head>
@@ -18,12 +25,12 @@ const AdminDashboard: NextPage = () => {
 
       <div className=" bg-textBlack min-h-screen px-4">
     
-        <AdminHeader />
+        <AdminHeader onClickButton={changeHidden}/>
 
-       <AdminLeftModal/>
+       <AdminLeftModal  onClickClose={changeHidden} hidden={isHiddenModal} />
         <main>
           <AdminAside />
-          <div className="flex gap-4">
+          <div className=" gap-4   hidden">
           <OrdersChart />
      <Barchart/>
           </div>
