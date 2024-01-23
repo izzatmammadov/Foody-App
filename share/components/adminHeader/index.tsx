@@ -1,7 +1,9 @@
 import React from "react";
 import { Button } from "../Button";
-
-export const AdminHeader = () => {
+interface Props{
+  onClickButton?: ()=>void,
+}
+export const AdminHeader = ({onClickButton}:Props) => {
   return (
     <div className=" bg-darkBlue_3  py-5 pl-5 pr-4 flex justify-between  rounded-b-xl">
       <h1
@@ -14,7 +16,7 @@ export const AdminHeader = () => {
         </span>{" "}
           </h1>
    
-       <Button className=" bg-lightPurple_3  h-7   pr-2 pl-3  text-white font-bold  text-xs rounded-[14px]" innerText="+ ADD PRODUCT"/>
+       <Button onClick={onClickButton} className=" bg-lightPurple_3  h-7   pr-2 pl-3  text-white font-bold  text-xs rounded-[14px]" innerText="+ ADD PRODUCT"/>
     </div>
   );
 };
