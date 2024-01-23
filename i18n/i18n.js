@@ -58,7 +58,7 @@ const resources = {
       adminLeftBarComponent5: "Orders",
       adminLeftBarComponent6: "Offers",
       adminLeftBarComponent7: "Logout",
-
+      items:"items",
 
 
 
@@ -123,6 +123,8 @@ const resources = {
       adminLeftBarComponent5: "Sifarişlər",
       adminLeftBarComponent6: "Təkliflər",
       adminLeftBarComponent7: "Çıxış",
+      items:"maddə",
+
     },
   },
 };
