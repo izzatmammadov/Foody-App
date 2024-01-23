@@ -90,7 +90,7 @@ const UserProfile = () => {
 
             <div className=" sm:m-10 flex flex-wrap justify-between gap-4  ">
               <div className="">
-                <label>contact</label>
+                <label>{t("userProfileContact")}</label>
                 <br />
                 <input
                   className=" w-[286px] sm:w-[444px] overflow-hidden h-14 p-3 rounded  bg-[#F3F4F6]  sm:bg-white"
@@ -112,7 +112,7 @@ const UserProfile = () => {
                 />
               </div>
               <div className="">
-                <label>Username</label>
+                <label>{t("userProfileUsarname")}</label>
                 <br />
                 <input
                   className="w-[286px] sm:w-[444px] overflow-hidden h-14 p-3 rounded bg-[#F3F4F6]  sm:bg-white"
@@ -123,7 +123,7 @@ const UserProfile = () => {
                 />
               </div>
               <div className="">
-                <label>Address </label>
+                <label>{t("userProfileAddress")}</label>
                 <br />
                 <input
                   className="w-[286px] sm:w-[444px] overflow-hidden h-14 p-3 rounded bg-[#F3F4F6]  sm:bg-white"
@@ -134,7 +134,7 @@ const UserProfile = () => {
                 />
               </div>
               <div className="">
-                <label>Full Name</label>
+                <label>{t("userProfileFullname")}</label>
                 <br />
                 <input
                   className="w-[286px] sm:w-[444px] overflow-hidden h-14 p-3 rounded bg-[#F3F4F6]  sm:bg-white"
@@ -146,7 +146,7 @@ const UserProfile = () => {
               </div>
               <div className=" flex items-end ">
                 <button className=" w-[286px] sm:w-[444px] h-[53px] rounded bg-[#6FCF97] transition-transform transform duration-300 hover:scale-95">
-                  Save
+                  {t("userProfileSave")}
                 </button>
               </div>
             </div>
