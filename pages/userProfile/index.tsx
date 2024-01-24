@@ -24,15 +24,20 @@ const UserProfile = () => {
 
           <div className="w-full flex  flex-col  sm:px-8 sm:py-10 flex-wrap gap-x-1 gap-y-8 bg-white sm:bg-whiteLight1">
             <h2 className=" font-semibold text-3xl text-grayText2">{t("userDesc")}</h2>
-            <div className=" w-full flex  justify-center">
+
+            <input type="file" id="file" accept="image/*"  className=" hidden" />
+            <label htmlFor="file"> 
+            <div className=" w-full flex  justify-center ">
               <Image
                 width={146}
                 height={0}
                 src={"user-profile-upload.svg"}
                 alt="upload"
-                className=""
+                className="cursor-pointer"
               />
             </div>
+            </label>
+        
 
             <div className=" sm:m-10 flex flex-wrap justify-between gap-4  ">
               <div className="">
