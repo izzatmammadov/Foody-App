@@ -6,14 +6,13 @@ import OrdersChart from "../../share/components/ordersChart";
 import Barchart from "../../share/components/LineChart";
 import { AdminLeftModal } from "../../share/components/adminLeftModal";
 import { useState } from "react";
-
+import AdminCard from "../../share/components/adminCard";
 
 const AdminDashboard: NextPage = () => {
-  const [isHiddenModal, setIsHiddenModal] = useState<boolean>(true)
+  const [isHiddenModal, setIsHiddenModal] = useState<boolean>(true);
   function changeHidden() {
-    setIsHiddenModal(prev => !prev)
+    setIsHiddenModal((prev) => !prev);
     console.log(isHiddenModal);
-    
   }
   return (
     <>
@@ -24,19 +23,25 @@ const AdminDashboard: NextPage = () => {
       </Head>
 
       <div className=" bg-textBlack min-h-screen px-4">
-    
-        <AdminHeader onClickButton={changeHidden}/>
+        <AdminHeader onClickButton={changeHidden} />
 
-       <AdminLeftModal  onClickClose={changeHidden} hidden={isHiddenModal} />
+        <AdminLeftModal onClickClose={changeHidden} hidden={isHiddenModal} />
         <main>
           <AdminAside />
           <div className=" gap-4   hidden">
-          <OrdersChart />
-     <Barchart/>
+            <OrdersChart />
+            <Barchart />
           </div>
-       
+          <section>
+            <AdminCard
+              foodname={"Marqarita"}
+              restoranname={"Papa John’s"}
+              foodimage={"adminMarqarita.svg"}
+              foodprice={16}
+            />
+          </section>
         </main>
-</div>
+      </div>
     </>
   );
 };
