@@ -35,7 +35,7 @@ export const Navbar = ({
         <></>
       ) : (
         <>
-          <ul className="flex justify-around text-lg w-1/2 font-medium text-grayText1 ">
+          <ul className="justify-around text-lg w-1/2 font-medium   flex text-grayText1 ">
             <li onClick={()=>navigate.push("/")} className="cursor-pointer hover:text-mainRed transition-all">
             {t("home")}
             </li>

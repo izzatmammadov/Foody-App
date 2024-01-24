@@ -20,7 +20,7 @@ export const AdminLeftModal = ({
   p = "Add Product",
   p1 = "Upload your product image",
   p2 = "Add your Product description and necessary information",
-  mod = "4",
+  mod = "2",
   btn = "Create Product",
   hidden = true,
   onClickClose,
@@ -29,7 +29,7 @@ export const AdminLeftModal = ({
     <div
       className={` fixed  z-10  w-full sm:w-3/4    sm:pl-12 ${
         hidden ? "  -right-full" : "right-0"
-      }  transition-all top-0 h-screen`}
+      }  transition-all duration-500 top-0 h-screen`}
     >
       <button
         onClick={onClickClose}
