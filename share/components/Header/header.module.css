@@ -60,4 +60,17 @@
       transform: translateY(10px);
     }
   }
+
+  @media screen and (max-width: 640px) {
+    .burger_bg {
+      display: none;
+    }
+  
+    .little_animation_div1,
+    .little_animation_div2,
+    .little_animation_div3 {
+      display: none;
+    }
+  }
+  
   

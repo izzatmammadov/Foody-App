@@ -3,7 +3,10 @@ import Image from "next/image";
 import { Navbar } from "../../share/components/Navbar";
 import { Footer } from "../../share/components/Footer";
 import { useTranslation } from "react-i18next";
+<<<<<<< HEAD
+=======
 import Head from "next/head";
+>>>>>>> f7cbc0207dc439d49ce37c98bf686b77e5b341d7
 
 const HowItWorks = () => {
   const { t, i18n } = useTranslation();
@@ -24,11 +27,15 @@ const HowItWorks = () => {
               {t("how_it_works")}
             </p>
             <p className=" mt-5 text-[#828282] max-w-[1034px] font-medium  leading-8 tracking-widest mx-auto">
+<<<<<<< HEAD
+              {t("howItWorksDesc")}
+=======
               {t("how_it_worksDesc")}
+>>>>>>> f7cbc0207dc439d49ce37c98bf686b77e5b341d7
             </p>
           </div>
         </section>
-        <section className=" hidden sm:block">
+        <section className="hidden sm:block">
           <div className="flex justify-center mt-7 relative">
             <Image
               className=" z-40"
