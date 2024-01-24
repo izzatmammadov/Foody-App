@@ -12,11 +12,11 @@ export const Footer = ({ isTop }: FooterParamTypes) => {
       {/* UPPER FOOTER */}
 
       {isTop ? (
-        <section className=" w-3/4 flex justify-around bg-blackLight absolute -top-52 items-center rounded-3xl py-12 px-9 text-white ">
-          <Image width={200} height={0} src={"footerPizza.svg"} alt="footer" />
+        <section className="w-3/4 flex justify-around bg-blackLight absolute -top-44 items-center rounded-3xl py-12 px-9 text-white ">
+          <Image className="hidden sm:block" width={200} height={0} src={"footerPizza.svg"} alt="footer" />
 
           <div className="flex flex-col items-center gap-5">
-            <p className=" font-medium text-4xl w-9/12 text-center leading-tight">
+            <p className=" font-medium text-3xl sm:text-4xl w-9/12 text-center leading-tight">
             {t("footerDesc")}
             </p>
             <button className=" bg-orange px-12 py-4 font-medium text-md rounded-full hover:scale-95 transition-all duration-500">
@@ -24,7 +24,7 @@ export const Footer = ({ isTop }: FooterParamTypes) => {
             </button>
           </div>
 
-          <Image width={250} height={0} src={"mainBurger.svg"} alt="burger" />
+          <Image className="hidden sm:block" width={250} height={0} src={"mainBurger.svg"} alt="burger" />
         </section>
       ) : (
         <></>
@@ -33,14 +33,14 @@ export const Footer = ({ isTop }: FooterParamTypes) => {
 
       {/* LOWER FOOTER */}
       <section className=" flex items-center justify-around w-4/5">
-        <div className="flex flex-col gap-2">
-          <p className="text-white font-extrabold text-3xl">
+        <div className="flex flex-col gap-5 sm:gap-2">
+          <p className="text-white font-extrabold text-center text-5xl sm:text-start sm:text-3xl">
             Foody<span className="text-orange">.</span>
           </p>
-          <p className="text-lg text-grayText1 w-2/3">
+          <p className="text-2xl text-grayText1 w-2/3 text-center mx-auto sm:text-start sm:mx-0 sm:text-lg">
             Lorem ipsum is placeholder text commonly used in the graphic
           </p>
-          <div className="flex gap-2">
+          <div className="flex justify-center sm:justify-start gap-2">
             <Image
               className=" border-white border-2 p-1 rounded-3xl cursor-pointer hover:scale-95 transition-all duration-500"
               width={40}
@@ -65,7 +65,7 @@ export const Footer = ({ isTop }: FooterParamTypes) => {
           </div>
         </div>
 
-        <div className="flex justify-center gap-28 h-full text-grayText1">
+        <div className="hidden sm:flex justify-center gap-28 h-full text-grayText1">
           <ul className="flex flex-col gap-1 ">
             <li className="text-white font-extrabold text-2xl">Popular</li>
             <li>Programming</li>

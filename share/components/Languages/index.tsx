@@ -11,7 +11,6 @@ export const Langugages = () => {
     await i18n.changeLanguage(lang);
     setSelectedLanguage(lang);
     setLangDropdown(false); 
-    
   };
 
   const toggleDropDown = () => {
@@ -24,8 +23,8 @@ export const Langugages = () => {
         className="cursor-pointer relative"
         width={40}
         height={0}
-        src={`${selectedLanguage}.svg`} 
-        alt={`${selectedLanguage}Flag`}
+        src={`/${selectedLanguage}.svg`} 
+        alt={`/${selectedLanguage}Flag`}
         onClick={toggleDropDown}
       />
       {langDropdown && (
@@ -34,25 +33,25 @@ export const Langugages = () => {
             className="cursor-pointer hover:scale-95 transition-all duration-500"
             width={40}
             height={0}
-            src={"en.svg"}
+            src={"/en.svg"}
             alt="EnFlag"
             onClick={() => clickHandle("en")}
           />
-          <hr />
-          <Image
+          {/* <hr /> */}
+          {/* <Image
             className="cursor-pointer hover:scale-95 transition-all duration-500"
             width={40}
             height={0}
             src={"fr.svg"}
             alt="FrFlag"
             onClick={() => clickHandle("fr")}
-          />
+          /> */}
           <hr />
           <Image
             className="cursor-pointer hover:scale-95 transition-all duration-500"
             width={40}
             height={0}
-            src={"az.svg"}
+            src={"/az.svg"}
             alt="AzFlag"
             onClick={() => clickHandle("az")}
           />
