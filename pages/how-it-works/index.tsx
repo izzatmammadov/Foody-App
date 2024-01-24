@@ -17,7 +17,7 @@ const HowItWorks = () => {
         <link rel="icon" href="/mainBurger.svg" />
       </Head>
 
-      {/* <Navbar forAdmin={false} forLogin={false} isRegister={true} /> */}
+      <Navbar forAdmin={false} forLogin={false} isRegister={true} />
       <main>
         <section className=" ">
           <div className="text-center">
@@ -68,7 +68,7 @@ const HowItWorks = () => {
         </section>
       </main>
 
-      {/* <Footer isTop={false} /> */}
+      <Footer isTop={false} />
     </>
   );
 };
