@@ -9,12 +9,47 @@ import { useState } from "react";
 import AdminCard from "../../../share/components/adminCard";
 import AdminCategory from "../../../share/components/adminCategory";
 
+interface CategoryType {
+  id: number;
+  image: string;
+  name: string;
+  slug: string;
+}
+
 const AdminProducts: NextPage = () => {
   const [isHiddenModal, setIsHiddenModal] = useState<boolean>(true);
-  function changeHidden() {
-    setIsHiddenModal((prev) => !prev);
+  function changeHidden(): void {
+    setIsHiddenModal((prev: boolean) => !prev);
     console.log(isHiddenModal);
   }
+  let categoryData: CategoryType[] = [
+    {
+      id: 2000,
+      image: "/adminMarqarita.svg",
+      name: "pizza",
+      slug: "Yummy-pizza",
+    },
+    {
+      id: 2001,
+      image: "/adminMarqarita.svg",
+      name: "hotdog",
+      slug: "Yummy-pizza",
+    },
+    {
+      id: 2002,
+      image: "/adminMarqarita.svg",
+      name: "pizza",
+      slug: "Yummy-pizza",
+    },
+    {
+      id: 2003,
+      image: "/adminMarqarita.svg",
+      name: "pizza",
+      slug: "Yummy-pizza",
+    },
+  ];
+  console.log("categoryData", categoryData);
+
   return (
     <>
       <Head>
@@ -37,21 +72,25 @@ const AdminProducts: NextPage = () => {
             <Barchart />
           </div>
           <section className=" w-[100%] m-5  bg-white">
-            <div className=" flex  justify-between text-sm  font-semibold h-16 items-center px-8">
-              <p>ID</p>
-              <p>Image</p>
-              <p>Name</p>
-              <p>Slug</p>
-              <p>Edit and delete</p>
-            </div>
-            <AdminCategory />
-            <AdminCategory />
-            <AdminCategory />
-            <AdminCategory />
-            <AdminCategory />
-            <AdminCategory />
-            <AdminCategory />
-            <AdminCategory />
+            {/* <div className=" flex  justify-between text-sm  font-semibold h-16 items-center px-8"></div> */}
+
+            <table className="w-[100%] ">
+              <thead className="h-16 text-sm px-8">
+                <tr>
+                  <th>ID</th>
+                  <th>Image</th>
+                  <th>Name</th>
+                  <th>Slug</th>
+                  <th>Edit and delete</th>
+                </tr>
+              </thead>
+
+              <tbody>
+                {categoryData.map((item: CategoryType) => (
+                  <AdminCategory key={item.id} item={item} />
+                ))}
+              </tbody>
+            </table>
           </section>
         </main>
       </div>
