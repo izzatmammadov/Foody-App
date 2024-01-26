@@ -4,7 +4,7 @@ import { AdminLeftModal } from "../adminLeftModal";
 import { useState } from "react";
 
 const AdminSecondTitle = () => {
-//   const onClickButton = () => {};
+  //   const onClickButton = () => {};
 
   const [isHiddenModal, setIsHiddenModal] = useState<boolean>(true);
   function onClickButton(): void {
@@ -14,8 +14,10 @@ const AdminSecondTitle = () => {
 
   return (
     <>
-      <div>
-        <div>name</div>
+      <div className=" h-20  bg-darkBlue_3 rounded-2xl flex justify-between  items-center p-8">
+        <div className="  text-white text-xl not-italic font-medium leading-5">
+          Category
+        </div>
 
         <Button
           onClick={onClickButton}
@@ -23,10 +25,9 @@ const AdminSecondTitle = () => {
           innerText="+ ADD catecory"
         />
 
-        <Button className="" onClick={onClickButton} innerText="" />
-
         <AdminLeftModal onClickClose={onClickButton} hidden={isHiddenModal} />
-      </div>
+      </div>{" "}
+      <Button className="" onClick={onClickButton} innerText="" />
     </>
   );
 };

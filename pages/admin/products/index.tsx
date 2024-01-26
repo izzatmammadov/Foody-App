@@ -7,6 +7,7 @@ import Barchart from "../../../share/components/LineChart";
 import { AdminLeftModal } from "../../../share/components/adminLeftModal";
 import { useState } from "react";
 import AdminCard from "../../../share/components/adminCard";
+import AdminSecondTitle from "../../../share/components/adminSecondTitle";
 
 const AdminProducts: NextPage = () => {
   const [isHiddenModal, setIsHiddenModal] = useState<boolean>(true);
@@ -27,74 +28,82 @@ const AdminProducts: NextPage = () => {
 
         <AdminLeftModal onClickClose={changeHidden} hidden={isHiddenModal} />
         <main className="flex">
-            <div className=" hidden sm:block">
+          <div className=" hidden sm:block">
             <AdminAside />
-            </div>
-        
+          </div>
+
           <div className=" gap-4 hidden">
             <OrdersChart />
             <Barchart />
           </div>
-          <section className=" w-[100%] m-5 flex flex-wrap gap-10  justify-center sm:justify-start">
-          <AdminCard
-              foodname={"Marqarita"}
-              restoranname={"Papa John’s"}
-              foodimage={"/adminMarqarita.svg"}
-              foodprice={16}
-            />     <AdminCard
-              foodname={"Marqarita"}
-              restoranname={"Papa John’s"}
-              foodimage={"/adminMarqarita.svg"}
-              foodprice={16}
-            />
-                <AdminCard
-              foodname={"Marqarita"}
-              restoranname={"Papa John’s"}
-              foodimage={"/adminMarqarita.svg"}
-              foodprice={16}
-            />
-                <AdminCard
-              foodname={"Marqarita"}
-              restoranname={"Papa John’s"}
-              foodimage={"/adminMarqarita.svg"}
-              foodprice={16}
-            />
-                <AdminCard
-              foodname={"Marqarita"}
-              restoranname={"Papa John’s"}
-              foodimage={"/adminMarqarita.svg"}
-              foodprice={16}
-            />
-                <AdminCard
-              foodname={"Marqarita"}
-              restoranname={"Papa John’s"}
-              foodimage={"/adminMarqarita.svg"}
-              foodprice={16}
-            />
-                <AdminCard
-              foodname={"Marqarita"}
-              restoranname={"Papa John’s"}
-              foodimage={"/adminMarqarita.svg"}
-              foodprice={16}
-            />
-                <AdminCard
-              foodname={"Marqarita"}
-              restoranname={"Papa John’s"}
-              foodimage={"/adminMarqarita.svg"}
-              foodprice={16}
-            />
-                <AdminCard
-              foodname={"Marqarita"}
-              restoranname={"Papa John’s"}
-              foodimage={"/adminMarqarita.svg"}
-              foodprice={16}
-            />
-                <AdminCard
-              foodname={"Marqarita"}
-              restoranname={"Papa John’s"}
-              foodimage={"/adminMarqarita.svg"}
-              foodprice={16}
-            />
+
+          <section>
+            <div className="m-5">
+              <AdminSecondTitle />
+            </div>
+
+            <div className=" w-full sm:w-auto m-5 flex flex-wrap gap-10 justify-center">
+              <AdminCard
+                foodname={"Marqarita"}
+                restoranname={"Papa John’s"}
+                foodimage={"/adminMarqarita.svg"}
+                foodprice={16}
+              />{" "}
+              <AdminCard
+                foodname={"Marqarita"}
+                restoranname={"Papa John’s"}
+                foodimage={"/adminMarqarita.svg"}
+                foodprice={16}
+              />
+              <AdminCard
+                foodname={"Marqarita"}
+                restoranname={"Papa John’s"}
+                foodimage={"/adminMarqarita.svg"}
+                foodprice={16}
+              />
+              <AdminCard
+                foodname={"Marqarita"}
+                restoranname={"Papa John’s"}
+                foodimage={"/adminMarqarita.svg"}
+                foodprice={16}
+              />
+              <AdminCard
+                foodname={"Marqarita"}
+                restoranname={"Papa John’s"}
+                foodimage={"/adminMarqarita.svg"}
+                foodprice={16}
+              />
+              <AdminCard
+                foodname={"Marqarita"}
+                restoranname={"Papa John’s"}
+                foodimage={"/adminMarqarita.svg"}
+                foodprice={16}
+              />
+              <AdminCard
+                foodname={"Marqarita"}
+                restoranname={"Papa John’s"}
+                foodimage={"/adminMarqarita.svg"}
+                foodprice={16}
+              />
+              <AdminCard
+                foodname={"Marqarita"}
+                restoranname={"Papa John’s"}
+                foodimage={"/adminMarqarita.svg"}
+                foodprice={16}
+              />
+              <AdminCard
+                foodname={"Marqarita"}
+                restoranname={"Papa John’s"}
+                foodimage={"/adminMarqarita.svg"}
+                foodprice={16}
+              />
+              <AdminCard
+                foodname={"Marqarita"}
+                restoranname={"Papa John’s"}
+                foodimage={"/adminMarqarita.svg"}
+                foodprice={16}
+              />
+            </div>
           </section>
         </main>
       </div>
