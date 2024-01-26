@@ -111,7 +111,7 @@ const Login: NextPage = () => {
                   </label>
                   <input
                     className=" p-4 rounded-md outline-none bg-[#ffe6e6]"
-                    type="email"
+                    type="e-mail"
                   />
                 </div>
 
