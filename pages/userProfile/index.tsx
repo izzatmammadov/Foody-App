@@ -59,7 +59,7 @@ const UserProfile = () => {
                   type="text"
                   name="contact"
                   id=""
-                  placeholder="rahimlisarkhan@gmail.com"
+                  placeholder="example@gmail.com"
                 />
               </div>
               <div className="">
@@ -70,7 +70,7 @@ const UserProfile = () => {
                   type="text"
                   name="contact"
                   id=""
-                  placeholder="rahimlisarkhan"
+                  placeholder="Example Example"
                 />
               </div>
               <div className="">
@@ -92,7 +92,7 @@ const UserProfile = () => {
                   type="text"
                   name="contact"
                   id=""
-                  placeholder="Sarkhan Rahimli"
+                  placeholder="exampleexample"
                 />
               </div>
               <div className=" flex items-end ">
