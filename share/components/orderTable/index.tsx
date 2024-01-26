@@ -25,7 +25,7 @@ export const Table = () => {
 
   return (
     <>
-      <table className="min-w-full bg-white text-center">
+      <table className=" min-w-full bg-white text-center">
         <thead>
           <tr>
             <th className="py-2 px-4 border-b border-whiteLight3">ID</th>
@@ -49,6 +49,7 @@ export const Table = () => {
         </thead>
         <tbody>
           <tr>
+            
             <td className="py-2 px-4 border-b border-whiteLight3">0001</td>
             <td className="py-2 px-4 border-b border-whiteLight3">12:30 PM</td>
             <td className="py-2 px-4 border-b border-whiteLight3 text-start w-60">
