@@ -8,7 +8,7 @@ import { useTranslation } from "react-i18next";
 import { UserBasketCard } from "../../share/components/userBasketCard/intex";
 
 const UserBasket: NextPage = () => {
-  const { t, i18n } = useTranslation();
+  const { t } = useTranslation();
 
   return (
     <>
