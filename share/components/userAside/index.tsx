@@ -35,9 +35,9 @@ export const UserAside = () => {
         </p>
       </div>
 
-      <div className="flex items-center gap-4 cursor-pointer group hover:bg-mainRedLight transition-all p-2">
+      <div className="flex items-center gap-4 cursor-pointer group hover:bg-mainRedLight transition-all p-2" onClick={()=>navigate.push("/login")}>
         <Image width={25} height={0} src={"logout.svg"} alt="logoutIcon" />
-        <p className="font-semibold text-grayText2 text-lg group-hover:text-mainRed">
+        <p  className="font-semibold text-grayText2 text-lg group-hover:text-mainRed">
           {t("userDesc5")}
         </p>
       </div>

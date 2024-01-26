@@ -27,9 +27,9 @@ export const Navbar = ({
 
   return (
     <nav
-      className={`flex justify-between m-8 items-center ${
+      className={`flex justify-between m-0 sm:m-8 items-center ${
         forLogin ? "bg-lightRed" : "bg-whiteLight1"
-      } rounded-md py-11 sm:p-11`}
+      } rounded-md py-11 px-5 sm:p-11`}
     >
       <h1
         className={`text-4xl font-extrabold ${
@@ -135,7 +135,7 @@ export const Navbar = ({
       )}
 
 {isModalOpen && (
-        <div className="fixed inset-0 bg-black m-8 min-h-screen bg-opacity-50 z-50 flex items-center justify-start">
+        <div className="fixed inset-0 bg-black m-0 min-h-screen bg-opacity-50 z-50 flex items-center justify-start">
 
           <div className="bg-white w-4/5 min-h-screen p-8 flex flex-col">
           <button className="text-mainRed font-bold text-lg block text-start" onClick={toggleModal}><Image width={35} height={0} alt="close2" src={"close2.svg"}/></button>

@@ -25,8 +25,8 @@ const Login: NextPage = () => {
       <Navbar isRegister={false} forLogin={true} forAdmin={true} />
 
       <main>
-        <section className="flex justify-center bg-lightRed mx-8 mb-8 ">
-          <div className="bg-lightRed m-auto w-1/2">
+        <section className="flex flex-col mt-5 sm:mt-0 sm:flex-row justify-center bg-white sm:bg-lightRed mx-8 mb-8 ">
+          <div className="bg-lightRed m-auto w-full sm:w-1/2">
             <Image
               className="w-4/5 m-auto"
               width={0}
@@ -36,7 +36,7 @@ const Login: NextPage = () => {
             />
           </div>
           {/* FORM DIV */}
-          <div className="w-1/2 flex flex-col gap-20 bg-white py-12">
+          <div className="w-full sm:w-1/2 flex flex-col gap-20 bg-white py-12 mx-auto">
             <div className="flex gap-16 mx-auto w-max">
               <button
                 className={`text-3xl ${

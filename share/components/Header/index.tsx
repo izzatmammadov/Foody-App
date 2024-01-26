@@ -10,7 +10,7 @@ export const Header = () => {
   const navigate = useRouter()
 
   return (
-    <header className="m-8 flex-col rounded-md bg-whiteLight1">
+    <header className="m-0 sm:m-8 flex-col rounded-md bg-whiteLight1">
       <Navbar isRegister={false} forAdmin={null} forLogin={null} />
 
       {/* MAIN SECTION */}
@@ -28,6 +28,7 @@ export const Header = () => {
             <Button
               className="px-6 py-3 rounded-3xl border-2 border-grayText1 text-grayText1 text-2xl font-medium shadow-md hover:scale-95 transition-all duration-500"
               innerText={t("homeDesc4")}
+              onClick={()=>navigate.push("/restaurants")}
             />
           </div>
         </div>
