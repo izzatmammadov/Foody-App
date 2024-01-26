@@ -52,31 +52,31 @@ export const Navbar = ({
           <ul className="justify-around text-lg w-1/2 font-medium text-grayText1 hidden sm:flex ">
             <li
               onClick={() => navigate.push("/")}
-              className="cursor-pointer hover:text-mainRed transition-all"
+              className={`cursor-pointer transition-all ${navigate.pathname === '/' ? 'text-mainRed' : 'hover:text-mainRed'}`}
             >
               {t("home")}
             </li>
             <li
               onClick={() => navigate.push("/restaurants")}
-              className="cursor-pointer hover:text-mainRed transition-all"
+              className={`cursor-pointer transition-all ${navigate.pathname === '/restaurants' ? 'text-mainRed' : 'hover:text-mainRed'}`}
             >
               {t("restaurants")}
             </li>
             <li
               onClick={() => navigate.push("/about-us")}
-              className="cursor-pointer hover:text-mainRed transition-all"
+              className={`cursor-pointer transition-all ${navigate.pathname === '/about-us' ? 'text-mainRed' : 'hover:text-mainRed'}`}
             >
               {t("about_us")}
             </li>
             <li
               onClick={() => navigate.push("/how-it-works")}
-              className="cursor-pointer hover:text-mainRed transition-all"
+              className={`cursor-pointer transition-all ${navigate.pathname === '/how-it-works' ? 'text-mainRed' : 'hover:text-mainRed'}`}
             >
               {t("how_it_works")}
             </li>
             <li
               onClick={() => navigate.push("/faqs")}
-              className="cursor-pointer hover:text-mainRed transition-all"
+              className={`cursor-pointer transition-all ${navigate.pathname === '/faqs' ? 'text-mainRed' : 'hover:text-mainRed'}`}
             >
               FAQs
             </li>
@@ -128,16 +128,17 @@ export const Navbar = ({
                 forLogin ? "hidden" : "block"
               }`}
               innerText={t("signUp")}
+              onClick={()=>navigate.push("/login")}
             />
           </div>
         </>
       )}
 
 {isModalOpen && (
-        <div className="fixed inset-0 bg-black m-8 bg-opacity-50 z-50 flex items-center justify-start">
-          {/* MODAL BASLAYIR*/}
-          <div className="bg-white w-4/5 min-h-full p-8 flex flex-col">
-          <button className="text-mainRed font-bold text-lg block text-start" onClick={toggleModal}><Image width={30} height={0} alt="close2" src={"close2.svg"}/></button>
+        <div className="fixed inset-0 bg-black m-8 min-h-screen bg-opacity-50 z-50 flex items-center justify-start">
+
+          <div className="bg-white w-4/5 min-h-screen p-8 flex flex-col">
+          <button className="text-mainRed font-bold text-lg block text-start" onClick={toggleModal}><Image width={35} height={0} alt="close2" src={"close2.svg"}/></button>
             <Button className=" w-1/2 mx-auto py-4 rounded-full text-xl bg-mainRed text-white font-medium shadow-md hover:scale-95 transition-all duration-500" innerText={t("signUp")}/>
             <ul className="justify-around text-2xl w-1/2 font-medium text-grayText1 flex flex-col mt-20 gap-4 ">
             <li
@@ -172,6 +173,7 @@ export const Navbar = ({
             </li>
           </ul>
           </div>
+          
         </div>
       )}
     </nav>
