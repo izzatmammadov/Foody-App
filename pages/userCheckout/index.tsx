@@ -5,8 +5,8 @@ import { Footer } from "../../share/components/Footer";
 import { UserAside } from "../../share/components/userAside";
 import { Button } from "../../share/components/Button";
 import { useTranslation } from "react-i18next";
-import styles from "./checkout.module.css"
 import { UserCheckoutAside } from "../../share/components/userCheckoutAside";
+import { UserCheckoutForm } from "../../share/components/userCheckForm";
 
 const UserCheckout: NextPage = () => {
   const { t, i18n } = useTranslation();
@@ -27,38 +27,7 @@ const UserCheckout: NextPage = () => {
             <UserAside/>
             <div className=" w-full sm:w-[55%] flex flex-col px-8 py-10 flex-wrap gap-0 sm:bg-whiteLight1">
             <h2 className="font-semibold text-3xl text-grayText2">{t("userDesc4")}</h2>
-            <form className="flex w-full gap-5 mt-4 flex-col">
-                <div className="flex gap-1 flex-col">
-                    <label className="text-lg font-semibold text-grayText2">
-                    {t("userCheck")}
-                    </label>
-                    <input className="p-4 rounded-md shadow-sm" type="text" placeholder="Your Street Name"/>
-                </div>
-                <div className="flex gap-1 flex-col">
-                    <label className="text-lg font-semibold text-grayText2">
-                    {t("userCheck2")}
-                    </label>
-                    <input className="p-4 rounded-md shadow-sm" type="number" placeholder="+994"/>
-                </div>
-                <div className="flex flex-col items-start sm:flex-row sm:items-center gap-x-12 gap-y-2 flex-wrap">
-                    <label className="w-full text-lg font-semibold text-grayText2">
-                    {t("userCheck3")}
-                    </label>
-                    <div className="flex gap-1 items-center">
-                        <input id="payment1" type="radio" name="payment" checked/>
-                        <label htmlFor="payment1" className="text-grayText1">
-                        {t("userCheck4")}
-                        </label>
-                    </div>
-                    <div className="flex gap-1 items-center">
-                        <input id="payment2" type="radio" name="payment" />
-                        <label htmlFor="payment2" className="text-grayText1">
-                        {t("userCheck5")}
-                        </label>
-                    </div>
-                </div>
-                <Button className="w-full p-4 font-semibold text-2xl bg-[#6fcf97] text-white rounded-md hover:scale-95 transition-all duration-500" innerText={t("userDesc4")}/>
-            </form>
+            <UserCheckoutForm/>
             </div>
 
             <UserCheckoutAside/>
