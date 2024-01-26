@@ -8,6 +8,7 @@ import { AdminLeftModal } from "../../../share/components/adminLeftModal";
 import { useState } from "react";
 import AdminCard from "../../../share/components/adminCard";
 import AdminCategory from "../../../share/components/adminCategory";
+import AdminSecondTitle from "../../../share/components/adminSecondTitle";
 
 interface CategoryType {
   id: number;
@@ -71,26 +72,28 @@ const AdminProducts: NextPage = () => {
             <OrdersChart />
             <Barchart />
           </div>
-          <section className=" w-[100%] m-5  bg-white">
+          <section className=" w-[100%] m-5">
             {/* <div className=" flex  justify-between text-sm  font-semibold h-16 items-center px-8"></div> */}
+            <AdminSecondTitle />
+            <div className=" w-[100%]   bg-white">
+              <table className="w-[100%] ">
+                <thead className="h-16 text-sm px-8">
+                  <tr>
+                    <th>ID</th>
+                    <th>Image</th>
+                    <th>Name</th>
+                    <th>Slug</th>
+                    <th>Edit and delete</th>
+                  </tr>
+                </thead>
 
-            <table className="w-[100%] ">
-              <thead className="h-16 text-sm px-8">
-                <tr>
-                  <th>ID</th>
-                  <th>Image</th>
-                  <th>Name</th>
-                  <th>Slug</th>
-                  <th>Edit and delete</th>
-                </tr>
-              </thead>
-
-              <tbody>
-                {categoryData.map((item: CategoryType) => (
-                  <AdminCategory key={item.id} item={item} />
-                ))}
-              </tbody>
-            </table>
+                <tbody>
+                  {categoryData.map((item: CategoryType) => (
+                    <AdminCategory key={item.id} item={item} />
+                  ))}
+                </tbody>
+              </table>
+            </div>
           </section>
         </main>
       </div>
