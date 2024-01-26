@@ -60,7 +60,8 @@ export const UserBasketCard: React.FC = () => {
       </div>
 
       {/* Pizza Section */}
-      <div className="flex justify-between items-center border-b-2 border-whiteLight2 py-10">
+      <div className="flex relative justify-between items-center border-b-2 border-whiteLight2 py-10">
+      
         <Image width={96} height={0} src={"margaritaCard.svg"} alt="margarita" />
 
         <div className="flex flex-col w-full pl-7">
@@ -68,7 +69,7 @@ export const UserBasketCard: React.FC = () => {
           <p className="font-medium text-lg">${totalPricePizza}</p>
         </div>
 
-        <div className="flex flex-col bg-white py-1 px-3 rounded-full gap-3 items-center">
+        <div className="flex flex-col bg-whiteLight1 sm:bg-white py-1 px-3 rounded-full gap-3 items-center">
           <button onClick={handleAddPizza}>
             <Image width={30} height={0} src={"add.svg"} alt="add" />
           </button>
@@ -77,10 +78,14 @@ export const UserBasketCard: React.FC = () => {
             <Image width={30} height={0} src={"remove.svg"} alt="remove" />
           </button>
         </div>
+
+        <span className="absolute top-0 left-0 sm:left-[100%] sm:top-4 w-8">
+                <Image width={30} height={0} src={"delete.svg"} alt="delete"/>
+              </span>
       </div>
 
       {/* Burger Section */}
-      <div className="flex justify-between items-center border-b-2 border-whiteLight2 py-10">
+      <div className="flex relative justify-between items-center border-b-2 border-whiteLight2 py-10">
         <Image width={96} height={0} src={"burgerAnimation.svg"} alt="cheeseburger" />
 
         <div className="flex flex-col w-full pl-7">
@@ -88,7 +93,7 @@ export const UserBasketCard: React.FC = () => {
           <p className="font-medium text-lg">${totalPriceBurger}</p>
         </div>
 
-        <div className="flex flex-col bg-white py-1 px-3 rounded-full gap-3 items-center">
+        <div className="flex flex-col bg-whiteLight1 sm:bg-white py-1 px-3 rounded-full gap-3 items-center">
           <button onClick={handleAddBurger}>
             <Image width={30} height={0} src={"add.svg"} alt="add" />
           </button>
@@ -97,10 +102,14 @@ export const UserBasketCard: React.FC = () => {
             <Image width={30} height={0} src={"remove.svg"} alt="remove" />
           </button>
         </div>
+
+        <span className="absolute top-0 left-0 sm:left-[100%] sm:top-4 w-8">
+                <Image width={30} height={0} src={"delete.svg"} alt="delete"/>
+              </span>
       </div>
 
       {/* Coffee Section */}
-      <div className="flex justify-between items-center border-b-2 border-whiteLight2 py-10">
+      <div className="flex relative justify-between items-center border-b-2 border-whiteLight2 py-10">
         <Image width={96} height={0} src={"papaCoffee.svg"} alt="coffee" />
 
         <div className="flex flex-col w-full pl-7">
@@ -108,7 +117,7 @@ export const UserBasketCard: React.FC = () => {
           <p className="font-medium text-lg">${totalPriceCoffee}</p>
         </div>
 
-        <div className="flex flex-col bg-white py-1 px-3 rounded-full gap-3 items-center">
+        <div className="flex flex-col bg-whiteLight1 sm:bg-white py-1 px-3 rounded-full gap-3 items-center">
           <button onClick={handleAddCoffee}>
             <Image width={30} height={0} src={"add.svg"} alt="add" />
           </button>
@@ -117,6 +126,9 @@ export const UserBasketCard: React.FC = () => {
             <Image width={30} height={0} src={"remove.svg"} alt="remove" />
           </button>
         </div>
+        <span className="absolute top-0 left-0 sm:left-[100%] sm:top-4 w-8">
+                <Image width={30} height={0} src={"delete.svg"} alt="delete"/>
+              </span>
       </div>
 
       {/* Total Bill Section */}
