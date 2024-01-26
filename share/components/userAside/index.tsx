@@ -30,7 +30,7 @@ export const UserAside = () => {
 
       <div className={`flex items-center gap-4 cursor-pointer group transition-all p-2 ${isCurrentRoute("/userCheckout") ? "bg-mainRedLight" : ""}`}>
         <Image width={22} height={0} src={"checkoutIcon.svg"} alt="checkoutIcon" />
-        <p className="font-semibold text-grayText2 text-lg group-hover:text-mainRed">
+        <p onClick={()=>navigate.push("/userCheckout")} className="font-semibold text-grayText2 text-lg group-hover:text-mainRed">
           {t("userDesc4")}
         </p>
       </div>
