@@ -3,8 +3,15 @@ import Head from "next/head";
 import Image from "next/image";
 import { Footer } from "../../share/components/Footer";
 import { Navbar } from "../../share/components/Navbar";
+import { useState } from "react";
+import Modal from "../../share/components/Modal";
 
 const Restaurants: NextPage = () => {
+  const [isFilterModalOpen, setIsFilterModalOpen] = useState(false);
+
+  const handleFilterButtonClick = () => {
+    setIsFilterModalOpen(!isFilterModalOpen);
+  };
   return (
     <>
       <Head>
@@ -16,8 +23,8 @@ const Restaurants: NextPage = () => {
       <main>
         <Navbar isRegister={true} forAdmin={null} forLogin={null}/>
 
-        <section className="m-8 flex justify-center gap-10">
-          <div className="rounded-md flex flex-col max-h-screen overflow-y-auto gap-8 bg-whiteLight1 w-1/6 p-4">
+        <section className="m-8 flex flex-col sm:flex-row justify-center gap-10">
+          <div className="hidden rounded-md sm:flex flex-col max-h-screen overflow-y-auto gap-8 bg-whiteLight1 w-1/6 p-4">
             <div className="flex items-center gap-4 cursor-pointer p-1 hover:bg-mainRedLight transition-all">
               <Image
                 width={40}
@@ -189,8 +196,35 @@ const Restaurants: NextPage = () => {
             </div>
           </div>
 
+          <div className="flex sm:hidden items-center justify-center gap-2 shadow-lg p-4" onClick={handleFilterButtonClick}>
+            <Image width={25} height={0} src={"filter.svg"} alt="filter" />
+            <p className="font-medium text-2xl text-grayText2">Filters</p>
+          </div>
+
+          {/* Modal */}
+          {isFilterModalOpen && (
+            <div className="fixed bottom-0 left-0 w-full min-h-screen z-50 bg-black bg-opacity-50 flex items-end justify-center">
+              <div className="bg-white p-6 rounded-t-3xl max-h-[55vh] w-full flex flex-col">
+                {/* Add your filter content here */}
+                <button className="mx-auto mb-3" onClick={handleFilterButtonClick}><Image width={50} height={0} src={"closeFilter.svg"} alt="closeFilter"/></button>
+                <ul className=" overflow-y-auto flex flex-col gap-8">
+                  <li className=" border-b-2 border-b-whiteLight2 text-2xl font-semibold pb-2 pl-4">Fast Food</li>
+                  <li className=" border-b-2 border-b-whiteLight2 text-2xl font-semibold pb-2 pl-4">Pizza</li>
+                  <li className=" border-b-2 border-b-whiteLight2 text-2xl font-semibold pb-2 pl-4">Chinese</li>
+                  <li className=" border-b-2 border-b-whiteLight2 text-2xl font-semibold pb-2 pl-4">Soups</li>
+                  <li className=" border-b-2 border-b-whiteLight2 text-2xl font-semibold pb-2 pl-4">Burger</li>
+                  <li className=" border-b-2 border-b-whiteLight2 text-2xl font-semibold pb-2 pl-4">Sushi</li>
+                  <li className=" border-b-2 border-b-whiteLight2 text-2xl font-semibold pb-2 pl-4">Special</li>
+                  <li className=" border-b-2 border-b-whiteLight2 text-2xl font-semibold pb-2 pl-4">Vegaterian</li>
+                </ul>
+              </div>
+            </div>
+          )}
+          {/* Modal END */}
+
+          {/* CARDS */}
           <div className="w-full flex justify-between flex-wrap gap-x-1 gap-y-8">
-            <div className="w-1/5 h-max px-4 py-7 shadow-lg flex flex-col cursor-pointer">
+            <div className="w-[46%] text-center sm:text-start sm:w-1/5 h-max px-1 sm:px-4 py-7 shadow-lg flex flex-col cursor-pointer">
               <Image width={300} height={0} src={"soupCard.svg"} alt="soup" />
               <p className=" font-bold text-grayText2 text-2xl mt-4">
                 Coffee Mania
@@ -198,15 +232,15 @@ const Restaurants: NextPage = () => {
               <p className="mb-4 text-grayText1">
                 chinese, sea-food, thai, lebanese, caribbean
               </p>
-              <div className="flex justify-between items-center">
+              <div className="flex flex-col gap-1 sm:gap-0 sm:flex-row justify-between items-center">
                 <p className="font-bold">$5 Delivery</p>
-                <p className="bg-mainRed py-1 px-3 rounded-full text-white shadow-md">
+                <p className="bg-mainRed py-1 w-4/5 text-center sm:px-3 sm:w-max rounded-full text-white shadow-md">
                   12 min.
                 </p>
               </div>
             </div>
 
-            <div className=" relative w-1/5 h-max px-4 py-7 shadow-lg flex flex-col cursor-pointer">
+            <div className=" relative w-[46%] text-center sm:text-start sm:w-1/5 h-max px-1 sm:px-4 py-7 shadow-lg flex flex-col cursor-pointer">
               <span className="absolute top-0 left-0 bg-mainRed text-white px-4 py-1 text-sm font-semibold animate-pulse">
                 New
               </span>
@@ -222,78 +256,15 @@ const Restaurants: NextPage = () => {
               <p className="mb-4 text-grayText1">
                 chinese, sea-food, thai, lebanese, caribbean
               </p>
-              <div className="flex justify-between items-center">
+              <div className="flex flex-col gap-1 sm:gap-0 sm:flex-row justify-between items-center">
                 <p className="font-bold">$17 Delivery</p>
-                <p className="bg-mainRed py-1 px-3 rounded-full text-white shadow-md">
+                <p className="bg-mainRed py-1 w-4/5 text-center sm:px-3 sm:w-max rounded-full text-white shadow-md">
                   30 min.
                 </p>
               </div>
             </div>
 
-            <div className=" w-1/5 h-max px-4 py-7 shadow-lg flex flex-col cursor-pointer">
-              <Image
-                width={300}
-                height={0}
-                src={"margaritaCard.svg"}
-                alt="margarita"
-              />
-              <p className=" font-bold text-grayText2 text-2xl mt-4">
-                Pizza Hut{" "}
-              </p>
-              <p className="mb-4 text-grayText1">
-                chinese, sea-food, thai, lebanese, caribbean
-              </p>
-              <div className="flex justify-between items-center">
-                <p className="font-bold">$13 Delivery</p>
-                <p className="bg-mainRed py-1 px-3 rounded-full text-white shadow-md">
-                  9 min.
-                </p>
-              </div>
-            </div>
-
-            <div className=" w-1/5 h-max px-4 py-7 shadow-lg flex flex-col cursor-pointer">
-              <Image
-                width={300}
-                height={0}
-                src={"papaJohns.svg"}
-                alt="papajohns"
-              />
-              <p className=" font-bold text-grayText2 text-2xl mt-4">
-                Papa John's
-              </p>
-              <p className="mb-4 text-grayText1">
-                chinese, sea-food, thai, lebanese, caribbean
-              </p>
-              <div className="flex justify-between items-center">
-                <p className="font-bold">$5 Delivery</p>
-                <p className="bg-mainRed py-1 px-3 rounded-full text-white shadow-md">
-                  12 min.
-                </p>
-              </div>
-            </div>
-
-            <div className=" w-1/5 h-max px-4 py-7 shadow-lg flex flex-col cursor-pointer">
-              <Image
-                width={300}
-                height={0}
-                src={"burgerKing.svg"}
-                alt="burgerking"
-              />
-              <p className=" font-bold text-grayText2 text-2xl mt-4">
-                Burger King
-              </p>
-              <p className="mb-4 text-grayText1">
-                chinese, sea-food, thai, lebanese, caribbean
-              </p>
-              <div className="flex justify-between items-center">
-                <p className="font-bold">$5 Delivery</p>
-                <p className="bg-mainRed py-1 px-3 rounded-full text-white shadow-md">
-                  12 min.
-                </p>
-              </div>
-            </div>
-
-            <div className=" w-1/5 h-max px-4 py-7 shadow-lg flex flex-col cursor-pointer">
+            <div className="w-[46%] text-center sm:text-start sm:w-1/5 h-max px-1 sm:px-4 py-7 shadow-lg flex flex-col cursor-pointer">
               <Image
                 width={300}
                 height={0}
@@ -306,15 +277,15 @@ const Restaurants: NextPage = () => {
               <p className="mb-4 text-grayText1">
                 chinese, sea-food, thai, lebanese, caribbean
               </p>
-              <div className="flex justify-between items-center">
-                <p className="font-bold">$5 Delivery</p>
-                <p className="bg-mainRed py-1 px-3 rounded-full text-white shadow-md">
-                  12 min.
+              <div className="flex flex-col gap-1 sm:gap-0 sm:flex-row justify-between items-center">
+                <p className="font-bold">$13 Delivery</p>
+                <p className="bg-mainRed py-1 w-4/5 text-center sm:px-3 sm:w-max rounded-full text-white shadow-md">
+                  9 min.
                 </p>
               </div>
             </div>
 
-            <div className=" w-1/5 h-max px-4 py-7 shadow-lg flex flex-col cursor-pointer">
+            <div className="w-[46%] text-center sm:text-start sm:w-1/5 h-max px-1 sm:px-4 py-7 shadow-lg flex flex-col cursor-pointer">
               <Image
                 width={300}
                 height={0}
@@ -327,15 +298,78 @@ const Restaurants: NextPage = () => {
               <p className="mb-4 text-grayText1">
                 chinese, sea-food, thai, lebanese, caribbean
               </p>
-              <div className="flex justify-between items-center">
+              <div className="flex flex-col gap-1 sm:gap-0 sm:flex-row justify-between items-center">
                 <p className="font-bold">$5 Delivery</p>
-                <p className="bg-mainRed py-1 px-3 rounded-full text-white shadow-md">
+                <p className="bg-mainRed py-1 w-4/5 text-center sm:px-3 sm:w-max rounded-full text-white shadow-md">
                   12 min.
                 </p>
               </div>
             </div>
 
-            <div className=" w-1/5 h-max px-4 py-7 shadow-lg flex flex-col cursor-pointer">
+            <div className="w-[46%] text-center sm:text-start sm:w-1/5 h-max px-1 sm:px-4 py-7 shadow-lg flex flex-col cursor-pointer">
+              <Image
+                width={300}
+                height={0}
+                src={"burgerKing.svg"}
+                alt="burgerking"
+              />
+              <p className=" font-bold text-grayText2 text-2xl mt-4">
+                Burger King
+              </p>
+              <p className="mb-4 text-grayText1">
+                chinese, sea-food, thai, lebanese, caribbean
+              </p>
+              <div className="flex flex-col gap-1 sm:gap-0 sm:flex-row justify-between items-center">
+                <p className="font-bold">$5 Delivery</p>
+                <p className="bg-mainRed py-1 w-4/5 text-center sm:px-3 sm:w-max rounded-full text-white shadow-md">
+                  12 min.
+                </p>
+              </div>
+            </div>
+
+            <div className="w-[46%] text-center sm:text-start sm:w-1/5 h-max px-1 sm:px-4 py-7 shadow-lg flex flex-col cursor-pointer">
+              <Image
+                width={300}
+                height={0}
+                src={"margaritaCard.svg"}
+                alt="margarita"
+              />
+              <p className=" font-bold text-grayText2 text-2xl mt-4">
+                Pizza Hut
+              </p>
+              <p className="mb-4 text-grayText1">
+                chinese, sea-food, thai, lebanese, caribbean
+              </p>
+              <div className="flex flex-col gap-1 sm:gap-0 sm:flex-row justify-between items-center">
+                <p className="font-bold">$5 Delivery</p>
+                <p className="bg-mainRed py-1 w-4/5 text-center sm:px-3 sm:w-max rounded-full text-white shadow-md">
+                  12 min.
+                </p>
+              </div>
+            </div>
+
+            <div className="w-[46%] text-center sm:text-start sm:w-1/5 h-max px-1 sm:px-4 py-7 shadow-lg flex flex-col cursor-pointer">
+              <Image
+                width={300}
+                height={0}
+                src={"papaJohns.svg"}
+                alt="papajohns"
+              />
+              <p className=" font-bold text-grayText2 text-2xl mt-4">
+                Papa John's
+              </p>
+              <p className="mb-4 text-grayText1">
+                chinese, sea-food, thai, lebanese, caribbean
+              </p>
+              <div className="flex flex-col gap-1 sm:gap-0 sm:flex-row justify-between items-center">
+                <p className="font-bold">$5 Delivery</p>
+                <p className="bg-mainRed py-1 w-4/5 text-center sm:px-3 sm:w-max rounded-full text-white shadow-md">
+                  12 min.
+                </p>
+              </div>
+            </div>
+
+            <div className="w-[46%] text-center sm:text-start sm:w-1/5 h-max px-1 sm:px-4 py-7 shadow-lg flex flex-col cursor-pointer">
               <Image width={300} height={0} src={"soupCard.svg"} alt="soup" />
               <p className=" font-bold text-grayText2 text-2xl mt-4">
                 Coffee Mania
@@ -343,9 +377,9 @@ const Restaurants: NextPage = () => {
               <p className="mb-4 text-grayText1">
                 chinese, sea-food, thai, lebanese, caribbean
               </p>
-              <div className="flex justify-between items-center">
+              <div className="flex flex-col gap-1 sm:gap-0 sm:flex-row justify-between items-center">
                 <p className="font-bold">$5 Delivery</p>
-                <p className="bg-mainRed py-1 px-3 rounded-full text-white shadow-md">
+                <p className="bg-mainRed py-1 w-4/5 text-center sm:px-3 sm:w-max rounded-full text-white shadow-md">
                   12 min.
                 </p>
               </div>

@@ -1,8 +1,9 @@
 import Image from "next/image";
 import { Button } from "../Button";
-import  {Langugages}  from "../Languages/index";
+import { Langugages } from "../Languages/index";
 import { useTranslation } from "react-i18next";
 import { useRouter } from "next/router";
+import { useState } from "react";
 
 interface NavbarParamTypes {
   isRegister: boolean | null;
@@ -16,15 +17,28 @@ export const Navbar = ({
   forAdmin,
 }: NavbarParamTypes) => {
   const { t, i18n } = useTranslation();
-  const navigate = useRouter()
+  const navigate = useRouter();
+
+  const [isModalOpen, setModalOpen] = useState(false);
+
+  const toggleModal = () => {
+    setModalOpen(!isModalOpen);
+  };
 
   return (
     <nav
-      className={`flex justify-between m-8 items-center ${
+      className={`flex justify-between m-0 sm:m-8 items-center ${
         forLogin ? "bg-lightRed" : "bg-whiteLight1"
-      } rounded-md  p-11`}
+      } rounded-md py-11 px-5 sm:p-11`}
     >
-      <h1 className={`text-4xl font-extrabold ${forLogin ? "text-white" : ""}`}>
+      <h1
+        className={`text-4xl font-extrabold ${
+          forLogin ? "text-white" : ""
+        } flex items-center`}
+      >
+        <button onClick={toggleModal} className="sm:hidden block mr-5">
+          <Image width={40} height={0} src={"hamburger.svg"} alt="hamburger" />
+        </button>
         Foody
         <span className={`${forLogin ? "text-white" : "text-mainRed"} `}>
           .
@@ -35,26 +49,41 @@ export const Navbar = ({
         <></>
       ) : (
         <>
-          <ul className="flex justify-around text-lg w-1/2 font-medium text-grayText1 ">
-            <li onClick={()=>navigate.push("/")} className="cursor-pointer hover:text-mainRed transition-all">
-            {t("home")}
+          <ul className="justify-around text-lg w-1/2 font-medium text-grayText1 hidden sm:flex ">
+            <li
+              onClick={() => navigate.push("/")}
+              className={`cursor-pointer transition-all ${navigate.pathname === '/' ? 'text-mainRed' : 'hover:text-mainRed'}`}
+            >
+              {t("home")}
             </li>
-            <li onClick={()=>navigate.push("/restaurants")} className="cursor-pointer hover:text-mainRed transition-all">
-            {t("restaurants")}
+            <li
+              onClick={() => navigate.push("/restaurants")}
+              className={`cursor-pointer transition-all ${navigate.pathname === '/restaurants' ? 'text-mainRed' : 'hover:text-mainRed'}`}
+            >
+              {t("restaurants")}
             </li>
-            <li onClick={()=>navigate.push("/about-us")} className="cursor-pointer hover:text-mainRed transition-all">
-            {t("about_us")}
+            <li
+              onClick={() => navigate.push("/about-us")}
+              className={`cursor-pointer transition-all ${navigate.pathname === '/about-us' ? 'text-mainRed' : 'hover:text-mainRed'}`}
+            >
+              {t("about_us")}
             </li>
-            <li onClick={()=>navigate.push("/how-it-works")} className="cursor-pointer hover:text-mainRed transition-all">
-            {t("how_it_works")}
+            <li
+              onClick={() => navigate.push("/how-it-works")}
+              className={`cursor-pointer transition-all ${navigate.pathname === '/how-it-works' ? 'text-mainRed' : 'hover:text-mainRed'}`}
+            >
+              {t("how_it_works")}
             </li>
-            <li onClick={()=>navigate.push("/faqs")} className="cursor-pointer hover:text-mainRed transition-all">
+            <li
+              onClick={() => navigate.push("/faqs")}
+              className={`cursor-pointer transition-all ${navigate.pathname === '/faqs' ? 'text-mainRed' : 'hover:text-mainRed'}`}
+            >
               FAQs
             </li>
           </ul>
 
           <input
-            className="px-6 py-3 relative rounded-xl w-1/5 shadow-sm"
+            className="px-6 py-3 relative rounded-xl w-1/5 shadow-sm hidden sm:block"
             type="text"
             placeholder="Search"
           />
@@ -95,13 +124,57 @@ export const Navbar = ({
           <div className="flex items-center justify-center gap-7 ">
             <Langugages />
             <Button
-              className={`px-6 py-2 rounded-3xl bg-mainRed text-white font-medium shadow-md hover:scale-95 transition-all duration-500 ${
+              className={`px-6 py-2 rounded-3xl bg-mainRed text-white font-medium shadow-md hover:scale-95 transition-all duration-500 hidden sm:block ${
                 forLogin ? "hidden" : "block"
               }`}
               innerText={t("signUp")}
+              onClick={()=>navigate.push("/login")}
             />
           </div>
         </>
+      )}
+
+{isModalOpen && (
+        <div className="fixed inset-0 bg-black m-0 min-h-screen bg-opacity-50 z-50 flex items-center justify-start">
+
+          <div className="bg-white w-4/5 min-h-screen p-8 flex flex-col">
+          <button className="text-mainRed font-bold text-lg block text-start" onClick={toggleModal}><Image width={35} height={0} alt="close2" src={"close2.svg"}/></button>
+            <Button className=" w-1/2 mx-auto py-4 rounded-full text-xl bg-mainRed text-white font-medium shadow-md hover:scale-95 transition-all duration-500" innerText={t("signUp")}/>
+            <ul className="justify-around text-2xl w-1/2 font-medium text-grayText1 flex flex-col mt-20 gap-4 ">
+            <li
+              onClick={() => navigate.push("/")}
+              className="cursor-pointer hover:text-mainRed transition-all"
+            >
+              {t("home")}
+            </li>
+            <li
+              onClick={() => navigate.push("/restaurants")}
+              className="cursor-pointer hover:text-mainRed transition-all"
+            >
+              {t("restaurants")}
+            </li>
+            <li
+              onClick={() => navigate.push("/about-us")}
+              className="cursor-pointer hover:text-mainRed transition-all"
+            >
+              {t("about_us")}
+            </li>
+            <li
+              onClick={() => navigate.push("/how-it-works")}
+              className="cursor-pointer hover:text-mainRed transition-all"
+            >
+              {t("how_it_works")}
+            </li>
+            <li
+              onClick={() => navigate.push("/faqs")}
+              className="cursor-pointer hover:text-mainRed transition-all"
+            >
+              FAQs
+            </li>
+          </ul>
+          </div>
+          
+        </div>
       )}
     </nav>
   );

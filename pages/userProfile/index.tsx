@@ -5,6 +5,7 @@ import { useTranslation } from "react-i18next";
 import { Navbar } from "../../share/components/Navbar";
 import { Footer } from "../../share/components/Footer";
 import Image from "next/image";
+import { UserAside } from "../../share/components/userAside";
 
 const UserProfile = () => {
   const { t, i18n } = useTranslation();
@@ -19,74 +20,24 @@ const UserProfile = () => {
         <Navbar isRegister={true} forAdmin={null} forLogin={null} />
 
         <section className="m-4 sm:m-8 flex justify-center gap-10">
-          <div className="rounded-md hidden sm:flex flex-col max-h-screen overflow-y-auto gap-8 bg-whiteLight1 w-1/6 p-4">
-            <div className="flex items-center gap-4 cursor-pointer hover:bg-mainRedLight transition-all p-2">
-              <Image
-                width={25}
-                height={0}
-                src={"profile.svg"}
-                alt="profileIcon"
-              />
-              <p className="font-semibold text-grayText2 text-lg ">
-                {t("userDesc")}
-              </p>
-            </div>
-
-            <div className="flex items-center gap-4 cursor-pointer hover:bg-mainRedLight transition-all p-2">
-              <Image
-                width={25}
-                height={0}
-                src={"basketIcon.svg"}
-                alt="basketIcon"
-              />
-              <p className="font-semibold text-grayText2 text-lg ">
-                {t("userDesc2")}
-              </p>
-            </div>
-
-            <div className="flex items-center gap-4 cursor-pointer hover:bg-mainRedLight transition-all p-2">
-              <Image width={25} height={0} src={"order.svg"} alt="orderIcon" />
-              <p className="font-semibold text-grayText2 text-lg ">
-                {t("userDesc3")}
-              </p>
-            </div>
-
-            <div className="flex items-center gap-4 cursor-pointer hover:bg-mainRedLight transition-all p-2">
-              <Image
-                width={25}
-                height={0}
-                src={"checkout.svg"}
-                alt="checkoutIcon"
-              />
-              <p className="font-semibold text-grayText2 text-lg ">
-                {t("userDesc4")}
-              </p>
-            </div>
-
-            <div className="flex items-center gap-4 cursor-pointer hover:bg-mainRedLight transition-all p-2">
-              <Image
-                width={25}
-                height={0}
-                src={"logout.svg"}
-                alt="logoutIcon"
-              />
-              <p className="font-semibold text-grayText2 text-lg ">
-                {t("userDesc5")}
-              </p>
-            </div>
-          </div>
+          <UserAside/>
 
           <div className="w-full flex  flex-col  sm:px-8 sm:py-10 flex-wrap gap-x-1 gap-y-8 bg-white sm:bg-whiteLight1">
-            <h2 className=" font-semibold text-3xl text-grayText2"> Profile</h2>
-            <div className=" w-full flex  justify-center">
+            <h2 className=" font-semibold text-3xl text-grayText2">{t("userDesc")}</h2>
+
+            <input type="file" id="file" accept="image/*"  className=" hidden" />
+            <label htmlFor="file"> 
+            <div className=" w-full flex  justify-center ">
               <Image
                 width={146}
                 height={0}
                 src={"user-profile-upload.svg"}
                 alt="upload"
-                className=""
+                className="cursor-pointer"
               />
             </div>
+            </label>
+        
 
             <div className=" sm:m-10 flex flex-wrap justify-between gap-4  ">
               <div className="">
