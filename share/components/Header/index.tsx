@@ -3,9 +3,11 @@ import { Navbar } from "../Navbar";
 import styles from "./header.module.css";
 import { useTranslation } from "react-i18next";
 import { Button } from "../Button";
+import { useRouter } from "next/router";
 
 export const Header = () => {
   const { t, i18n } = useTranslation();
+  const navigate = useRouter()
 
   return (
     <header className="m-8 flex-col rounded-md bg-whiteLight1">
@@ -20,6 +22,7 @@ export const Header = () => {
             <Button
               className="px-8 py-3 rounded-3xl bg-mainRed text-white text-2xl font-medium shadow-md hover:bg-red-700 hover:scale-95 transition-all duration-500"
               innerText={t("homeDesc3")}
+              onClick={()=> navigate.push("/login")}
             />
 
             <Button
