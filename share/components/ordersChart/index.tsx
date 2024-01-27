@@ -1,20 +1,22 @@
 import React from 'react'
-import { PieChart } from '@mui/x-charts/PieChart';
+import { PieChart, pieArcLabelClasses } from '@mui/x-charts/PieChart';
 
 
  const OrdersChart = () => {
   return (
-    <div className=' pt-4 pl-6 bg-darkBlue_3 max-h-[472px] rounded-xl max-w-[472px] pb-16 '>
+    <div className=' pt-4 pl-6   bg-darkBlue_3  h-80  rounded-xl max-w-[472px]  pb-8 '>
+      <div >
       <p className=' text-grayText font-medium text-xl'>Orders</p>
       <PieChart
-        
+    
     series={[
       {
+        
         data: [
-          {  value: 20, label: 'KFC' },
-          {  value: 15, label: 'McDonalds' },
-          { value: 30, label: 'Burger King' },
-          {  value: 10, label: "Domino's" },
+          {  value: 20,  color:"red" },
+          {  value: 15,  },
+          { value: 30, },
+          {  value: 10,  },
         ],
         innerRadius: 65,
         highlightScope: { faded: 'global', highlighted: 'item' },
@@ -23,7 +25,27 @@ import { PieChart } from '@mui/x-charts/PieChart';
     ]}
     width={400}
     height={200}
-  /></div>
+      />
+    
+      <div className=' flex text-grayText gap-2 mt-2'>
+        <div className=' flex  gap-1 items-center '>
+          <div className=' h-3 w-3 rounded-full bg-mainRed '> </div> <p> KFC</p>
+        </div>
+        <div className=' flex  gap-1 items-center '>
+          <div className=' h-3 w-3 rounded-full  bg-[#2E96FF] '> </div>  <p>Dominoe's</p>
+        </div>
+        <div className=' flex  gap-1 items-center '>
+          <div className=' h-3 w-3 rounded-full bg-[#B800D8]'> </div> <p>Mc Donalds</p>
+        </div>
+        <div className=' flex  gap-1 items-center '>
+          <div className=' h-3 w-3 rounded-full bg-[#60009B] '> </div>  <p>Burger King</p>
+          </div>
+      
+       
+       
+        </div>
+        </div>
+    </div>
   )
 }
 export default OrdersChart

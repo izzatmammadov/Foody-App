@@ -28,7 +28,7 @@ const AdminDashboard: NextPage = () => {
         <AdminLeftModal onClickClose={changeHidden} hidden={isHiddenModal} />
         <main>
           <AdminAside />
-          <div className=" gap-4   hidden">
+          <div className=" gap-4   flex">
             <OrdersChart />
             <Barchart />
           </div>
