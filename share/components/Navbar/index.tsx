@@ -139,8 +139,8 @@ export const Navbar = ({
 
           <div className="bg-white w-4/5 min-h-screen p-8 flex flex-col">
           <button className="text-mainRed font-bold text-lg block text-start" onClick={toggleModal}><Image width={35} height={0} alt="close2" src={"close2.svg"}/></button>
-            <Button className=" w-1/2 mx-auto py-4 rounded-full text-xl bg-mainRed text-white font-medium shadow-md hover:scale-95 transition-all duration-500" innerText={t("signUp")}/>
-            <ul className="justify-around text-2xl w-1/2 font-medium text-grayText1 flex flex-col mt-20 gap-4 ">
+            <Button className=" w-full mt-8 mx-auto py-4 rounded-full text-xl bg-mainRed text-white font-medium shadow-md hover:scale-95 transition-all duration-500" innerText={t("signUp")}/>
+            <ul className="justify-around text-2xl w-full font-medium text-grayText1 flex flex-col mt-14 gap-4 ">
             <li
               onClick={() => navigate.push("/")}
               className="cursor-pointer hover:text-mainRed transition-all"

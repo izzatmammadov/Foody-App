@@ -20,7 +20,7 @@ const Home: NextPage = () => {
         <Header />
 
         {/* FIRST SECTION COMPONENT */}
-        <section className="flex flex-col gap-10 justify-center my-14 px-14">
+        <section className="flex flex-col gap-10 justify-center my-14 px-3 sm:px-14">
           <div className="flex flex-col gap-6 items-center text-center">
             <h3 className=" text-5xl font-black">{t("homeDesc5")}</h3>
             <p className="w-full sm:w-2/3 text-2xl text-grayText1">
@@ -83,9 +83,9 @@ const Home: NextPage = () => {
         {/* FIRST SECTION COMPONENT END */}
 
         {/* SECOND SECTION COMPONENT */}
-        <section className="flex flex-col sm:flex-row justify-center items-center px-11 mt-52">
+        <section className="flex flex-col sm:flex-row justify-center items-center px-3 sm:px-11 mt-52">
           <div className="flex flex-col gap-8 w-full sm:w-1/2">
-            <h4 className="text-5xl w-3/4 sm:w-full sm:text-6xl font-black leading-tight text-center mx-auto sm:mx-0 sm:text-start">
+            <h4 className="text-5xl w-full sm:w-full sm:text-6xl font-black leading-tight text-center mx-auto sm:mx-0 sm:text-start">
               {t("homeDesc6")}
             </h4>
             <p className="text-xl text-grayText1 w-full mb-8 sm:mb-0 sm:w-3/5 mx-auto text-center sm:text-start sm:mx-0">
@@ -109,9 +109,9 @@ const Home: NextPage = () => {
         {/* SECOND SECTION COMPONENT END */}
 
         {/* THIRD SECTION COMPONENT */}
-        <section className="flex flex-col sm:flex-row justify-center items-center px-11 mt-52">
+        <section className="flex flex-col sm:flex-row justify-center items-center px-3 sm:px-11 mt-52">
           <div className="flex flex-col gap-8 w-full sm:w-1/2">
-            <h4 className="text-5xl w-3/4 sm:w-full sm:text-6xl font-black leading-tight text-center mx-auto sm:mx-0 sm:text-start">
+            <h4 className="text-5xl w-full sm:w-full sm:text-6xl font-black leading-tight text-center mx-auto sm:mx-0 sm:text-start">
               {t("homeDesc7")}
             </h4>
             <p className="text-xl text-grayText1 w-full mb-8 sm:mb-0 sm:w-3/5 mx-auto text-center sm:text-start sm:mx-0">
@@ -135,9 +135,9 @@ const Home: NextPage = () => {
         {/* THIRD SECTION COMPONENT END */}
 
         {/* FOURTH SECTION COMPONENT */}
-        <section className="flex flex-col sm:flex-row justify-center items-center px-11 mt-52">
+        <section className="flex flex-col sm:flex-row justify-center items-center px-3 sm:px-11 mt-52">
           <div className="flex flex-col gap-8 w-full sm:w-1/2">
-            <h4 className="text-5xl w-3/4 sm:w-full sm:text-6xl font-black leading-tight text-center mx-auto sm:mx-0 sm:text-start">
+            <h4 className="text-5xl w-full sm:w-full sm:text-6xl font-black leading-tight text-center mx-auto sm:mx-0 sm:text-start">
               {t("homeDesc8")}
             </h4>
             <p className="text-xl text-grayText1 w-full mb-8 sm:mb-0 sm:w-3/5 mx-auto text-center sm:text-start sm:mx-0">
@@ -161,7 +161,7 @@ const Home: NextPage = () => {
         {/* FOURTH SECTION COMPONENT END */}
 
         {/* FIFTH SECTION COMPONENT */}
-        <section className="flex flex-col gap-10 justify-center px-14 mb-96">
+        <section className="flex flex-col gap-10 justify-center px-3 sm:px-14 mb-96">
           <div className="flex flex-col gap-6 items-center text-center">
             <h3 className=" text-5xl font-black w-full mt-20 sm:mt-0 sm:w-1/3 leading-tight">
               {t("homeDesc9")}

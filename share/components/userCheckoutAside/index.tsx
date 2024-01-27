@@ -4,11 +4,11 @@ export const UserCheckoutAside = () => {
   const { t } = useTranslation();
 
   return (
-    <div className="w-full sm:w-[40%] flex flex-col justify-between px-8 py-10 flex-wrap gap-0 sm:bg-whiteLight1">
+    <div className="w-full sm:w-[40%] flex flex-col justify-between px-3 sm:px-8 py-10 flex-wrap gap-0 sm:bg-whiteLight1">
       <p className="w-full text-center text-grayText1 font-medium text-xl">
         {t("userDesc3")}
       </p>
-      <div className="flex flex-col gap-6 max-h-72 pr-2 overflow-y-auto ">
+      <div className="flex flex-col mt-4 sm:mt-0 gap-6 max-h-72 pr-2 overflow-y-auto ">
         <div className="flex items-center text-grayText1 justify-between">
           <div className="flex items-center gap-1">
             <p className="text-grayText2 text-lg font-semibold">1</p>

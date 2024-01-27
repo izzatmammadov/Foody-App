@@ -112,7 +112,6 @@ export const Table = () => {
                   alt="3dots"
                   onClick={togglePopup}
                 />
-
                 {/* Popup */}
                 {showPopup && (
                   <div className="absolute right-0 w-max bg-whiteLight1 shadow-md rounded-md p-2 flex flex-col items-center justify-center gap-1">

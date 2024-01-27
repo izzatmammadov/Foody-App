@@ -11,9 +11,9 @@ interface RestaurantFilterModalProps {
     };
     return (
         <div className="fixed bottom-0 left-0 w-full min-h-screen z-50 bg-black bg-opacity-50 flex items-end justify-center">
-              <div className="bg-white p-6 rounded-t-3xl max-h-[55vh] w-full flex flex-col">
-                <button className="mx-auto mb-3" onClick={handleFilterButtonClick}><Image width={50} height={0} src={"closeFilter.svg"} alt="closeFilter"/></button>
-                <ul className=" overflow-y-auto flex flex-col gap-8">
+              <div className="bg-white p-6 rounded-t-3xl max-h-[65vh] w-full flex flex-col">
+                <button className="mx-auto mb-4" onClick={handleFilterButtonClick}><Image width={50} height={0} src={"closeFilter.svg"} alt="closeFilter"/></button>
+                <ul className=" overflow-y-auto flex flex-col gap-8 px-2">
                   <li className=" border-b-2 border-b-whiteLight2 text-2xl font-semibold pb-2 pl-4">Fast Food</li>
                   <li className=" border-b-2 border-b-whiteLight2 text-2xl font-semibold pb-2 pl-4">Pizza</li>
                   <li className=" border-b-2 border-b-whiteLight2 text-2xl font-semibold pb-2 pl-4">Chinese</li>
