@@ -12,11 +12,11 @@ export const Footer = ({ isTop }: FooterParamTypes) => {
       {/* UPPER FOOTER */}
 
       {isTop ? (
-        <section className="w-3/4 flex justify-around bg-blackLight absolute -top-44 items-center rounded-3xl py-12 px-9 text-white ">
+        <section className="w-3/4 flex justify-around bg-blackLight absolute -top-44 items-center rounded-3xl py-12 px-0 sm:px-9 text-white ">
           <Image className="hidden sm:block" width={200} height={0} src={"footerPizza.svg"} alt="footer" />
 
           <div className="flex flex-col items-center gap-5">
-            <p className=" font-medium text-3xl sm:text-4xl w-9/12 text-center leading-tight">
+            <p className=" font-medium text-xl sm:text-4xl w-9/12 text-center leading-tight">
             {t("footerDesc")}
             </p>
             <button className=" bg-orange px-12 py-4 font-medium text-md rounded-full hover:scale-95 transition-all duration-500">
@@ -37,7 +37,7 @@ export const Footer = ({ isTop }: FooterParamTypes) => {
           <p className="text-white font-extrabold text-center text-5xl sm:text-start sm:text-3xl">
             Foody<span className="text-orange">.</span>
           </p>
-          <p className="text-2xl text-grayText1 w-2/3 text-center mx-auto sm:text-start sm:mx-0 sm:text-lg">
+          <p className="text-grayText1 w-full sm:w-2/3 text-center mx-auto sm:text-start sm:mx-0 text-lg">
             Lorem ipsum is placeholder text commonly used in the graphic
           </p>
           <div className="flex justify-center sm:justify-start gap-2">
@@ -90,7 +90,7 @@ export const Footer = ({ isTop }: FooterParamTypes) => {
         </div>
       </section>
 
-      <div className="text-white mt-20">
+      <div className="text-white mt-20 text-center w-3/4 sm:w-full">
         All rights reserved © 2003-2023 Foody TERMS OF USE | Privacy Policy
       </div>
       {/* LOWER FOOTER END */}

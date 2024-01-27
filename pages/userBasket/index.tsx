@@ -23,7 +23,7 @@ const UserBasket: NextPage = () => {
 
         <section className="mx-0 sm:m-8 flex justify-center gap-10">
           <UserAside />
-          <div className="w-full flex flex-col px-8 py-10 flex-wrap gap-0 sm:bg-whiteLight1">
+          <div className="w-full flex flex-col px-3 sm:px-8 py-10 flex-wrap gap-0 sm:bg-whiteLight1">
             <h2 className="font-semibold text-3xl text-grayText2">{t("userDesc2")}</h2>
             <UserBasketCard />
           </div>

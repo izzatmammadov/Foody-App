@@ -19,6 +19,7 @@ const Restaurants: NextPage = () => {
   const handleCloseFilterModal = () => {
     setFilterModalOpen(false);
   };
+  
   return (
     <>
       <Head>
@@ -30,12 +31,12 @@ const Restaurants: NextPage = () => {
       <main>
         <Navbar isRegister={true} forAdmin={null} forLogin={null}/>
 
-        <section className="m-8 flex flex-col sm:flex-row justify-center gap-10">
+        <section className="mx-0 px-1 sm:px-0 sm:m-8 flex flex-col sm:flex-row justify-center gap-10">
         <div className="hidden rounded-md sm:flex flex-col max-h-screen overflow-y-auto gap-8 bg-whiteLight1 w-1/6 p-4">
           <RestaurantAside/>
         </div>
 
-          <div className="flex sm:hidden items-center justify-center gap-2 shadow-lg p-4" onClick={handleOpenFilterModal}>
+          <div className="flex sm:hidden items-center mt-4 justify-center gap-2 shadow-lg p-4" onClick={handleOpenFilterModal}>
             <Image width={25} height={0} src={"filter.svg"} alt="filter" />
             <p className="font-medium text-2xl text-grayText2">Filters</p>
           </div>
@@ -45,7 +46,7 @@ const Restaurants: NextPage = () => {
           {/* Modal END */}
 
           {/* CARDS */}
-          <div className="w-full flex justify-between flex-wrap gap-x-1 gap-y-8">
+          <div className="w-full flex justify-between max-h-[740px] mb-8 sm:mb-0 overflow-y-auto flex-wrap gap-x-1 gap-y-8">
             <RestaurantCard 
             name="Coffee Mania"
             cuisine="chinese, sea-food, thai, lebanese, caribbean"

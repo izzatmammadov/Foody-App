@@ -95,7 +95,7 @@ export const UserCheckoutForm = () => {
         </div>
       </div>
       <Button
-        className="w-full p-4 font-semibold text-2xl bg-[#6fcf97] text-white rounded-md hover:scale-95 transition-all duration-500"
+        className="w-full p-4 font-semibold text-lg sm:text-2xl bg-[#6fcf97] text-white rounded-md hover:scale-95 transition-all duration-500"
         innerText={t("userDesc4")}
       />
     </form>

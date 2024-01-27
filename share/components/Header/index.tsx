@@ -14,7 +14,7 @@ export const Header = () => {
       <Navbar isRegister={false} forAdmin={null} forLogin={null} />
 
       {/* MAIN SECTION */}
-      <section className="flex flex-col-reverse sm:flex-row justify-center items-center h-screen px-11 -mt-24">
+      <section className="flex flex-col-reverse sm:flex-row justify-center items-center h-screen px-1 sm:px-11 -mt-24">
         <div className="w-full sm:w-1/2 flex flex-col gap-10">
         <h2 className="text-4xl text-center sm:text-5xl font-black leading-tight sm:text-start">{t("homeDesc")}</h2>
           <p className="sm:block hidden sm:text-xl text-grayText1 w-3/4 ">{t("homeDesc2")}</p>

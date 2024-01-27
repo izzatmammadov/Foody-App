@@ -57,7 +57,7 @@ const Login: NextPage = () => {
             </div>
 
             {showLoginForm ? (
-              <form className="flex flex-col w-4/5 mx-auto gap-8 items-center">
+              <form className="flex flex-col w-full sm:w-4/5 mx-auto gap-8 items-center">
                 <div className="flex flex-col gap-2 w-full">
                   <label className="text-xl font-medium text-grayText2">
                     {t("username")}
@@ -84,7 +84,7 @@ const Login: NextPage = () => {
                 />
               </form>
             ) : (
-              <form className="flex flex-col w-4/5 mx-auto gap-8 items-center">
+              <form className="flex flex-col w-full sm:w-4/5 mx-auto gap-8 items-center">
                 <div className="flex flex-col gap-2 w-full">
                   <label className="text-xl font-medium text-grayText2">
                     {t("fullname")}
