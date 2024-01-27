@@ -5,6 +5,7 @@ import { Footer } from "../../share/components/Footer";
 import { Navbar } from "../../share/components/Navbar";
 import { useState } from "react";
 import Modal from "../../share/components/Modal";
+import RestaurantCard from "../../share/components/restaurantCard";
 
 const Restaurants: NextPage = () => {
   const [isFilterModalOpen, setIsFilterModalOpen] = useState(false);
@@ -224,166 +225,65 @@ const Restaurants: NextPage = () => {
 
           {/* CARDS */}
           <div className="w-full flex justify-between flex-wrap gap-x-1 gap-y-8">
-            <div className="w-[46%] text-center sm:text-start sm:w-1/5 h-max px-1 sm:px-4 py-7 shadow-lg flex flex-col cursor-pointer">
-              <Image width={300} height={0} src={"soupCard.svg"} alt="soup" />
-              <p className=" font-bold text-grayText2 text-2xl mt-4">
-                Coffee Mania
-              </p>
-              <p className="mb-4 text-grayText1">
-                chinese, sea-food, thai, lebanese, caribbean
-              </p>
-              <div className="flex flex-col gap-1 sm:gap-0 sm:flex-row justify-between items-center">
-                <p className="font-bold">$5 Delivery</p>
-                <p className="bg-mainRed py-1 w-4/5 text-center sm:px-3 sm:w-max rounded-full text-white shadow-md">
-                  12 min.
-                </p>
-              </div>
-            </div>
-
-            <div className=" relative w-[46%] text-center sm:text-start sm:w-1/5 h-max px-1 sm:px-4 py-7 shadow-lg flex flex-col cursor-pointer">
-              <span className="absolute top-0 left-0 bg-mainRed text-white px-4 py-1 text-sm font-semibold animate-pulse">
-                New
-              </span>
-              <Image
-                width={300}
-                height={0}
-                src={"burgerKing.svg"}
-                alt="burgerking"
-              />
-              <p className=" font-bold text-grayText2 text-2xl mt-4">
-                Burger King
-              </p>
-              <p className="mb-4 text-grayText1">
-                chinese, sea-food, thai, lebanese, caribbean
-              </p>
-              <div className="flex flex-col gap-1 sm:gap-0 sm:flex-row justify-between items-center">
-                <p className="font-bold">$17 Delivery</p>
-                <p className="bg-mainRed py-1 w-4/5 text-center sm:px-3 sm:w-max rounded-full text-white shadow-md">
-                  30 min.
-                </p>
-              </div>
-            </div>
-
-            <div className="w-[46%] text-center sm:text-start sm:w-1/5 h-max px-1 sm:px-4 py-7 shadow-lg flex flex-col cursor-pointer">
-              <Image
-                width={300}
-                height={0}
-                src={"margaritaCard.svg"}
-                alt="margarita"
-              />
-              <p className=" font-bold text-grayText2 text-2xl mt-4">
-                Pizza Hut
-              </p>
-              <p className="mb-4 text-grayText1">
-                chinese, sea-food, thai, lebanese, caribbean
-              </p>
-              <div className="flex flex-col gap-1 sm:gap-0 sm:flex-row justify-between items-center">
-                <p className="font-bold">$13 Delivery</p>
-                <p className="bg-mainRed py-1 w-4/5 text-center sm:px-3 sm:w-max rounded-full text-white shadow-md">
-                  9 min.
-                </p>
-              </div>
-            </div>
-
-            <div className="w-[46%] text-center sm:text-start sm:w-1/5 h-max px-1 sm:px-4 py-7 shadow-lg flex flex-col cursor-pointer">
-              <Image
-                width={300}
-                height={0}
-                src={"papaJohns.svg"}
-                alt="papajohns"
-              />
-              <p className=" font-bold text-grayText2 text-2xl mt-4">
-                Papa John's
-              </p>
-              <p className="mb-4 text-grayText1">
-                chinese, sea-food, thai, lebanese, caribbean
-              </p>
-              <div className="flex flex-col gap-1 sm:gap-0 sm:flex-row justify-between items-center">
-                <p className="font-bold">$5 Delivery</p>
-                <p className="bg-mainRed py-1 w-4/5 text-center sm:px-3 sm:w-max rounded-full text-white shadow-md">
-                  12 min.
-                </p>
-              </div>
-            </div>
-
-            <div className="w-[46%] text-center sm:text-start sm:w-1/5 h-max px-1 sm:px-4 py-7 shadow-lg flex flex-col cursor-pointer">
-              <Image
-                width={300}
-                height={0}
-                src={"burgerKing.svg"}
-                alt="burgerking"
-              />
-              <p className=" font-bold text-grayText2 text-2xl mt-4">
-                Burger King
-              </p>
-              <p className="mb-4 text-grayText1">
-                chinese, sea-food, thai, lebanese, caribbean
-              </p>
-              <div className="flex flex-col gap-1 sm:gap-0 sm:flex-row justify-between items-center">
-                <p className="font-bold">$5 Delivery</p>
-                <p className="bg-mainRed py-1 w-4/5 text-center sm:px-3 sm:w-max rounded-full text-white shadow-md">
-                  12 min.
-                </p>
-              </div>
-            </div>
-
-            <div className="w-[46%] text-center sm:text-start sm:w-1/5 h-max px-1 sm:px-4 py-7 shadow-lg flex flex-col cursor-pointer">
-              <Image
-                width={300}
-                height={0}
-                src={"margaritaCard.svg"}
-                alt="margarita"
-              />
-              <p className=" font-bold text-grayText2 text-2xl mt-4">
-                Pizza Hut
-              </p>
-              <p className="mb-4 text-grayText1">
-                chinese, sea-food, thai, lebanese, caribbean
-              </p>
-              <div className="flex flex-col gap-1 sm:gap-0 sm:flex-row justify-between items-center">
-                <p className="font-bold">$5 Delivery</p>
-                <p className="bg-mainRed py-1 w-4/5 text-center sm:px-3 sm:w-max rounded-full text-white shadow-md">
-                  12 min.
-                </p>
-              </div>
-            </div>
-
-            <div className="w-[46%] text-center sm:text-start sm:w-1/5 h-max px-1 sm:px-4 py-7 shadow-lg flex flex-col cursor-pointer">
-              <Image
-                width={300}
-                height={0}
-                src={"papaJohns.svg"}
-                alt="papajohns"
-              />
-              <p className=" font-bold text-grayText2 text-2xl mt-4">
-                Papa John's
-              </p>
-              <p className="mb-4 text-grayText1">
-                chinese, sea-food, thai, lebanese, caribbean
-              </p>
-              <div className="flex flex-col gap-1 sm:gap-0 sm:flex-row justify-between items-center">
-                <p className="font-bold">$5 Delivery</p>
-                <p className="bg-mainRed py-1 w-4/5 text-center sm:px-3 sm:w-max rounded-full text-white shadow-md">
-                  12 min.
-                </p>
-              </div>
-            </div>
-
-            <div className="w-[46%] text-center sm:text-start sm:w-1/5 h-max px-1 sm:px-4 py-7 shadow-lg flex flex-col cursor-pointer">
-              <Image width={300} height={0} src={"soupCard.svg"} alt="soup" />
-              <p className=" font-bold text-grayText2 text-2xl mt-4">
-                Coffee Mania
-              </p>
-              <p className="mb-4 text-grayText1">
-                chinese, sea-food, thai, lebanese, caribbean
-              </p>
-              <div className="flex flex-col gap-1 sm:gap-0 sm:flex-row justify-between items-center">
-                <p className="font-bold">$5 Delivery</p>
-                <p className="bg-mainRed py-1 w-4/5 text-center sm:px-3 sm:w-max rounded-full text-white shadow-md">
-                  12 min.
-                </p>
-              </div>
-            </div>
+            <RestaurantCard 
+            name="Coffee Mania"
+            cuisine="chinese, sea-food, thai, lebanese, caribbean"
+            deliveryCost={5}
+            deliveryTime="12 min."
+            imageSrc="soupCard.svg"
+            />
+            <RestaurantCard 
+            name="Burger King"
+            cuisine="chinese, sea-food, thai, lebanese, caribbean"
+            deliveryCost={8}
+            deliveryTime="10 min."
+            imageSrc="burgerKing.svg"
+            isNew
+            />
+            <RestaurantCard 
+            name="Pizza Hut"
+            cuisine="chinese, sea-food, thai, lebanese, caribbean"
+            deliveryCost={14}
+            deliveryTime="22 min."
+            imageSrc="margaritaCard.svg"
+            />
+            <RestaurantCard 
+            name="Papa John's"
+            cuisine="chinese, sea-food, thai, lebanese, caribbean"
+            deliveryCost={16}
+            deliveryTime="21 min."
+            imageSrc="papaJohns.svg"
+            />
+            <RestaurantCard 
+            name="Burger King"
+            cuisine="chinese, sea-food, thai, lebanese, caribbean"
+            deliveryCost={5}
+            deliveryTime="10 min."
+            imageSrc="burgerKing.svg"
+            />
+            <RestaurantCard 
+            name="Coffee Mania"
+            cuisine="chinese, sea-food, thai, lebanese, caribbean"
+            deliveryCost={5}
+            deliveryTime="12 min."
+            imageSrc="soupCard.svg"
+            />
+            <RestaurantCard 
+            name="Papa John's"
+            cuisine="chinese, sea-food, thai, lebanese, caribbean"
+            deliveryCost={18}
+            deliveryTime="32 min."
+            imageSrc="papaJohns.svg"
+            isNew
+            />
+            <RestaurantCard 
+            name="Pizza Hut"
+            cuisine="chinese, sea-food, thai, lebanese, caribbean"
+            deliveryCost={15}
+            deliveryTime="17 min."
+            imageSrc="margaritaCard.svg"
+            />
+            
           </div>
         </section>
 
