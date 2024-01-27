@@ -6,12 +6,18 @@ import { Navbar } from "../../share/components/Navbar";
 import { useState } from "react";
 import Modal from "../../share/components/Modal";
 import RestaurantCard from "../../share/components/restaurantCard";
+import { RestaurantAside } from "../../share/components/restaurantAside";
+import { RestaurantFilterModal } from "../../share/components/restaurantFilterModal"
 
 const Restaurants: NextPage = () => {
-  const [isFilterModalOpen, setIsFilterModalOpen] = useState(false);
+  const [isFilterModalOpen, setFilterModalOpen] = useState(false);
 
-  const handleFilterButtonClick = () => {
-    setIsFilterModalOpen(!isFilterModalOpen);
+  const handleOpenFilterModal = () => {
+    setFilterModalOpen(true);
+  };
+
+  const handleCloseFilterModal = () => {
+    setFilterModalOpen(false);
   };
   return (
     <>
@@ -25,202 +31,17 @@ const Restaurants: NextPage = () => {
         <Navbar isRegister={true} forAdmin={null} forLogin={null}/>
 
         <section className="m-8 flex flex-col sm:flex-row justify-center gap-10">
-          <div className="hidden rounded-md sm:flex flex-col max-h-screen overflow-y-auto gap-8 bg-whiteLight1 w-1/6 p-4">
-            <div className="flex items-center gap-4 cursor-pointer p-1 hover:bg-mainRedLight transition-all">
-              <Image
-                width={40}
-                height={0}
-                src={"margaritaCard.svg"}
-                alt="margarita"
-              />
-              <p className="font-semibold text-[20px] ">Fast Food</p>
-            </div>
+        <div className="hidden rounded-md sm:flex flex-col max-h-screen overflow-y-auto gap-8 bg-whiteLight1 w-1/6 p-4">
+          <RestaurantAside/>
+        </div>
 
-            <div className="flex items-center gap-4 cursor-pointer p-1 hover:bg-mainRedLight transition-all">
-              <Image
-                width={40}
-                height={0}
-                src={"margaritaCard.svg"}
-                alt="margarita"
-              />
-              <p className="font-semibold text-[20px] ">Fast Food</p>
-            </div>
-
-            <div className="flex items-center gap-4 cursor-pointer p-1 hover:bg-mainRedLight transition-all">
-              <Image
-                width={40}
-                height={0}
-                src={"margaritaCard.svg"}
-                alt="margarita"
-              />
-              <p className="font-semibold text-[20px] ">Fast Food</p>
-            </div>
-
-            <div className="flex items-center gap-4 cursor-pointer p-1 hover:bg-mainRedLight transition-all">
-              <Image
-                width={40}
-                height={0}
-                src={"margaritaCard.svg"}
-                alt="margarita"
-              />
-              <p className="font-semibold text-[20px] ">Fast Food</p>
-            </div>
-
-            <div className="flex items-center gap-4 cursor-pointer p-1 hover:bg-mainRedLight transition-all">
-              <Image
-                width={40}
-                height={0}
-                src={"margaritaCard.svg"}
-                alt="margarita"
-              />
-              <p className="font-semibold text-[20px] ">Fast Food</p>
-            </div>
-
-            <div className="flex items-center gap-4 cursor-pointer p-1 hover:bg-mainRedLight transition-all">
-              <Image
-                width={40}
-                height={0}
-                src={"margaritaCard.svg"}
-                alt="margarita"
-              />
-              <p className="font-semibold text-[20px] ">Fast Food</p>
-            </div>
-
-            <div className="flex items-center gap-4 cursor-pointer p-1 hover:bg-mainRedLight transition-all">
-              <Image
-                width={40}
-                height={0}
-                src={"margaritaCard.svg"}
-                alt="margarita"
-              />
-              <p className="font-semibold text-[20px] ">Fast Food</p>
-            </div>
-
-            <div className="flex items-center gap-4 cursor-pointer p-1 hover:bg-mainRedLight transition-all">
-              <Image
-                width={40}
-                height={0}
-                src={"margaritaCard.svg"}
-                alt="margarita"
-              />
-              <p className="font-semibold text-[20px] ">Fast Food</p>
-            </div>
-
-            <div className="flex items-center gap-4 cursor-pointer p-1 hover:bg-mainRedLight transition-all">
-              <Image
-                width={40}
-                height={0}
-                src={"margaritaCard.svg"}
-                alt="margarita"
-              />
-              <p className="font-semibold text-[20px] ">Fast Food</p>
-            </div>
-
-            <div className="flex items-center gap-4 cursor-pointer p-1 hover:bg-mainRedLight transition-all">
-              <Image
-                width={40}
-                height={0}
-                src={"margaritaCard.svg"}
-                alt="margarita"
-              />
-              <p className="font-semibold text-[20px] ">Fast Food</p>
-            </div>
-
-            <div className="flex items-center gap-4 cursor-pointer p-1 hover:bg-mainRedLight transition-all">
-              <Image
-                width={40}
-                height={0}
-                src={"margaritaCard.svg"}
-                alt="margarita"
-              />
-              <p className="font-semibold text-[20px] ">Fast Food</p>
-            </div>
-
-            <div className="flex items-center gap-4 cursor-pointer p-1 hover:bg-mainRedLight transition-all">
-              <Image
-                width={40}
-                height={0}
-                src={"margaritaCard.svg"}
-                alt="margarita"
-              />
-              <p className="font-semibold text-[20px] ">Fast Food</p>
-            </div>
-
-            <div className="flex items-center gap-4 cursor-pointer p-1 hover:bg-mainRedLight transition-all">
-              <Image
-                width={40}
-                height={0}
-                src={"margaritaCard.svg"}
-                alt="margarita"
-              />
-              <p className="font-semibold text-[20px] ">Fast Food</p>
-            </div>
-
-            <div className="flex items-center gap-4 cursor-pointer p-1 hover:bg-mainRedLight transition-all">
-              <Image
-                width={40}
-                height={0}
-                src={"margaritaCard.svg"}
-                alt="margarita"
-              />
-              <p className="font-semibold text-[20px] ">Fast Food</p>
-            </div>
-
-            <div className="flex items-center gap-4 cursor-pointer p-1 hover:bg-mainRedLight transition-all">
-              <Image
-                width={40}
-                height={0}
-                src={"margaritaCard.svg"}
-                alt="margarita"
-              />
-              <p className="font-semibold text-[20px] ">Fast Food</p>
-            </div>
-
-            <div className="flex items-center gap-4 cursor-pointer p-1 hover:bg-mainRedLight transition-all">
-              <Image
-                width={40}
-                height={0}
-                src={"margaritaCard.svg"}
-                alt="margarita"
-              />
-              <p className="font-semibold text-[20px] ">Fast Food</p>
-            </div>
-
-            <div className="flex items-center gap-4 cursor-pointer p-1 hover:bg-mainRedLight transition-all">
-              <Image
-                width={40}
-                height={0}
-                src={"margaritaCard.svg"}
-                alt="margarita"
-              />
-              <p className="font-semibold text-[20px] ">Fast Food</p>
-            </div>
-          </div>
-
-          <div className="flex sm:hidden items-center justify-center gap-2 shadow-lg p-4" onClick={handleFilterButtonClick}>
+          <div className="flex sm:hidden items-center justify-center gap-2 shadow-lg p-4" onClick={handleOpenFilterModal}>
             <Image width={25} height={0} src={"filter.svg"} alt="filter" />
             <p className="font-medium text-2xl text-grayText2">Filters</p>
           </div>
 
           {/* Modal */}
-          {isFilterModalOpen && (
-            <div className="fixed bottom-0 left-0 w-full min-h-screen z-50 bg-black bg-opacity-50 flex items-end justify-center">
-              <div className="bg-white p-6 rounded-t-3xl max-h-[55vh] w-full flex flex-col">
-                {/* Add your filter content here */}
-                <button className="mx-auto mb-3" onClick={handleFilterButtonClick}><Image width={50} height={0} src={"closeFilter.svg"} alt="closeFilter"/></button>
-                <ul className=" overflow-y-auto flex flex-col gap-8">
-                  <li className=" border-b-2 border-b-whiteLight2 text-2xl font-semibold pb-2 pl-4">Fast Food</li>
-                  <li className=" border-b-2 border-b-whiteLight2 text-2xl font-semibold pb-2 pl-4">Pizza</li>
-                  <li className=" border-b-2 border-b-whiteLight2 text-2xl font-semibold pb-2 pl-4">Chinese</li>
-                  <li className=" border-b-2 border-b-whiteLight2 text-2xl font-semibold pb-2 pl-4">Soups</li>
-                  <li className=" border-b-2 border-b-whiteLight2 text-2xl font-semibold pb-2 pl-4">Burger</li>
-                  <li className=" border-b-2 border-b-whiteLight2 text-2xl font-semibold pb-2 pl-4">Sushi</li>
-                  <li className=" border-b-2 border-b-whiteLight2 text-2xl font-semibold pb-2 pl-4">Special</li>
-                  <li className=" border-b-2 border-b-whiteLight2 text-2xl font-semibold pb-2 pl-4">Vegaterian</li>
-                </ul>
-              </div>
-            </div>
-          )}
+          {isFilterModalOpen && <RestaurantFilterModal onClose={handleCloseFilterModal} />}
           {/* Modal END */}
 
           {/* CARDS */}

@@ -28,7 +28,7 @@ export const Langugages = () => {
         onClick={toggleDropDown}
       />
       {langDropdown && (
-        <div className="flex flex-col gap-4 w-max bg-white px-2 py-4 absolute shadow-lg z-10 top-32 ml-[0px] sm:-ml-[132px]">
+        <div className="flex flex-col gap-4 w-max bg-white px-2 py-4 absolute shadow-lg z-10 top-24 sm:top-32 -ml-[135px] sm:-ml-[132px]">
           <Image
             className="cursor-pointer hover:scale-95 transition-all duration-500"
             width={40}
