@@ -77,7 +77,7 @@ const AdminProducts: NextPage = () => {
           </div>
           <section className=" w-[100%] m-5">
             {/* <div className=" flex  justify-between text-sm  font-semibold h-16 items-center px-8"></div> */}
-            <AdminSecondTitle />
+            <AdminSecondTitle name="Catagory" />
             <div className=" w-[100%]   bg-white">
               <table className="w-[100%] ">
                 <thead className="h-16 text-sm px-8">
