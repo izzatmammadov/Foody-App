@@ -13,7 +13,7 @@ const ErrorPage = () => {
           className="w-full"
           width={0}
           height={0}
-          src={"errorImage.svg"}
+          src={"/errorImage.svg"}
           alt="error"
         />
       </main>
