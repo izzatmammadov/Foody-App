@@ -1,5 +1,8 @@
 import Image from "next/image";
-import React from "react";
+import React, { useState } from "react";
+import Modal from "../Modal";
+import { Button } from "../Button";
+import { useTranslation } from "react-i18next";
 interface cartTipe {
   foodname: string;
   restoranname: string;
@@ -13,6 +16,24 @@ const AdminCard = ({
   foodimage,
   foodprice,
 }: cartTipe) => {
+  const { t, i18n } = useTranslation();
+  const [showPopup, setShowPopup] = useState(false);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
+  //^ MODAL
+  const handleButtonClick = () => {
+    setIsModalOpen(true);
+  };
+
+  const handleModalClose = () => {
+    setIsModalOpen(false);
+  };
+
+  //^ POP UP
+  const togglePopup = () => {
+    setShowPopup(!showPopup);
+  };
+
   return (
     <>
       <div className=" rounded-lg w-52 h-72 bg-white">
@@ -40,9 +61,38 @@ const AdminCard = ({
               src="/adminMarqaritaDeleteButton.svg"
               alt=""
               className=" cursor-pointer"
+              onClick={handleButtonClick}
             />
           </div>
         </div>
+        {/* MODAL CONTENT FOR DELETE */}
+        <Modal isOpen={isModalOpen} onClose={handleModalClose}>
+          <div className="flex justify-between items-center">
+            <p className="mx-auto text-3xl font-medium">{t("modalDesc")}</p>
+            <Button
+              className="text-mainRed text-lg"
+              innerText="&#10006;"
+              onClick={handleModalClose}
+            />
+          </div>
+
+          <p className=" text-grayText1 w-2/3 mx-auto text-center my-5">
+            {t("modalDesc2")}
+          </p>
+
+          <div className="mx-auto flex items-center justify-center gap-9">
+            <Button
+              className=" border-grayText1 text-grayText1 py-1 px-8 rounded-md border-2 shadow-md hover:scale-95 transition-all duration-500"
+              innerText={t("modalDesc3")}
+              onClick={handleModalClose}
+            />
+            <Button
+              className="bg-mainRed border-2 text-white py-1 px-8 rounded-md border-mainRed shadow-md hover:scale-95 transition-all duration-500"
+              innerText={t("modalDesc4")}
+            />
+          </div>
+        </Modal>
+        {/* MODAL CONTENT FOR SHOW */}
       </div>
     </>
   );
