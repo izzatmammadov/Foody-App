@@ -25,6 +25,11 @@ export const AdminLeftModal = ({
   hidden = true,
   onClickClose,
 }: Props) => {
+
+
+
+
+
   return (
     <div
       className={` fixed  z-10  w-full sm:w-3/4    sm:pl-12 ${
@@ -76,7 +81,7 @@ export const AdminLeftModal = ({
                 <AdminModalInput p="Delivery Price $" />
                 <AdminModalInput p="Delivery Min" />
                 <AdminModalInput p="Address" />
-                <AdminModalDropdown p="Category" />
+                <AdminModalDropdown p="Category" className="w-full bg-darkBlue_4 rounded-2xl font-medium text-base text-whiteLight pl-3 py-4" />
               </div>
             )}
             {mod === "3" && (
