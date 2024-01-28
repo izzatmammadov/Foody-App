@@ -82,6 +82,7 @@ const resources = {
       userCheck4: "pay at the door by cash",
       userCheck5: "pay at the door by card",
       userCheck6: "Total",
+      userCheck7: "Your order has been received",
     },
   },
   az: {
@@ -165,6 +166,8 @@ const resources = {
       userCheck4: "nağd pulla qapıda ödəyin",
       userCheck5: "kart ilə qapıda ödəyin",
       userCheck6: "Cəm",
+      userCheck7: "Sizin sifariş qeydə alındı",
+
     },
   },
 };
