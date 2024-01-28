@@ -1,11 +1,14 @@
 import { NextPage } from "next";
 import Head from "next/head";
 import { Navbar } from "../../../share/components/Navbar";
-import Image from "next/image";
 import { Footer } from "../../../share/components/Footer";
 import { RestDetailHeader } from "../../../share/components/restaurantDetailHeader";
+import { RestDetailProductReact } from "../../../share/components/restaurantDetailProductCard";
+import { useTranslation } from "react-i18next";
 
 const RestaurantDetail: NextPage = () => {
+  const { t } = useTranslation();
+
   return (
     <>
       <Head>
@@ -17,10 +20,54 @@ const RestaurantDetail: NextPage = () => {
       <main>
         <Navbar isRegister={true} forAdmin={null} forLogin={null} />
 
-        <section className="m-8 flex flex-col">
-          <RestDetailHeader/>
-          <section className="flex justify-between">
-            <div></div>
+        <section className="mx-0 sm:m-8 p-2 sm:p-0 flex flex-col">
+          <RestDetailHeader />
+          <section className="flex flex-col sm:flex-row justify-between gap-5 mt-8">
+            {/* PRODUCT */}
+            <div className=" bg-whiteLight1 w-full sm:w-3/5">
+              <p className="text-center text-3xl text-grayText2 font-semibold my-8">
+                {t("detailDesc3")}
+              </p>
+              <div className="max-h-[432px] overflow-y-auto">
+                <RestDetailProductReact
+                  name="Papa John's Margarita"
+                  desc="Prepared with a patty, a slice of cheese and special sauce"
+                  price={17.9}
+                  imageSrc="/margaritaCard.svg"
+                />
+                <RestDetailProductReact
+                  name="Papa John's Roll"
+                  desc="Prepared with a patty, a slice of cheese and special sauce"
+                  price={11.5}
+                  imageSrc="/papaRoll.svg"
+                />
+
+                <RestDetailProductReact
+                  name="Papa John's Coffee"
+                  desc="Caramel Syrop"
+                  price={5.4}
+                  imageSrc="/papaCoffee.svg"
+                />
+
+                <RestDetailProductReact
+                  name="Coca Cola"
+                  desc="Classic"
+                  price={2.8}
+                  imageSrc="/cocaCola.svg"
+                />
+
+                <RestDetailProductReact
+                  name="Papa John's Fries"
+                  desc="Prepared with hot soucases"
+                  price={9.9}
+                  imageSrc="/friesAnimation.svg"
+                />
+              </div>
+            </div>
+            {/* BASKET */}
+            <div className=" bg-whiteLight1 w-full sm:w-2/5">
+              <p>Basket</p>
+            </div>
           </section>
         </section>
 

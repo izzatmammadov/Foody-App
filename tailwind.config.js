@@ -32,6 +32,7 @@ module.exports = {
       black: "#181617",
       blackLight: "#272727",
       orange: "#FFB64F",
+      green: "#6fcf97"
     },
     screens: {
       xs: "320px",

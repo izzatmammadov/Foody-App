@@ -37,7 +37,7 @@ export const Navbar = ({
         } flex items-center`}
       >
         <button onClick={toggleModal} className="sm:hidden block mr-5">
-          <Image width={40} height={0} src={"hamburger.svg"} alt="hamburger" />
+          <Image width={40} height={0} src={"/hamburger.svg"} alt="hamburger" />
         </button>
         Foody
         <span className={`${forLogin ? "text-white" : "text-mainRed"} `}>
@@ -138,7 +138,7 @@ export const Navbar = ({
         <div className="fixed inset-0 bg-black m-0 min-h-screen bg-opacity-50 z-50 flex items-center justify-start">
 
           <div className="bg-white w-4/5 min-h-screen p-8 flex flex-col">
-          <button className="text-mainRed font-bold text-lg block text-start" onClick={toggleModal}><Image width={35} height={0} alt="close2" src={"close2.svg"}/></button>
+          <button className="text-mainRed font-bold text-lg block text-start" onClick={toggleModal}><Image width={35} height={0} alt="close2" src={"/close2.svg"}/></button>
             <Button className=" w-full mt-8 mx-auto py-4 rounded-full text-xl bg-mainRed text-white font-medium shadow-md hover:scale-95 transition-all duration-500" innerText={t("signUp")}/>
             <ul className="justify-around text-2xl w-full font-medium text-grayText1 flex flex-col mt-14 gap-4 ">
             <li
