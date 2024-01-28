@@ -54,7 +54,7 @@ export default function AdminLogin() {
                 <Button innerText={ t("signIn")} className=" text-white font-medium text-2xl  w-full bg-lightPurple_3 py-3 rounded" />
             </div>
               <div className=" w-full sm:w-full relative md:w-1/2  py-14 px-7 md:bg-adminLogin">
-                <div className=" absolute  top-2  right-3"><Langugages />
+                <div className=" absolute  top-2  right-3"><Langugages bgDark />
                 </div>
               <div className="">
                 <Image
