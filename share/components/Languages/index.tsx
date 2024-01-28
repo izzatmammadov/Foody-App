@@ -2,7 +2,11 @@ import Image from "next/image";
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
 
-export const Langugages = () => {
+interface Props {
+  bgDark?:boolean
+}
+
+export const Langugages = ({bgDark}:Props) => {
   const { t, i18n } = useTranslation();
   const [langDropdown, setLangDropdown] = useState(false);
   const [selectedLanguage, setSelectedLanguage] = useState("en");
@@ -28,7 +32,7 @@ export const Langugages = () => {
         onClick={toggleDropDown}
       />
       {langDropdown && (
-        <div className="flex flex-col gap-4 w-max bg-white px-2 py-4 absolute shadow-lg z-10 top-12 left-0 ">
+        <div className={`flex flex-col gap-4 w-max ${bgDark?" bg-darkBlue_3":"bg-white "} px-2 py-4 absolute shadow-lg z-10 top-12 left-0 `}>
           <Image
             className="cursor-pointer hover:scale-95 transition-all duration-500"
             width={40}

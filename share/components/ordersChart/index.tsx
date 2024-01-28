@@ -13,10 +13,10 @@ import { PieChart, pieArcLabelClasses } from '@mui/x-charts/PieChart';
       {
         
         data: [
-          {  value: 20,  color:"red" },
-          {  value: 15,  },
-          { value: 30, },
-          {  value: 10,  },
+          {  value: 20,  label:"KFC",  color:"red" },
+          {  value: 15, label:"Dominoe's"  },
+          { value: 30, label:"Mc Donalds" },
+          {  value: 10, label:"Burger King" },
         ],
         innerRadius: 65,
         highlightScope: { faded: 'global', highlighted: 'item' },
@@ -27,7 +27,7 @@ import { PieChart, pieArcLabelClasses } from '@mui/x-charts/PieChart';
     height={200}
       />
     
-      <div className=' flex text-grayText gap-2 mt-2'>
+      {/* <div className=' flex text-grayText gap-2 mt-2'>
         <div className=' flex  gap-1 items-center '>
           <div className=' h-3 w-3 rounded-full bg-mainRed '> </div> <p> KFC</p>
         </div>
@@ -43,7 +43,7 @@ import { PieChart, pieArcLabelClasses } from '@mui/x-charts/PieChart';
       
        
        
-        </div>
+        </div> */}
         </div>
     </div>
   )
