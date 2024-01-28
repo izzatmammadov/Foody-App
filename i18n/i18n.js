@@ -83,6 +83,10 @@ const resources = {
       userCheck5: "pay at the door by card",
       userCheck6: "Total",
       userCheck7: "Your order has been received",
+      detailDesc: "Delivery",
+      detailDesc2: "Go Back",
+      detailDesc3: "Product",
+      detailDesc4: "Cuisine",
     },
   },
   az: {
@@ -167,7 +171,10 @@ const resources = {
       userCheck5: "kart ilə qapıda ödəyin",
       userCheck6: "Cəm",
       userCheck7: "Sizin sifariş qeydə alındı",
-
+      detailDesc: "Çatdırılma",
+      detailDesc2: "Geri Dön",
+      detailDesc3: "Məhsul",
+      detailDesc4: "Mətbəx",
     },
   },
 };
