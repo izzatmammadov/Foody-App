@@ -1,28 +1,37 @@
-import React from "react";
-interface Props{
+import React, { useState } from "react";
+
+interface Props {
   p?: string;
+  arr?: string[];
+  className?: string;
 }
-export const AdminModalDropdown = ({p="Restaurants"}:Props) => {
+
+export const AdminModalDropdown = ({ p = "Restaurants",arr= ["item1", "item2", "item3"],className }: Props) => {
+  const [selectedValue, setSelectedValue] = useState<string | undefined>("");
+
+
+  function handleSelectChange(e: React.ChangeEvent<HTMLSelectElement>): void {
+    const value = e.target.value;
+    setSelectedValue(value);
+    console.log(value);
+  }
+
   return (
-      <div>
-      <p className=' text-grayText font-medium  mb-4   text-base'>{ p}</p>
-      <select className=" w-full bg-darkBlue_4 rounded-2xl font-medium text-base text-whiteLight pl-3  py-4">
-        <option value="" disabled selected>
+    <div>
+      <p className="text-grayText font-medium mb-4 text-base">{p}</p>
+      <select
+        value={selectedValue}
+        onChange={handleSelectChange}
+        className={className}
+      >
+        <option value="" disabled>
           Choose...
         </option>
-        <option className=" cursor-pointer" value="option1">Seçenek 1</option>
-        <option value="option2">Seçenek 2</option>
-              <option value="option3">Seçenek 3</option>
-        <option value="option3">Seçenek 3</option>
-        <option value="option3">Seçenek 3</option>
-        <option value="option3">Seçenek 3</option>
-        <option value="option3">Seçenek 3</option>
-        <option value="option3">Seçenek 3</option>
-        <option value="option3">Seçenek 3</option>
-        <option value="option3">Seçenek 3</option>
-        <option value="option3">Seçenek 3</option>
-        <option value="option3">Seçenek 3</option>
-              
+        {arr.map((item, index) => (
+          <option key={index} className="cursor-pointer" value={item}>
+            {item}
+          </option>
+        ))}
       </select>
     </div>
   );
