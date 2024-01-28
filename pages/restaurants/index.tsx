@@ -4,7 +4,6 @@ import Image from "next/image";
 import { Footer } from "../../share/components/Footer";
 import { Navbar } from "../../share/components/Navbar";
 import { useState } from "react";
-import Modal from "../../share/components/Modal";
 import RestaurantCard from "../../share/components/restaurantCard";
 import { RestaurantAside } from "../../share/components/restaurantAside";
 import { RestaurantFilterModal } from "../../share/components/restaurantFilterModal"

@@ -110,7 +110,7 @@ export const Navbar = ({
               className="cursor-pointer hover:scale-95 transition-all duration-500"
               width={40}
               height={0}
-              src={"basket.svg"}
+              src={"/basket.svg"}
               alt="basket"
             />
             <Button

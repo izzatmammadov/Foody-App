@@ -55,14 +55,14 @@ export const UserBasketCard: React.FC = () => {
      
 <>
       <div className="flex items-center gap-2 border-b-2 border-whiteLight2 pb-4">
-        <Image width={20} height={0} src={"basketIcon.svg"} alt="basketIcon" />
+        <Image width={20} height={0} src={"/basketIcon.svg"} alt="basketIcon" />
         <p className="text-mainRed font-medium">{countPizza + countBurger + countCoffee} {t("items")}</p>
       </div>
 
       {/* Pizza Section */}
       <div className="flex relative justify-between items-center border-b-2 border-whiteLight2 py-10">
       
-        <Image width={96} height={0} src={"margaritaCard.svg"} alt="margarita" />
+        <Image width={96} height={0} src={"/margaritaCard.svg"} alt="margarita" />
 
         <div className="flex flex-col w-full pl-7">
           <p className="font-medium text-grayText2 text-2xl">Papa John’s Pizza</p>
@@ -71,22 +71,22 @@ export const UserBasketCard: React.FC = () => {
 
         <div className="flex flex-col bg-whiteLight1 sm:bg-white py-1 px-3 rounded-full gap-3 items-center">
           <button onClick={handleAddPizza}>
-            <Image width={30} height={0} src={"add.svg"} alt="add" />
+            <Image width={30} height={0} src={"/add.svg"} alt="add" />
           </button>
           <p className="text-lg font-medium">{countPizza}</p>
           <button onClick={handleRemovePizza}>
-            <Image width={30} height={0} src={"remove.svg"} alt="remove" />
+            <Image width={30} height={0} src={"/remove.svg"} alt="remove" />
           </button>
         </div>
 
         <span className="absolute top-0 left-0 sm:left-[100%] sm:top-4 w-8">
-                <Image width={30} height={0} src={"delete.svg"} alt="delete"/>
+                <Image width={30} height={0} src={"/delete.svg"} alt="delete"/>
               </span>
       </div>
 
       {/* Burger Section */}
       <div className="flex relative justify-between items-center border-b-2 border-whiteLight2 py-10">
-        <Image width={96} height={0} src={"burgerAnimation.svg"} alt="cheeseburger" />
+        <Image width={96} height={0} src={"/burgerAnimation.svg"} alt="cheeseburger" />
 
         <div className="flex flex-col w-full pl-7">
           <p className="font-medium text-grayText2 text-2xl">Papa John’s Burger</p>
@@ -95,22 +95,22 @@ export const UserBasketCard: React.FC = () => {
 
         <div className="flex flex-col bg-whiteLight1 sm:bg-white py-1 px-3 rounded-full gap-3 items-center">
           <button onClick={handleAddBurger}>
-            <Image width={30} height={0} src={"add.svg"} alt="add" />
+            <Image width={30} height={0} src={"/add.svg"} alt="add" />
           </button>
           <p className="text-lg font-medium">{countBurger}</p>
           <button onClick={handleRemoveBurger}>
-            <Image width={30} height={0} src={"remove.svg"} alt="remove" />
+            <Image width={30} height={0} src={"/remove.svg"} alt="remove" />
           </button>
         </div>
 
         <span className="absolute top-0 left-0 sm:left-[100%] sm:top-4 w-8">
-                <Image width={30} height={0} src={"delete.svg"} alt="delete"/>
+                <Image width={30} height={0} src={"/delete.svg"} alt="delete"/>
               </span>
       </div>
 
       {/* Coffee Section */}
       <div className="flex relative justify-between items-center border-b-2 border-whiteLight2 py-10">
-        <Image width={96} height={0} src={"papaCoffee.svg"} alt="coffee" />
+        <Image width={96} height={0} src={"/papaCoffee.svg"} alt="coffee" />
 
         <div className="flex flex-col w-full pl-7">
           <p className="font-medium text-grayText2 text-2xl">Papa John’s Special Coffee</p>
@@ -119,15 +119,15 @@ export const UserBasketCard: React.FC = () => {
 
         <div className="flex flex-col bg-whiteLight1 sm:bg-white py-1 px-3 rounded-full gap-3 items-center">
           <button onClick={handleAddCoffee}>
-            <Image width={30} height={0} src={"add.svg"} alt="add" />
+            <Image width={30} height={0} src={"/add.svg"} alt="add" />
           </button>
           <p className="text-lg font-medium">{countCoffee}</p>
           <button onClick={handleRemoveCoffee}>
-            <Image width={30} height={0} src={"remove.svg"} alt="remove" />
+            <Image width={30} height={0} src={"/remove.svg"} alt="remove" />
           </button>
         </div>
         <span className="absolute top-0 left-0 sm:left-[100%] sm:top-4 w-8">
-                <Image width={30} height={0} src={"delete.svg"} alt="delete"/>
+                <Image width={30} height={0} src={"/delete.svg"} alt="delete"/>
               </span>
       </div>
 
