@@ -14,8 +14,12 @@
     "resolveJsonModule": true,
     "isolatedModules": true,
     "jsx": "preserve",
-    "incremental": true
+    "incremental": true,
+    "paths": {
+      "@/*": ["./*"]
+    },
   },
+
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "share/components/ordersChart/index.tsx"],
   "exclude": ["node_modules"]
 }

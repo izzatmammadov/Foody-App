@@ -1,10 +1,12 @@
-import React, { useState } from "react";
+import React, {  useState } from "react";
 import { ImageInput } from "../ImageInput";
 import { AdminModalInput } from "../adminModalInput";
 import { AdminModalTexArea } from "../adminModalTextArea";
 import { AdminModalDropdown } from "../adminModalDropdown";
 import { Button } from "../Button";
 import Image from "next/image";
+import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
+import { fileStorage } from "../../../server/configs/firebase";
 
 interface Props {
   p?: string;
@@ -25,11 +27,36 @@ export const AdminLeftModal = ({
   hidden = true,
   onClickClose,
 }: Props) => {
+  const [imgUrl, setImgUrl] = useState<any>("");
+  //  const [imgUpload, setImageUpload]=useState()
 
+  // const imgRef=useRef(null)
+  // console.log(imgUrl);
+  const [imgOnload,setImgOnload]=useState(false)
 
+  // console.log(imgOnload);
+  
+  function getİmage(e: React.ChangeEvent<HTMLInputElement>) {
+    const name = e?.target?.files?.[0]?.name;
+    if (!name) {
+      return;
+    }
+    const imageRef = ref(fileStorage, `files/images/${name}`);
 
+    // setCurrentImgRef(imageRef)
 
-
+    const file = e?.target?.files?.[0];
+    if (!file) {
+      return;
+    }
+    uploadBytes(imageRef, file).then((snapshot) => {
+      setImgOnload(true)
+      getDownloadURL(snapshot.ref).then((url) => {
+        setImgOnload(false)
+        setImgUrl(url);
+      });
+    });
+  }
   return (
     <div
       className={` fixed  z-10  w-full sm:w-3/4    sm:pl-12 ${
@@ -51,10 +78,18 @@ export const AdminLeftModal = ({
             <p className=" text-grayText font-medium  text-lg  tracking-wide">
               {p1}
             </p>
-            <Image src="/noimg.png" width={124} height={124} alt="img" />
+            <Image
+              src={`${imgOnload ? "/loadingImg.jpg" : (imgUrl ? imgUrl : "/noimg.png")}`}
+         
+
+
+              width={124}
+              height={124}
+              alt="img"
+            />
           </div>
           <div className=" w-full lg:w-2/3  h-38 pt-6 ">
-            <ImageInput />
+            <ImageInput onChange={getİmage} />
           </div>
         </div>
 
@@ -81,7 +116,10 @@ export const AdminLeftModal = ({
                 <AdminModalInput p="Delivery Price $" />
                 <AdminModalInput p="Delivery Min" />
                 <AdminModalInput p="Address" />
-                <AdminModalDropdown p="Category" className="w-full bg-darkBlue_4 rounded-2xl font-medium text-base text-whiteLight pl-3 py-4" />
+                <AdminModalDropdown
+                  p="Category"
+                  className="w-full bg-darkBlue_4 rounded-2xl font-medium text-base text-whiteLight pl-3 py-4"
+                />
               </div>
             )}
             {mod === "3" && (

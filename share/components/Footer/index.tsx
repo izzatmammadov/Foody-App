@@ -24,7 +24,7 @@ export const Footer = ({ isTop }: FooterParamTypes) => {
             </button>
           </div>
 
-          <Image className="hidden sm:block" width={250} height={0} src={"mainBurger.svg"} alt="burger" />
+          <Image className="hidden sm:block" width={250} height={0} src={"/mainBurger.svg"} alt="burger" />
         </section>
       ) : (
         <></>
@@ -45,21 +45,21 @@ export const Footer = ({ isTop }: FooterParamTypes) => {
               className=" border-white border-2 p-1 rounded-3xl cursor-pointer hover:scale-95 transition-all duration-500"
               width={40}
               height={0}
-              src={"facebook.svg"}
+              src={"/facebook.svg"}
               alt="facebook"
             />
             <Image
               className=" p-2 rounded-3xl bg-orange cursor-pointer hover:scale-95 transition-all duration-500"
               width={40}
               height={0}
-              src={"instagram.svg"}
+              src={"/instagram.svg"}
               alt="instagram"
             />
             <Image
               className=" border-white border-2 p-2 rounded-3xl cursor-pointer hover:scale-95 transition-all duration-500"
               width={40}
               height={0}
-              src={"twitter.svg"}
+              src={"/twitter.svg"}
               alt="twitter"
             />
           </div>
