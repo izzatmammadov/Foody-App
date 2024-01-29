@@ -14,7 +14,7 @@ const Modal: React.FC<ModalProps> = ({ isOpen, onClose, children }) => {
       } bg-black bg-opacity-30`}
     >
       <div className="flex items-center justify-center min-h-screen">
-        <div className="bg-white p-8 mx-2 sm:mx-0">{children}</div>
+        <div className="bg-white px-1 py-4 sm:p-8 mx-2 sm:mx-0">{children}</div>
       </div>
     </div>
   );

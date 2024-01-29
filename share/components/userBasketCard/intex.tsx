@@ -20,7 +20,7 @@ export const UserBasketCard: React.FC<UserBasketCardProps> = ({
   const { t, i18n } = useTranslation();
   const [itemCount, setItemCount] = useState(1);
   const [isModalOpen, setIsModalOpen] = useState(false);
-  
+
   const increaseCount = () => {
     setItemCount(itemCount + 1);
   };
