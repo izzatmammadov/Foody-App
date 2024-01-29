@@ -176,7 +176,7 @@ export const Table = () => {
       {/* MODAL CONTENT FOR DELETE */}
       <Modal isOpen={isModalOpen} onClose={handleModalClose}>
         <div className="flex justify-between items-center">
-          <p className="mx-auto text-3xl font-medium">{t("modalDesc")}</p>
+          <p className="mx-auto text-2xl sm:text-3xl font-medium">{t("modalDesc")}</p>
           <Button
             className="text-mainRed text-lg"
             innerText="&#10006;"

@@ -31,6 +31,9 @@ const UserBasket: NextPage = () => {
 
         <Footer isTop={false} />
       </main>
+
+
+      
     </>
   );
 };
