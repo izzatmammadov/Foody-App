@@ -112,6 +112,7 @@ export const Navbar = ({
               height={0}
               src={"/basket.svg"}
               alt="basket"
+              onClick={()=> {navigate.push("/userBasket")}}
             />
             <Button
               className="rounded-full w-10 h-10 text-lg text-white shadow-md bg-mainRed font-semibold hover:scale-95 transition-all duration-500"

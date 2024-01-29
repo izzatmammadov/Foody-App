@@ -5,6 +5,7 @@ import { Footer } from "../../../share/components/Footer";
 import { RestDetailHeader } from "../../../share/components/restaurantDetailHeader";
 import { RestDetailProductReact } from "../../../share/components/restaurantDetailProductCard";
 import { useTranslation } from "react-i18next";
+import { RestDetailBasket } from "@/share/components/restaurantDetailBasket";
 
 const RestaurantDetail: NextPage = () => {
   const { t } = useTranslation();
@@ -65,8 +66,8 @@ const RestaurantDetail: NextPage = () => {
               </div>
             </div>
             {/* BASKET */}
-            <div className=" bg-whiteLight1 w-full sm:w-2/5">
-              <p>Basket</p>
+            <div className="flex flex-col bg-whiteLight1 p-4 w-full sm:w-2/5">
+              <RestDetailBasket itemCount={3} />
             </div>
           </section>
         </section>
