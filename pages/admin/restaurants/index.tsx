@@ -1,6 +1,5 @@
 import Barchart from "@/share/components/LineChart";
 import { AdminAside } from "@/share/components/adminAside";
-import AdminCard from "@/share/components/adminCard";
 import { AdminHeader } from "@/share/components/adminHeader";
 import { AdminLeftModal } from "@/share/components/adminLeftModal";
 import AdminRestouransCard from "@/share/components/adminRestouransCard";

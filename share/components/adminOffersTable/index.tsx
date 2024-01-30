@@ -7,9 +7,9 @@ import Image from "next/image";
 interface AdminOffersTableType {
   data: {
     id: number | string;
-    customerId:  string;
-    Time: string;
-    Address: string;
+    image:  string;
+    Title: string;
+    Descriptions: string;
  
   };
 }
@@ -51,7 +51,7 @@ const AdminOffersTableT: FC<AdminOffersTableType> = ({ data }) => {
               <Image
             width="60"
             height="0"
-            src={data.customerId}
+            src={data.image}
             alt=""
             className=" cursor-pointer"
             onClick={handleButtonClick}
@@ -59,8 +59,8 @@ const AdminOffersTableT: FC<AdminOffersTableType> = ({ data }) => {
             {/* </p>
           </div> */}
         </td>
-        <td>{data.Time}</td>
-        <td>{data.Address} </td>
+        <td>{data.Title}</td>
+        <td>{data.Descriptions} </td>
       
         <td className=" h-14 flex  align-middle justify-evenly">
         <Image

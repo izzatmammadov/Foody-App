@@ -8,7 +8,6 @@ import { AdminLeftModal } from "../../../share/components/adminLeftModal";
 import { useState } from "react";
 import AdminCard from "../../../share/components/adminCard";
 import AdminSecondTitle from "../../../share/components/adminSecondTitle";
-import { useTranslation } from "react-i18next";
 
 const AdminProducts: NextPage = () => {
   const [isHiddenModal, setIsHiddenModal] = useState<boolean>(true);
