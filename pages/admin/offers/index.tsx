@@ -11,27 +11,45 @@ import React, { useState } from "react";
 const item = [
   {
     id: 9177,
-    customerId: "/adminMarqarita.svg",
-    Time: "Do you like Pizza at Pap...",
-    Address: "Yummy this pizza but...",
+    image: "/adminMarqarita.svg",
+    Title: "Do you like Pizza at Pap...",
+    Descriptions: "Yummy this pizza but...",
   },
   {
     id: 9178,
-    customerId: "/adminMarqarita.svg",
-    Time: "Do you like Pizza at Pap...",
-    Address: "Yummy this pizza but...",
+    image: "/adminMarqarita.svg",
+    Title: "Do you like Pizza at Pap...",
+    Descriptions: "Yummy this pizza but...",
   },
   {
     id: 9179,
-    customerId: "/adminMarqarita.svg",
-    Time: "Do you like Pizza at Pap...",
-    Address: "Yummy this pizza but...",
+    image: "/adminMarqarita.svg",
+    Title: "Do you like Pizza at Pap...",
+    Descriptions: "Yummy this pizza but...",
   },
   {
     id: 9200,
-    customerId: "/adminMarqarita.svg",
-    Time: "Do you like Pizza at Pap...",
-    Address: "Yummy this pizza but...",
+    image: "/adminMarqarita.svg",
+    Title: "Do you like Pizza at Pap...",
+    Descriptions: "Yummy this pizza but...",
+  },
+  {
+    id: 9200,
+    image: "/adminMarqarita.svg",
+    Title: "Do you like Pizza at Pap...",
+    Descriptions: "Yummy this pizza but...",
+  },
+  {
+    id: 9200,
+    image: "/adminMarqarita.svg",
+    Title: "Do you like Pizza at Pap...",
+    Descriptions: "Yummy this pizza but...",
+  },
+  {
+    id: 9200,
+    image: "/adminMarqarita.svg",
+    Title: "Do you like Pizza at Pap...",
+    Descriptions: "Yummy this pizza but...",
   },
 ];
 

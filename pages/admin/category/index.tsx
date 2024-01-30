@@ -6,12 +6,8 @@ import OrdersChart from "../../../share/components/ordersChart";
 import Barchart from "../../../share/components/LineChart";
 import { AdminLeftModal } from "../../../share/components/adminLeftModal";
 import { useState } from "react";
-import AdminCard from "../../../share/components/adminCard";
 import AdminCategory from "../../../share/components/adminCategory";
 import AdminSecondTitle from "../../../share/components/adminSecondTitle";
-import Modal from "../../../share/components/Modal";
-import { Button } from "../../../share/components/Button";
-import { useTranslation } from "react-i18next";
 
 interface CategoryType {
   id: number;

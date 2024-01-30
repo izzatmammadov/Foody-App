@@ -3,7 +3,6 @@ import { AdminAside } from "@/share/components/adminAside";
 import { AdminHeader } from "@/share/components/adminHeader";
 import { AdminLeftModal } from "@/share/components/adminLeftModal";
 import AdminOrdersTable from "@/share/components/adminOrdersTable";
-import AdminRestouransCard from "@/share/components/adminRestouransCard";
 import AdminSecondTitle from "@/share/components/adminSecondTitle";
 import OrdersChart from "@/share/components/ordersChart";
 import Head from "next/head";
