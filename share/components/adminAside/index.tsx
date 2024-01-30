@@ -26,7 +26,8 @@ export const AdminAside = () => {
       <AdminAsideItem value={"products"} innerText={t("adminLeftBarComponent2")} img='/product-icon.svg' onClick={changePage}   />
           <AdminAsideItem value={"restaurants"} innerText={t("adminLeftBarComponent3")} img='/restaurant-icon.svg' onClick={changePage}   />
           <AdminAsideItem value={"category"} innerText={t("adminLeftBarComponent4")} img='/category-icon.svg' onClick={changePage}    />
-          <AdminAsideItem value={"orders"} innerText={t("adminLeftBarComponent5")} img='/orders-icon.svg'  onClick={changePage}  />
+      <AdminAsideItem value={"orders"} innerText={t("adminLeftBarComponent5")} img='/orders-icon.svg' onClick={changePage} />
+      <AdminAsideItem value={"history"} innerText={t("adminLeftBarComponent8")} img='/offer-icon.svg'  onClick={changePage}  />
           <AdminAsideItem value={"offers"} innerText={t("adminLeftBarComponent6")} img='/offer-icon.svg'  onClick={changePage} />
           <AdminAsideItem value={"logout"} innerText={t("adminLeftBarComponent7")} img='/logout-icon.svg'  /> 
     </div>
