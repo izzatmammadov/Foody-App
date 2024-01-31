@@ -6,7 +6,7 @@ export const RestaurantSearchModal = ({ onClose }: any) => {
     <div className=" absolute top-[135px] right-[20.75%] flex flex-col justify-between rounded-lg py-5 bg-white z-50 w-[32%]">
       <Button
         onClick={onClose}
-        className="text-mainRed hover:text-mainRedLight "
+        className="text-mainRed hover:text-mainRedLight mb-5"
         innerText="&#10006;"
       />
       <div className="max-h-[180px] overflow-y-auto overflow-x-hidden">
