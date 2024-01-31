@@ -4,6 +4,8 @@ import { Langugages } from "../Languages/index";
 import { useTranslation } from "react-i18next";
 import { useRouter } from "next/router";
 import { useState } from "react";
+import { Input } from "../input";
+import { RestaurantSearchModal } from "../restaurantSearchModal";
 
 interface NavbarParamTypes {
   isRegister: boolean | null;
@@ -24,6 +26,18 @@ export const Navbar = ({
   const toggleModal = () => {
     setModalOpen(!isModalOpen);
   };
+
+  //^ INPUT MODAL
+
+  const [isInputModal, setInputModal] = useState(false)
+
+  const toggleInputModal = () => {
+    setInputModal(!isInputModal)
+  }
+
+  const closeInputModal = () => {
+    setInputModal(false)
+  }
 
   return (
     <nav
@@ -82,11 +96,15 @@ export const Navbar = ({
             </li>
           </ul>
 
-          <input
+          {/* <input
             className="px-6 py-3 relative rounded-xl w-1/5 shadow-sm hidden sm:block"
             type="text"
             placeholder="Search"
-          />
+          /> */}
+          <div className="w-1/5 hidden sm:block">
+          <Input OnClick={toggleInputModal} Type="text" Placeholder="Search" ClassName="w-full px-6 py-3 relative rounded-xl outline-none shadow-sm"/>
+          {isInputModal && <RestaurantSearchModal onClose={closeInputModal} />}
+          </div>
         </>
       )}
 
