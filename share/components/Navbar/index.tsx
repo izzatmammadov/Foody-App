@@ -6,6 +6,7 @@ import { useRouter } from "next/router";
 import { useState } from "react";
 import { Input } from "../input";
 import { RestaurantSearchModal } from "../restaurantSearchModal";
+import { NavbarAvatar } from "../navbarAvatar";
 
 interface NavbarParamTypes {
   isRegister: boolean | null;
@@ -124,19 +125,8 @@ export const Navbar = ({
         <>
           <div className="flex items-center justify-center gap-7 ">
             <Langugages />
-            <Image
-              className="cursor-pointer hover:scale-95 transition-all duration-500"
-              width={40}
-              height={0}
-              src={"/basket.svg"}
-              alt="basket"
-              onClick={()=> {navigate.push("/userBasket")}}
-            />
-            <Button
-              className="rounded-full w-10 h-10 text-lg text-white shadow-md bg-mainRed font-semibold hover:scale-95 transition-all duration-500"
-              innerText="ZZ"
-            />
-          </div>
+           <NavbarAvatar/>
+           </div>
         </>
       ) : (
         <>
