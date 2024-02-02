@@ -1,4 +1,4 @@
-import React, {  useState } from "react";
+import React, { useEffect, useState } from "react";
 import { ImageInput } from "../ImageInput";
 import { AdminModalInput } from "../adminModalInput";
 import { AdminModalTexArea } from "../adminModalTextArea";
@@ -8,6 +8,7 @@ import Image from "next/image";
 import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
 import { fileStorage } from "../../../server/configs/firebase";
 
+
 interface Props {
   p?: string;
   p1?: string;
@@ -15,27 +16,35 @@ interface Props {
   mod?: string;
   btn?: string;
   hidden?: boolean;
+  categoryRef?: any;
+  ButtonOnClick?: () => void;
   onClickClose?: () => void;
+  getImgUrl?: any;
 }
 
 export const AdminLeftModal = ({
   p = "Add Product",
   p1 = "Upload your product image",
   p2 = "Add your Product description and necessary information",
-  mod = "2",
+  mod = "1",
   btn = "Create Product",
   hidden = true,
+  ButtonOnClick,
   onClickClose,
+  categoryRef,
+  getImgUrl
 }: Props) => {
   const [imgUrl, setImgUrl] = useState<any>("");
   //  const [imgUpload, setImageUpload]=useState()
 
   // const imgRef=useRef(null)
   // console.log(imgUrl);
-  const [imgOnload,setImgOnload]=useState(false)
+
+
+  const [imgOnload, setImgOnload] = useState(false);
 
   // console.log(imgOnload);
-  
+
   function getİmage(e: React.ChangeEvent<HTMLInputElement>) {
     const name = e?.target?.files?.[0]?.name;
     if (!name) {
@@ -50,10 +59,11 @@ export const AdminLeftModal = ({
       return;
     }
     uploadBytes(imageRef, file).then((snapshot) => {
-      setImgOnload(true)
+      setImgOnload(true);
       getDownloadURL(snapshot.ref).then((url) => {
-        setImgOnload(false)
+        setImgOnload(false);
         setImgUrl(url);
+        getImgUrl(url)
       });
     });
   }
@@ -79,10 +89,9 @@ export const AdminLeftModal = ({
               {p1}
             </p>
             <Image
-              src={`${imgOnload ? "/loadingImg.jpg" : (imgUrl ? imgUrl : "/noimg.png")}`}
-         
-
-
+              src={`${
+                imgOnload ? "/loadingImg.jpg" : imgUrl ? imgUrl : "/noimg.png"
+              }`}
               width={124}
               height={124}
               alt="img"
@@ -105,7 +114,10 @@ export const AdminLeftModal = ({
                 <AdminModalInput p="Name" />
                 <AdminModalTexArea />
                 <AdminModalInput p="Price" />
-                <AdminModalDropdown />
+                <AdminModalDropdown
+                  p="Restaurants"
+                  className="w-full bg-darkBlue_4 rounded-2xl font-medium text-base text-whiteLight pl-3 py-4"
+                />
               </div>
             )}
 
@@ -124,8 +136,8 @@ export const AdminLeftModal = ({
             )}
             {mod === "3" && (
               <div>
-                <AdminModalInput p="Name" />
-                <AdminModalInput p="Slug" />
+                <AdminModalInput useRef={categoryRef} p="Name" />
+                {/* <AdminModalInput p="Slug" /> */}
               </div>
             )}
             {mod === "4" && (
@@ -139,10 +151,12 @@ export const AdminLeftModal = ({
 
         <div className="flex justify-around  border-t-darkBlue_5 border-t-4 pt-6  gap-10">
           <Button
+            onClick={onClickClose}
             className=" bg-darkBlue_5 text-white py-3 w-1/2 rounded-2xl"
             innerText="Cancel"
           />
           <Button
+            onClick={ButtonOnClick}
             className=" text-white bg-lightPurple_3 w-1/2 rounded-2xl"
             innerText={btn}
           />

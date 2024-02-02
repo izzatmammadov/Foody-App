@@ -4,9 +4,10 @@ interface Props {
   p?: string;
   arr?: string[];
   className?: string;
+  useRef?:any
 }
 
-export const AdminModalDropdown = ({ p = "Restaurants",arr= ["item1", "item2", "item3"],className }: Props) => {
+export const AdminModalDropdown = ({ p = "Restaurants",arr= ["item1", "item2", "item3"],className, useRef }: Props) => {
   const [selectedValue, setSelectedValue] = useState<string | undefined>("");
 
 
@@ -19,7 +20,7 @@ export const AdminModalDropdown = ({ p = "Restaurants",arr= ["item1", "item2", "
   return (
     <div>
       <p className="text-grayText font-medium mb-4 text-base">{p}</p>
-      <select
+      <select ref={useRef}
         value={selectedValue}
         onChange={handleSelectChange}
         className={className}
@@ -28,7 +29,7 @@ export const AdminModalDropdown = ({ p = "Restaurants",arr= ["item1", "item2", "
           Choose...
         </option>
         {arr.map((item, index) => (
-          <option key={index} className="cursor-pointer" value={item}>
+          <option key={index} className="cursor-pointer"  value={item}>
             {item}
           </option>
         ))}
