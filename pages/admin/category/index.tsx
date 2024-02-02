@@ -8,6 +8,7 @@ import AdminCategory from "../../../share/components/adminCategory";
 import AdminSecondTitle from "../../../share/components/adminSecondTitle";
 import { UpperCase } from "@/share/services/upperCase";
 import { url } from "inspector";
+import { Form, postCategory } from "@/share/services/axios";
 
 interface CategoryType {
   id: number;
@@ -17,7 +18,8 @@ interface CategoryType {
 }
 
 const AdminProducts: NextPage = () => {
-  const categoryRef=useRef <React.RefObject<HTMLInputElement>|null>() 
+  const categoryRef = useRef<React.RefObject<HTMLInputElement> | null>() 
+  const slugRef=useRef <React.RefObject<HTMLInputElement>|null>() 
   const [imgUrl, setImgUrl] = useState<string>("")
   
   function getImgUrl(url:string):void {
@@ -25,12 +27,25 @@ const AdminProducts: NextPage = () => {
     setImgUrl(url)
    
   }
-  function addCategory() {
-    const value:string= categoryRef?.current?.value
-    const img = imgUrl
-    console.log(img);
+  async function  addCategory() {
+
+    const value = categoryRef?.current?.value
+
+    const slug = slugRef?.current?.value
     
-    console.log(UpperCase(value));
+    const img = imgUrl
+
+    const form:Form= {
+      "name": value,
+      "slug":slug ,
+      "img_url": img
+    }
+    const res = await postCategory(form)
+    console.log(res);
+    
+    // console.log(UpperCase(value));
+
+ 
   }
   
 
@@ -95,6 +110,7 @@ const AdminProducts: NextPage = () => {
               categoryRef={categoryRef}
               ButtonOnClick={addCategory}
               getImgUrl={getImgUrl}
+              slugRef={slugRef}
             />
             {/* <div className=" flex  justify-between text-sm  font-semibold h-16 items-center px-8"></div> */}
             <AdminSecondTitle onClick={changeHidden} name="Catagory" />
