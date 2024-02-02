@@ -20,6 +20,7 @@ interface Props {
   ButtonOnClick?: () => void;
   onClickClose?: () => void;
   getImgUrl?: any;
+  slugRef?:any
 }
 
 export const AdminLeftModal = ({
@@ -32,7 +33,8 @@ export const AdminLeftModal = ({
   ButtonOnClick,
   onClickClose,
   categoryRef,
-  getImgUrl
+  getImgUrl,
+  slugRef
 }: Props) => {
   const [imgUrl, setImgUrl] = useState<any>("");
   //  const [imgUpload, setImageUpload]=useState()
@@ -137,7 +139,7 @@ export const AdminLeftModal = ({
             {mod === "3" && (
               <div>
                 <AdminModalInput useRef={categoryRef} p="Name" />
-                {/* <AdminModalInput p="Slug" /> */}
+                <AdminModalInput useRef={slugRef}  p="Slug" />
               </div>
             )}
             {mod === "4" && (
