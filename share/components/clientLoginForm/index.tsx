@@ -3,6 +3,7 @@ import { useCallback, useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
 import axios from "axios";
 import Image from "next/image";
+import { log } from "console";
 
 export const ClientLogInForm = () => {
     const [showLoginForm, setShowLoginForm] = useState(true);
@@ -19,12 +20,11 @@ export const ClientLogInForm = () => {
       const email = emailRef.current?.value;
       const password = passwordRef.current?.value;
   
+      //^Register
       axios
-        .post("http://localhost:3000/login/api/auth/signup", {
-          fullname,
-          username,
+        .post("/api/auth/signup", {
           email,
-          password,
+          password
         })
         .then((result) => {
           if (result.status === 201) {
@@ -36,27 +36,33 @@ export const ClientLogInForm = () => {
         })
         .catch((error) => {
           alert("Already have an account!");
+          console.log(error);
+          
         });
   
         setShowLoginForm(true)
     }, []);
   
+
+    //^ Login
     const logIn = useCallback(() => {
-      const username = usernameRef.current?.value;
+      const email = emailRef.current?.value;
       const password = passwordRef.current?.value;
   
       axios
-        .post("http://localhost:3000/login?/api/auth/signin", {
-          username,
-          password,
+        .post("/api/auth/signin", {
+          email,
+          password
         })
         .then((result) => {
-          if (result.status === 201) {
+          
             alert("Log in Successfully!");
-            console.log(username, password);
-          }
+            console.log(email, password);
+          
         })
         .catch((error) => {
+          console.log(error);
+          
           alert("Something get wrong!");
         });
     }, []);
@@ -100,11 +106,11 @@ export const ClientLogInForm = () => {
               <form className="flex flex-col w-full sm:w-4/5 mx-auto gap-8 items-center">
                 <div className="flex flex-col gap-2 w-full">
                   <label className="text-xl font-medium text-grayText2">
-                    {t("username")}
+                    Email
                   </label>
                   <input
                     className="p-4 rounded-md outline-none bg-[#ffe6e6]"
-                    type="text"
+                    type="email"
                   />
                 </div>
 

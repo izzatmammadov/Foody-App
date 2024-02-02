@@ -13,7 +13,7 @@ const Login: NextPage = () => {
         <link rel="icon" href="/mainBurger.svg" />
       </Head>
 
-      <Navbar isRegister={false} forLogin={true} forAdmin={true} />
+      <Navbar isRegister={false} forLogin={true} forAdmin={null} />
 
       <main>
         <ClientLogInForm/>
