@@ -2,12 +2,12 @@ import type { NextPage } from "next";
 import Head from "next/head";
 import { AdminHeader } from "../../../share/components/adminHeader";
 import { AdminAside } from "../../../share/components/adminAside";
-import OrdersChart from "../../../share/components/ordersChart";
-import Barchart from "../../../share/components/LineChart";
 import { AdminLeftModal } from "../../../share/components/adminLeftModal";
-import { useState } from "react";
+import { useRef, useState } from "react";
 import AdminCategory from "../../../share/components/adminCategory";
 import AdminSecondTitle from "../../../share/components/adminSecondTitle";
+import { UpperCase } from "@/share/services/upperCase";
+import { url } from "inspector";
 
 interface CategoryType {
   id: number;
@@ -17,6 +17,23 @@ interface CategoryType {
 }
 
 const AdminProducts: NextPage = () => {
+  const categoryRef=useRef <React.RefObject<HTMLInputElement>|null>() 
+  const [imgUrl, setImgUrl] = useState<string>("")
+  
+  function getImgUrl(url:string):void {
+    //  console.log(url);
+    setImgUrl(url)
+   
+  }
+  function addCategory() {
+    const value:string= categoryRef?.current?.value
+    const img = imgUrl
+    console.log(img);
+    
+    console.log(UpperCase(value));
+  }
+  
+
   const [isHiddenModal, setIsHiddenModal] = useState<boolean>(true);
   function changeHidden(): void {
     setIsHiddenModal((prev: boolean) => !prev);
@@ -48,7 +65,7 @@ const AdminProducts: NextPage = () => {
       slug: "Yummy-pizza",
     },
   ];
-  console.log("categoryData", categoryData);
+  // console.log("categoryData", categoryData);
 
   return (
     <>
@@ -59,21 +76,28 @@ const AdminProducts: NextPage = () => {
       </Head>
 
       <div className=" bg-textBlack min-h-screen px-4">
-        <AdminHeader onClickButton={changeHidden} />
+        <AdminHeader />
 
-        <AdminLeftModal onClickClose={changeHidden} hidden={isHiddenModal} />
         <main className="flex">
           <div className=" hidden sm:block">
             <AdminAside />
           </div>
 
-          <div className=" gap-4 hidden">
-            <OrdersChart />
-            <Barchart />
-          </div>
           <section className=" w-[100%] m-5">
+            <AdminLeftModal
+              onClickClose={changeHidden}
+              mod="3"
+              p="Add Category  "
+              p1="Upload  image"
+              p2="Add your Category information"
+              hidden={isHiddenModal}
+              btn="Create Category"
+              categoryRef={categoryRef}
+              ButtonOnClick={addCategory}
+              getImgUrl={getImgUrl}
+            />
             {/* <div className=" flex  justify-between text-sm  font-semibold h-16 items-center px-8"></div> */}
-            <AdminSecondTitle name="Catagory" />
+            <AdminSecondTitle onClick={changeHidden} name="Catagory" />
             <div className=" w-[100%]   bg-white">
               <table className="w-[100%] ">
                 <thead className="h-16 text-sm px-8">
@@ -95,7 +119,6 @@ const AdminProducts: NextPage = () => {
             </div>
           </section>
         </main>
-       
       </div>
     </>
   );

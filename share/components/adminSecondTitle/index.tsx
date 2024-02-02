@@ -4,15 +4,17 @@ import { AdminLeftModal } from "../adminLeftModal";
 
 interface AdminSecondTitleProps {
   name: string;
+  onClick?: () => void;
+
 }
 
-const AdminSecondTitle: React.FC<AdminSecondTitleProps> = ({ name }) => {
-  const [isHiddenModal, setIsHiddenModal] = useState<boolean>(true);
+const AdminSecondTitle: React.FC<AdminSecondTitleProps> = ({ name ,onClick}) => {
+  // const [isHiddenModal, setIsHiddenModal] = useState<boolean>(true);
 
-  const onClickButton = (): void => {
-    setIsHiddenModal((prev: boolean) => !prev);
-    console.log(isHiddenModal);
-  };
+  // const onClickButton = (): void => {
+  //   setIsHiddenModal((prev: boolean) => !prev);
+  //   console.log(isHiddenModal);
+  // };
 
   return (
     <>
@@ -22,12 +24,12 @@ const AdminSecondTitle: React.FC<AdminSecondTitleProps> = ({ name }) => {
         </div>
 
         <Button
-          onClick={onClickButton}
+          onClick={onClick}
           className="bg-lightPurple_3 h-7 pr-2 pl-3 text-white font-bold text-xs rounded-[14px]"
           innerText="+ ADD category"
         />
 
-        <AdminLeftModal onClickClose={onClickButton} hidden={isHiddenModal} />
+        {/* <AdminLeftModal onClickClose={onClick} mod={mod} hidden={hidden} /> */}
       </div>
     </>
   );
