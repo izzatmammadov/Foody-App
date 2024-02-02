@@ -3,6 +3,7 @@ import { Button } from "../Button";
 import { useRouter } from "next/router";
 import { NavbarAvatarList } from "../navbarAvatarList";
 import { useState } from "react";
+import { Langugages } from "../Languages";
 
 export const NavbarAvatar = () => {
   const navigate = useRouter();
@@ -12,7 +13,8 @@ export const NavbarAvatar = () => {
     setNavbarList(!isNvbarList)
   }
   return (
-    <div className="flex items-center gap-5 relative">
+    <div className="flex items-center gap-7 relative">
+      <Langugages/>
       <Image
         className="cursor-pointer hover:scale-95 transition-all duration-500"
         width={40}
