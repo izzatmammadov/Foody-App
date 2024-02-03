@@ -12,15 +12,10 @@ import { Langugages } from "../Languages";
 
 interface NavbarParamTypes {
   isRegister: boolean | null;
-  forLogin: boolean | null;
   forAdmin: boolean | null;
 }
 
-export const Navbar = ({
-  isRegister,
-  forLogin,
-  forAdmin,
-}: NavbarParamTypes) => {
+export const Navbar = ({ isRegister, forAdmin }: NavbarParamTypes) => {
   const { t } = useTranslation();
   const navigate = useRouter();
 
@@ -43,28 +38,13 @@ export const Navbar = ({
   };
 
   return (
-    <nav
-      className={`flex justify-between m-0 sm:m-8 items-center ${
-        forLogin ? "bg-lightRed" : "bg-whiteLight1"
-      } rounded-md py-11 px-5 sm:p-11`}
-    >
-      <h1
-        className={`text-4xl font-extrabold ${
-          forLogin ? "text-white" : ""
-        } flex items-center`}
-      >
+    <nav className="flex justify-between m-0 sm:m-8 items-center bg-whiteLight1 rounded-md py-11 px-5 sm:p-11">
+      <h1 className="text-4xl font-extrabold flex items-center">
         <button onClick={toggleModal} className="sm:hidden block mr-5">
-          <Image
-            width={40}
-            height={0}
-            src={forLogin ? "/hamburgerWhite.svg" : "/hamburger.svg"}
-            alt="hamburger"
-          />
+          <Image width={40} height={0} src={"/hamburger.svg"} alt="hamburger" />
         </button>
         Foody
-        <span className={`${forLogin ? "text-white" : "text-mainRed"} `}>
-          .
-        </span>
+        <span className="text-mainRed">.</span>
       </h1>
 
       {isRegister ? (
@@ -102,7 +82,6 @@ export const Navbar = ({
           <NavbarLangButton />
         </>
       )}
-
 
       {/* HAMBURGER */}
       {isModalOpen && (
