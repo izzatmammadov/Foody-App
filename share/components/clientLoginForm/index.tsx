@@ -5,72 +5,64 @@ import axios from "axios";
 import Image from "next/image";
 import { useRouter } from "next/router";
 import { log } from "console";
+import { completeLogin, completeRegister } from "@/share/services/axios";
 
 export const ClientLogInForm = () => {
   const [showLoginForm, setShowLoginForm] = useState(true);
   const { t } = useTranslation();
-  const navigate = useRouter()
+  const navigate = useRouter();
 
   const fullnameRef = useRef<HTMLInputElement>(null);
   const usernameRef = useRef<HTMLInputElement>(null);
   const emailRef = useRef<HTMLInputElement>(null);
   const passwordRef = useRef<HTMLInputElement>(null);
 
-  const completeRegister = useCallback(() => {
+  //^Register
+
+  const handleRegister = async () => {
+    event?.preventDefault()
     const fullname = fullnameRef.current?.value;
     const username = usernameRef.current?.value;
     const email = emailRef.current?.value;
     const password = passwordRef.current?.value;
 
-    //^Register
-    axios
-      .post("/api/auth/signup", {
-        email,
-        password,
-      })
-      .then((result) => {
-        if (result.status === 201) {
-          alert("Register Successfully!");
-          
-          console.log(fullname, username, email, password);
-        } else {
-          alert("Something get wrong!");
-        }
-      })
-      .catch((error) => {
-        alert("Already have an account!");
-        console.log(error);
-      });
+    const form = {
+      fullname,
+      username,
+      email,
+      password,
+    };
 
-    setShowLoginForm(true);
-  }, []);
+    const res = await completeRegister(form);
+    console.log(res);
+
+    if (fullnameRef.current) fullnameRef.current.value = "";
+    if (usernameRef.current) usernameRef.current.value = "";
+    if (emailRef.current) emailRef.current.value = "";
+    if (passwordRef.current) passwordRef.current.value = "";
+
+    setShowLoginForm(true)
+  };
 
   //^ Login
-  const logIn = useCallback(() => {
-    event?.preventDefault()
+  const handleLogin = async () => {
+    event?.preventDefault();
+    const fullname = fullnameRef.current?.value;
+    const username = usernameRef.current?.value;
     const email = emailRef.current?.value;
     const password = passwordRef.current?.value;
 
-    console.log(emailRef);
-    
+    const form = {
+      fullname,
+      username,
+      email,
+      password,
+    };
 
-    axios
-      .post("/api/auth/signin", {
-        email,
-        password,
-      })
-      .then((result) => {
-        // alert("Log in Successfully!");
-        console.log(result);
-
-        navigate.push("/")
-      })
-      .catch((error) => {
-        console.log(error);
-        // alert("Something get wrong!");
-      });
-
-  }, []);
+    const res = await completeLogin(form);
+    navigate.push("/")
+    console.log(res);
+  };
 
   const switchForm = () => {
     setShowLoginForm(!showLoginForm);
@@ -132,7 +124,7 @@ export const ClientLogInForm = () => {
             </div>
 
             <Button
-              onClick={logIn}
+              onClick={handleLogin}
               className="w-full bg-lightRed text-xl font-medium p-4 rounded-md text-white hover:scale-95 hover:bg-mainRed transition-all duration-500"
               innerText={t("login")}
             />
@@ -184,7 +176,7 @@ export const ClientLogInForm = () => {
             </div>
 
             <Button
-              onClick={completeRegister}
+              onClick={handleRegister}
               className="w-full bg-lightRed text-xl font-medium p-4 rounded-md text-white hover:scale-95 hover:bg-mainRed transition-all duration-500"
               innerText={t("register")}
             />
