@@ -4,11 +4,12 @@ import { PieChart, pieArcLabelClasses } from '@mui/x-charts/PieChart';
 
  const OrdersChart = () => {
   return (
-    <div className=' pt-4 pl-6   bg-darkBlue_3  h-80  rounded-xl max-w-[472px]  pb-8 '>
+    <div className=' mb-20 mmd:mb-0 pt-4 pl-6    bg-darkBlue_3  h-80  rounded-xl   llg:w-5/12 xl:w-4/12  pb-8 '>
       <div >
-      <p className=' text-grayText font-medium text-xl'>Orders</p>
+        <p className=' text-grayText font-medium text-xl'>Orders</p>
+        <div className=' flex justify-center items-center'>
       <PieChart
-    
+
     series={[
       {
         
@@ -23,10 +24,10 @@ import { PieChart, pieArcLabelClasses } from '@mui/x-charts/PieChart';
         faded: { innerRadius: 30, additionalRadius: -30, color: 'gray' },
       },
     ]}
-    width={400}
+    width={370}
     height={200}
       />
-    
+    </div>
       {/* <div className=' flex text-grayText gap-2 mt-2'>
         <div className=' flex  gap-1 items-center '>
           <div className=' h-3 w-3 rounded-full bg-mainRed '> </div> <p> KFC</p>

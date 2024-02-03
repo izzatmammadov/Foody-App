@@ -23,7 +23,7 @@ const AdminDashboard: NextPage = () => {
       </Head>
 
       <div className=" bg-textBlack min-h-screen px-4">
-        <AdminHeader onClickButton={changeHidden} />
+        <AdminHeader />
 
         <AdminLeftModal onClickClose={changeHidden} hidden={isHiddenModal} />
         <main>

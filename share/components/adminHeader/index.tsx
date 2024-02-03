@@ -13,7 +13,7 @@ export const AdminHeader = () => {
 
 
   return (
-    <div className=" bg-darkBlue_3  py-5 pl-5 pr-4 flex justify-between  rounded-b-xl">
+    <div className=" bg-darkBlue_3  py-5 pl-5 pr-4 flex justify-between  mb-4 rounded-b-xl">
          <AdminLeftModal onClickClose={changeHidden} mod="1"  hidden={isHiddenModal} />
       <h1
         style={{ letterSpacing: "0.84px" }}

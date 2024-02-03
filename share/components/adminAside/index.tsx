@@ -10,7 +10,7 @@ export const AdminAside = () => {
   // React.ChangeEvent<HTMLSelectElement>
 
   const {push} =useRouter()
-  function changePage(value: string) {
+  function changePage(value: string):void {
   push(`/admin/${value}`)
 }
 
@@ -20,7 +20,7 @@ export const AdminAside = () => {
         value={"dashboard"}
         innerText={t("adminLeftBarComponent")}
         img="/dashboard-icon.svg"
-       
+        onClick={changePage} 
   
       />
       <AdminAsideItem value={"products"} innerText={t("adminLeftBarComponent2")} img='/product-icon.svg' onClick={changePage}   />
