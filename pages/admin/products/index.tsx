@@ -39,7 +39,7 @@ const AdminProducts: NextPage = () => {
 
           <section>
             <div className="m-5">
-              <AdminSecondTitle name="Products"/>
+              <AdminSecondTitle name="Products " p1="Products"/>
             </div>
 
             <div className=" w-full sm:w-auto m-5 flex flex-wrap gap-10 justify-center">

@@ -4,12 +4,18 @@ interface Props {
   p?: string;
   arr?: string[];
   className?: string;
-  useRef?:any
+  className2?: string;
+  useRef?: any;
 }
 
-export const AdminModalDropdown = ({ p = "Restaurants",arr= ["item1", "item2", "item3"],className, useRef }: Props) => {
+export const AdminModalDropdown = ({
+  p = "Restaurants",
+  arr = ["item1", "item2", "item3"],
+  className,
+  useRef,
+  className2,
+}: Props) => {
   const [selectedValue, setSelectedValue] = useState<string | undefined>("");
-
 
   function handleSelectChange(e: React.ChangeEvent<HTMLSelectElement>): void {
     const value = e.target.value;
@@ -18,18 +24,19 @@ export const AdminModalDropdown = ({ p = "Restaurants",arr= ["item1", "item2", "
   }
 
   return (
-    <div>
-      <p className="text-grayText font-medium mb-4 text-base">{p}</p>
-      <select ref={useRef}
+    <div className={className2}>
+      <p className=" text-white font-medium  text-base">{p}</p>
+      <select
+        ref={useRef}
         value={selectedValue}
         onChange={handleSelectChange}
         className={className}
       >
-        <option value="" disabled>
+        <option  value="" disabled>
           Choose...
         </option>
         {arr.map((item, index) => (
-          <option key={index} className="cursor-pointer"  value={item}>
+          <option key={index} className="cursor-pointer" value={item}>
             {item}
           </option>
         ))}
