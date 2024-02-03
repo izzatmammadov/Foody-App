@@ -1,9 +1,7 @@
 import React, { useState } from "react";
 import { Button } from "../Button";
 import { AdminLeftModal } from "../adminLeftModal";
-interface Props{
-  onClickButton?: ()=>void,
-}
+
 export const AdminHeader = () => {
   const [isHiddenModal, setIsHiddenModal] = useState<boolean>(true);
   function changeHidden(): void {
