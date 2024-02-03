@@ -82,7 +82,7 @@ const restourans = () => {
 
           <section>
             <div className="m-5">
-              <AdminSecondTitle name="Restaurants" />
+              <AdminSecondTitle name="Restaurants" p1="Restaurants" />
             </div>
 
             <div className=" w-full sm:w-auto m-5 flex flex-wrap gap-4 justify-center">
