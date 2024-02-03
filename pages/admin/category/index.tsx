@@ -97,7 +97,7 @@ const AdminProducts: NextPage = () => {
               getImgUrl={getImgUrl}
             />
             {/* <div className=" flex  justify-between text-sm  font-semibold h-16 items-center px-8"></div> */}
-            <AdminSecondTitle onClick={changeHidden} name="Catagory" />
+            <AdminSecondTitle onClick={changeHidden} name="Catagory" p1="Catagory" />
             <div className=" w-[100%]   bg-white">
               <table className="w-[100%] ">
                 <thead className="h-16 text-sm px-8">
