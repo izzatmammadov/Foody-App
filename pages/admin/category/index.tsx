@@ -1,4 +1,5 @@
 import type { NextPage } from "next";
+import 'react-toastify/dist/ReactToastify.css';
 import Head from "next/head";
 import { AdminHeader } from "../../../share/components/adminHeader";
 import { AdminAside } from "../../../share/components/adminAside";
@@ -7,8 +8,8 @@ import { useRef, useState } from "react";
 import AdminCategory from "../../../share/components/adminCategory";
 import AdminSecondTitle from "../../../share/components/adminSecondTitle";
 import { UpperCase } from "@/share/services/upperCase";
-import { url } from "inspector";
 import { Form, postCategory } from "@/share/services/axios";
+import { ToastContainer, toast } from "react-toastify";
 
 interface CategoryType {
   id: number;
@@ -18,8 +19,15 @@ interface CategoryType {
 }
 
 const AdminProducts: NextPage = () => {
-  const categoryRef = useRef<React.RefObject<HTMLInputElement> | null>() 
-  const slugRef=useRef <React.RefObject<HTMLInputElement>|null>() 
+  const [isHiddenModal, setIsHiddenModal] = useState<boolean>(true);
+
+  const categoryRef = useRef<HTMLInputElement>(null) 
+
+  const slugRef = useRef<HTMLInputElement>(null) 
+
+  const imgRef = useRef<HTMLInputElement>(null) 
+  
+  
   const [imgUrl, setImgUrl] = useState<string>("")
   
   function getImgUrl(url:string):void {
@@ -27,33 +35,55 @@ const AdminProducts: NextPage = () => {
     setImgUrl(url)
    
   }
-  async function  addCategory() {
+  async function addCategory() {
+    const category = categoryRef?.current?.value;
+    const slug = slugRef?.current?.value;
+    const img = imgUrl;
 
-    const value = categoryRef?.current?.value
-
-    const slug = slugRef?.current?.value
-    
-    const img = imgUrl
-
-    const form:Form= {
-      "name": value,
-      "slug":slug ,
-      "img_url": img
+    if (!isInputValid(category, slug, img)) {
+        toast.warning("Please fill all the inputs!");
+        return;
     }
-    const res = await postCategory(form)
-    console.log(res);
-    
-    // console.log(UpperCase(value));
 
- 
-  }
+    const form: Form = {
+        "name": UpperCase(category),
+        "slug": slug,
+        "img_url": img
+    };
+
+    try {
+        const res = await postCategory(form);
+        
+        if (res?.status === 201) {
+            if (categoryRef.current && slugRef.current) {
+                categoryRef.current.value = "";
+                slugRef.current.value = "";
+            }
+
+            setTimeout(() => {
+                changeHidden();
+            }, 500);
+
+            toast.success("Category created successfully!");
+        }
+    } catch (error) {
+        console.error("Error adding category:", error);
+        toast.error("An error occurred while adding the category.");
+    }
+}
+
+function isInputValid(category: string | undefined, slug: string | undefined, img: string): boolean {
+    return !!category && !!slug && !!img;
+}
+
   
 
-  const [isHiddenModal, setIsHiddenModal] = useState<boolean>(true);
+
   function changeHidden(): void {
     setIsHiddenModal((prev: boolean) => !prev);
-    console.log(isHiddenModal);
+    // console.log(isHiddenModal);
   }
+  
   let categoryData: CategoryType[] = [
     {
       id: 2000,
@@ -91,6 +121,7 @@ const AdminProducts: NextPage = () => {
       </Head>
 
       <div className=" bg-textBlack min-h-screen px-4">
+      <ToastContainer />
         <AdminHeader />
 
         <main className="flex">
@@ -111,6 +142,7 @@ const AdminProducts: NextPage = () => {
               ButtonOnClick={addCategory}
               getImgUrl={getImgUrl}
               slugRef={slugRef}
+              imgRef={imgRef}
             />
             {/* <div className=" flex  justify-between text-sm  font-semibold h-16 items-center px-8"></div> */}
             <AdminSecondTitle onClick={changeHidden} name="Catagory" p1="Catagory" />

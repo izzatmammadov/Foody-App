@@ -20,7 +20,8 @@ interface Props {
   ButtonOnClick?: () => void;
   onClickClose?: () => void;
   getImgUrl?: any;
-  slugRef?:any
+  slugRef?: any,
+  imgRef?:any
 }
 
 export const AdminLeftModal = ({
@@ -34,7 +35,9 @@ export const AdminLeftModal = ({
   onClickClose,
   categoryRef,
   getImgUrl,
-  slugRef
+  slugRef,
+  imgRef
+  
 }: Props) => {
   const [imgUrl, setImgUrl] = useState<any>("");
   //  const [imgUpload, setImageUpload]=useState()
@@ -91,9 +94,11 @@ export const AdminLeftModal = ({
               {p1}
             </p>
             <Image
+              ref={imgRef}
               src={`${
                 imgOnload ? "/loadingImg.jpg" : imgUrl ? imgUrl : "/noimg.png"
-              }`}
+                }`}
+             
               width={124}
               height={124}
               alt="img"

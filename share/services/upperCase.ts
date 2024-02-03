@@ -1,3 +1,7 @@
-export function UpperCase(name:string):string {
-    return name.split("")[0].toUpperCase()+name.slice(1)
+export function UpperCase(name: string | undefined): string {
+    if (name) {
+        return name.charAt(0).toUpperCase() + name.slice(1);
+    } else {
+        return "";
+    }
 }

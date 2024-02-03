@@ -8,11 +8,11 @@ const instanceAxios = axios.create({
     "Content-Type": "application/json",
   },
 });
-export type Form = {
-  name: string;
-  slug: string;
-  img_url: string;
-};
+export type Form={
+    "name": string|undefined,
+    "slug": string|undefined,
+    "img_url": string|undefined
+  }
 
 export const postCategory = async (form: Form) => {
   try {
