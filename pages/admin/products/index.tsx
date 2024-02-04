@@ -10,11 +10,7 @@ import AdminCard from "../../../share/components/adminCard";
 import AdminSecondTitle from "../../../share/components/adminSecondTitle";
 
 const AdminProducts: NextPage = () => {
-  const [isHiddenModal, setIsHiddenModal] = useState<boolean>(true);
-  function changeHidden() {
-    setIsHiddenModal((prev) => !prev);
-    console.log(isHiddenModal);
-  }
+
   return (
     <>
       <Head>
@@ -24,9 +20,9 @@ const AdminProducts: NextPage = () => {
       </Head>
 
       <div className=" bg-textBlack min-h-screen px-4">
-        <AdminHeader onClickButton={changeHidden} />
+        <AdminHeader  />
 
-        <AdminLeftModal onClickClose={changeHidden} hidden={isHiddenModal} />
+   
         <main className="flex">
           <div className=" hidden sm:block">
             <AdminAside />
@@ -39,7 +35,7 @@ const AdminProducts: NextPage = () => {
 
           <section>
             <div className="m-5">
-              <AdminSecondTitle name="Products " p1="Products"/>
+              <AdminSecondTitle  name="Products " p1="Products"/>
             </div>
 
             <div className=" w-full sm:w-auto m-5 flex flex-wrap gap-10 justify-center">

@@ -68,9 +68,15 @@ const adminOrders = () => {
         <link rel="icon" href="/admin-icon.png" />
       </Head>
       <div className=" bg-textBlack min-h-screen px-4">
-        <AdminHeader onClickButton={changeHidden} />
+        <AdminHeader  />
 
-        <AdminLeftModal onClickClose={changeHidden} hidden={isHiddenModal} />
+        <AdminLeftModal
+          p="Add Offer  "
+          p1="Upload Image"
+          p2="Add your Offer information"
+          btn="Create Offer"
+          mod="4"
+          onClickClose={changeHidden} hidden={isHiddenModal} />
         <main className="flex">
           <div className=" hidden sm:block">
             <AdminAside />
@@ -83,7 +89,7 @@ const adminOrders = () => {
 
           <section className=" w-full">
             <div className="m-5">
-              <AdminSecondTitle name="Offers"  p1="Offers" />
+              <AdminSecondTitle onClick={changeHidden} name="Offers"  p1="Offers" />
             </div>
 
             {/* <div className=" w-full sm:w-auto m-5 flex flex-wrap gap-4 justify-center">

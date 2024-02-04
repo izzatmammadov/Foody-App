@@ -3,6 +3,7 @@ import React, { useState } from "react";
 import Modal from "../Modal";
 import { Button } from "../Button";
 import { useTranslation } from "react-i18next";
+import { AdminLeftModal } from "../adminLeftModal";
 interface cartTipe {
   foodname: string;
   restoranname: string;
@@ -33,9 +34,18 @@ const AdminCard = ({
   const togglePopup = () => {
     setShowPopup(!showPopup);
   };
-
+  const [isHiddenModal, setIsHiddenModal] = useState<boolean>(true);
+  function changeHidden() {
+    setIsHiddenModal((prev) => !prev);
+    console.log(isHiddenModal);
+  }
   return (
     <>
+            <AdminLeftModal
+          btn="Update Product"
+          p="Edit product"
+          p2="Edit your Product description and necessary information"
+          onClickClose={changeHidden} hidden={isHiddenModal} />
       <div className=" rounded-lg w-52 h-72 bg-white">
         <div className="flex  flex-col items-center">
           <Image width="170" height="0" src={foodimage} alt="" />
@@ -54,6 +64,7 @@ const AdminCard = ({
               src="/adminMarqaritaEditButton.svg"
               alt=""
               className=" cursor-pointer"
+              onClick={changeHidden}
             />
             <Image
               width="24"

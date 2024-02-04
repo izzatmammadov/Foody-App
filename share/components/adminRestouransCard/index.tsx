@@ -3,6 +3,7 @@ import React, { FC, useState } from "react";
 import Modal from "../Modal";
 import { Button } from "../Button";
 import { useTranslation } from "react-i18next";
+import { AdminLeftModal } from "../adminLeftModal";
 
 interface AdminRestouransCard{
     data:{
@@ -31,9 +32,21 @@ const AdminRestouransCard : FC<AdminRestouransCard> = ({data}) => {
   const togglePopup = () => {
     setShowPopup(!showPopup);
   };
-
+  const [isHiddenModal, setIsHiddenModal] = useState<boolean>(true);
+  function changeHidden() {
+    setIsHiddenModal((prev) => !prev);
+    console.log(isHiddenModal);
+  }
   return (
     <>
+          <AdminLeftModal
+          p="Edit Restuarant  "
+          mod="2"
+          p1="Upload Image"
+          btn="Update Restaurant"
+          p2="Edit your Restuarants information"
+          onClickClose={changeHidden}
+          hidden={isHiddenModal} />
       <div className=" bg-white w-72 h-20 rounded-md">
         <div className=" flex  w-72 h-20 items-center justify-between">
           <Image className=" ml-3"
@@ -60,6 +73,7 @@ const AdminRestouransCard : FC<AdminRestouransCard> = ({data}) => {
                 onClick={handleButtonClick}
               />
               <Image
+                onClick={changeHidden}
                 width="24"
                 height="0"
                 src="/adminMarqaritaEditButton.svg"
