@@ -69,7 +69,14 @@ const restourans = () => {
       <div className=" bg-textBlack min-h-screen px-4">
         <AdminHeader />
 
-        <AdminLeftModal onClickClose={changeHidden} hidden={isHiddenModal} />
+        <AdminLeftModal
+          p="Add Restuarant "
+          mod="2"
+          p1="Upload Image"
+          btn="Create Restaurant"
+          p2="Add your Restuarants information"
+          onClickClose={changeHidden}
+          hidden={isHiddenModal} />
         <main className="flex">
           <div className=" hidden sm:block">
             <AdminAside />
@@ -82,7 +89,7 @@ const restourans = () => {
 
           <section>
             <div className="m-5">
-              <AdminSecondTitle name="Restaurants" p1="Restaurants" />
+              <AdminSecondTitle onClick={changeHidden} name="Restaurants" p1="Restaurants" />
             </div>
 
             <div className=" w-full sm:w-auto m-5 flex flex-wrap gap-4 justify-center">
