@@ -1,4 +1,5 @@
 import axios from "axios";
+import { toast } from "react-toastify";
 const categoryBaseUrl = "/api";
 
 const instanceAxios = axios.create({
@@ -37,8 +38,8 @@ export const postRestourans = async (form) => {
 export type FormRegister = {
   email: string | undefined;
   password: string | undefined;
-  fullname: string | undefined;
-  username: string | undefined;
+  fullname?: string | undefined;
+  username?: string | undefined;
 };
 
 //& REGISTER
@@ -59,7 +60,9 @@ export const completeLogin = async (form: FormRegister) => {
       const response = await instanceAxios.post("/auth/signin", form);
       return response;
     } catch (error) {
-      alert("Something get wrong!");
+      toast.warning("Check your information!");
       console.log(error);
     }
   };
+
+

@@ -3,6 +3,7 @@ import { useTranslation } from "react-i18next";
 import Modal from "../Modal";
 import { Button } from "../Button";
 import Image from "next/image";
+import { AdminLeftModal } from "../adminLeftModal";
 
 interface AdminOffersTableType {
   data: {
@@ -32,9 +33,20 @@ const AdminOffersTableT: FC<AdminOffersTableType> = ({ data }) => {
   const togglePopup = () => {
     setShowPopup(!showPopup);
   };
-
+  const [isHiddenModal, setIsHiddenModal] = useState<boolean>(true);
+  function changeHidden() {
+    setIsHiddenModal((prev) => !prev);
+    // console.log(isHiddenModal);
+  }
   return (
     <>
+      <AdminLeftModal
+          p="Edit Offer  "
+          p1="Upload Image"
+          p2="Edit your Offer information"
+          btn="Update Offer"
+          mod="4"
+          onClickClose={changeHidden} hidden={isHiddenModal} />
       <tr className="h-14 text-center  border-slate-700  border-y text-gray-900 text-sm not-italic font-normal leading-5 ">
         <td>
           {/* <div>
@@ -69,7 +81,7 @@ const AdminOffersTableT: FC<AdminOffersTableType> = ({ data }) => {
             src="/adminOffersEditimg.svg"
             alt=""
             className=" cursor-pointer"
-            onClick={handleButtonClick}
+            onClick={changeHidden}
           />
           <Image
             width="24"

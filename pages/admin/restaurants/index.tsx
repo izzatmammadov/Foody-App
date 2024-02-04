@@ -175,6 +175,7 @@ const restourans = () => {
       </Head>
 
       <div className=" bg-textBlack min-h-screen px-4">
+
         <ToastContainer />
         <AdminHeader />
 
@@ -195,6 +196,7 @@ const restourans = () => {
           p2="Add your Restuarants information"
           btn="Create  Restuarant"
         />
+
         <main className="flex">
           <div className=" hidden sm:block">
             <AdminAside />
@@ -207,11 +209,13 @@ const restourans = () => {
 
           <section>
             <div className="m-5">
+
               <AdminSecondTitle
                 name="Restaurants"
                 p1="Restaurants"
                 onClick={changeHidden}
               />
+
             </div>
 
             <div className=" w-full sm:w-auto m-5 flex flex-wrap gap-4 justify-center">
