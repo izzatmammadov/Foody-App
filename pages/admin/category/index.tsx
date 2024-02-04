@@ -1,5 +1,5 @@
 import type { NextPage } from "next";
-import 'react-toastify/dist/ReactToastify.css';
+import "react-toastify/dist/ReactToastify.css";
 import Head from "next/head";
 import { AdminHeader } from "../../../share/components/adminHeader";
 import { AdminAside } from "../../../share/components/adminAside";
@@ -21,19 +21,17 @@ interface CategoryType {
 const AdminProducts: NextPage = () => {
   const [isHiddenModal, setIsHiddenModal] = useState<boolean>(true);
 
-  const categoryRef = useRef<HTMLInputElement>(null) 
+  const categoryRef = useRef<HTMLInputElement>(null);
 
-  const slugRef = useRef<HTMLInputElement>(null) 
+  const slugRef = useRef<HTMLInputElement>(null);
 
-  const imgRef = useRef<HTMLInputElement>(null) 
-  
-  
-  const [imgUrl, setImgUrl] = useState<string>("")
-  
-  function getImgUrl(url:string):void {
+  const imgRef = useRef<HTMLInputElement>(null);
+
+  const [imgUrl, setImgUrl] = useState<string>("");
+
+  function getImgUrl(url: string): void {
     //  console.log(url);
-    setImgUrl(url)
-   
+    setImgUrl(url);
   }
   async function addCategory() {
     const category = categoryRef?.current?.value;
@@ -41,49 +39,50 @@ const AdminProducts: NextPage = () => {
     const img = imgUrl;
 
     if (!isInputValid(category, slug, img)) {
-        toast.warning("Please fill all the inputs!");
-        return;
+      toast.warning("Please fill all the inputs!");
+      return;
     }
 
     const form: Form = {
-        "name": UpperCase(category),
-        "slug": slug,
-        "img_url": img
+      name: UpperCase(category),
+      slug: slug,
+      img_url: img,
     };
 
     try {
-        const res = await postCategory(form);
-        
-        if (res?.status === 201) {
-            if (categoryRef.current && slugRef.current) {
-                categoryRef.current.value = "";
-                slugRef.current.value = "";
-            }
+      const res = await postCategory(form);
 
-            setTimeout(() => {
-                changeHidden();
-            }, 500);
-
-            toast.success("Category created successfully!");
+      if (res?.status === 201) {
+        if (categoryRef.current && slugRef.current) {
+          categoryRef.current.value = "";
+          slugRef.current.value = "";
         }
+
+        setTimeout(() => {
+          changeHidden();
+        }, 500);
+
+        toast.success("Category created successfully!");
+      }
     } catch (error) {
-        console.error("Error adding category:", error);
-        toast.error("An error occurred while adding the category.");
+      console.error("Error adding category:", error);
+      toast.error("An error occurred while adding the category.");
     }
-}
+  }
 
-function isInputValid(category: string | undefined, slug: string | undefined, img: string): boolean {
+  function isInputValid(
+    category: string | undefined,
+    slug: string | undefined,
+    img: string
+  ): boolean {
     return !!category && !!slug && !!img;
-}
-
-  
-
+  }
 
   function changeHidden(): void {
     setIsHiddenModal((prev: boolean) => !prev);
     // console.log(isHiddenModal);
   }
-  
+
   let categoryData: CategoryType[] = [
     {
       id: 2000,
@@ -121,7 +120,7 @@ function isInputValid(category: string | undefined, slug: string | undefined, im
       </Head>
 
       <div className=" bg-textBlack min-h-screen px-4">
-      <ToastContainer />
+        <ToastContainer />
         <AdminHeader />
 
         <main className="flex">
@@ -145,7 +144,11 @@ function isInputValid(category: string | undefined, slug: string | undefined, im
               imgRef={imgRef}
             />
             {/* <div className=" flex  justify-between text-sm  font-semibold h-16 items-center px-8"></div> */}
-            <AdminSecondTitle onClick={changeHidden} name="Catagory" p1="Catagory" />
+            <AdminSecondTitle
+              onClick={changeHidden}
+              name="Catagory"
+              p1="Catagory"
+            />
             <div className=" w-[100%]   bg-white">
               <table className="w-[100%] ">
                 <thead className="h-16 text-sm px-8">

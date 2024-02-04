@@ -8,7 +8,6 @@ import Image from "next/image";
 import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
 import { fileStorage } from "../../../server/configs/firebase";
 
-
 interface Props {
   p?: string;
   p1?: string;
@@ -20,8 +19,15 @@ interface Props {
   ButtonOnClick?: () => void;
   onClickClose?: () => void;
   getImgUrl?: any;
-  slugRef?: any,
-  imgRef?:any
+  slugRef?: any;
+  imgRef?: any;
+  RestouransNameRef?: any;
+  imgResRef?: any;
+  cuisineRef?: any;
+  delivery_priceRef?: any;
+  delivery_minRef?: any;
+  addressRef?: any;
+  category_idRef?: any;
 }
 
 export const AdminLeftModal = ({
@@ -36,15 +42,19 @@ export const AdminLeftModal = ({
   categoryRef,
   getImgUrl,
   slugRef,
-  imgRef
-  
+  imgRef,
+  RestouransNameRef,
+  cuisineRef,
+  delivery_priceRef,
+  delivery_minRef,
+  addressRef,
+  category_idRef,
 }: Props) => {
   const [imgUrl, setImgUrl] = useState<any>("");
   //  const [imgUpload, setImageUpload]=useState()
 
   // const imgRef=useRef(null)
   // console.log(imgUrl);
-
 
   const [imgOnload, setImgOnload] = useState(false);
 
@@ -68,7 +78,7 @@ export const AdminLeftModal = ({
       getDownloadURL(snapshot.ref).then((url) => {
         setImgOnload(false);
         setImgUrl(url);
-        getImgUrl(url)
+        getImgUrl(url);
       });
     });
   }
@@ -97,8 +107,7 @@ export const AdminLeftModal = ({
               ref={imgRef}
               src={`${
                 imgOnload ? "/loadingImg.jpg" : imgUrl ? imgUrl : "/noimg.png"
-                }`}
-             
+              }`}
               width={124}
               height={124}
               alt="img"
@@ -130,12 +139,16 @@ export const AdminLeftModal = ({
 
             {mod === "2" && (
               <div>
-                <AdminModalInput p="Name" />
-                <AdminModalTexArea p="Cuisine" />
-                <AdminModalInput p="Delivery Price $" />
-                <AdminModalInput p="Delivery Min" />
-                <AdminModalInput p="Address" />
+                <AdminModalInput useRef={RestouransNameRef} p="Name" />
+                <AdminModalTexArea useRef={cuisineRef} p="Cuisine" />
+                <AdminModalInput
+                  useRef={delivery_priceRef}
+                  p="Delivery Price $"
+                />
+                <AdminModalInput useRef={delivery_minRef} p="Delivery Min" />
+                <AdminModalInput useRef={addressRef} p="Address" />
                 <AdminModalDropdown
+                  useRef={category_idRef}
                   p="Category"
                   className="w-full bg-darkBlue_4 rounded-2xl font-medium text-base text-whiteLight pl-3 py-4"
                 />
@@ -144,7 +157,7 @@ export const AdminLeftModal = ({
             {mod === "3" && (
               <div>
                 <AdminModalInput useRef={categoryRef} p="Name" />
-                <AdminModalInput useRef={slugRef}  p="Slug" />
+                <AdminModalInput useRef={slugRef} p="Slug" />
               </div>
             )}
             {mod === "4" && (
