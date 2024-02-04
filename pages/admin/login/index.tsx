@@ -8,6 +8,7 @@ import { FormRegister, completeLogin } from "@/share/services/axios";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { useRouter } from "next/router";
+import { log } from "console";
 
 export default function AdminLogin() {
   const [isLoading, setIsLoading] = useState<boolean>(false);
@@ -19,6 +20,18 @@ export default function AdminLogin() {
   const emailRef = useRef<HTMLInputElement>(null);
 
   const passwordRef = useRef<HTMLInputElement>(null);
+
+  type token = {
+  "access_token": string,
+  "refresh_token": string
+  }
+let tokenObj: token = JSON.parse(
+    typeof localStorage !== 'undefined' ? localStorage.getItem("tokenObj") ?? "{}" : "{}"
+  );
+
+// console.log(tokenObj);
+
+
 
   async function login() {
 
@@ -59,7 +72,13 @@ export default function AdminLogin() {
       setIsLoading(false);
 
       toast.success("Logged in successfully!");
-
+      tokenObj = {
+        "access_token": res.data.user.access_token ,
+        "refresh_token": res.data.user.refresh_token
+      }
+      localStorage.setItem("tokenObj",JSON.stringify(tokenObj))
+      // console.log(tokenObj);
+      
       if (emailRef.current && passwordRef.current) {
         emailRef.current.value = "";
         passwordRef.current.value = "";
