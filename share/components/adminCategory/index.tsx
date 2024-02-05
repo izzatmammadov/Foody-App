@@ -4,21 +4,23 @@ import "react-toastify/dist/ReactToastify.css";
 import { useTranslation } from "react-i18next";
 import Modal from "../Modal";
 import { Button } from "../Button";
-import { Form, deleteCategories, getEditCategories, updateCategories } from "@/share/services/axios";
+import {
+  Form,
+  deleteCategories,
+  getEditCategories,
+  updateCategories,
+} from "@/share/services/axios";
 import { AdminLeftModal } from "../adminLeftModal";
 import { ToastContainer, toast } from "react-toastify";
 
-
- interface itemP {
-    id: number;
-    "img_url": string;
-    name: string;
-    slug: string;
-  };
-
+interface itemP {
+  id: number;
+  img_url: string;
+  name: string;
+  slug: string;
+}
 
 const AdminCategory = ({ item }: any) => {
-
   const categoryRef = useRef<HTMLInputElement>(null);
 
   const slugRef = useRef<HTMLInputElement>(null);
@@ -27,18 +29,18 @@ const AdminCategory = ({ item }: any) => {
 
   const { t, i18n } = useTranslation();
 
-const [imgUrl,setImgUrl]=useState<string>("")
+  const [imgUrl, setImgUrl] = useState<string>("");
 
   // const [showPopup, setShowPopup] = useState(false);
 
   const [isModalOpen, setIsModalOpen] = useState(false);
 
-  const [activeId, setActiveId] = useState("")
-  
+  const [activeId, setActiveId] = useState("");
+
   const [isHiddenModal, setIsHiddenModal] = useState<boolean>(true);
 
-  function getImgUrl(url:string) {
-setImgUrl(url)
+  function getImgUrl(url: string) {
+    setImgUrl(url);
   }
 
   function changeHidden(): void {
@@ -47,93 +49,82 @@ setImgUrl(url)
   }
 
   //^ MODAL
-  const handleButtonClick = (id:string) => {
+  const handleButtonClick = (id: string) => {
     setIsModalOpen(true);
-    setActiveId(id)
-console.log(id);
-
+    setActiveId(id);
+    console.log(id);
   };
- async function handleEditClick(id:string) {
-   setActiveId(id)
-   console.log(activeId);
-   
-    changeHidden()
-   const res = await getEditCategories(id)
-   console.log(res);
-   if (res?.status === 200) {
-     const currentData = res?.data.result.data
-     if (categoryRef && slugRef && imgRef) {
- 
-       console.log(imgRef.current);
-      
-       
-       (categoryRef.current as { value: string }).value = currentData?.name || '';
-       
-       (slugRef.current as { value: string }).value = currentData?.slug || '';
-       
-       (imgRef.current as { src: string }).src = currentData?.img_url || '';
+  async function handleEditClick(id: string) {
+    setActiveId(id);
+    console.log(activeId);
 
-     }
-     console.log(currentData);
-     
-   }
+    changeHidden();
+    const res = await getEditCategories(id);
+    console.log(res);
+    if (res?.status === 200) {
+      const currentData = res?.data.result.data;
+      if (categoryRef && slugRef && imgRef) {
+        console.log(imgRef.current);
 
+        (categoryRef.current as { value: string }).value =
+          currentData?.name || "";
+
+        (slugRef.current as { value: string }).value = currentData?.slug || "";
+
+        (imgRef.current as { src: string }).src = currentData?.img_url || "";
+      }
+      console.log(currentData);
+    }
   }
 
   async function updateCategory() {
-  
     const category = categoryRef?.current?.value;
     const slug = slugRef?.current?.value;
     const img = imgRef.current?.src;
 
-  const form:Form = {
-    name: category,
-    slug: slug,
-    img_url:img
-    }
+    const form: Form = {
+      name: category,
+      slug: slug,
+      img_url: img,
+    };
 
     if (!isInputValid(category, slug, img)) {
       toast.warning("Please fill all the inputs!");
       return;
     }
-// console.log(activeId);
+    // console.log(activeId);
 
-const res = await updateCategories(activeId,form)
+    const res = await updateCategories(activeId, form);
     if (res?.status === 200) {
-      toast.success("Category updated successfully!")
-      changeHidden()
-}
-  console.log(res);
-  
-  
+      toast.success("Category updated successfully!");
+      changeHidden();
+    }
+    console.log(res);
   }
   function isInputValid(
     category: string | undefined,
     slug: string | undefined,
     img: string
   ): boolean {
-    console.log(category,slug,img);
-    
+    console.log(category, slug, img);
+
     return !!category && !!slug && !!img;
   }
-
 
   const handleModalClose = () => {
     setIsModalOpen(false);
   };
 
   async function deleteCategory() {
-    const res = await deleteCategories(activeId)
+    const res = await deleteCategories(activeId);
     console.log(res);
     if (res?.status === 204) {
-      toast.success("Deleted successfully!")
-      setIsModalOpen(prev=>!prev);
+      toast.success("Deleted successfully!");
+      setIsModalOpen((prev) => !prev);
     }
 
-   
-    return
-}
-
+    return;
+  }
 
   //^ POP UP
   // const togglePopup = () => {
@@ -142,21 +133,21 @@ const res = await updateCategories(activeId,form)
 
   return (
     <>
-      <ToastContainer/>
-         <AdminLeftModal
-              onClickClose={changeHidden}
-              mod="3"
-              p="Edit Category  "
-              p1="Upload  image"
-              p2="Edit your Category information"
-              hidden={isHiddenModal}
-              btn="Edit Category"
-              categoryRef={categoryRef}
-              ButtonOnClick={updateCategory}
-              getImgUrl={getImgUrl}
-              slugRef={slugRef}
-              imgRef={imgRef}
-            />
+      <ToastContainer />
+      <AdminLeftModal
+        onClickClose={changeHidden}
+        mod="3"
+        p="Edit Category  "
+        p1="Upload  image"
+        p2="Edit your Category information"
+        hidden={isHiddenModal}
+        btn="Edit Category"
+        categoryRef={categoryRef}
+        ButtonOnClick={updateCategory}
+        getImgUrl={getImgUrl}
+        slugRef={slugRef}
+        imgRef={imgRef}
+      />
       <tr className="text-center h-16  border-y border-gray-800 text-sm not-italic font-normal leading-6">
         <td className="text-center max-w-[75px]   overflow-x-auto">
           <div className="flex  justify-center ">
@@ -176,7 +167,7 @@ const res = await updateCategories(activeId,form)
               src="/adminMarqaritaEditButton.svg"
               alt=""
               className=" cursor-pointer"
-              onClick={()=>handleEditClick(item.id)}
+              onClick={() => handleEditClick(item.id)}
             />
             <Image
               width="24"
@@ -184,7 +175,7 @@ const res = await updateCategories(activeId,form)
               src="/adminMarqaritaDeleteButton.svg"
               alt=""
               className=" cursor-pointer"
-              onClick={()=>handleButtonClick(item.id)}
+              onClick={() => handleButtonClick(item.id)}
             />
             {/* {showPopup && (
               <div className="absolute right-0 w-max bg-whiteLight1 shadow-md rounded-md p-2 flex flex-col items-center justify-center gap-1">
