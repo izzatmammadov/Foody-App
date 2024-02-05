@@ -25,13 +25,13 @@ export const postCategory = async (form: Form) => {
 };
 
 export interface formtype{
-  ;
-  category_id: string|number;
-  img_url: string;
+  name: string;
+  "category_id": string|number;
+ " img_url": string;
   cuisine: string;
   address: string;
-  delivery_min: string;
-  delivery_price: string | undefined;
+ " delivery_min": string;
+  "delivery_price": string | undefined;
 }
 
 export const postRestourans = async (form: formtype) => {
