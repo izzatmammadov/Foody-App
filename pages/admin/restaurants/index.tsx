@@ -104,7 +104,7 @@ const restourans = () => {
     const form:formtype= {
       name: ResName,
       category_id: category_id,
-      img_url: img,
+     img_url: img,
       cuisine: cuisine,
       address: address,
       delivery_min: delivery_min,
