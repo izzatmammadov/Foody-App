@@ -7,7 +7,7 @@ import { AdminLeftModal } from "@/share/components/adminLeftModal";
 import AdminRestouransCard from "@/share/components/adminRestouransCard";
 import AdminSecondTitle from "@/share/components/adminSecondTitle";
 import OrdersChart from "@/share/components/ordersChart";
-import { Form, postRestourans } from "@/share/services/axios";
+import { Form, formtype, postRestourans } from "@/share/services/axios";
 import Head from "next/head";
 import React, { useRef, useState } from "react";
 import { ToastContainer, toast } from "react-toastify";
@@ -100,7 +100,8 @@ const restourans = () => {
       return;
     }
 
-    const form = {
+
+    const form:formtype= {
       name: ResName,
       category_id: category_id,
       img_url: img,
@@ -109,7 +110,7 @@ const restourans = () => {
       delivery_min: delivery_min,
       delivery_price: delivery_price,
     };
-
+ 
     const response = await postRestourans(form);
     console.log(response);
     try {
