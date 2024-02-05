@@ -9,13 +9,12 @@ const instanceAxios = axios.create({
     "Content-Type": "application/json",
   },
 });
-export type Form={
-    "name": string|undefined,
-    "slug": string|undefined,
-    "img_url": string|undefined
-  }
+export type Form = {
+  name: string | undefined;
+  slug: string | undefined;
+  img_url: string | undefined;
+};
 
-  
 export const postCategory = async (form: Form) => {
   try {
     const response = await instanceAxios.post("/category", form);
@@ -24,7 +23,18 @@ export const postCategory = async (form: Form) => {
     console.log(err);
   }
 };
-export const postRestourans = async (form) => {
+
+export interface formtype{
+  ;
+  category_id: string|number;
+  img_url: string;
+  cuisine: string;
+  address: string;
+  delivery_min: string;
+  delivery_price: string | undefined;
+}
+
+export const postRestourans = async (form: formtype) => {
   try {
     const response = await instanceAxios.post("/restuarants", form);
     return response;
@@ -56,13 +66,11 @@ export const completeRegister = async (form: FormRegister) => {
 //& LOGIN
 
 export const completeLogin = async (form: FormRegister) => {
-    try {
-      const response = await instanceAxios.post("/auth/signin", form);
-      return response;
-    } catch (error) {
-      toast.warning("Check your information!");
-      console.log(error);
-    }
-  };
-
-
+  try {
+    const response = await instanceAxios.post("/auth/signin", form);
+    return response;
+  } catch (error) {
+    toast.warning("Check your information!");
+    console.log(error);
+  }
+};
