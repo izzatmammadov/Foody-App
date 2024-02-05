@@ -4,24 +4,33 @@ import Modal from "../Modal";
 import { Button } from "../Button";
 import { useTranslation } from "react-i18next";
 import { AdminLeftModal } from "../adminLeftModal";
+import { deleteRestourans } from "@/share/services/axios";
+import { ToastContainer, toast } from "react-toastify";
 
-interface AdminRestouransCard{
-    data:{
-        image: string;
-        name1: string;
-        name2: string;
-    
-    }
+interface AdminRestouransCard {
+  data: {
+    img_url: string;
+    name: string;
+    category_id: string;
+  };
 }
 
-const AdminRestouransCard : FC<AdminRestouransCard> = ({data}) => {
+const AdminRestouransCard: FC<AdminRestouransCard> = ({ data }) => {
+  console.log(data);
+
   const { t, i18n } = useTranslation();
+
   const [showPopup, setShowPopup] = useState(false);
+
   const [isModalOpen, setIsModalOpen] = useState(false);
 
+  const [activeId, setActiveId] = useState("");
+
   //^ MODAL
-  const handleButtonClick = () => {
+  const handleButtonClick = (id: string) => {
     setIsModalOpen(true);
+    setActiveId(id);
+    console.log(id);
   };
 
   const handleModalClose = () => {
@@ -37,29 +46,47 @@ const AdminRestouransCard : FC<AdminRestouransCard> = ({data}) => {
     setIsHiddenModal((prev) => !prev);
     console.log(isHiddenModal);
   }
+
+  async function deleteRestouransfunction() {
+    const res = await deleteRestourans(activeId);
+    console.log(res);
+    if (res?.status === 204) {
+      toast.success("Deleted successfully!");
+      setIsModalOpen((prev) => !prev);
+    }
+
+    return;
+    console.log("delete res");
+  }
+
   return (
     <>
-          <AdminLeftModal
-          p="Edit Restuarant  "
-          mod="2"
-          p1="Upload Image"
-          btn="Update Restaurant"
-          p2="Edit your Restuarants information"
-          onClickClose={changeHidden}
-          hidden={isHiddenModal} />
+      <AdminLeftModal
+        p="Edit Restuarant  "
+        mod="2"
+        p1="Upload Image"
+        btn="Update Restaurant"
+        p2="Edit your Restuarants information"
+        onClickClose={changeHidden}
+        hidden={isHiddenModal}
+      />
+      <ToastContainer />
       <div className=" bg-white w-72 h-20 rounded-md">
         <div className=" flex  w-72 h-20 items-center justify-between">
-          <Image className=" ml-3"
+          <Image
+            className=" ml-3  h-16"
             width="65"
-            height="0"
-            src={data.image}
+            height="30"
+            src={data.img_url}
             alt=""
           />
           <div>
             <p className="text-gray-900 text-lg not-italic font-medium leading-6">
-              {data.name1}
+              {data.name}
             </p>
-            <p className="text-sm not-italic font-medium leading-6 ">{data.name2}</p>
+            <p className="text-sm not-italic font-medium leading-6 ">
+              {data.category_id}
+            </p>
           </div>
           <div className="flex ">
             {" "}
@@ -70,7 +97,8 @@ const AdminRestouransCard : FC<AdminRestouransCard> = ({data}) => {
                 src="/adminMarqaritaDeleteButton.svg"
                 alt=""
                 className=" cursor-pointer"
-                onClick={handleButtonClick}
+                // onClick={deleteRestourans}
+                onClick={() => handleButtonClick(data.id)}
               />
               <Image
                 onClick={changeHidden}
@@ -107,6 +135,7 @@ const AdminRestouransCard : FC<AdminRestouransCard> = ({data}) => {
             <Button
               className="bg-mainRed border-2 text-white py-1 px-8 rounded-md border-mainRed shadow-md hover:scale-95 transition-all duration-500"
               innerText={t("modalDesc4")}
+              onClick={deleteRestouransfunction}
             />
           </div>
         </Modal>

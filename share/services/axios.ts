@@ -24,14 +24,24 @@ export const postCategory = async (form: Form) => {
   }
 };
 
-export interface formtype{
+export interface formtype {
   name: string;
-  "category_id": string|number;
-  "img_url": string;
+  category_id: string | number;
+  img_url: string;
   cuisine: string;
   address: string;
-  "delivery_min": string;
-  "delivery_price": string | undefined;
+  delivery_min: string;
+  delivery_price: string | undefined;
+}
+//* Restourans
+
+export async function deleteRestourans(id: string) {
+  try {
+    const response = await instanceAxios.delete(`/restuarants/${id}`);
+    return response;
+  } catch (err) {
+    console.log(err);
+  }
 }
 
 export const postRestourans = async (form: formtype) => {
@@ -42,6 +52,15 @@ export const postRestourans = async (form: formtype) => {
     console.log(err);
   }
 };
+
+export async function getRestourans() {
+  try {
+    const response = await instanceAxios.get("/restuarants");
+    return response;
+  } catch (err) {
+    console.log(err);
+  }
+}
 
 //? CLIENT REGISTER AND LOGIN
 
@@ -77,39 +96,34 @@ export const completeLogin = async (form: FormRegister) => {
 
 export async function getCategories() {
   try {
-    const response = await instanceAxios.get("/category")
-    return response
-
+    const response = await instanceAxios.get("/category");
+    return response;
   } catch (err) {
-    console.log(err);  
+    console.log(err);
   }
 }
 
-
-export async function deleteCategories(id:string) {
+export async function deleteCategories(id: string) {
   try {
-    const response = await instanceAxios.delete(`/category/${id}`)
-    return response
-
+    const response = await instanceAxios.delete(`/category/${id}`);
+    return response;
   } catch (err) {
-    console.log(err);  
+    console.log(err);
   }
 }
-export async function getEditCategories(id:string) {
+export async function getEditCategories(id: string) {
   try {
-    const response = await instanceAxios.get(`/category/${id}`)
-    return response
-
+    const response = await instanceAxios.get(`/category/${id}`);
+    return response;
   } catch (err) {
-    console.log(err);  
+    console.log(err);
   }
 }
-export async function updateCategories(id: string,form:Form) {
+export async function updateCategories(id: string, form: Form) {
   try {
-    const response = await instanceAxios.put(`/category/${id}`,form)
-    return response
-
+    const response = await instanceAxios.put(`/category/${id}`, form);
+    return response;
   } catch (err) {
-    console.log(err);  
+    console.log(err);
   }
 }
