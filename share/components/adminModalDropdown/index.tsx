@@ -10,17 +10,23 @@ interface Props {
 
 export const AdminModalDropdown = ({
   p = "Restaurants",
+
   arr = ["item1", "item2", "item3"],
+
   className,
+
   useRef,
+
   className2,
+  callBackValue,
 }: Props) => {
   const [selectedValue, setSelectedValue] = useState<string | undefined>("");
 
   function handleSelectChange(e: React.ChangeEvent<HTMLSelectElement>): void {
     const value = e.target.value;
     setSelectedValue(value);
-    console.log(value);
+    // console.log(value);
+    callBackValue(value);
   }
 
   return (
@@ -32,7 +38,7 @@ export const AdminModalDropdown = ({
         onChange={handleSelectChange}
         className={className}
       >
-        <option  value="" disabled>
+        <option value="" disabled>
           Choose...
         </option>
         {arr.map((item, index) => (
