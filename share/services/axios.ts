@@ -1,9 +1,9 @@
 import axios from "axios";
 import { toast } from "react-toastify";
-const categoryBaseUrl = "/api";
+const baseUrl = "/api";
 
 const instanceAxios = axios.create({
-  baseURL: categoryBaseUrl,
+  baseURL: baseUrl,
   headers: {
     Accept: "application/json",
     "Content-Type": "application/json",
@@ -27,10 +27,10 @@ export const postCategory = async (form: Form) => {
 export interface formtype{
   name: string;
   "category_id": string|number;
- " img_url": string;
+  "img_url": string;
   cuisine: string;
   address: string;
- " delivery_min": string;
+  "delivery_min": string;
   "delivery_price": string | undefined;
 }
 
@@ -74,3 +74,42 @@ export const completeLogin = async (form: FormRegister) => {
     console.log(error);
   }
 };
+
+export async function getCategories() {
+  try {
+    const response = await instanceAxios.get("/category")
+    return response
+
+  } catch (err) {
+    console.log(err);  
+  }
+}
+
+
+export async function deleteCategories(id:string) {
+  try {
+    const response = await instanceAxios.delete(`/category/${id}`)
+    return response
+
+  } catch (err) {
+    console.log(err);  
+  }
+}
+export async function getEditCategories(id:string) {
+  try {
+    const response = await instanceAxios.get(`/category/${id}`)
+    return response
+
+  } catch (err) {
+    console.log(err);  
+  }
+}
+export async function updateCategories(id: string,form:Form) {
+  try {
+    const response = await instanceAxios.put(`/category/${id}`,form)
+    return response
+
+  } catch (err) {
+    console.log(err);  
+  }
+}

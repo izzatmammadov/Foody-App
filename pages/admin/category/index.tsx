@@ -4,22 +4,24 @@ import Head from "next/head";
 import { AdminHeader } from "../../../share/components/adminHeader";
 import { AdminAside } from "../../../share/components/adminAside";
 import { AdminLeftModal } from "../../../share/components/adminLeftModal";
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import AdminCategory from "../../../share/components/adminCategory";
 import AdminSecondTitle from "../../../share/components/adminSecondTitle";
 import { UpperCase } from "@/share/services/upperCase";
-import { Form, postCategory } from "@/share/services/axios";
+import { Form, getCategories, postCategory } from "@/share/services/axios";
 import { ToastContainer, toast } from "react-toastify";
 
 interface CategoryType {
   id: number;
-  image: string;
+  "img_url": string;
   name: string;
   slug: string;
 }
 
 const AdminProducts: NextPage = () => {
   const [isHiddenModal, setIsHiddenModal] = useState<boolean>(true);
+
+  const [categories,setCategories]=useState([])
 
   const categoryRef = useRef<HTMLInputElement>(null);
 
@@ -83,33 +85,52 @@ const AdminProducts: NextPage = () => {
     // console.log(isHiddenModal);
   }
 
-  let categoryData: CategoryType[] = [
-    {
-      id: 2000,
-      image: "/adminMarqarita.svg",
-      name: "pizza",
-      slug: "Yummy-pizza",
-    },
-    {
-      id: 2001,
-      image: "/adminMarqarita.svg",
-      name: "hotdog",
-      slug: "Yummy-pizza",
-    },
-    {
-      id: 2002,
-      image: "/adminMarqarita.svg",
-      name: "pizza",
-      slug: "Yummy-pizza",
-    },
-    {
-      id: 2003,
-      image: "/adminMarqarita.svg",
-      name: "pizza",
-      slug: "Yummy-pizza",
-    },
-  ];
+  // let categoryData: CategoryType[] = [
+  //   {
+  //     id: 2000,
+  //     image: "/adminMarqarita.svg",
+  //     name: "pizza",
+  //     slug: "Yummy-pizza",
+  //   },
+  //   {
+  //     id: 2001,
+  //     image: "/adminMarqarita.svg",
+  //     name: "hotdog",
+  //     slug: "Yummy-pizza",
+  //   },
+  //   {
+  //     id: 2002,
+  //     image: "/adminMarqarita.svg",
+  //     name: "pizza",
+  //     slug: "Yummy-pizza",
+  //   },
+  //   {
+  //     id: 2003,
+  //     image: "/adminMarqarita.svg",
+  //     name: "pizza",
+  //     slug: "Yummy-pizza",
+  //   },
+  // ];
   // console.log("categoryData", categoryData);
+
+ async function categoriesRender() {
+    try {
+      const res = await getCategories();
+      // console.log(res);
+      const categoryArry=res?.data.result.data
+      setCategories(categoryArry)
+    } catch (err) {
+      console.log(err);
+      
+  }
+  }
+  
+
+  useEffect(() => {
+    categoriesRender()
+  },[])                                                                                                                                                 
+
+
 
   return (
     <>
@@ -162,7 +183,7 @@ const AdminProducts: NextPage = () => {
                 </thead>
 
                 <tbody>
-                  {categoryData.map((item: CategoryType) => (
+                   {categories.map((item: CategoryType) => (
                     <AdminCategory key={item.id} item={item} />
                   ))}
                 </tbody>
