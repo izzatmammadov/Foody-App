@@ -1,11 +1,11 @@
 import { Button } from "../Button";
-import { useCallback, useRef, useState } from "react";
+import { useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
-import axios from "axios";
 import Image from "next/image";
 import { useRouter } from "next/router";
-import { log } from "console";
 import { completeLogin, completeRegister } from "@/share/services/axios";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 export const ClientLogInForm = () => {
   const [showLoginForm, setShowLoginForm] = useState(true);
@@ -17,10 +17,20 @@ export const ClientLogInForm = () => {
   const emailRef = useRef<HTMLInputElement>(null);
   const passwordRef = useRef<HTMLInputElement>(null);
 
+  type token = {
+    access_token: string;
+    refresh_token: string;
+  };
+  let tokenObj: token = JSON.parse(
+    typeof localStorage !== "undefined"
+      ? localStorage.getItem("tokenObj") ?? "{}"
+      : "{}"
+  );
+
   //^Register
 
   const handleRegister = async () => {
-    event?.preventDefault()
+    event?.preventDefault();
     const fullname = fullnameRef.current?.value;
     const username = usernameRef.current?.value;
     const email = emailRef.current?.value;
@@ -33,6 +43,16 @@ export const ClientLogInForm = () => {
       password,
     };
 
+    const emailRegex = /^[\w\-\.]+@([\w-]+\.)+[\w-]{2,}$/;
+
+    if (!email || !password) {
+      toast.warning("Please fill in all inputs!");
+      return;
+    } else if (!emailRegex.test(email)) {
+      toast.warning("Please enter a valid email address!");
+      return;
+    }
+
     const res = await completeRegister(form);
     console.log(res);
 
@@ -41,7 +61,7 @@ export const ClientLogInForm = () => {
     if (emailRef.current) emailRef.current.value = "";
     if (passwordRef.current) passwordRef.current.value = "";
 
-    setShowLoginForm(true)
+    setShowLoginForm(true);
   };
 
   //^ Login
@@ -59,9 +79,32 @@ export const ClientLogInForm = () => {
       password,
     };
 
+    const emailRegex = /^[\w\-\.]+@([\w-]+\.)+[\w-]{2,}$/;
+
+    if (!email || !password) {
+      toast.warning("Please fill in all inputs!");
+
+      return;
+    } else if (!emailRegex.test(email)) {
+      toast.warning("Please enter a valid email address!");
+
+      return;
+    }
+
     const res = await completeLogin(form);
-    navigate.push("/")
     console.log(res);
+
+    if (res?.status === 200) {
+      toast.success("Logged in successfully!");
+      tokenObj = {
+        access_token: res.data.user.access_token,
+        refresh_token: res.data.user.refresh_token,
+      };
+      localStorage.setItem("tokenObj", JSON.stringify(tokenObj));
+      setTimeout(() => {
+        navigate.push("/");
+      }, 700);
+    }
   };
 
   const switchForm = () => {
@@ -69,6 +112,7 @@ export const ClientLogInForm = () => {
   };
   return (
     <section className="flex flex-col mt-5 sm:mt-0 sm:flex-row justify-center bg-white sm:bg-lightRed mx-8 mb-8 ">
+      <ToastContainer />
       <div className="bg-lightRed m-auto w-full sm:w-1/2">
         <Image
           className="w-4/5 m-auto"
