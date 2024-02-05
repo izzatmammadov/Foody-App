@@ -1,12 +1,19 @@
 import Barchart from "@/share/components/LineChart";
+
 import "react-toastify/dist/ReactToastify.css";
 
 import { AdminAside } from "@/share/components/adminAside";
+
 import { AdminHeader } from "@/share/components/adminHeader";
+
 import { AdminLeftModal } from "@/share/components/adminLeftModal";
+
 import AdminRestouransCard from "@/share/components/adminRestouransCard";
+
 import AdminSecondTitle from "@/share/components/adminSecondTitle";
+
 import OrdersChart from "@/share/components/ordersChart";
+
 import {
   Form,
   formtype,
@@ -19,7 +26,7 @@ import { ToastContainer, toast } from "react-toastify";
 
 const restourans = () => {
   const [data, setData] = useState([]);
-
+  const [data2, setData2] = useState([]);
   const [isHiddenModal, setIsHiddenModal] = useState<boolean>(true);
 
   function changeHidden() {
@@ -29,6 +36,7 @@ const restourans = () => {
   async function RenderData() {
     const data = await getRestourans();
     setData(data?.data.result.data);
+    setData2(data?.data.result.data);
   }
 
   useEffect(() => {
@@ -146,6 +154,12 @@ const restourans = () => {
     );
   }
 
+  const Filterf = (value) => {
+    console.log(data);
+    let newValue = data2.filter((item) => item.category_id == value);
+    setData(newValue);
+  };
+
   return (
     <>
       <Head>
@@ -189,6 +203,7 @@ const restourans = () => {
           <section className="w-full">
             <div className="m-5">
               <AdminSecondTitle
+                callBackValue={Filterf}
                 name="Restaurants"
                 p1="Restaurants"
                 onClick={changeHidden}

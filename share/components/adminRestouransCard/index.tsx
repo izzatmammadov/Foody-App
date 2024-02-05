@@ -45,8 +45,11 @@ const AdminRestouransCard: FC<AdminRestouransCard> = ({ data }) => {
   function changeHidden() {
     setIsHiddenModal((prev) => !prev);
     console.log(isHiddenModal);
+
   }
 
+  console.log(data.id);
+  
   async function deleteRestouransfunction() {
     const res = await deleteRestourans(activeId);
     console.log(res);
@@ -107,6 +110,7 @@ const AdminRestouransCard: FC<AdminRestouransCard> = ({ data }) => {
                 src="/adminMarqaritaEditButton.svg"
                 alt=""
                 className=" cursor-pointer"
+                
               />
             </div>
           </div>
