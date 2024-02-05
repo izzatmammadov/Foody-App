@@ -21,7 +21,7 @@ export default function AdminLogin() {
 
   const passwordRef = useRef<HTMLInputElement>(null);
 
-  type token = {
+type token = {
   "access_token": string,
   "refresh_token": string
   }
