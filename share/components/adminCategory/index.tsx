@@ -66,8 +66,7 @@ const AdminCategory = ({ item }: any) => {
       if (categoryRef && slugRef && imgRef) {
         console.log(imgRef.current);
 
-        (categoryRef.current as { value: string }).value =
-          currentData?.name || "";
+        (categoryRef.current as { value: string }).value =currentData?.name || "";
 
         (slugRef.current as { value: string }).value = currentData?.slug || "";
 
@@ -104,7 +103,7 @@ const AdminCategory = ({ item }: any) => {
   function isInputValid(
     category: string | undefined,
     slug: string | undefined,
-    img: string
+    img: string|undefined
   ): boolean {
     console.log(category, slug, img);
 
