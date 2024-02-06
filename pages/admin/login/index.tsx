@@ -8,7 +8,6 @@ import { FormRegister, completeLogin } from "@/share/services/axios";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { useRouter } from "next/router";
-import { log } from "console";
 
 export default function AdminLogin() {
   const [isLoading, setIsLoading] = useState<boolean>(false);

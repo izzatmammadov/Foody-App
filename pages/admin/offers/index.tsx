@@ -8,7 +8,8 @@ import OrdersChart from "@/share/components/ordersChart";
 import { createOffer } from "@/share/services/axios";
 import Head from "next/head";
 import React, { useRef, useState } from "react";
-import { toast } from "react-toastify";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const item = [
   {
@@ -57,6 +58,7 @@ const item = [
 
 const adminOrders = () => {
   const [isHiddenModal, setIsHiddenModal] = useState<boolean>(true);
+  const [isOfferImage, setIsOfferImage] = useState<string>("")
   const titleOfferRef = useRef<HTMLInputElement>(null);
   const descOfferRef = useRef<HTMLInputElement>(null);
 
@@ -70,31 +72,30 @@ const adminOrders = () => {
     const descOffer = descOfferRef.current?.value;
 
 
-    if (titleOffer == "" || descOffer == "") {
+    if (titleOffer == "" || descOffer == "" || isOfferImage == "") {
       toast.warning("Fill the inputs correctly!")
   } else {
       const offerValues = {
           name: titleOffer,
           description: descOffer,
-          img_url: "image"
+          img_url: isOfferImage
       }
 
     const res = await createOffer(offerValues);
     console.log(res);
 
-    if (res?.status === 200 || res?.status === 201) {
+    if (res?.status == 200 || res?.status == 201) {
       toast.success("Offer added successfully!");
     }
   }}
 
   //^ ADD IMAGE
-  const handleAddNewImage = () => {
-
-    if("image_true"){
-      const randomID = Math.floor(Math.random() * 9999) + 1;
-    }
-    else {}
+  const handleAddNewImage = (image_url:string) => {
+    setIsOfferImage(image_url)
   }
+
+  //^ GET OFFER
+  
 
   return (
     <>
@@ -104,6 +105,7 @@ const adminOrders = () => {
         <link rel="icon" href="/admin-icon.png" />
       </Head>
       <div className=" bg-textBlack min-h-screen px-4">
+        <ToastContainer/>
         <AdminHeader />
 
         <AdminLeftModal
@@ -117,6 +119,7 @@ const adminOrders = () => {
           onClickClose={changeHidden}
           hidden={isHiddenModal}
           ButtonOnClick={handleCreateOffer}
+          getImgUrl={handleAddNewImage}
         />
         <main className="flex">
           <div className=" hidden sm:block">

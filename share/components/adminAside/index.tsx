@@ -1,4 +1,3 @@
-import Image from "next/image";
 import React from "react";
 import { AdminAsideItem } from "../adminAsideItem";
 import { useTranslation } from "react-i18next";
