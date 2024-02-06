@@ -13,6 +13,7 @@ const AdminSecondTitle: React.FC<AdminSecondTitleProps> = ({
   p1,
   name,
   onClick,
+  callBackValue,
 }) => {
   // const [isHiddenModal, setIsHiddenModal] = useState<boolean>(true);
 
@@ -20,6 +21,9 @@ const AdminSecondTitle: React.FC<AdminSecondTitleProps> = ({
   //   setIsHiddenModal((prev: boolean) => !prev);
   //   console.log(isHiddenModal);
   // };
+  const callBackValuef = (value) => {
+    callBackValue(value);
+  };
 
   return (
     <>
@@ -29,6 +33,7 @@ const AdminSecondTitle: React.FC<AdminSecondTitleProps> = ({
         </div>
         <div className=" flex gap-5 ">
           <AdminModalDropdown
+            callBackValue={callBackValuef}
             p={p1}
             className="w-full bg-darkBlue_4 rounded-2xl font-medium text-base text-whiteLight "
             className2="flex  bg-darkBlue_4  gap-3  rounded-2xl  p-1 px-3 "

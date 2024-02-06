@@ -1,74 +1,62 @@
 import Barchart from "@/share/components/LineChart";
+
 import "react-toastify/dist/ReactToastify.css";
 
 import { AdminAside } from "@/share/components/adminAside";
+
 import { AdminHeader } from "@/share/components/adminHeader";
+
 import { AdminLeftModal } from "@/share/components/adminLeftModal";
+
 import AdminRestouransCard from "@/share/components/adminRestouransCard";
+
 import AdminSecondTitle from "@/share/components/adminSecondTitle";
+
 import OrdersChart from "@/share/components/ordersChart";
-import { Form, formtype, postRestourans } from "@/share/services/axios";
+
+import {
+  Form,
+  formtype,
+  getRestourans,
+  postRestourans,
+} from "@/share/services/axios";
 import Head from "next/head";
-import React, { useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { ToastContainer, toast } from "react-toastify";
 
 const restourans = () => {
-  const item = [
-    {
-      name1: "Papa John’s",
-      name2: "Pizza",
-      image: "/adminRestouransPapaJons.svg",
-    },
-    {
-      name1: "Burger King",
-      name2: "Pizza",
-      image: "/adminRestouransBurgerKing.svg",
-    },
-    {
-      name1: "Papa John’s",
-      name2: "Pizza",
-      image: "/adminRestouransPapaJons.svg",
-    },
-    {
-      name1: "Burger King",
-      name2: "Pizza",
-      image: "/adminRestouransBurgerKing.svg",
-    },
-    {
-      name1: "Papa John’s",
-      name2: "Pizza",
-      image: "/adminRestouransPapaJons.svg",
-    },
-    {
-      name1: "Burger King",
-      name2: "Pizza",
-      image: "/adminRestouransBurgerKing.svg",
-    },
-    {
-      name1: "Papa John’s",
-      name2: "Pizza",
-      image: "/adminRestouransPapaJons.svg",
-    },
-    {
-      name1: "Burger King",
-      name2: "Pizza",
-      image: "/adminRestouransBurgerKing.svg",
-    },
-  ];
-
+  const [data, setData] = useState([]);
+  const [data2, setData2] = useState([]);
   const [isHiddenModal, setIsHiddenModal] = useState<boolean>(true);
+
   function changeHidden() {
     setIsHiddenModal((prev) => !prev);
     console.log(isHiddenModal);
   }
+  async function RenderData() {
+    const data = await getRestourans();
+    setData(data?.data.result.data);
+    setData2(data?.data.result.data);
+  }
+
+  useEffect(() => {
+    RenderData();
+  }, []);
 
   const RestouransNameRef = useRef<HTMLInputElement>(null);
+
   const cuisineRef = useRef<HTMLInputElement>(null);
+
   const delivery_priceRef = useRef<HTMLInputElement>(null);
+
   const delivery_minRef = useRef<HTMLInputElement>(null);
+
   const addressRef = useRef<HTMLInputElement>(null);
+
   const category_idRef = useRef<HTMLInputElement>(null);
+
   const imgRef = useRef<HTMLInputElement>(null);
+
   const [imgUrl, setImgUrl] = useState<string>("");
 
   function getImgUrl(url: string): void {
@@ -77,6 +65,8 @@ const restourans = () => {
   }
 
   async function addRestourans() {
+    console.log("addRestourans");
+
     const ResName: any = RestouransNameRef?.current?.value;
     const cuisine: any = cuisineRef?.current?.value;
     const delivery_price = delivery_priceRef?.current?.value;
@@ -100,8 +90,7 @@ const restourans = () => {
       return;
     }
 
-
-    const form:formtype= {
+    const form: formtype = {
       name: ResName,
       category_id: category_id,
       img_url: img,
@@ -110,9 +99,7 @@ const restourans = () => {
       delivery_min: delivery_min,
       delivery_price: delivery_price,
     };
- 
-    const response = await postRestourans(form);
-    console.log(response);
+
     try {
       const res = await postRestourans(form);
 
@@ -167,6 +154,12 @@ const restourans = () => {
     );
   }
 
+  const Filterf = (value) => {
+    console.log(data);
+    let newValue = data2.filter((item) => item.category_id == value);
+    setData(newValue);
+  };
+
   return (
     <>
       <Head>
@@ -176,7 +169,6 @@ const restourans = () => {
       </Head>
 
       <div className=" bg-textBlack min-h-screen px-4">
-
         <ToastContainer />
         <AdminHeader />
 
@@ -208,19 +200,18 @@ const restourans = () => {
             <Barchart />
           </div>
 
-          <section>
+          <section className="w-full">
             <div className="m-5">
-
               <AdminSecondTitle
+                callBackValue={Filterf}
                 name="Restaurants"
                 p1="Restaurants"
                 onClick={changeHidden}
               />
-
             </div>
 
             <div className=" w-full sm:w-auto m-5 flex flex-wrap gap-4 justify-center">
-              {item.map((data) => (
+              {data.map((data) => (
                 <AdminRestouransCard data={data} />
               ))}
             </div>

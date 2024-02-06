@@ -107,11 +107,12 @@ export const AdminLeftModal = ({
             <p className=" text-grayText font-medium  text-lg  tracking-wide">
               {p1}
             </p>
-            <Image
+            <img
               ref={imgRef}
               src={`${
                 imgOnload ? "/loadingImg.jpg" : imgUrl ? imgUrl : "/noimg.png"
-              }`}
+                }`}
+           
               width={124}
               height={124}
               alt="img"

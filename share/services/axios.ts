@@ -1,9 +1,9 @@
 import axios from "axios";
 import { toast } from "react-toastify";
-const categoryBaseUrl = "/api";
+const baseUrl = "/api";
 
 const instanceAxios = axios.create({
-  baseURL: categoryBaseUrl,
+  baseURL: baseUrl,
   headers: {
     Accept: "application/json",
     "Content-Type": "application/json",
@@ -32,6 +32,21 @@ export interface formtype {
   address: string;
   " delivery_min": string;
   delivery_price: string | undefined;
+  img_url: string;
+  cuisine: string;
+  address: string;
+  delivery_min: string;
+  delivery_price: string | undefined;
+}
+//* Restourans
+
+export async function deleteRestourans(id: string) {
+  try {
+    const response = await instanceAxios.delete(`/restuarants/${id}`);
+    return response;
+  } catch (err) {
+    console.log(err);
+  }
 }
 
 export const postRestourans = async (form: formtype) => {
@@ -42,6 +57,15 @@ export const postRestourans = async (form: formtype) => {
     console.log(err);
   }
 };
+
+export async function getRestourans() {
+  try {
+    const response = await instanceAxios.get("/restuarants");
+    return response;
+  } catch (err) {
+    console.log(err);
+  }
+}
 
 //? CLIENT REGISTER AND LOGIN
 
@@ -73,9 +97,7 @@ export const completeLogin = async (form: FormRegister) => {
     console.log(error);
   }
 };
-
 //& ADMIN OFFER
-
 export type OfferValues = {
   titleOffer?: string | undefined;
   descOffer?: string | undefined;
@@ -91,3 +113,36 @@ export const createOffer = async (offerValues: OfferValues) => {
     console.log(error);
   }
 };
+export async function getCategories() {
+  try {
+    const response = await instanceAxios.get("/category");
+    return response;
+  } catch (err) {
+    console.log(err);
+  }
+}
+
+export async function deleteCategories(id: string) {
+  try {
+    const response = await instanceAxios.delete(`/category/${id}`);
+    return response;
+  } catch (err) {
+    console.log(err);
+  }
+}
+export async function getEditCategories(id: string) {
+  try {
+    const response = await instanceAxios.get(`/category/${id}`);
+    return response;
+  } catch (err) {
+    console.log(err);
+  }
+}
+export async function updateCategories(id: string, form: Form) {
+  try {
+    const response = await instanceAxios.put(`/category/${id}`, form);
+    return response;
+  } catch (err) {
+    console.log(err);
+  }
+}
