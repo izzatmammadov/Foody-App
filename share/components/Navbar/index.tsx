@@ -8,8 +8,14 @@ import { RestaurantSearchModal } from "../restaurantSearchModal";
 import { NavbarAvatar } from "../navbarAvatar";
 import { NavbarList } from "../NavbarList";
 import { NavbarLangButton } from "../navbarLangButton";
+import { AdminNavbarAvatar } from "../adminNavbarAvatar";
+import { AdminAside } from "../adminAside";
 
-export const Navbar = () => {
+interface NavbarProps {
+  adminNavbar: boolean;
+}
+
+export const Navbar: React.FC<NavbarProps> = ({ adminNavbar }) => {
   const { t } = useTranslation();
   const navigate = useRouter();
 
@@ -55,136 +61,190 @@ export const Navbar = () => {
   };
 
   return (
-    <nav className="flex justify-between m-0 sm:m-8 items-center bg-whiteLight1 rounded-md py-11 px-5 sm:p-11">
-      <h1 className="text-4xl font-extrabold flex items-center">
-        <button onClick={toggleModal} className="sm:hidden block mr-5">
-          <Image width={40} height={0} src={"/hamburger.svg"} alt="hamburger" />
+    <nav
+      className={`${
+        adminNavbar
+          ? "flex justify-between m-0 mb-4 items-center rounded-md py-11 px-5 sm:m-0 sm:mb-4 bg-darkBlue_3 sm:p-5"
+          : "flex justify-between m-0 items-center rounded-md py-11 px-5 sm:m-8 bg-whiteLight1 sm:p-11"
+      }`}
+    >
+      <h1
+        className={`${
+          adminNavbar
+            ? "text-white text-3xl font-extrabold flex items-center"
+            : "text-4xl font-extrabold flex items-center"
+        }`}
+      >
+        <button
+          onClick={toggleModal}
+          className={`${
+            adminNavbar ? "sm:hidden block mr-1" : "sm:hidden block mr-5"
+          }`}
+        >
+          <Image
+            width={40}
+            height={0}
+            src={`${adminNavbar ? "/hamburgerWhite.svg" : "/hamburger.svg"}`}
+            alt="hamburger"
+          />
         </button>
         Foody
-        <span className="text-mainRed">.</span>
+        <span className={`${adminNavbar ? "text-orange" : "text-mainRed"}`}>
+          .
+        </span>
       </h1>
 
-      {isToken ? (
-        <>
-          <NavbarList />
-
-          <div className="w-1/5 hidden sm:block">
-            <Input
-              OnClick={toggleInputModal}
-              Type="text"
-              Placeholder="Search"
-              ClassName="w-full px-6 py-3 relative rounded-xl outline-none shadow-sm"
-            />
-            {isInputModal && (
-              <RestaurantSearchModal onClose={closeInputModal} />
-            )}
-          </div>
-          <NavbarAvatar isName={isActiveName} />
-        </>
+      {adminNavbar ? (
+        <div className="flex gap-2 sm:gap-5">
+          <button className="hidden sm:block bg-lightPurple_3 text-white text-sm font-medium px-3 rounded-full shadow-sm shadow-textGreenLight hover:scale-95 transition-all duration-500">
+            {t("addCategory")}
+          </button>
+          <button className="block sm:hidden bg-lightPurple_3 text-white text-2xl font-medium px-4 rounded-full shadow-sm shadow-textGreenLight hover:scale-95 transition-all duration-500">
+            &#43;
+          </button>
+          <AdminNavbarAvatar isName={isActiveName} />
+        </div>
       ) : (
         <>
-          <NavbarList />
+          {isToken ? (
+            <>
+              <NavbarList />
 
-          <div className="w-1/5 hidden sm:block">
-            <Input
-              OnClick={toggleInputModal}
-              Type="text"
-              Placeholder="Search"
-              ClassName="w-full px-6 py-3 relative rounded-xl outline-none shadow-sm"
-            />
-            {isInputModal && (
-              <RestaurantSearchModal onClose={closeInputModal} />
-            )}
-          </div>
-          <NavbarLangButton />
+              <div className="w-1/5 hidden sm:block">
+                <Input
+                  OnClick={toggleInputModal}
+                  Type="text"
+                  Placeholder="Search"
+                  ClassName="w-full px-6 py-3 relative rounded-xl outline-none shadow-sm"
+                />
+                {isInputModal && (
+                  <RestaurantSearchModal onClose={closeInputModal} />
+                )}
+              </div>
+              <NavbarAvatar isName={isActiveName} />
+            </>
+          ) : (
+            <>
+              <NavbarList />
+
+              <div className="w-1/5 hidden sm:block">
+                <Input
+                  OnClick={toggleInputModal}
+                  Type="text"
+                  Placeholder="Search"
+                  ClassName="w-full px-6 py-3 relative rounded-xl outline-none shadow-sm"
+                />
+                {isInputModal && (
+                  <RestaurantSearchModal onClose={closeInputModal} />
+                )}
+              </div>
+              <NavbarLangButton />
+            </>
+          )}
         </>
       )}
 
       {/* HAMBURGER */}
       {isModalOpen && (
         <div className="fixed inset-0 bg-black m-0 min-h-screen bg-opacity-50 z-50 flex items-center justify-start">
-          <div className="bg-white w-4/5 min-h-screen p-8 flex flex-col">
+          <div
+            className={`${
+              adminNavbar
+                ? " bg-lightPurple_2 w-4/5 min-h-screen py-8 flex flex-col"
+                : "bg-white w-4/5 min-h-screen p-8 flex flex-col"
+            }`}
+          >
             <button
               className="text-mainRed font-bold text-lg block text-start"
               onClick={toggleModal}
             >
               <Image width={35} height={0} alt="close2" src={"/close2.svg"} />
             </button>
-            <Button
-              className=" w-full mt-8 mx-auto py-4 rounded-full text-2xl text-black font-medium "
-              innerText={isFullName}
-            />
-            <ul className="justify-around text-2xl w-full font-medium text-grayText1 flex flex-col mt-6 gap-3">
-              <li
-                onClick={() => navigate.push("/")}
-                className="cursor-pointer hover:text-mainRed transition-all text-[22px]"
-              >
-                {t("home")}
-              </li>
-              {isToken && (
-                <>
+
+            {adminNavbar ? (
+              <>
+                <AdminAside />
+              </>
+            ) : (
+              <>
+                <Button
+                  className=" w-full mt-8 mx-auto py-4 rounded-full text-2xl text-black font-medium "
+                  innerText={isFullName}
+                />
+                <ul className="justify-around text-2xl w-full font-medium text-grayText1 flex flex-col mt-6 gap-3">
                   <li
-                    onClick={() => navigate.push("/userProfile")}
+                    onClick={() => navigate.push("/")}
                     className="cursor-pointer hover:text-mainRed transition-all text-[22px]"
                   >
-                    Profile
+                    {t("home")}
                   </li>
+                  {isToken && (
+                    <>
+                      <li
+                        onClick={() => navigate.push("/userProfile")}
+                        className="cursor-pointer hover:text-mainRed transition-all text-[22px]"
+                      >
+                        Profile
+                      </li>
+                      <li
+                        onClick={() => navigate.push("/userBasket")}
+                        className="cursor-pointer hover:text-mainRed transition-all text-[22px]"
+                      >
+                        Your Basket
+                      </li>
+                      <li
+                        onClick={() => navigate.push("/userOrder")}
+                        className="cursor-pointer hover:text-mainRed transition-all text-[22px]"
+                      >
+                        Your Orders
+                      </li>
+                      <li
+                        onClick={() => navigate.push("/userCheckout")}
+                        className="cursor-pointer hover:text-mainRed transition-all text-[22px]"
+                      >
+                        Checkout
+                      </li>
+                    </>
+                  )}
                   <li
-                    onClick={() => navigate.push("/userBasket")}
+                    onClick={() => navigate.push("/restaurants")}
                     className="cursor-pointer hover:text-mainRed transition-all text-[22px]"
                   >
-                    Your Basket
+                    {t("restaurants")}
                   </li>
                   <li
-                    onClick={() => navigate.push("/userOrder")}
+                    onClick={() => navigate.push("/about-us")}
                     className="cursor-pointer hover:text-mainRed transition-all text-[22px]"
                   >
-                    Your Orders
+                    {t("about_us")}
                   </li>
                   <li
-                    onClick={() => navigate.push("/userCheckout")}
+                    onClick={() => navigate.push("/how-it-works")}
                     className="cursor-pointer hover:text-mainRed transition-all text-[22px]"
                   >
-                    Checkout
+                    {t("how_it_works")}
                   </li>
-                </>
-              )}
-              <li
-                onClick={() => navigate.push("/restaurants")}
-                className="cursor-pointer hover:text-mainRed transition-all text-[22px]"
-              >
-                {t("restaurants")}
-              </li>
-              <li
-                onClick={() => navigate.push("/about-us")}
-                className="cursor-pointer hover:text-mainRed transition-all text-[22px]"
-              >
-                {t("about_us")}
-              </li>
-              <li
-                onClick={() => navigate.push("/how-it-works")}
-                className="cursor-pointer hover:text-mainRed transition-all text-[22px]"
-              >
-                {t("how_it_works")}
-              </li>
-              <li
-                onClick={() => navigate.push("/faqs")}
-                className="cursor-pointer hover:text-mainRed transition-all text-[22px]"
-              >
-                FAQs
-              </li>
-              {isToken && (
-                <li
-                  onClick={() => navigate.push("/login")}
-                  className="cursor-pointer hover:text-mainRed transition-all text-[22px] mt-8"
-                >
-                  Logout
-                </li>
-              )}
-            </ul>
+                  <li
+                    onClick={() => navigate.push("/faqs")}
+                    className="cursor-pointer hover:text-mainRed transition-all text-[22px]"
+                  >
+                    FAQs
+                  </li>
+                  {isToken && (
+                    <li
+                      onClick={() => navigate.push("/login")}
+                      className="cursor-pointer hover:text-mainRed transition-all text-[22px] mt-8"
+                    >
+                      Logout
+                    </li>
+                  )}
+                </ul>
+              </>
+            )}
           </div>
         </div>
       )}
+      {/* HAMBURGER END */}
     </nav>
   );
 };
