@@ -33,10 +33,7 @@ export interface formtype {
   " delivery_min": string;
   delivery_price: string | undefined;
   img_url: string;
-  cuisine: string;
-  address: string;
   delivery_min: string;
-  delivery_price: string | undefined;
 }
 //* Restourans
 
