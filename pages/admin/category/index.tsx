@@ -128,7 +128,7 @@ const AdminProducts: NextPage = () => {
 
   useEffect(() => {
     categoriesRender()
-  },[])                                                                                                                                                 
+  },[categories,isHiddenModal])                                                                                                                                                 
 
 
 
