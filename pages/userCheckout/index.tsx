@@ -21,7 +21,7 @@ const UserCheckout: NextPage = () => {
       </Head>
       
       <main>
-        <Navbar isRegister={true} forAdmin={null} forLogin={null} />
+        <Navbar />
       
         <section className="mx-0 sm:m-8 flex flex-col sm:flex-row justify-center gap-4">
             <UserAside/>

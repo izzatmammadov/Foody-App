@@ -6,6 +6,11 @@ export const UserAside = () => {
   const { t, i18n } = useTranslation();
   const navigate = useRouter()
   const isCurrentRoute = (path:string|number) => navigate.pathname === path;
+
+  const logOut = () => {
+    localStorage.removeItem("tokenObj")
+    navigate.push("/login")
+  }
   
   return (
     <div className="rounded-md hidden sm:flex flex-col max-h-screen overflow-y-auto gap-8 bg-whiteLight1 w-1/6 p-4">
@@ -35,7 +40,7 @@ export const UserAside = () => {
         </p>
       </div>
 
-      <div className="flex items-center gap-4 cursor-pointer group hover:bg-mainRedLight transition-all p-2" onClick={()=>navigate.push("/login")}>
+      <div className="flex items-center gap-4 cursor-pointer group hover:bg-mainRedLight transition-all p-2" onClick={logOut}>
         <Image width={25} height={0} src={"logout.svg"} alt="logoutIcon" />
         <p  className="font-semibold text-grayText2 text-lg group-hover:text-mainRed">
           {t("userDesc5")}

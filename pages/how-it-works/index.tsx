@@ -17,7 +17,7 @@ const HowItWorks = () => {
         <link rel="icon" href="/mainBurger.svg" />
       </Head>
 
-      <Navbar forAdmin={false} forLogin={false} isRegister={true} />
+      <Navbar />
       <main>
         <section className=" ">
           <div className="text-center">

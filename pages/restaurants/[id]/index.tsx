@@ -19,7 +19,7 @@ const RestaurantDetail: NextPage = () => {
       </Head>
 
       <main>
-        <Navbar isRegister={true} forAdmin={null} forLogin={null} />
+        <Navbar />
 
         <section className="mx-0 sm:m-8 p-2 sm:p-0 flex flex-col">
           <RestDetailHeader />

@@ -27,6 +27,11 @@ export const postCategory = async (form: Form) => {
 export interface formtype {
   name: string;
   category_id: string | number;
+  " img_url": string;
+  cuisine: string;
+  address: string;
+  " delivery_min": string;
+  delivery_price: string | undefined;
   img_url: string;
   cuisine: string;
   address: string;
@@ -83,7 +88,6 @@ export const completeRegister = async (form: FormRegister) => {
 };
 
 //& LOGIN
-
 export const completeLogin = async (form: FormRegister) => {
   try {
     const response = await instanceAxios.post("/auth/signin", form);
@@ -93,7 +97,22 @@ export const completeLogin = async (form: FormRegister) => {
     console.log(error);
   }
 };
+//& ADMIN OFFER
+export type OfferValues = {
+  titleOffer?: string | undefined;
+  descOffer?: string | undefined;
+  img_url?: string | undefined
+};
 
+export const createOffer = async (offerValues: OfferValues) => {
+  try {
+    const response = await instanceAxios.post("/offer", offerValues);
+    return response;
+  } catch (error) {
+    toast.error("Can not added offer!");
+    console.log(error);
+  }
+};
 export async function getCategories() {
   try {
     const response = await instanceAxios.get("/category");

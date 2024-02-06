@@ -28,6 +28,8 @@ interface Props {
   delivery_minRef?: any;
   addressRef?: any;
   category_idRef?: any;
+  form_titleRef?: any;
+  form_descRef?: any;
 }
 
 export const AdminLeftModal = ({
@@ -49,6 +51,8 @@ export const AdminLeftModal = ({
   delivery_minRef,
   addressRef,
   category_idRef,
+  form_titleRef,
+  form_descRef,
 }: Props) => {
   const [imgUrl, setImgUrl] = useState<any>("");
   //  const [imgUpload, setImageUpload]=useState()
@@ -163,8 +167,8 @@ export const AdminLeftModal = ({
             )}
             {mod === "4" && (
               <div>
-                <AdminModalInput p="Title" />
-                <AdminModalTexArea p="Description" />
+                <AdminModalInput p="Title"  useRef={form_titleRef}/>
+                <AdminModalTexArea p="Description"  useRef={form_descRef}/>
               </div>
             )}
           </div>

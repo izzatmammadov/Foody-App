@@ -5,7 +5,7 @@ import { NavbarAvatarList } from "../navbarAvatarList";
 import { useState } from "react";
 import { Langugages } from "../Languages";
 
-export const NavbarAvatar = () => {
+export const NavbarAvatar = ({isName}:any) => {
   const navigate = useRouter();
   const [isNvbarList, setNavbarList] = useState(false)
 
@@ -27,7 +27,7 @@ export const NavbarAvatar = () => {
       />
       <Button
         className="rounded-full w-10 h-10 text-lg text-white shadow-md bg-mainRed font-semibold hover:scale-95 transition-all duration-500"
-        innerText="ZZ"
+        innerText={isName}
         onClick={toggleNavbarList}
       />
       {isNvbarList &&  <NavbarAvatarList/>}

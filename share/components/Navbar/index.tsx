@@ -2,28 +2,45 @@ import Image from "next/image";
 import { Button } from "../Button";
 import { useTranslation } from "react-i18next";
 import { useRouter } from "next/router";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Input } from "../input";
 import { RestaurantSearchModal } from "../restaurantSearchModal";
 import { NavbarAvatar } from "../navbarAvatar";
 import { NavbarList } from "../NavbarList";
 import { NavbarLangButton } from "../navbarLangButton";
-import { Langugages } from "../Languages";
 
-interface NavbarParamTypes {
-  isRegister: boolean | null;
-  forAdmin: boolean | null;
-}
-
-export const Navbar = ({ isRegister, forAdmin }: NavbarParamTypes) => {
+export const Navbar = () => {
   const { t } = useTranslation();
   const navigate = useRouter();
 
   const [isModalOpen, setModalOpen] = useState(false);
+  const [isToken, setIsToken] = useState(false);
+  const [isActiveName, setIsActiveName] = useState("");
+  const [isFullName, setIsFullName] = useState("");
 
   const toggleModal = () => {
     setModalOpen(!isModalOpen);
   };
+
+  useEffect(() => {
+    const localItem: any = localStorage.getItem("tokenObj");
+    const localUser: any = localStorage.getItem("userInfo");
+
+    let parsedItem = JSON.parse(localItem);
+    let parsedUser = JSON.parse(localUser);
+    let fullName = parsedUser?.fullname;
+    let str = " ";
+    str += parsedUser.fullname.split(" ")[0][0];
+    str += parsedUser.fullname.split(" ")[1][0];
+    let avatar = str.toUpperCase();
+
+    setIsFullName(fullName);
+    setIsActiveName(avatar);
+
+    if (parsedItem?.access_token) {
+      setIsToken(true);
+    }
+  }, [isToken]);
 
   //^ INPUT MODAL
 
@@ -47,7 +64,7 @@ export const Navbar = ({ isRegister, forAdmin }: NavbarParamTypes) => {
         <span className="text-mainRed">.</span>
       </h1>
 
-      {isRegister ? (
+      {isToken ? (
         <>
           <NavbarList />
 
@@ -62,7 +79,7 @@ export const Navbar = ({ isRegister, forAdmin }: NavbarParamTypes) => {
               <RestaurantSearchModal onClose={closeInputModal} />
             )}
           </div>
-          <NavbarAvatar />
+          <NavbarAvatar isName={isActiveName} />
         </>
       ) : (
         <>
@@ -94,40 +111,76 @@ export const Navbar = ({ isRegister, forAdmin }: NavbarParamTypes) => {
               <Image width={35} height={0} alt="close2" src={"/close2.svg"} />
             </button>
             <Button
-              className=" w-full mt-8 mx-auto py-4 rounded-full text-xl bg-mainRed text-white font-medium shadow-md hover:scale-95 transition-all duration-500"
-              innerText={t("signUp")}
+              className=" w-full mt-8 mx-auto py-4 rounded-full text-2xl text-black font-medium "
+              innerText={isFullName}
             />
-            <ul className="justify-around text-2xl w-full font-medium text-grayText1 flex flex-col mt-14 gap-4 ">
+            <ul className="justify-around text-2xl w-full font-medium text-grayText1 flex flex-col mt-6 gap-3">
               <li
                 onClick={() => navigate.push("/")}
-                className="cursor-pointer hover:text-mainRed transition-all"
+                className="cursor-pointer hover:text-mainRed transition-all text-[22px]"
               >
                 {t("home")}
               </li>
+              {isToken && (
+                <>
+                  <li
+                    onClick={() => navigate.push("/userProfile")}
+                    className="cursor-pointer hover:text-mainRed transition-all text-[22px]"
+                  >
+                    Profile
+                  </li>
+                  <li
+                    onClick={() => navigate.push("/userBasket")}
+                    className="cursor-pointer hover:text-mainRed transition-all text-[22px]"
+                  >
+                    Your Basket
+                  </li>
+                  <li
+                    onClick={() => navigate.push("/userOrder")}
+                    className="cursor-pointer hover:text-mainRed transition-all text-[22px]"
+                  >
+                    Your Orders
+                  </li>
+                  <li
+                    onClick={() => navigate.push("/userCheckout")}
+                    className="cursor-pointer hover:text-mainRed transition-all text-[22px]"
+                  >
+                    Checkout
+                  </li>
+                </>
+              )}
               <li
                 onClick={() => navigate.push("/restaurants")}
-                className="cursor-pointer hover:text-mainRed transition-all"
+                className="cursor-pointer hover:text-mainRed transition-all text-[22px]"
               >
                 {t("restaurants")}
               </li>
               <li
                 onClick={() => navigate.push("/about-us")}
-                className="cursor-pointer hover:text-mainRed transition-all"
+                className="cursor-pointer hover:text-mainRed transition-all text-[22px]"
               >
                 {t("about_us")}
               </li>
               <li
                 onClick={() => navigate.push("/how-it-works")}
-                className="cursor-pointer hover:text-mainRed transition-all"
+                className="cursor-pointer hover:text-mainRed transition-all text-[22px]"
               >
                 {t("how_it_works")}
               </li>
               <li
                 onClick={() => navigate.push("/faqs")}
-                className="cursor-pointer hover:text-mainRed transition-all"
+                className="cursor-pointer hover:text-mainRed transition-all text-[22px]"
               >
                 FAQs
               </li>
+              {isToken && (
+                <li
+                  onClick={() => navigate.push("/login")}
+                  className="cursor-pointer hover:text-mainRed transition-all text-[22px] mt-8"
+                >
+                  Logout
+                </li>
+              )}
             </ul>
           </div>
         </div>

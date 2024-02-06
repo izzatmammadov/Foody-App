@@ -28,7 +28,7 @@ const Restaurants: NextPage = () => {
       </Head>
 
       <main>
-        <Navbar isRegister={true} forAdmin={null} />
+        <Navbar />
 
         <section className="mx-0 px-1 sm:px-0 sm:m-8 flex flex-col sm:flex-row justify-center gap-10">
         <div className="hidden rounded-md sm:flex flex-col max-h-screen overflow-y-auto gap-8 bg-whiteLight1 w-1/6 p-4">

@@ -7,7 +7,7 @@ import Image from "next/image";
 const ErrorPage = () => {
   return (
     <>
-      <Navbar isRegister={false} forLogin={false} forAdmin={false} />
+      <Navbar />
       <main className=" flex justify-center items-center p-4 mb-8">
         <Image
           className="w-full"

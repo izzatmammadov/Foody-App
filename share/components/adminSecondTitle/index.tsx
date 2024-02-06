@@ -41,7 +41,7 @@ const AdminSecondTitle: React.FC<AdminSecondTitleProps> = ({
           <Button
             onClick={onClick}
             className="bg-lightPurple_3 h-7 pr-2 pl-3 text-white font-bold text-xs rounded-[14px]"
-            innerText="+ ADD category"
+            innerText="+ ADD offer"
           />
         </div>
 
