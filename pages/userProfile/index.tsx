@@ -17,7 +17,7 @@ const UserProfile = () => {
         <link rel="icon" href="/mainBurger.svg" />
       </Head>
       <main>
-        <Navbar isRegister={true} forAdmin={null} forLogin={null} />
+        <Navbar />
 
         <section className="m-4 sm:m-8 flex justify-center gap-10">
           <UserAside/>

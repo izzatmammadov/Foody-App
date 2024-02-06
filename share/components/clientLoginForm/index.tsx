@@ -101,6 +101,7 @@ export const ClientLogInForm = () => {
         refresh_token: res.data.user.refresh_token,
       };
       localStorage.setItem("tokenObj", JSON.stringify(tokenObj));
+      localStorage.setItem("userInfo", JSON.stringify(res?.data.user))  
       setTimeout(() => {
         navigate.push("/");
       }, 700);
