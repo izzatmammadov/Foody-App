@@ -1,41 +1,106 @@
-import React, { FC, useState } from "react";
+import React, { FC, useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
 import Modal from "../Modal";
 import { Button } from "../Button";
 import Image from "next/image";
 import { AdminLeftModal } from "../adminLeftModal";
-import { deleteOffer } from "@/share/services/axios";
+import {
+  OfferValues,
+  deleteOffer,
+  getEditOffer,
+  putOffer,
+} from "@/share/services/axios";
 import { toast } from "react-toastify";
+import { title } from "process";
 
 interface AdminOffersTableType {
   data: {
     id: number | string;
-    image:  string;
+    image: string;
     Title: string;
     Descriptions: string;
- 
   };
 }
 
-const AdminOffersTableT: FC<AdminOffersTableType> = ({ data }:any) => {
+const AdminOffersTableT: React.FC<AdminOffersTableType> = ({
+  data,
+}: any): any => {
   const { t, i18n } = useTranslation();
   const [showPopup, setShowPopup] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [activeId, setActiveId] = useState("");
+  const [imgUrl, setImgUrl] = useState<string>("");
 
+  const form_titleRef = useRef<HTMLInputElement>(null);
+  const form_descRef = useRef<HTMLInputElement>(null);
+  const imgRef = useRef<HTMLInputElement>(null);
+
+  function getImgUrl(url: string) {
+    setImgUrl(url);
+  }
 
   //^ MODAL
-  const handleButtonClick = () => {
+  const handleButtonClick = (id:string) => {
     setIsModalOpen(true);
     setActiveId(data.id);
-
   };
 
   const handleModalClose = () => {
     setIsModalOpen(false);
   };
 
-  
+  async function handleEditClick(id: string) {
+    setActiveId(data.id);
+    changeHidden();
+
+    const res = await getEditOffer(id);
+    if (res?.status === 200) {
+      const currentData = res?.data.result.data;
+
+      (form_descRef.current as { value: string }).value =
+        currentData?.title || "";
+
+      (form_titleRef.current as { value: string }).value =
+        currentData?.description || "";
+
+      (imgRef.current as { src: string }).src = currentData?.img_url || "";
+    }
+  }
+
+  //* EDIT OFFER
+  async function editOffer() {
+    const title = form_titleRef?.current?.value;
+    const description = form_descRef?.current?.value;
+    const img = imgRef.current?.src;
+
+    const offerValues: OfferValues = {
+      name: title,
+      description,
+      img_url: img,
+    };
+
+    if (!isInputValid(title, description, img)) {
+      toast.warning("Please fill all the inputs!");
+      return;
+    }
+
+    const res = await putOffer(activeId, offerValues);
+    console.log(offerValues);
+    
+    console.log(res);
+    if (res?.status === 200) {
+      toast.success("Edit was successfully!");
+    }
+  }
+
+  function isInputValid(
+    title: string | undefined,
+    description: string | undefined,
+    img: string | undefined
+  ): boolean {
+    console.log(title, description, img);
+    return !!title && !!description && !!img;
+  }
 
   //! DELETE OFFER
   async function removeOffer() {
@@ -53,62 +118,69 @@ const AdminOffersTableT: FC<AdminOffersTableType> = ({ data }:any) => {
     setShowPopup(!showPopup);
   };
   const [isHiddenModal, setIsHiddenModal] = useState<boolean>(true);
+
   function changeHidden() {
     setIsHiddenModal((prev) => !prev);
-    // console.log(isHiddenModal);
   }
   return (
     <>
       <AdminLeftModal
-          p="Edit Offer  "
-          p1="Upload Image"
-          p2="Edit your Offer information"
-          btn="Update Offer"
-          mod="4"
-          onClickClose={changeHidden} hidden={isHiddenModal} />
+        p="Edit Offer  "
+        p1="Upload Image"
+        p2="Edit your Offer information"
+        btn="Update Offer"
+        mod="4"
+        getImgUrl={getImgUrl}
+        onClickClose={changeHidden}
+        hidden={isHiddenModal}
+        ButtonOnClick={editOffer}
+        imgRef={imgRef}
+        form_descRef={form_descRef}
+        form_titleRef={form_titleRef}
+      />
       <tr className="h-14 text-center  border-slate-700  border-y text-gray-900 text-sm not-italic font-normal leading-5 ">
         <td>
           {/* <div>
             <p className=" border-slate-700  border rounded-lg ml-2"> */}
-              {data.id}
-            {/* </p>
+          {data.id}
+          {/* </p>
           </div> */}
         </td>
         <td className=" flex justify-center items-center">
           {/* <div className="flex justify-center">
           /adminMarqarita.svg
             <p className=" border-slate-700  border rounded-lg px-2 "> */}
-              
-              <Image
+
+          <img
             width="60"
             height="0"
             src={data.img_url}
             alt=""
             className=" cursor-pointer"
-            onClick={handleButtonClick}
+            onClick={()=>handleButtonClick(data.id)}
           />
-            {/* </p>
+          {/* </p>
           </div> */}
         </td>
         <td>{data.name}</td>
         <td>{data.description} </td>
-      
+
         <td className=" h-14 flex  align-middle justify-evenly">
-        <Image
+          <img
             width="24"
             height="0"
             src="/adminOffersEditimg.svg"
             alt=""
             className=" cursor-pointer"
-            onClick={changeHidden}
+            onClick={()=>handleEditClick(data.id)}
           />
-          <Image
+          <img
             width="24"
             height="0"
             src="/adminMarqaritaDeleteButton.svg"
             alt=""
             className=" cursor-pointer"
-            onClick={handleButtonClick}
+            onClick={()=>handleButtonClick(data.id)}
           />
         </td>
       </tr>

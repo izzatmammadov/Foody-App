@@ -96,8 +96,8 @@ export const completeLogin = async (form: FormRegister) => {
 };
 //& ADMIN OFFER
 export type OfferValues = {
-  titleOffer?: string | undefined;
-  descOffer?: string | undefined;
+  name?: string | undefined;
+  description?: string | undefined;
   img_url?: string | undefined;
 };
 
@@ -134,9 +134,9 @@ export const getEditOffer = async (id:string) => {
   };
 
 //* PUT
-export const putOffer = async (id: string) => {
+export const putOffer = async (id: string, offerValues: OfferValues) => {
   try {
-    const response = await instanceAxios.put(`/offer/${id}`);
+    const response = await instanceAxios.put(`/offer/${id}`,  offerValues);
     return response;
   } catch (error) {
     toast.error("Can not update offer!");

@@ -58,6 +58,7 @@ const AdminCategory = ({ item }: any) => {
     setActiveId(id);
     console.log(id);
   };
+  
   async function handleEditClick(id: string) {
     setActiveId(id);
     console.log(activeId);
@@ -113,6 +114,7 @@ const AdminCategory = ({ item }: any) => {
     }
     // console.log(res);
   }
+
   function isInputValid(
     category: string | undefined,
     slug: string | undefined,
