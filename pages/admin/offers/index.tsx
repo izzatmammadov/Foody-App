@@ -3,10 +3,10 @@ import { Navbar } from "@/share/components/Navbar";
 import { AdminAside } from "@/share/components/adminAside";
 import { AdminLeftModal } from "@/share/components/adminLeftModal";
 import AdminOffersTableT from "@/share/components/adminOffersTable";
-import AdminOrdersTable from "@/share/components/adminOrdersTable";
 import AdminSecondTitle from "@/share/components/adminSecondTitle";
 import OrdersChart from "@/share/components/ordersChart";
 import { createOffer, getOffer } from "@/share/services/axios";
+import { useGlobalStore } from "@/share/services/provider";
 import Head from "next/head";
 import React, { useEffect, useRef, useState } from "react";
 import { ToastContainer, toast } from "react-toastify";
@@ -15,7 +15,7 @@ import "react-toastify/dist/ReactToastify.css";
 const adminOffers = () => {
   const [isHiddenModal, setIsHiddenModal] = useState<boolean>(true);
   const [isOfferImage, setIsOfferImage] = useState<string>("");
-  const [offers, setOffers] = useState([]);
+  const {offers, setOffers} = useGlobalStore();
 
   const titleOfferRef = useRef<HTMLInputElement>(null);
   const descOfferRef = useRef<HTMLInputElement>(null);
@@ -46,6 +46,10 @@ const adminOffers = () => {
         if (titleOfferRef.current) titleOfferRef.current.value = "";
         if (descOfferRef.current) descOfferRef.current.value = "";
       }
+
+      setTimeout(() => {
+        changeHidden();
+      }, 500);
     }
   }
 
@@ -62,6 +66,8 @@ const adminOffers = () => {
       console.log(res);
       const offersArray = res?.data.result.data;
       setOffers(offersArray);
+
+
     } catch (err) {
       console.log(err);
     }
@@ -69,7 +75,7 @@ const adminOffers = () => {
 
   useEffect(() => {
     offersRender();
-  }, [isHiddenModal]);
+  }, []);
 
   return (
     <>

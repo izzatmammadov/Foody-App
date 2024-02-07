@@ -1,8 +1,7 @@
-import React, { FC, useRef, useState } from "react";
+import React, { useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
 import Modal from "../Modal";
 import { Button } from "../Button";
-import Image from "next/image";
 import { AdminLeftModal } from "../adminLeftModal";
 import {
   OfferValues,
@@ -11,7 +10,6 @@ import {
   putOffer,
 } from "@/share/services/axios";
 import { toast } from "react-toastify";
-import { title } from "process";
 
 interface AdminOffersTableType {
   data: {
@@ -30,6 +28,8 @@ const AdminOffersTableT: React.FC<AdminOffersTableType> = ({
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [activeId, setActiveId] = useState("");
   const [imgUrl, setImgUrl] = useState<string>("");
+  const [isHiddenModal, setIsHiddenModal] = useState<boolean>(true);
+
 
   const form_titleRef = useRef<HTMLInputElement>(null);
   const form_descRef = useRef<HTMLInputElement>(null);
@@ -56,15 +56,13 @@ const AdminOffersTableT: React.FC<AdminOffersTableType> = ({
     const res = await getEditOffer(id);
     if (res?.status === 200) {
       const currentData = res?.data.result.data;
+      if (form_descRef && form_titleRef && imgRef) {
+      (form_descRef.current as { value: string }).value = currentData?.title || "";
 
-      (form_descRef.current as { value: string }).value =
-        currentData?.title || "";
-
-      (form_titleRef.current as { value: string }).value =
-        currentData?.description || "";
+      (form_titleRef.current as { value: string }).value = currentData?.description || "";
 
       (imgRef.current as { src: string }).src = currentData?.img_url || "";
-    }
+    }}
   }
 
   //* EDIT OFFER
@@ -90,6 +88,10 @@ const AdminOffersTableT: React.FC<AdminOffersTableType> = ({
     console.log(res);
     if (res?.status === 200) {
       toast.success("Edit was successfully!");
+
+      setTimeout(() => {
+        changeHidden();
+      }, 500);
     }
   }
 
@@ -117,7 +119,6 @@ const AdminOffersTableT: React.FC<AdminOffersTableType> = ({
   const togglePopup = () => {
     setShowPopup(!showPopup);
   };
-  const [isHiddenModal, setIsHiddenModal] = useState<boolean>(true);
 
   function changeHidden() {
     setIsHiddenModal((prev) => !prev);
@@ -217,3 +218,4 @@ const AdminOffersTableT: React.FC<AdminOffersTableType> = ({
 };
 
 export default AdminOffersTableT;
+
