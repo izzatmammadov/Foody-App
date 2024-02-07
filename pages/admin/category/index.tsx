@@ -116,7 +116,7 @@ const AdminProducts: NextPage = () => {
  async function categoriesRender() {
     try {
       const res = await getCategories();
-      // console.log(res);
+      console.log(res);
       const categoryArry=res?.data.result.data
       setCategories(categoryArry)
     } catch (err) {
@@ -128,7 +128,7 @@ const AdminProducts: NextPage = () => {
 
   useEffect(() => {
     categoriesRender()
-  },[categories,isHiddenModal])                                                                                                                                                 
+  },[isHiddenModal])                                                                                                                                                 
 
 
 
