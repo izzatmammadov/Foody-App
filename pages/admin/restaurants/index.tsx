@@ -161,15 +161,20 @@ const restourans = () => {
   //   let newValue = data2.filter((item) => item?.category_id == value);
   //   setData(newValue);
   // };
-  const Filterf = () => {
-    const value = category_idRef.current?.value;
+  // const Filterf = () => {
 
-    let newValue = data2.filter((item) => item?.category_id == value);
+  // };
+  
+  function handleSelectChange(e: React.ChangeEvent<HTMLSelectElement>): void {
+    const value = e.target.value;
+    // const value = category_idRef.current?.value;
+    // console.log("value", value);
+    // e.target.value=value
+    let newValue = data2.filter((item:any) => item?.category_id == value);
 
     setData(newValue);
-    console.log("value",value);
-    
-  };
+  
+  }
 
   return (
     <>
@@ -215,7 +220,7 @@ const restourans = () => {
           <section className="w-full">
             <div className="m-5">
               <AdminSecondTitle
-                callBackValue={Filterf}
+                callBackValue={handleSelectChange}
                 name="Restaurants"
                 p1="Restaurants"
                 onClick={changeHidden}
