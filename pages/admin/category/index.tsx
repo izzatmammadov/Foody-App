@@ -1,7 +1,6 @@
 import type { NextPage } from "next";
 import "react-toastify/dist/ReactToastify.css";
 import Head from "next/head";
-import { AdminHeader } from "../../../share/components/adminHeader";
 import { AdminAside } from "../../../share/components/adminAside";
 import { AdminLeftModal } from "../../../share/components/adminLeftModal";
 import { useEffect, useRef, useState } from "react";
@@ -10,6 +9,8 @@ import AdminSecondTitle from "../../../share/components/adminSecondTitle";
 import { UpperCase } from "@/share/services/upperCase";
 import { Form, getCategories, postCategory } from "@/share/services/axios";
 import { ToastContainer, toast } from "react-toastify";
+import { Navbar } from "@/share/components/Navbar";
+import { useGlobalStore } from "@/share/services/provider";
 
 interface CategoryType {
   id: number;
@@ -19,9 +20,16 @@ interface CategoryType {
 }
 
 const AdminProducts: NextPage = () => {
+
+  const {categoryData,setCategoryData } = useGlobalStore();
+
+
+
+  
+
   const [isHiddenModal, setIsHiddenModal] = useState<boolean>(true);
 
-  const [categories,setCategories]=useState([])
+  // const [categories,setCategories]=useState(categoryData)
 
   const categoryRef = useRef<HTMLInputElement>(null);
 
@@ -53,8 +61,10 @@ const AdminProducts: NextPage = () => {
 
     try {
       const res = await postCategory(form);
+console.log(res?.data);
 
       if (res?.status === 201) {
+        setCategoryData((prev:any)=>[...prev,res.data])
         if (categoryRef.current && slugRef.current) {
           categoryRef.current.value = "";
           slugRef.current.value = "";
@@ -117,8 +127,10 @@ const AdminProducts: NextPage = () => {
     try {
       const res = await getCategories();
       // console.log(res);
-      const categoryArry=res?.data.result.data
-      setCategories(categoryArry)
+      const categoryArry = res?.data.result.data
+      
+      setCategoryData(categoryArry)
+      
     } catch (err) {
       console.log(err);
       
@@ -142,7 +154,7 @@ const AdminProducts: NextPage = () => {
 
       <div className=" bg-textBlack min-h-screen px-4">
         <ToastContainer />
-        <AdminHeader />
+        <Navbar adminNavbar={true}/>
 
         <main className="flex">
           <div className=" hidden sm:block">
@@ -183,7 +195,7 @@ const AdminProducts: NextPage = () => {
                 </thead>
 
                 <tbody>
-                   {categories.map((item: CategoryType) => (
+                   {categoryData.map((item: CategoryType) => (
                     <AdminCategory key={item.id} item={item} />
                   ))}
                 </tbody>

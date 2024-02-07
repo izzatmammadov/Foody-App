@@ -16,7 +16,7 @@ interface AdminOrdersTableType {
   };
 }
 
-const AdminOrdersTable: FC<AdminOrdersTableType> = ({ data }) => {
+const AdminOrdersTable: FC<AdminOrdersTableType> = ({ data }:any) => {
   const { t, i18n } = useTranslation();
   const [showPopup, setShowPopup] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);

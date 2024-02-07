@@ -1,62 +1,22 @@
 import Barchart from "@/share/components/LineChart";
+import { Navbar } from "@/share/components/Navbar";
 import { AdminAside } from "@/share/components/adminAside";
-import { AdminHeader } from "@/share/components/adminHeader";
 import { AdminLeftModal } from "@/share/components/adminLeftModal";
 import AdminOffersTableT from "@/share/components/adminOffersTable";
 import AdminSecondTitle from "@/share/components/adminSecondTitle";
 import OrdersChart from "@/share/components/ordersChart";
-import { createOffer } from "@/share/services/axios";
+import { createOffer, getOffer } from "@/share/services/axios";
+import { useGlobalStore } from "@/share/services/provider";
 import Head from "next/head";
-import React, { useRef, useState } from "react";
-import { toast } from "react-toastify";
+import React, { useEffect, useRef, useState } from "react";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
-const item = [
-  {
-    id: 9177,
-    image: "/adminMarqarita.svg",
-    Title: "Do you like Pizza at Pap...",
-    Descriptions: "Yummy this pizza but...",
-  },
-  {
-    id: 9178,
-    image: "/adminMarqarita.svg",
-    Title: "Do you like Pizza at Pap...",
-    Descriptions: "Yummy this pizza but...",
-  },
-  {
-    id: 9179,
-    image: "/adminMarqarita.svg",
-    Title: "Do you like Pizza at Pap...",
-    Descriptions: "Yummy this pizza but...",
-  },
-  {
-    id: 9200,
-    image: "/adminMarqarita.svg",
-    Title: "Do you like Pizza at Pap...",
-    Descriptions: "Yummy this pizza but...",
-  },
-  {
-    id: 9200,
-    image: "/adminMarqarita.svg",
-    Title: "Do you like Pizza at Pap...",
-    Descriptions: "Yummy this pizza but...",
-  },
-  {
-    id: 9200,
-    image: "/adminMarqarita.svg",
-    Title: "Do you like Pizza at Pap...",
-    Descriptions: "Yummy this pizza but...",
-  },
-  {
-    id: 9200,
-    image: "/adminMarqarita.svg",
-    Title: "Do you like Pizza at Pap...",
-    Descriptions: "Yummy this pizza but...",
-  },
-];
-
-const adminOrders = () => {
+const adminOffers = () => {
   const [isHiddenModal, setIsHiddenModal] = useState<boolean>(true);
+  const [isOfferImage, setIsOfferImage] = useState<string>("");
+  const {offers, setOffers} = useGlobalStore();
+
   const titleOfferRef = useRef<HTMLInputElement>(null);
   const descOfferRef = useRef<HTMLInputElement>(null);
 
@@ -69,32 +29,53 @@ const adminOrders = () => {
     const titleOffer = titleOfferRef.current?.value;
     const descOffer = descOfferRef.current?.value;
 
-
-    if (titleOffer == "" || descOffer == "") {
-      toast.warning("Fill the inputs correctly!")
-  } else {
+    if (titleOffer == "" || descOffer == "" || isOfferImage == "") {
+      toast.warning("Fill the inputs correctly!");
+    } else {
       const offerValues = {
-          name: titleOffer,
-          description: descOffer,
-          img_url: "image"
+        name: titleOffer,
+        description: descOffer,
+        img_url: isOfferImage,
+      };
+
+      const res = await createOffer(offerValues);
+      console.log(res);
+
+      if (res?.status == 200 || res?.status == 201) {
+        toast.success("Offer added successfully!");
+        if (titleOfferRef.current) titleOfferRef.current.value = "";
+        if (descOfferRef.current) descOfferRef.current.value = "";
       }
 
-    const res = await createOffer(offerValues);
-    console.log(res);
-
-    if (res?.status === 200 || res?.status === 201) {
-      toast.success("Offer added successfully!");
+      setTimeout(() => {
+        changeHidden();
+      }, 500);
     }
-  }}
+  }
 
   //^ ADD IMAGE
-  const handleAddNewImage = () => {
+  const handleAddNewImage = (image_url: string) => {
+    setIsOfferImage(image_url);
+  };
 
-    if("image_true"){
-      const randomID = Math.floor(Math.random() * 9999) + 1;
+  //^ REDNER OFFERS
+
+  async function offersRender() {
+    try {
+      const res = await getOffer();
+      console.log(res);
+      const offersArray = res?.data.result.data;
+      setOffers(offersArray);
+
+
+    } catch (err) {
+      console.log(err);
     }
-    else {}
   }
+
+  useEffect(() => {
+    offersRender();
+  }, []);
 
   return (
     <>
@@ -104,7 +85,8 @@ const adminOrders = () => {
         <link rel="icon" href="/admin-icon.png" />
       </Head>
       <div className=" bg-textBlack min-h-screen px-4">
-        <AdminHeader />
+        <ToastContainer />
+        <Navbar adminNavbar={true} />
 
         <AdminLeftModal
           p="Add Offer"
@@ -117,6 +99,7 @@ const adminOrders = () => {
           onClickClose={changeHidden}
           hidden={isHiddenModal}
           ButtonOnClick={handleCreateOffer}
+          getImgUrl={handleAddNewImage}
         />
         <main className="flex">
           <div className=" hidden sm:block">
@@ -155,9 +138,12 @@ const adminOrders = () => {
                   </tr>
                 </thead>
                 <tbody className="">
-                  {item.map((data) => (
+                  {/* {item.map((data) => (
                     // <AdminOrdersTable data={data} />
                     <AdminOffersTableT data={data} />
+                  ))} */}
+                  {offers.map((data: any) => (
+                    <AdminOffersTableT key={data.id} data={data} />
                   ))}
                 </tbody>
               </table>
@@ -169,4 +155,4 @@ const adminOrders = () => {
   );
 };
 
-export default adminOrders;
+export default adminOffers;

@@ -94,6 +94,7 @@ const resources = {
       userOrder4: "Count",
       userOrder5: "Amount",
       userOrder6: "Close",
+      addCategory: "+ ADD PRODUCT",
     },
   },
   az: {
@@ -189,6 +190,7 @@ const resources = {
       userOrder4: "Ədəd",
       userOrder5: "Cəm",
       userOrder6: "Bağla",
+      addCategory: "+ MƏHSUL ƏLAVƏ ET",
     },
   },
 };

@@ -11,7 +11,7 @@ export const Header = () => {
 
   return (
     <header className="m-0 sm:m-8 flex-col rounded-md bg-whiteLight1">
-      <Navbar />
+      <Navbar/>
 
       {/* MAIN SECTION */}
       <section className="flex flex-col-reverse sm:flex-row justify-center items-center h-screen px-1 sm:px-11 -mt-24">

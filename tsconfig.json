@@ -20,6 +20,6 @@
     },
   },
 
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "share/components/ordersChart/index.tsx"],
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "share/components/ordersChart/index.tsx", "share/services/provider.js"],
   "exclude": ["node_modules"]
 }

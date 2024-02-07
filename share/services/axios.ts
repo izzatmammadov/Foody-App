@@ -112,11 +112,17 @@ export const completeLogin = async (form: FormRegister) => {
 };
 //& ADMIN OFFER
 export type OfferValues = {
+
   titleOffer?: string | undefined;
   descOffer?: string | undefined;
+
+  name?: string | undefined;
+  description?: string | undefined;
+
   img_url?: string | undefined;
 };
 
+//* POST
 export const createOffer = async (offerValues: OfferValues) => {
   try {
     const response = await instanceAxios.post("/offer", offerValues);
@@ -126,6 +132,51 @@ export const createOffer = async (offerValues: OfferValues) => {
     console.log(error);
   }
 };
+
+//* GET
+export const getOffer = async () => {
+  try {
+    const response = await instanceAxios.get("/offer");
+    return response;
+  } catch (error) {
+    toast.error("Can not get offer!");
+    console.log(error);
+  }
+};
+
+export const getEditOffer = async (id:string) => {
+    try {
+      const response = await instanceAxios.get(`/offer${id}`);
+      return response;
+    } catch (error) {
+      toast.error("Can not get offer!");
+      console.log(error);
+    }
+  };
+
+//* PUT
+export const putOffer = async (id: string, offerValues: OfferValues) => {
+  try {
+    const response = await instanceAxios.put(`/offer/${id}`,  offerValues);
+    return response;
+  } catch (error) {
+    toast.error("Can not update offer!");
+    console.log(error);
+  }
+};
+
+//* DELETE
+export const deleteOffer = async (id: string) => {
+  try {
+    const response = await instanceAxios.delete(`/offer/${id}`);
+    return response;
+  } catch (error) {
+    toast.error("Can not delete offer!");
+    console.log(error);
+  }
+};
+
+//& CATEGORIES
 export async function getCategories() {
   try {
     const response = await instanceAxios.get("/category");
@@ -143,6 +194,7 @@ export async function deleteCategories(id: string) {
     console.log(err);
   }
 }
+
 export async function getEditCategories(id: string) {
   try {
     const response = await instanceAxios.get(`/category/${id}`);
@@ -151,6 +203,7 @@ export async function getEditCategories(id: string) {
     console.log(err);
   }
 }
+
 export async function updateCategories(id: string, form: Form) {
   try {
     const response = await instanceAxios.put(`/category/${id}`, form);
