@@ -13,7 +13,7 @@ import { AdminAside } from "../adminAside";
 import { AdminLeftModal } from "../adminLeftModal";
 
 interface NavbarProps {
-  adminNavbar: boolean;
+  adminNavbar?: boolean;
 }
 
 export const Navbar: React.FC<NavbarProps> = ({ adminNavbar }) => {
