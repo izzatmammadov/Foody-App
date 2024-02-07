@@ -4,6 +4,8 @@ import Modal from "../Modal";
 import { Button } from "../Button";
 import Image from "next/image";
 import { AdminLeftModal } from "../adminLeftModal";
+import { deleteOffer } from "@/share/services/axios";
+import { toast } from "react-toastify";
 
 interface AdminOffersTableType {
   data: {
@@ -15,19 +17,36 @@ interface AdminOffersTableType {
   };
 }
 
-const AdminOffersTableT: FC<AdminOffersTableType> = ({ data }) => {
+const AdminOffersTableT: FC<AdminOffersTableType> = ({ data }:any) => {
   const { t, i18n } = useTranslation();
   const [showPopup, setShowPopup] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [activeId, setActiveId] = useState("");
+
 
   //^ MODAL
   const handleButtonClick = () => {
     setIsModalOpen(true);
+    setActiveId(data.id);
+
   };
 
   const handleModalClose = () => {
     setIsModalOpen(false);
   };
+
+  
+
+  //! DELETE OFFER
+  async function removeOffer() {
+    const res = await deleteOffer(activeId);
+    console.log(res);
+    if (res?.status === 204) {
+      toast.success("Deleted successfully!");
+      setIsModalOpen((prev) => !prev);
+    }
+    return;
+  }
 
   //^ POP UP
   const togglePopup = () => {
@@ -63,7 +82,7 @@ const AdminOffersTableT: FC<AdminOffersTableType> = ({ data }) => {
               <Image
             width="60"
             height="0"
-            src={data.image}
+            src={data.img_url}
             alt=""
             className=" cursor-pointer"
             onClick={handleButtonClick}
@@ -71,8 +90,8 @@ const AdminOffersTableT: FC<AdminOffersTableType> = ({ data }) => {
             {/* </p>
           </div> */}
         </td>
-        <td>{data.Title}</td>
-        <td>{data.Descriptions} </td>
+        <td>{data.name}</td>
+        <td>{data.description} </td>
       
         <td className=" h-14 flex  align-middle justify-evenly">
         <Image
@@ -116,6 +135,7 @@ const AdminOffersTableT: FC<AdminOffersTableType> = ({ data }) => {
           <Button
             className="bg-mainRed border-2 text-white py-1 px-8 rounded-md border-mainRed shadow-md hover:scale-95 transition-all duration-500"
             innerText={t("modalDesc4")}
+            onClick={removeOffer}
           />
         </div>
       </Modal>

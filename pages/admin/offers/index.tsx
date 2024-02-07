@@ -3,6 +3,7 @@ import { Navbar } from "@/share/components/Navbar";
 import { AdminAside } from "@/share/components/adminAside";
 import { AdminLeftModal } from "@/share/components/adminLeftModal";
 import AdminOffersTableT from "@/share/components/adminOffersTable";
+import AdminOrdersTable from "@/share/components/adminOrdersTable";
 import AdminSecondTitle from "@/share/components/adminSecondTitle";
 import OrdersChart from "@/share/components/ordersChart";
 import { createOffer, getOffer } from "@/share/services/axios";
@@ -10,51 +11,6 @@ import Head from "next/head";
 import React, { useEffect, useRef, useState } from "react";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-
-const item = [
-  {
-    id: 9177,
-    image: "/adminMarqarita.svg",
-    Title: "Do you like Pizza at Pap...",
-    Descriptions: "Yummy this pizza but...",
-  },
-  {
-    id: 9178,
-    image: "/adminMarqarita.svg",
-    Title: "Do you like Pizza at Pap...",
-    Descriptions: "Yummy this pizza but...",
-  },
-  {
-    id: 9179,
-    image: "/adminMarqarita.svg",
-    Title: "Do you like Pizza at Pap...",
-    Descriptions: "Yummy this pizza but...",
-  },
-  {
-    id: 9200,
-    image: "/adminMarqarita.svg",
-    Title: "Do you like Pizza at Pap...",
-    Descriptions: "Yummy this pizza but...",
-  },
-  {
-    id: 9200,
-    image: "/adminMarqarita.svg",
-    Title: "Do you like Pizza at Pap...",
-    Descriptions: "Yummy this pizza but...",
-  },
-  {
-    id: 9200,
-    image: "/adminMarqarita.svg",
-    Title: "Do you like Pizza at Pap...",
-    Descriptions: "Yummy this pizza but...",
-  },
-  {
-    id: 9200,
-    image: "/adminMarqarita.svg",
-    Title: "Do you like Pizza at Pap...",
-    Descriptions: "Yummy this pizza but...",
-  },
-];
 
 const adminOffers = () => {
   const [isHiddenModal, setIsHiddenModal] = useState<boolean>(true);
@@ -100,20 +56,20 @@ const adminOffers = () => {
 
   //^ REDNER OFFERS
 
-  // async function offersRender() {
-  //   try {
-  //     const res = await getOffer();
-  //     console.log(res);
-  //     const offersArray = res?.data.result.data;
-  //     setOffers(offersArray);
-  //   } catch (err) {
-  //     console.log(err);
-  //   }
-  // }
+  async function offersRender() {
+    try {
+      const res = await getOffer();
+      console.log(res);
+      const offersArray = res?.data.result.data;
+      setOffers(offersArray);
+    } catch (err) {
+      console.log(err);
+    }
+  }
 
-  // useEffect(() => {
-  //   offersRender();
-  // }, []);
+  useEffect(() => {
+    offersRender();
+  }, [isHiddenModal]);
 
   return (
     <>
@@ -176,9 +132,12 @@ const adminOffers = () => {
                   </tr>
                 </thead>
                 <tbody className="">
-                  {item.map((data) => (
+                  {/* {item.map((data) => (
                     // <AdminOrdersTable data={data} />
                     <AdminOffersTableT data={data} />
+                  ))} */}
+                  {offers.map((data: any) => (
+                    <AdminOffersTableT key={data.id} data={data} />
                   ))}
                 </tbody>
               </table>
