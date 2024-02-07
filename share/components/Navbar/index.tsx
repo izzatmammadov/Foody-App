@@ -10,6 +10,7 @@ import { NavbarList } from "../NavbarList";
 import { NavbarLangButton } from "../navbarLangButton";
 import { AdminNavbarAvatar } from "../adminNavbarAvatar";
 import { AdminAside } from "../adminAside";
+import { AdminLeftModal } from "../adminLeftModal";
 
 interface NavbarProps {
   adminNavbar: boolean;
@@ -23,21 +24,28 @@ export const Navbar: React.FC<NavbarProps> = ({ adminNavbar }) => {
   const [isToken, setIsToken] = useState(false);
   const [isActiveName, setIsActiveName] = useState("");
   const [isFullName, setIsFullName] = useState("");
+  const [isHiddenModal, setIsHiddenModal] = useState<boolean>(true);
+
+  function changeHidden(): void {
+    setIsHiddenModal((prev: boolean) => !prev);
+    // console.log(isHiddenModal);
+  }
+
 
   const toggleModal = () => {
     setModalOpen(!isModalOpen);
   };
 
   useEffect(() => {
-    const localItem: any = localStorage.getItem("tokenObj");
-    const localUser: any = localStorage.getItem("userInfo");
+    const localItem: any = localStorage?.getItem("tokenObj");
+    const localUser: any = localStorage?.getItem("userInfo");
 
     let parsedItem = JSON.parse(localItem);
     let parsedUser = JSON.parse(localUser);
     let fullName = parsedUser?.fullname;
     let str = " ";
-    str += parsedUser.fullname.split(" ")[0][0];
-    str += parsedUser.fullname.split(" ")[1][0];
+    str += parsedUser?.fullname.split(" ")[0][0];
+    str += parsedUser?.fullname.split(" ")[1][0];
     let avatar = str.toUpperCase();
 
     setIsFullName(fullName);
@@ -93,11 +101,21 @@ export const Navbar: React.FC<NavbarProps> = ({ adminNavbar }) => {
           .
         </span>
       </h1>
-
+      <AdminLeftModal
+              onClickClose={changeHidden}
+              mod="1"
+              p="Add Product  "
+              p1="Upload  image"
+              p2="Add your Product information"
+              hidden={isHiddenModal}
+              btn="Create Product"
+              // ButtonOnClick={addCategory}
+          
+            />
       {adminNavbar ? (
         <div className="flex gap-2 sm:gap-5">
-          <Button className="hidden sm:block bg-lightPurple_3 text-white text-sm font-medium px-3 rounded-full shadow-sm shadow-textGreenLight hover:scale-95 transition-all duration-500" innerText={t("addCategory")}/>
-          <Button className="block sm:hidden bg-lightPurple_3 text-white text-2xl font-medium px-4 rounded-full shadow-sm shadow-textGreenLight hover:scale-95 transition-all duration-500" innerText="&#43;"/>
+          <Button onClick={changeHidden} className="hidden sm:block bg-lightPurple_3 text-white text-sm font-medium px-3 rounded-full shadow-sm shadow-textGreenLight hover:scale-95 transition-all duration-500" innerText={t("addCategory")}/>
+          <Button onClick={changeHidden} className="block sm:hidden bg-lightPurple_3 text-white text-2xl font-medium px-4 rounded-full shadow-sm shadow-textGreenLight hover:scale-95 transition-all duration-500" innerText="&#43;"/>
           <AdminNavbarAvatar isName={isActiveName} />
         </div>
       ) : (
