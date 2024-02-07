@@ -10,6 +10,7 @@ import { UpperCase } from "@/share/services/upperCase";
 import { Form, getCategories, postCategory } from "@/share/services/axios";
 import { ToastContainer, toast } from "react-toastify";
 import { Navbar } from "@/share/components/Navbar";
+import { useGlobalStore } from "@/share/services/provider";
 
 interface CategoryType {
   id: number;
@@ -19,9 +20,16 @@ interface CategoryType {
 }
 
 const AdminProducts: NextPage = () => {
+
+  const {categoryData,setCategoryData } = useGlobalStore();
+
+
+
+  
+
   const [isHiddenModal, setIsHiddenModal] = useState<boolean>(true);
 
-  const [categories,setCategories]=useState([])
+  // const [categories,setCategories]=useState(categoryData)
 
   const categoryRef = useRef<HTMLInputElement>(null);
 
@@ -53,8 +61,10 @@ const AdminProducts: NextPage = () => {
 
     try {
       const res = await postCategory(form);
+console.log(res?.data);
 
       if (res?.status === 201) {
+        setCategoryData((prev:any)=>[...prev,res.data])
         if (categoryRef.current && slugRef.current) {
           categoryRef.current.value = "";
           slugRef.current.value = "";
@@ -116,9 +126,11 @@ const AdminProducts: NextPage = () => {
  async function categoriesRender() {
     try {
       const res = await getCategories();
-      console.log(res);
-      const categoryArry=res?.data.result.data
-      setCategories(categoryArry)
+      // console.log(res);
+      const categoryArry = res?.data.result.data
+      
+      setCategoryData(categoryArry)
+      
     } catch (err) {
       console.log(err);
       
@@ -128,7 +140,7 @@ const AdminProducts: NextPage = () => {
 
   useEffect(() => {
     categoriesRender()
-  },[isHiddenModal])                                                                                                                                                 
+  },[])                                                                                                                                                 
 
 
 
@@ -183,7 +195,7 @@ const AdminProducts: NextPage = () => {
                 </thead>
 
                 <tbody>
-                   {categories.map((item: CategoryType) => (
+                   {categoryData.map((item: CategoryType) => (
                     <AdminCategory key={item.id} item={item} />
                   ))}
                 </tbody>
