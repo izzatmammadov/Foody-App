@@ -36,8 +36,8 @@ export const Navbar: React.FC<NavbarProps> = ({ adminNavbar }) => {
     let parsedUser = JSON.parse(localUser);
     let fullName = parsedUser?.fullname;
     let str = " ";
-    str += parsedUser.fullname.split(" ")[0][0];
-    str += parsedUser.fullname.split(" ")[1][0];
+    str += parsedUser?.fullname.split(" ")[0][0];
+    str += parsedUser?.fullname.split(" ")[1][0];
     let avatar = str.toUpperCase();
 
     setIsFullName(fullName);
@@ -47,6 +47,12 @@ export const Navbar: React.FC<NavbarProps> = ({ adminNavbar }) => {
       setIsToken(true);
     }
   }, [isToken]);
+
+  const logOut = () => {
+    localStorage.removeItem("tokenObj")
+    localStorage.removeItem("userInfo")
+    navigate.push("/login")
+  }
 
   //^ INPUT MODAL
 
@@ -163,10 +169,17 @@ export const Navbar: React.FC<NavbarProps> = ({ adminNavbar }) => {
               </>
             ) : (
               <>
+              {isToken ? (
                 <Button
-                  className=" w-full mt-8 mx-auto py-4 rounded-full text-2xl text-black font-medium "
-                  innerText={isFullName}
-                />
+                className=" w-full mt-8 mx-auto py-4 rounded-full text-2xl text-black font-medium "
+                innerText={isFullName}
+              />
+              ) : (<Button
+                className=" w-4/5 mt-8 mx-auto py-4 rounded-full bg-mainRed text-2xl text-white font-medium "
+                innerText={t("signUp")}
+                onClick={()=>navigate.push("/login")}
+              />)}
+                
                 <ul className="justify-around text-2xl w-full font-medium text-grayText1 flex flex-col mt-6 gap-3">
                   <li
                     onClick={() => navigate.push("/")}
@@ -228,7 +241,7 @@ export const Navbar: React.FC<NavbarProps> = ({ adminNavbar }) => {
                   </li>
                   {isToken && (
                     <li
-                      onClick={() => navigate.push("/login")}
+                      onClick={logOut}
                       className="cursor-pointer hover:text-mainRed transition-all text-[22px] mt-8"
                     >
                       Logout
