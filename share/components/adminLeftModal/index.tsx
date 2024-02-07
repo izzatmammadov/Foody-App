@@ -30,6 +30,7 @@ interface Props {
   category_idRef?: any;
   form_titleRef?: any;
   form_descRef?: any;
+
 }
 
 export const AdminLeftModal = ({
@@ -111,8 +112,7 @@ export const AdminLeftModal = ({
               ref={imgRef}
               src={`${
                 imgOnload ? "/loadingImg.jpg" : imgUrl ? imgUrl : "/noimg.png"
-                }`}
-           
+              }`}
               width={124}
               height={124}
               alt="img"
@@ -167,8 +167,8 @@ export const AdminLeftModal = ({
             )}
             {mod === "4" && (
               <div>
-                <AdminModalInput p="Title"  useRef={form_titleRef}/>
-                <AdminModalTexArea p="Description"  useRef={form_descRef}/>
+                <AdminModalInput p="Title" useRef={form_titleRef} />
+                <AdminModalTexArea p="Description" useRef={form_descRef} />
               </div>
             )}
           </div>
