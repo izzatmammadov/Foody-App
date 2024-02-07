@@ -1,14 +1,13 @@
 import Barchart from "@/share/components/LineChart";
 import { Navbar } from "@/share/components/Navbar";
 import { AdminAside } from "@/share/components/adminAside";
-import { AdminHeader } from "@/share/components/adminHeader";
 import { AdminLeftModal } from "@/share/components/adminLeftModal";
 import AdminOffersTableT from "@/share/components/adminOffersTable";
 import AdminSecondTitle from "@/share/components/adminSecondTitle";
 import OrdersChart from "@/share/components/ordersChart";
-import { createOffer } from "@/share/services/axios";
+import { createOffer, getOffer } from "@/share/services/axios";
 import Head from "next/head";
-import React, { useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
@@ -57,9 +56,11 @@ const item = [
   },
 ];
 
-const adminOrders = () => {
+const adminOffers = () => {
   const [isHiddenModal, setIsHiddenModal] = useState<boolean>(true);
-  const [isOfferImage, setIsOfferImage] = useState<string>("")
+  const [isOfferImage, setIsOfferImage] = useState<string>("");
+  const [offers, setOffers] = useState([]);
+
   const titleOfferRef = useRef<HTMLInputElement>(null);
   const descOfferRef = useRef<HTMLInputElement>(null);
 
@@ -72,31 +73,47 @@ const adminOrders = () => {
     const titleOffer = titleOfferRef.current?.value;
     const descOffer = descOfferRef.current?.value;
 
-
     if (titleOffer == "" || descOffer == "" || isOfferImage == "") {
-      toast.warning("Fill the inputs correctly!")
-  } else {
+      toast.warning("Fill the inputs correctly!");
+    } else {
       const offerValues = {
-          name: titleOffer,
-          description: descOffer,
-          img_url: isOfferImage
+        name: titleOffer,
+        description: descOffer,
+        img_url: isOfferImage,
+      };
+
+      const res = await createOffer(offerValues);
+      console.log(res);
+
+      if (res?.status == 200 || res?.status == 201) {
+        toast.success("Offer added successfully!");
+        if (titleOfferRef.current) titleOfferRef.current.value = "";
+        if (descOfferRef.current) descOfferRef.current.value = "";
       }
-
-    const res = await createOffer(offerValues);
-    console.log(res);
-
-    if (res?.status == 200 || res?.status == 201) {
-      toast.success("Offer added successfully!");
     }
-  }}
-
-  //^ ADD IMAGE
-  const handleAddNewImage = (image_url:string) => {
-    setIsOfferImage(image_url)
   }
 
-  //^ GET OFFER
+  //^ ADD IMAGE
+  const handleAddNewImage = (image_url: string) => {
+    setIsOfferImage(image_url);
+  };
 
+  //^ REDNER OFFERS
+
+  // async function offersRender() {
+  //   try {
+  //     const res = await getOffer();
+  //     console.log(res);
+  //     const offersArray = res?.data.result.data;
+  //     setOffers(offersArray);
+  //   } catch (err) {
+  //     console.log(err);
+  //   }
+  // }
+
+  // useEffect(() => {
+  //   offersRender();
+  // }, []);
 
   return (
     <>
@@ -106,9 +123,8 @@ const adminOrders = () => {
         <link rel="icon" href="/admin-icon.png" />
       </Head>
       <div className=" bg-textBlack min-h-screen px-4">
-        <ToastContainer/>
-        <Navbar adminNavbar={true}/>
-
+        <ToastContainer />
+        <Navbar adminNavbar={true} />
 
         <AdminLeftModal
           p="Add Offer"
@@ -174,4 +190,4 @@ const adminOrders = () => {
   );
 };
 
-export default adminOrders;
+export default adminOffers;

@@ -123,7 +123,7 @@ export const getOffer = async () => {
   }
 };
 
-export const getOfferID = async (id:string) => {
+export const getEditOffer = async (id:string) => {
     try {
       const response = await instanceAxios.get(`/offer${id}`);
       return response;
