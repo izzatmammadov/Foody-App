@@ -1,4 +1,5 @@
 import Barchart from "@/share/components/LineChart";
+import { Navbar } from "@/share/components/Navbar";
 import { AdminAside } from "@/share/components/adminAside";
 import { AdminHeader } from "@/share/components/adminHeader";
 import { AdminLeftModal } from "@/share/components/adminLeftModal";
@@ -95,7 +96,7 @@ const adminOrders = () => {
   }
 
   //^ GET OFFER
-  
+
 
   return (
     <>
@@ -106,7 +107,8 @@ const adminOrders = () => {
       </Head>
       <div className=" bg-textBlack min-h-screen px-4">
         <ToastContainer/>
-        <AdminHeader />
+        <Navbar adminNavbar={true}/>
+
 
         <AdminLeftModal
           p="Add Offer"

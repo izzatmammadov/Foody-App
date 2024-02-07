@@ -1,5 +1,4 @@
 import { AdminAside } from '@/share/components/adminAside'
-import { AdminHeader } from '@/share/components/adminHeader'
 import OrdersChart from '@/share/components/ordersChart'
 import LineChart  from '../../../share/components/LineChart'
 import React from 'react'
@@ -8,7 +7,6 @@ import { Navbar } from '@/share/components/Navbar'
 const DashboardPage = () => {
   return (
       <div className=' bg-textBlack min-h-screen px-4'>
-          {/* <AdminHeader /> */}
           <Navbar adminNavbar={true}/>
           <div className='flex'>
               <div className=' hidden xl:block'>

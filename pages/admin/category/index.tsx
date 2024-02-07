@@ -1,7 +1,6 @@
 import type { NextPage } from "next";
 import "react-toastify/dist/ReactToastify.css";
 import Head from "next/head";
-import { AdminHeader } from "../../../share/components/adminHeader";
 import { AdminAside } from "../../../share/components/adminAside";
 import { AdminLeftModal } from "../../../share/components/adminLeftModal";
 import { useEffect, useRef, useState } from "react";
@@ -10,6 +9,7 @@ import AdminSecondTitle from "../../../share/components/adminSecondTitle";
 import { UpperCase } from "@/share/services/upperCase";
 import { Form, getCategories, postCategory } from "@/share/services/axios";
 import { ToastContainer, toast } from "react-toastify";
+import { Navbar } from "@/share/components/Navbar";
 
 interface CategoryType {
   id: number;
@@ -142,7 +142,7 @@ const AdminProducts: NextPage = () => {
 
       <div className=" bg-textBlack min-h-screen px-4">
         <ToastContainer />
-        <AdminHeader />
+        <Navbar adminNavbar={true}/>
 
         <main className="flex">
           <div className=" hidden sm:block">

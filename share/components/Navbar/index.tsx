@@ -96,12 +96,8 @@ export const Navbar: React.FC<NavbarProps> = ({ adminNavbar }) => {
 
       {adminNavbar ? (
         <div className="flex gap-2 sm:gap-5">
-          <button className="hidden sm:block bg-lightPurple_3 text-white text-sm font-medium px-3 rounded-full shadow-sm shadow-textGreenLight hover:scale-95 transition-all duration-500">
-            {t("addCategory")}
-          </button>
-          <button className="block sm:hidden bg-lightPurple_3 text-white text-2xl font-medium px-4 rounded-full shadow-sm shadow-textGreenLight hover:scale-95 transition-all duration-500">
-            &#43;
-          </button>
+          <Button className="hidden sm:block bg-lightPurple_3 text-white text-sm font-medium px-3 rounded-full shadow-sm shadow-textGreenLight hover:scale-95 transition-all duration-500" innerText={t("addCategory")}/>
+          <Button className="block sm:hidden bg-lightPurple_3 text-white text-2xl font-medium px-4 rounded-full shadow-sm shadow-textGreenLight hover:scale-95 transition-all duration-500" innerText="&#43;"/>
           <AdminNavbarAvatar isName={isActiveName} />
         </div>
       ) : (
