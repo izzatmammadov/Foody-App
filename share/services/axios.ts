@@ -25,17 +25,33 @@ export const postCategory = async (form: Form) => {
 };
 
 export interface formtype {
-  name: string;
-  category_id: string | number;
-  " img_url": string;
-  cuisine: string;
-  address: string;
-  " delivery_min": string;
+  name: string | undefined;
+  category_id: string | number | undefined;
+  cuisine: string | undefined;
+  address: string | undefined;
   delivery_price: string | undefined;
-  img_url: string;
-  delivery_min: string;
+  img_url: string | undefined;
+  delivery_min: string | undefined;
 }
 //* Restourans
+
+export async function updateRestourans(id: string, form: Form) {
+  try {
+    const response = await instanceAxios.put(`/restuarants/${id}`, form);
+    return response;
+  } catch (err) {
+    console.log(err);
+  }
+}
+
+export async function getEditRestourans(id: string) {
+  try {
+    const response = await instanceAxios.get(`/restuarants/${id}`);
+    return response;
+  } catch (err) {
+    console.log(err);
+  }
+}
 
 export async function deleteRestourans(id: string) {
   try {
@@ -98,7 +114,7 @@ export const completeLogin = async (form: FormRegister) => {
 export type OfferValues = {
   titleOffer?: string | undefined;
   descOffer?: string | undefined;
-  img_url?: string | undefined
+  img_url?: string | undefined;
 };
 
 export const createOffer = async (offerValues: OfferValues) => {

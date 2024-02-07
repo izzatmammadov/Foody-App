@@ -6,6 +6,7 @@ interface Props {
   className?: string;
   className2?: string;
   useRef?: any;
+  callBackValue?: any;
 }
 
 export const AdminModalDropdown = ({
@@ -18,31 +19,33 @@ export const AdminModalDropdown = ({
   useRef,
 
   className2,
+
   callBackValue,
 }: Props) => {
   const [selectedValue, setSelectedValue] = useState<string | undefined>("");
 
-  function handleSelectChange(e: React.ChangeEvent<HTMLSelectElement>): void {
-    const value = e.target.value;
-    setSelectedValue(value);
-    // console.log(value);
-    callBackValue(value);
-  }
+  // function handleSelectChange(e: React.ChangeEvent<HTMLSelectElement>): void {
+  //   const value = e.target.value;
+  //   setSelectedValue(value);
+  //   // console.log(value);
+  //   callBackValue(value);
+  // }
 
   return (
     <div className={className2}>
       <p className=" text-white font-medium  text-base">{p}</p>
-      <select
-        ref={useRef}
-        value={selectedValue}
-        onChange={handleSelectChange}
-        className={className}
-      >
+      <select value={selectedValue} className={className}>
         <option value="" disabled>
           Choose...
         </option>
         {arr.map((item, index) => (
-          <option key={index} className="cursor-pointer" value={item}>
+          <option
+            ref={useRef}
+            key={index}
+            className="cursor-pointer"
+            onClick={callBackValue}
+            value={item}
+          >
             {item}
           </option>
         ))}

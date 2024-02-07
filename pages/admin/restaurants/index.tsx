@@ -154,10 +154,18 @@ const restourans = () => {
     );
   }
 
-  const Filterf = (value) => {
-    console.log(data);
-    let newValue = data2.filter((item) => item.category_id == value);
+  // const Filterf = (value: any) => {
+  //   console.log(data);
+  //   let newValue = data2.filter((item) => item?.category_id == value);
+  //   setData(newValue);
+  // };
+  const Filterf = () => {
+    const value = category_idRef.current?.value;
+
+    let newValue = data2.filter((item) => item?.category_id == value);
     setData(newValue);
+    console.log("value",value);
+    
   };
 
   return (

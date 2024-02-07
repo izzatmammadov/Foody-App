@@ -7,6 +7,7 @@ interface AdminSecondTitleProps {
   p1?: string;
   name: string;
   onClick?: () => void;
+  callBackValue: any;
 }
 
 const AdminSecondTitle: React.FC<AdminSecondTitleProps> = ({
@@ -21,9 +22,9 @@ const AdminSecondTitle: React.FC<AdminSecondTitleProps> = ({
   //   setIsHiddenModal((prev: boolean) => !prev);
   //   console.log(isHiddenModal);
   // };
-  const callBackValuef = (value) => {
-    callBackValue(value);
-  };
+  // const callBackValuef = (value) => {
+  //   callBackValue(value);
+  // };
 
   return (
     <>
@@ -33,7 +34,7 @@ const AdminSecondTitle: React.FC<AdminSecondTitleProps> = ({
         </div>
         <div className=" flex gap-5 ">
           <AdminModalDropdown
-            callBackValue={callBackValuef}
+            callBackValue={callBackValue}
             p={p1}
             className="w-full bg-darkBlue_4 rounded-2xl font-medium text-base text-whiteLight "
             className2="flex  bg-darkBlue_4  gap-3  rounded-2xl  p-1 px-3 "
