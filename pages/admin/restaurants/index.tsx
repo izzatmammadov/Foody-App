@@ -23,6 +23,7 @@ import {
 import Head from "next/head";
 import React, { useEffect, useRef, useState } from "react";
 import { ToastContainer, toast } from "react-toastify";
+import { Navbar } from "@/share/components/Navbar";
 
 const restourans = () => {
   const [data, setData] = useState([]);
@@ -154,7 +155,7 @@ const restourans = () => {
     );
   }
 
-  const Filterf = (value) => {
+  const Filterf = (value:any) => {
     console.log(data);
     let newValue = data2.filter((item) => item.category_id == value);
     setData(newValue);
@@ -170,7 +171,8 @@ const restourans = () => {
 
       <div className=" bg-textBlack min-h-screen px-4">
         <ToastContainer />
-        <AdminHeader />
+        <Navbar adminNavbar={true}/>
+        
 
         <AdminLeftModal
           category_idRef={category_idRef}

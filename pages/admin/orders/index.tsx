@@ -1,4 +1,5 @@
 import Barchart from "@/share/components/LineChart";
+import { Navbar } from "@/share/components/Navbar";
 import { AdminAside } from "@/share/components/adminAside";
 import { AdminHeader } from "@/share/components/adminHeader";
 import { AdminLeftModal } from "@/share/components/adminLeftModal";
@@ -62,7 +63,9 @@ const adminOrders = () => {
         <link rel="icon" href="/admin-icon.png" />
       </Head>
       <div className=" bg-textBlack min-h-screen px-4">
-        <AdminHeader onClickButton={changeHidden} />
+        {/* <AdminHeader onClickButton={changeHidden} /> */}
+        <Navbar adminNavbar={true}/>
+        
 
         <AdminLeftModal onClickClose={changeHidden} hidden={isHiddenModal} />
         <main className="flex">

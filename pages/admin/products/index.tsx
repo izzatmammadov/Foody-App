@@ -1,6 +1,5 @@
 import type { NextPage } from "next";
 import Head from "next/head";
-import { AdminHeader } from "../../../share/components/adminHeader";
 import { AdminAside } from "../../../share/components/adminAside";
 import OrdersChart from "../../../share/components/ordersChart";
 import Barchart from "../../../share/components/LineChart";
@@ -8,6 +7,7 @@ import { AdminLeftModal } from "../../../share/components/adminLeftModal";
 import { useState } from "react";
 import AdminCard from "../../../share/components/adminCard";
 import AdminSecondTitle from "../../../share/components/adminSecondTitle";
+import { Navbar } from "@/share/components/Navbar";
 
 const AdminProducts: NextPage = () => {
 
@@ -20,7 +20,8 @@ const AdminProducts: NextPage = () => {
       </Head>
 
       <div className=" bg-textBlack min-h-screen px-4">
-        <AdminHeader  />
+        <Navbar adminNavbar={true}/>
+
 
    
         <main className="flex">
