@@ -34,7 +34,7 @@ const AdminProducts: NextPage = () => {
             <Barchart />
           </div>
 
-          <section>
+          <section className=" w-full">
             <div className="m-5">
               <AdminSecondTitle  name="Products " p1="Products"/>
             </div>
@@ -46,60 +46,7 @@ const AdminProducts: NextPage = () => {
                 foodimage={"/adminMarqarita.svg"}
                 foodprice={16}
               />{" "}
-              <AdminCard
-                foodname={"Marqarita"}
-                restoranname={"Papa John’s"}
-                foodimage={"/adminMarqarita.svg"}
-                foodprice={16}
-              />
-              <AdminCard
-                foodname={"Marqarita"}
-                restoranname={"Papa John’s"}
-                foodimage={"/adminMarqarita.svg"}
-                foodprice={16}
-              />
-              <AdminCard
-                foodname={"Marqarita"}
-                restoranname={"Papa John’s"}
-                foodimage={"/adminMarqarita.svg"}
-                foodprice={16}
-              />
-              <AdminCard
-                foodname={"Marqarita"}
-                restoranname={"Papa John’s"}
-                foodimage={"/adminMarqarita.svg"}
-                foodprice={16}
-              />
-              <AdminCard
-                foodname={"Marqarita"}
-                restoranname={"Papa John’s"}
-                foodimage={"/adminMarqarita.svg"}
-                foodprice={16}
-              />
-              <AdminCard
-                foodname={"Marqarita"}
-                restoranname={"Papa John’s"}
-                foodimage={"/adminMarqarita.svg"}
-                foodprice={16}
-              />
-              <AdminCard
-                foodname={"Marqarita"}
-                restoranname={"Papa John’s"}
-                foodimage={"/adminMarqarita.svg"}
-                foodprice={16}
-              />
-              <AdminCard
-                foodname={"Marqarita"}
-                restoranname={"Papa John’s"}
-                foodimage={"/adminMarqarita.svg"}
-                foodprice={16}
-              />
-              <AdminCard
-                foodname={"Marqarita"}
-                restoranname={"Papa John’s"}
-                foodimage={"/adminMarqarita.svg"}
-                foodprice={16}
-              />
+
             </div>
           </section>
         </main>

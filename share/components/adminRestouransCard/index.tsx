@@ -12,6 +12,8 @@ import {
 } from "@/share/services/axios";
 import { ToastContainer, toast } from "react-toastify";
 
+import { useGlobalStore } from "@/share/services/provider";
+
 interface AdminRestouransCard {
   data: {
     img_url: string;
@@ -21,6 +23,8 @@ interface AdminRestouransCard {
 }
 
 const AdminRestouransCard: FC<AdminRestouransCard> = ({ data }: any) => {
+  const { restouranData, setRestouranData } = useGlobalStore();
+
   console.log(data);
 
   const { t, i18n } = useTranslation();
@@ -87,6 +91,7 @@ const AdminRestouransCard: FC<AdminRestouransCard> = ({ data }: any) => {
     if (res?.status === 200) {
       const currentData = res?.data.result.data;
       console.log("currentData", currentData);
+
       if (
         RestouransNameRef &&
         cuisineRef &&
@@ -158,14 +163,18 @@ const AdminRestouransCard: FC<AdminRestouransCard> = ({ data }: any) => {
 
     const response = await updateRestourans(activeId, form);
 
-    if (response?.status === 200) {
+    if (response?.status === 200 || response?.status === 201) {
       toast.success("Category updated successfully!");
       changeHidden();
+      const updatedData = restouranData.map((item: any) => {
+        if (item.id === activeId) {
+          return response.data.data;
+        }
+        return item;
+      });
+      setRestouranData(updatedData);
     }
-    if (response?.status === 201) {
-      toast.success("Category updated successfully!");
-      changeHidden();
-    }
+
     console.log(response);
 
     console.log("response", response);
@@ -175,6 +184,11 @@ const AdminRestouransCard: FC<AdminRestouransCard> = ({ data }: any) => {
     const res = await deleteRestourans(activeId);
     console.log(res);
     if (res?.status === 204) {
+      const updatedArr = restouranData.filter(
+        (item: any) => item.id !== activeId
+      );
+      setRestouranData(updatedArr);
+
       toast.success("Deleted successfully!");
       setIsModalOpen((prev) => !prev);
     }
