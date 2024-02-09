@@ -1,3 +1,4 @@
+import { getCategories } from "@/share/services/axios";
 import React, { useState } from "react";
 
 interface Props {
@@ -20,7 +21,9 @@ export const AdminModalDropdown = ({
   activeValue
 }: Props) => {
   // const [selectedValue, setSelectedValue] = useState<string | undefined>("");
-
+  // getCategories()
+  console.log();
+  
 
   return (
     <div className={className2}>

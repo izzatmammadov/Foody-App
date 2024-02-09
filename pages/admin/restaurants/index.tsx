@@ -1,18 +1,13 @@
 import Barchart from "@/share/components/LineChart";
-
 import "react-toastify/dist/ReactToastify.css";
-
 import { AdminAside } from "@/share/components/adminAside";
-
 import { AdminHeader } from "@/share/components/adminHeader";
-
 import { AdminLeftModal } from "@/share/components/adminLeftModal";
-
 import AdminRestouransCard from "@/share/components/adminRestouransCard";
-
 import AdminSecondTitle from "@/share/components/adminSecondTitle";
-
 import OrdersChart from "@/share/components/ordersChart";
+
+import { useGlobalStore } from "@/share/services/provider";
 
 import {
   Form,
@@ -26,6 +21,7 @@ import { ToastContainer, toast } from "react-toastify";
 import { Navbar } from "@/share/components/Navbar";
 
 const restourans = () => {
+  const { restouranData, setRestouranData } = useGlobalStore();
   const [data, setData] = useState([]);
   const [data2, setData2] = useState([]);
   const [isHiddenModal, setIsHiddenModal] = useState<boolean>(true);
@@ -38,6 +34,10 @@ const restourans = () => {
     const data = await getRestourans();
     setData(data?.data.result.data);
     setData2(data?.data.result.data);
+
+    const categoryArry = data?.data.result.data;
+
+    setRestouranData(categoryArry);
   }
 
   useEffect(() => {
@@ -105,6 +105,7 @@ const restourans = () => {
       const res = await postRestourans(form);
 
       if (res?.status === 201) {
+        setRestouranData((prev: any) => [...prev, res.data]);
         if (
           RestouransNameRef?.current &&
           cuisineRef?.current &&
@@ -155,7 +156,6 @@ const restourans = () => {
     );
   }
 
-
   // const Filterf = (value: any) => {
   //   console.log(data);
   //   let newValue = data2.filter((item) => item?.category_id == value);
@@ -164,16 +164,15 @@ const restourans = () => {
   // const Filterf = () => {
 
   // };
-  
+
   function handleSelectChange(e: React.ChangeEvent<HTMLSelectElement>): void {
     const value = e.target.value;
     // const value = category_idRef.current?.value;
     // console.log("value", value);
     // e.target.value=value
-    let newValue = data2.filter((item:any) => item?.category_id == value);
+    let newValue = data2.filter((item: any) => item?.category_id == value);
 
     setData(newValue);
-  
   }
 
   return (
@@ -186,8 +185,7 @@ const restourans = () => {
 
       <div className=" bg-textBlack min-h-screen px-4">
         <ToastContainer />
-        <Navbar adminNavbar={true}/>
-        
+        <Navbar adminNavbar={true} />
 
         <AdminLeftModal
           category_idRef={category_idRef}
@@ -228,7 +226,7 @@ const restourans = () => {
             </div>
 
             <div className=" w-full sm:w-auto m-5 flex flex-wrap gap-4 justify-center">
-              {data.map((data) => (
+              {restouranData.map((data: any) => (
                 <AdminRestouransCard data={data} />
               ))}
             </div>

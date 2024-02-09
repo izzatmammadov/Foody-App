@@ -10,6 +10,8 @@ export const useGlobalStore = () => {
 const Provider = ({ children }) => {
   const [categoryData, setCategoryData] = useState([]);
   const [offers, setOffers] = useState([]);
+  const [restouranData, setRestouranData] = useState([]);
+
 
   const Component = globalContext.Provider;
 
@@ -18,6 +20,8 @@ const Provider = ({ children }) => {
     setCategoryData,
     offers,
     setOffers,
+    restouranData,
+    setRestouranData
   };
 
   return <Component value={values}>{children}</Component>;
