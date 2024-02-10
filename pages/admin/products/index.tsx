@@ -29,10 +29,7 @@ const AdminProducts: NextPage = () => {
             <AdminAside />
           </div>
 
-          <div className=" gap-4 hidden">
-            <OrdersChart />
-            <Barchart />
-          </div>
+    
 
           <section className=" w-full">
             <div className="m-5">

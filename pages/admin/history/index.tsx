@@ -1,14 +1,10 @@
-import Barchart from "@/share/components/LineChart";
 import { Navbar } from "@/share/components/Navbar";
 import { AdminAside } from "@/share/components/adminAside";
-import { AdminHeader } from "@/share/components/adminHeader";
-import { AdminLeftModal } from "@/share/components/adminLeftModal";
-import AdminOffersTableT from "@/share/components/adminOffersTable";
 import AdminOrderHistoryTable from "@/share/components/adminOrderHistoryTable";
 import AdminSecondTitle from "@/share/components/adminSecondTitle";
-import OrdersChart from "@/share/components/ordersChart";
+import { getOrderHistory } from "@/share/services/axios";
 import Head from "next/head";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 
 const item = [
   {
@@ -49,12 +45,20 @@ const item = [
   },
 ];
 
-const adminOrders = () => {
-  const [isHiddenModal, setIsHiddenModal] = useState<boolean>(true);
-  function changeHidden() {
-    setIsHiddenModal((prev) => !prev);
-    // console.log(isHiddenModal);
+const adminOrdersHistory = () => {
+
+const [history,setHistory] = useState()
+
+  
+ async function renderHistory() {
+   const res: any = await getOrderHistory()
+   setHistory(res)
   }
+  useEffect(() => {
+    renderHistory()
+    console.log(history);
+    
+  })
 
   return (
     <>
@@ -64,20 +68,14 @@ const adminOrders = () => {
         <link rel="icon" href="/admin-icon.png" />
       </Head>
       <div className=" bg-textBlack min-h-screen px-4">
-        {/* <AdminHeader onClickButton={changeHidden} /> */}
         <Navbar adminNavbar={true}/>
 
 
-        <AdminLeftModal onClickClose={changeHidden} hidden={isHiddenModal} />
         <main className="flex">
           <div className=" hidden sm:block">
             <AdminAside />
           </div>
 
-          <div className=" gap-4 hidden">
-            <OrdersChart />
-            <Barchart />
-          </div>
 
           <section className=" w-full">
             <div className="m-5">
@@ -118,4 +116,4 @@ const adminOrders = () => {
   );
 };
 
-export default adminOrders;
+export default adminOrdersHistory;

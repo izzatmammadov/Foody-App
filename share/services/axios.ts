@@ -212,3 +212,14 @@ export async function updateCategories(id: string, form: Form) {
     console.log(err);
   }
 }
+
+export async function getOrderHistory() {
+  try {
+    const response  = await instanceAxios.get(`/order/history`)
+    return response
+  } catch (err) {
+    console.log(err);
+    
+  }
+
+}

@@ -5,9 +5,9 @@ import { AdminModalDropdown } from "../adminModalDropdown";
 
 interface AdminSecondTitleProps {
   p1?: string;
-  name: string;
+  name?: string;
   onClick?: () => void;
-  callBackValue: any;
+  callBackValue?: any;
 }
 
 const AdminSecondTitle: React.FC<AdminSecondTitleProps> = ({
