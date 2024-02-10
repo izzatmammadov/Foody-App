@@ -7,29 +7,30 @@ interface Props {
   className?: string;
   className2?: string;
   callBackValue?: any;
-  useRef?: any,
-  activeValue?:string
+  useRef?: any;
+  activeValue?: string;
+
 }
 
 export const AdminModalDropdown = ({
   p = "Restaurants",
-  arr = ["item1", "item2", "item3"],
+  arr,
   className,
   className2,
   callBackValue,
   useRef,
-  activeValue
+  activeValue,
+  
 }: Props) => {
   // const [selectedValue, setSelectedValue] = useState<string | undefined>("");
   // getCategories()
   console.log();
-  
 
   return (
     <div className={className2}>
       <p className="text-white font-medium text-base">{p}</p>
       <select
-         ref={useRef}
+        ref={useRef}
         value={activeValue}
         className={className}
         onChange={callBackValue}
@@ -37,8 +38,8 @@ export const AdminModalDropdown = ({
         <option value="" disabled>
           Choose...
         </option>
-        {arr.map((item, index) => (
-          <option  key={index} value={item}>
+        {arr?.map((item:any, index:any) => (
+          <option key={index} value={item}>
             {item}
           </option>
         ))}

@@ -14,11 +14,13 @@ import {
   formtype,
   getRestourans,
   postRestourans,
+  getCategories,
 } from "@/share/services/axios";
 import Head from "next/head";
 import React, { useEffect, useRef, useState } from "react";
 import { ToastContainer, toast } from "react-toastify";
 import { Navbar } from "@/share/components/Navbar";
+import { log } from "console";
 
 const restourans = () => {
   const { restouranData, setRestouranData } = useGlobalStore();
@@ -28,7 +30,7 @@ const restourans = () => {
 
   function changeHidden() {
     setIsHiddenModal((prev) => !prev);
-    console.log(isHiddenModal);
+    // console.log(isHiddenModal);
   }
   async function RenderData() {
     const data = await getRestourans();
@@ -66,7 +68,7 @@ const restourans = () => {
   }
 
   async function addRestourans() {
-    console.log("addRestourans");
+    // console.log("addRestourans");
 
     const ResName: any = RestouransNameRef?.current?.value;
     const cuisine: any = cuisineRef?.current?.value;
@@ -172,9 +174,34 @@ const restourans = () => {
     // e.target.value=value
     let newValue = data2.filter((item: any) => item?.category_id == value);
 
+    console.log("------------------------data", newValue);
+
     setData(newValue);
   }
 
+  const [resCategoryARR, setResCategoryARR] = useState();
+
+  async function categoriesRender2() {
+    try {
+      const response = await getCategories();
+      const categoryArry = response?.data.result.data;
+
+      let items = categoryArry.map((item: any) => item.name);
+      // console.log("categoryArry-------------",categoryArry);
+
+      setResCategoryARR(items);
+    } catch (error) {
+      console.log(error);
+    }
+  }
+  // console.log("category", resCategoryARR);
+  useEffect(() => {
+    categoriesRender2();
+  }, []);
+
+  useEffect(() => {
+    // console.log("resCategoryARR-------------", resCategoryARR);
+  }, []);
   return (
     <>
       <Head>
@@ -188,6 +215,7 @@ const restourans = () => {
         <Navbar adminNavbar={true} />
 
         <AdminLeftModal
+          arr={resCategoryARR}
           category_idRef={category_idRef}
           addressRef={addressRef}
           delivery_minRef={delivery_minRef}
@@ -218,6 +246,7 @@ const restourans = () => {
           <section className="w-full">
             <div className="m-5">
               <AdminSecondTitle
+                resCategoryARR={resCategoryARR}
                 callBackValue={handleSelectChange}
                 name="Restaurants"
                 p1="Restaurants"
@@ -226,7 +255,7 @@ const restourans = () => {
             </div>
 
             <div className=" w-full sm:w-auto m-5 flex flex-wrap gap-4 justify-center">
-              {restouranData.map((data: any) => (
+              {data.map((data: any) => (
                 <AdminRestouransCard data={data} />
               ))}
             </div>

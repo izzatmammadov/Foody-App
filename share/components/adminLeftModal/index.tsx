@@ -30,10 +30,11 @@ interface Props {
   category_idRef?: any;
   form_titleRef?: any;
   form_descRef?: any;
-
+  arr: any;
 }
 
 export const AdminLeftModal = ({
+  arr,
   p = "Add Product",
   p1 = "Upload your product image",
   p2 = "Add your Product description and necessary information",
@@ -153,6 +154,7 @@ export const AdminLeftModal = ({
                 <AdminModalInput useRef={delivery_minRef} p="Delivery Min" />
                 <AdminModalInput useRef={addressRef} p="Address" />
                 <AdminModalDropdown
+                arr={arr}
                   useRef={category_idRef}
                   p="Category"
                   className="w-full bg-darkBlue_4 rounded-2xl font-medium text-base text-whiteLight pl-3 py-4"

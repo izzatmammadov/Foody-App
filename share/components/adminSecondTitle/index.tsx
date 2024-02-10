@@ -8,6 +8,7 @@ interface AdminSecondTitleProps {
   name?: string;
   onClick?: () => void;
   callBackValue?: any;
+  resCategoryARR: any;
 }
 
 const AdminSecondTitle: React.FC<AdminSecondTitleProps> = ({
@@ -15,6 +16,7 @@ const AdminSecondTitle: React.FC<AdminSecondTitleProps> = ({
   name,
   onClick,
   callBackValue,
+  resCategoryARR
 }) => {
   // const [isHiddenModal, setIsHiddenModal] = useState<boolean>(true);
 
@@ -34,6 +36,7 @@ const AdminSecondTitle: React.FC<AdminSecondTitleProps> = ({
         </div>
         <div className=" flex gap-5 ">
           <AdminModalDropdown
+          arr={resCategoryARR}
             callBackValue={callBackValue}
             p={p1}
             className="w-full bg-darkBlue_4 rounded-2xl font-medium text-base text-whiteLight "
