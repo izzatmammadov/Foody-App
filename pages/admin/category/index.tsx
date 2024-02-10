@@ -14,18 +14,13 @@ import { useGlobalStore } from "@/share/services/provider";
 
 interface CategoryType {
   id: number;
-  "img_url": string;
+  img_url: string;
   name: string;
   slug: string;
 }
 
 const AdminProducts: NextPage = () => {
-
-  const {categoryData,setCategoryData } = useGlobalStore();
-
-
-
-  
+  const { categoryData, setCategoryData } = useGlobalStore();
 
   const [isHiddenModal, setIsHiddenModal] = useState<boolean>(true);
 
@@ -61,10 +56,10 @@ const AdminProducts: NextPage = () => {
 
     try {
       const res = await postCategory(form);
-console.log(res?.data);
+      console.log(res?.data);
 
       if (res?.status === 201) {
-        setCategoryData((prev:any)=>[...prev,res.data])
+        setCategoryData((prev: any) => [...prev, res.data]);
         if (categoryRef.current && slugRef.current) {
           categoryRef.current.value = "";
           slugRef.current.value = "";
@@ -123,26 +118,21 @@ console.log(res?.data);
   // ];
   // console.log("categoryData", categoryData);
 
- async function categoriesRender() {
+  async function categoriesRender() {
     try {
       const res = await getCategories();
       // console.log(res);
-      const categoryArry = res?.data.result.data
-      
-      setCategoryData(categoryArry)
-      
+      const categoryArry = res?.data.result.data;
+
+      setCategoryData(categoryArry);
     } catch (err) {
       console.log(err);
-      
+    }
   }
-  }
-  
 
   useEffect(() => {
-    categoriesRender()
-  },[])                                                                                                                                                 
-
-
+    categoriesRender();
+  }, []);
 
   return (
     <>
@@ -154,7 +144,7 @@ console.log(res?.data);
 
       <div className=" bg-textBlack min-h-screen px-4">
         <ToastContainer />
-        <Navbar adminNavbar={true}/>
+        <Navbar adminNavbar={true} />
 
         <main className="flex">
           <div className=" hidden sm:block">
@@ -195,7 +185,7 @@ console.log(res?.data);
                 </thead>
 
                 <tbody>
-                   {categoryData.map((item: CategoryType) => (
+                  {categoryData.map((item: CategoryType) => (
                     <AdminCategory key={item.id} item={item} />
                   ))}
                 </tbody>
