@@ -34,7 +34,7 @@ export const AdminModalDropdown = ({
         className={className}
         onChange={callBackValue}
       >
-        <option value="" disabled>
+        <option value="" disabled selected>
           Choose...
         </option>
         {arr ? (arr?.map((item:any, index:any) => (

@@ -20,7 +20,6 @@ import Head from "next/head";
 import React, { useEffect, useRef, useState } from "react";
 import { ToastContainer, toast } from "react-toastify";
 import { Navbar } from "@/share/components/Navbar";
-import { log } from "console";
 
 const restourans = () => {
   const { restouranData, setRestouranData } = useGlobalStore();
@@ -126,7 +125,7 @@ const restourans = () => {
 
         setTimeout(() => {
           changeHidden();
-        }, 300);
+        }, 500);
 
         toast.success("Category created successfully!");
       }
@@ -176,7 +175,9 @@ const restourans = () => {
 
     console.log("------------------------data", newValue);
 
-    setData(newValue);
+    // setData(newValue);
+    setRestouranData(newValue);
+
   }
 
   const [resCategoryARR, setResCategoryARR] = useState();

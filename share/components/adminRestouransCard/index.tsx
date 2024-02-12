@@ -165,8 +165,13 @@ const AdminRestouransCard: FC<AdminRestouransCard> = ({ data }: any) => {
     const response = await updateRestourans(activeId, form);
 
     if (response?.status === 200 || response?.status === 201) {
+      
+      setTimeout(() => {
+        changeHidden();
+      }, 500);
       toast.success("Category updated successfully!");
-      changeHidden();
+
+
       const updatedData = restouranData.map((item: any) => {
         if (item.id === activeId) {
           return response.data.data;
@@ -185,23 +190,28 @@ const AdminRestouransCard: FC<AdminRestouransCard> = ({ data }: any) => {
     const res = await deleteRestourans(activeId);
     console.log(res);
     if (res?.status === 204) {
+
       const updatedArr = restouranData.filter(
+      
         (item: any) => item.id !== activeId
+
       );
       setRestouranData(updatedArr);
 
       toast.success("Deleted successfully!");
+
       setIsModalOpen((prev) => !prev);
     }
-
-    return;
     console.log("delete res");
+    return;
+
   }
   const [resCategoryARR, setResCategoryARR] = useState();
   
   async function categoriesRender2() {
     try {
       const response = await getCategories();
+      
       const categoryArry = response?.data.result.data;
 
       let items = categoryArry.map((item: any) => item.name);
@@ -219,6 +229,7 @@ const AdminRestouransCard: FC<AdminRestouransCard> = ({ data }: any) => {
 
   return (
     <>
+       <ToastContainer />
       <AdminLeftModal
         arr={resCategoryARR}
         p="Edit Restuarant  "
@@ -238,7 +249,7 @@ const AdminRestouransCard: FC<AdminRestouransCard> = ({ data }: any) => {
         ButtonOnClick={UpdateRestouran}
         getImgUrl={getImgUrl}
       />
-      <ToastContainer />
+     
       <div className=" bg-white w-72 h-20 rounded-md">
         <div className=" flex  w-72 h-20 items-center justify-between">
           <img
