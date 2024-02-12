@@ -1,14 +1,71 @@
 import Head from "next/head";
-import React from "react";
-
+import React, { useState } from "react";
 import { useTranslation } from "react-i18next";
 import { Navbar } from "../../share/components/Navbar";
 import { Footer } from "../../share/components/Footer";
 import Image from "next/image";
 import { UserAside } from "../../share/components/userAside";
+import { getDownloadURL, ref, uploadBytes } from "firebase/storage";
+import { fileStorage } from "@/server/configs/firebase";
 
 const UserProfile = () => {
   const { t, i18n } = useTranslation();
+ 
+const [userDatas,setUserDatas] = useState()
+
+let local: any | null = null;
+let currentId: any = null;
+
+if (typeof window !== 'undefined') {
+  local = localStorage?.getItem("userInfo") ?? null;
+  currentId = JSON.parse(local).id;
+}
+
+console.log(currentId);
+
+
+  
+  
+  function getValues(e: React.ChangeEvent<HTMLInputElement>) {
+    const name = e.target.name;
+    const value = e.target.value;
+  }
+  
+  const [imgUrl, setImgUrl] = useState<any>("");
+  //  const [imgUpload, setImageUpload]=useState()
+
+  // const imgRef=useRef(null)
+  // console.log(imgUrl);
+
+  const [imgOnload, setImgOnload] = useState(false);
+
+  // console.log(imgOnload);
+
+  function getİmage(e: React.ChangeEvent<HTMLInputElement>) {
+    const name = e?.target?.files?.[0]?.name;
+    if (!name) {
+      return;
+    }
+    const imageRef = ref(fileStorage, `files/images/${name}`);
+
+    // setCurrentImgRef(imageRef)
+
+    const file = e?.target?.files?.[0];
+    if (!file) {
+      return;
+    }
+    uploadBytes(imageRef, file).then((snapshot) => {
+      setImgOnload(true);
+      getDownloadURL(snapshot.ref).then((url) => {
+        setImgOnload(false);
+        setImgUrl(url);
+     
+      });
+    });
+  }
+console.log();
+
+
   return (
     <>
       <Head>
@@ -25,13 +82,16 @@ const UserProfile = () => {
           <div className="w-full flex  flex-col  sm:px-8 sm:py-10 flex-wrap gap-x-1 gap-y-8 bg-white sm:bg-whiteLight1">
             <h2 className=" font-semibold text-3xl text-grayText2">{t("userDesc")}</h2>
 
-            <input type="file" id="file" accept="image/*"  className=" hidden" />
+            <input onChange={getİmage} type="file" id="file" accept="image/*"  className=" hidden" />
             <label htmlFor="file"> 
             <div className=" w-full flex  justify-center ">
-              <Image
+              <img
                 width={146}
                 height={0}
-                src={"user-profile-upload.svg"}
+                  // src={"user-profile-upload.svg"}
+                src= {`${
+                    imgOnload ? "/loadingImg.jpg" : imgUrl ? imgUrl : "/user-profile-upload.svg"
+                  }`}
                 alt="upload"
                 className="cursor-pointer"
               />

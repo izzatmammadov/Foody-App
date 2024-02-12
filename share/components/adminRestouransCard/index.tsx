@@ -26,7 +26,7 @@ interface AdminRestouransCard {
 const AdminRestouransCard: FC<AdminRestouransCard> = ({ data }: any) => {
   const { restouranData, setRestouranData } = useGlobalStore();
 
-  console.log(data);
+  // console.log(data);
 
   const { t, i18n } = useTranslation();
 
@@ -50,7 +50,7 @@ const AdminRestouransCard: FC<AdminRestouransCard> = ({ data }: any) => {
   const category_idRef = useRef<HTMLInputElement>(null);
 
   const imgRef = useRef<HTMLInputElement>(null);
-  console.log("imgRef", imgRef.current?.src);
+  // console.log("imgRef", imgRef.current?.src);
 
   const [imgUrl, setImgUrl] = useState<string>("");
 
@@ -77,21 +77,21 @@ const AdminRestouransCard: FC<AdminRestouransCard> = ({ data }: any) => {
   const [isHiddenModal, setIsHiddenModal] = useState<boolean>(true);
   function changeHidden() {
     setIsHiddenModal((prev) => !prev);
-    console.log(isHiddenModal);
+    // console.log(isHiddenModal);
   }
 
-  console.log(data.id);
+  // console.log(data.id);
 
   async function handleEditClick(id: string) {
     setActiveId(id);
-    console.log(activeId);
+    // console.log(activeId);
 
     changeHidden();
     const res = await getEditRestourans(id);
-    console.log("res", res);
+    // console.log("res", res);
     if (res?.status === 200) {
       const currentData = res?.data.result.data;
-      console.log("currentData", currentData);
+      // console.log("currentData", currentData);
 
       if (
         RestouransNameRef &&
@@ -160,7 +160,7 @@ const AdminRestouransCard: FC<AdminRestouransCard> = ({ data }: any) => {
       category_id: rescategory_id,
       img_url: resimgRef,
     };
-    console.log("form", form);
+    // console.log("form", form);
 
     const response = await updateRestourans(activeId, form);
 
@@ -181,14 +181,14 @@ const AdminRestouransCard: FC<AdminRestouransCard> = ({ data }: any) => {
       setRestouranData(updatedData);
     }
 
-    console.log(response);
+    // console.log(response);
 
-    console.log("response", response);
+    // console.log("response", response);
   }
 
   async function deleteRestouransfunction() {
     const res = await deleteRestourans(activeId);
-    console.log(res);
+    // console.log(res);
     if (res?.status === 204) {
 
       const updatedArr = restouranData.filter(
@@ -202,7 +202,7 @@ const AdminRestouransCard: FC<AdminRestouransCard> = ({ data }: any) => {
 
       setIsModalOpen((prev) => !prev);
     }
-    console.log("delete res");
+    // console.log("delete res");
     return;
 
   }
@@ -211,7 +211,7 @@ const AdminRestouransCard: FC<AdminRestouransCard> = ({ data }: any) => {
   async function categoriesRender2() {
     try {
       const response = await getCategories();
-      
+
       const categoryArry = response?.data.result.data;
 
       let items = categoryArry.map((item: any) => item.name);

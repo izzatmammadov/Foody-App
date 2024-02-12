@@ -5,12 +5,14 @@ import { useRouter } from "next/router";
 
 
 export const AdminAside = () => {
-  const { t, i18n } = useTranslation();
+  const { t, i18n} = useTranslation();
   // React.ChangeEvent<HTMLSelectElement>
 
   const {push} =useRouter()
   function changePage(value: string):void {
-  push(`/admin/${value}`)
+    push(`/admin/${value}`)
+
+    
 }
 
   return (
