@@ -151,7 +151,7 @@ const AdminProducts: NextPage = () => {
             <AdminAside />
           </div>
 
-          <section className=" w-[100%] m-5">
+          <section className=" w-[100%] m-0 sm:m-5">
             <AdminLeftModal
               onClickClose={changeHidden}
               mod="3"
@@ -169,10 +169,13 @@ const AdminProducts: NextPage = () => {
             {/* <div className=" flex  justify-between text-sm  font-semibold h-16 items-center px-8"></div> */}
             <AdminSecondTitle resCategoryARR={""}
               onClick={changeHidden}
-              name="Catagory"
-              p1="Catagory"
+              name="Category"
+              p1="Category"
+              visibleDropwdown={false}
+              visibleButton={true}
+              buttonInnerText="+ ADD CATEGORY"
             />
-            <div className=" w-[100%]   bg-white">
+            <div className=" w-[100%] mt-10 bg-white">
               <table className="w-[100%] ">
                 <thead className="h-16 text-sm px-8">
                   <tr>

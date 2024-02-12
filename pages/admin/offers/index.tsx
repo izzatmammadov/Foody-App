@@ -120,6 +120,7 @@ const adminOffers = () => {
                 p1="Offers"
                 buttonInnerText="+ ADD OFFER"
                 visibleDropwdown={false}
+                visibleButton={true}
               />
             </div>
 

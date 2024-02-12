@@ -244,13 +244,16 @@ const restourans = () => {
           </div>
 
           <section className="w-full">
-            <div className="m-5">
+            <div className="m-0 sm:m-5">
               <AdminSecondTitle
                 resCategoryARR={resCategoryARR}
                 callBackValue={handleSelectChange}
                 name="Restaurants"
                 p1="Restaurants"
                 onClick={changeHidden}
+                visibleButton={true}
+                visibleDropwdown={true}
+                buttonInnerText="+ ADD RESTAURANT"
               />
             </div>
 

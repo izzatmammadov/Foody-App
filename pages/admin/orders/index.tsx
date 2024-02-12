@@ -79,8 +79,8 @@ const adminOrders = () => {
           </div>
 
           <section className=" w-full">
-            <div className="m-5">
-              <AdminSecondTitle name="Orders"  p1="Orders" />
+            <div className="m-0 sm:m-5">
+              <AdminSecondTitle name="Orders"  p1="Orders" resCategoryARR={""} visibleButton={false} visibleDropwdown={false} buttonInnerText=""/>
             </div>
 
             {/* <div className=" w-full sm:w-auto m-5 flex flex-wrap gap-4 justify-center">
