@@ -1,5 +1,4 @@
-import { getCategories } from "@/share/services/axios";
-import React, { useState } from "react";
+import React from "react";
 
 interface Props {
   p?: string;

@@ -113,19 +113,16 @@ const adminOffers = () => {
           </div>
 
           <section className=" w-full">
-            <div className="m-5">
+            <div className="m-0 sm:m-5">
               <AdminSecondTitle resCategoryARR={""}
                 onClick={changeHidden}
                 name="Offers"
                 p1="Offers"
+                buttonInnerText="+ ADD OFFER"
+                visibleDropwdown={false}
               />
             </div>
 
-            {/* <div className=" w-full sm:w-auto m-5 flex flex-wrap gap-4 justify-center">
-              {item.map((data) => (
-                <AdminRestouransCard data={data} />
-              ))}
-            </div> */}
             <div className="p-5">
               <table className=" w-full bg-white ">
                 <thead className="h-16  text-center text-sm not-italic font-semibold leading-6">
