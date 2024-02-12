@@ -1,5 +1,5 @@
 import Image from "next/image";
-import React, { FC, useRef, useState } from "react";
+import React, { FC, useEffect, useRef, useState } from "react";
 import Modal from "../Modal";
 import { Button } from "../Button";
 import { useTranslation } from "react-i18next";
@@ -7,6 +7,7 @@ import { AdminLeftModal } from "../adminLeftModal";
 import {
   deleteRestourans,
   formtype,
+  getCategories,
   getEditRestourans,
   updateRestourans,
 } from "@/share/services/axios";
@@ -196,10 +197,30 @@ const AdminRestouransCard: FC<AdminRestouransCard> = ({ data }: any) => {
     return;
     console.log("delete res");
   }
+  const [resCategoryARR, setResCategoryARR] = useState();
+  
+  async function categoriesRender2() {
+    try {
+      const response = await getCategories();
+      const categoryArry = response?.data.result.data;
+
+      let items = categoryArry.map((item: any) => item.name);
+      // console.log("categoryArry-------------",categoryArry);
+
+      setResCategoryARR(items);
+    } catch (error) {
+      console.log(error);
+    }
+  }
+  // console.log("category", resCategoryARR);
+  useEffect(() => {
+    categoriesRender2();
+  }, []);
 
   return (
     <>
       <AdminLeftModal
+        arr={resCategoryARR}
         p="Edit Restuarant  "
         mod="2"
         p1="Upload Image"
