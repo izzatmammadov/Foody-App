@@ -11,7 +11,6 @@ import {
 } from "@/share/services/axios";
 import { toast } from "react-toastify";
 import { useGlobalStore } from "@/share/services/provider";
-import { log } from "console";
 
 interface AdminOffersTableType {
   data: {

@@ -1,6 +1,5 @@
-import React, { useState } from "react";
+import React from "react";
 import { Button } from "../Button";
-import { AdminLeftModal } from "../adminLeftModal";
 import { AdminModalDropdown } from "../adminModalDropdown";
 
 interface AdminSecondTitleProps {
@@ -9,6 +8,8 @@ interface AdminSecondTitleProps {
   onClick?: () => void;
   callBackValue?: any;
   resCategoryARR: any;
+  buttonInnerText: string;
+  visibleDropwdown: boolean
 }
 
 const AdminSecondTitle: React.FC<AdminSecondTitleProps> = ({
@@ -16,7 +17,9 @@ const AdminSecondTitle: React.FC<AdminSecondTitleProps> = ({
   name,
   onClick,
   callBackValue,
-  resCategoryARR
+  resCategoryARR,
+  buttonInnerText,
+  visibleDropwdown
 }) => {
   // const [isHiddenModal, setIsHiddenModal] = useState<boolean>(true);
 
@@ -35,17 +38,17 @@ const AdminSecondTitle: React.FC<AdminSecondTitleProps> = ({
           {name}
         </div>
         <div className=" flex gap-5 ">
-          <AdminModalDropdown
+          {visibleDropwdown ? (<AdminModalDropdown
           arr={resCategoryARR}
             callBackValue={callBackValue}
             p={p1}
             className="w-full bg-darkBlue_4 rounded-2xl font-medium text-base text-whiteLight "
             className2="flex  bg-darkBlue_4  gap-3  rounded-2xl  p-1 px-3 "
-          />
+          />) : ("")}
           <Button
             onClick={onClick}
-            className="bg-lightPurple_3 h-7 pr-2 pl-3 text-white font-bold text-xs rounded-[14px]"
-            innerText="+ ADD offer"
+            className="bg-lightPurple_3 py-2 px-8 text-white font-bold text-sm rounded-[14px]"
+            innerText={buttonInnerText}
           />
         </div>
 
