@@ -146,7 +146,7 @@ export const getOffer = async () => {
 
 export const getEditOffer = async (id:string) => {
     try {
-      const response = await instanceAxios.get(`/offer${id}`);
+      const response = await instanceAxios.get(`/offer/${id}`);
       return response;
     } catch (error) {
       toast.error("Can not get offer!");

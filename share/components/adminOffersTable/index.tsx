@@ -10,6 +10,8 @@ import {
   putOffer,
 } from "@/share/services/axios";
 import { toast } from "react-toastify";
+import { useGlobalStore } from "@/share/services/provider";
+import { log } from "console";
 
 interface AdminOffersTableType {
   data: {
@@ -29,6 +31,7 @@ const AdminOffersTableT: React.FC<AdminOffersTableType> = ({
   const [activeId, setActiveId] = useState("");
   const [imgUrl, setImgUrl] = useState<string>("");
   const [isHiddenModal, setIsHiddenModal] = useState<boolean>(true);
+  const {offers, setOffers} = useGlobalStore();
 
 
   const form_titleRef = useRef<HTMLInputElement>(null);
@@ -56,13 +59,16 @@ const AdminOffersTableT: React.FC<AdminOffersTableType> = ({
     const res = await getEditOffer(id);
     if (res?.status === 200) {
       const currentData = res?.data.result.data;
+      console.log("currentData ", currentData);
+      
       if (form_descRef && form_titleRef && imgRef) {
-      (form_descRef.current as { value: string }).value = currentData?.title || "";
+      (form_descRef.current as { value: string }).value = currentData?.description || "";
 
-      (form_titleRef.current as { value: string }).value = currentData?.description || "";
+      (form_titleRef.current as { value: string }).value = currentData?.name || "";
 
       (imgRef.current as { src: string }).src = currentData?.img_url || "";
     }}
+    
   }
 
   //* EDIT OFFER
@@ -70,6 +76,8 @@ const AdminOffersTableT: React.FC<AdminOffersTableType> = ({
     const title = form_titleRef?.current?.value;
     const description = form_descRef?.current?.value;
     const img = imgRef.current?.src;
+    console.log();
+    
 
     const offerValues: OfferValues = {
       name: title,
@@ -88,6 +96,13 @@ const AdminOffersTableT: React.FC<AdminOffersTableType> = ({
     console.log(res);
     if (res?.status === 200) {
       toast.success("Edit was successfully!");
+      const updatedData = offers.map((item:any) => {
+        if (item.id === activeId) {
+          return res.data.data;
+        }
+        return item;
+      });
+      setOffers(updatedData)
 
       setTimeout(() => {
         changeHidden();
@@ -107,9 +122,12 @@ const AdminOffersTableT: React.FC<AdminOffersTableType> = ({
   //! DELETE OFFER
   async function removeOffer() {
     const res = await deleteOffer(activeId);
-    console.log(res);
+    console.log(offers);
     if (res?.status === 204) {
+    let newData = offers?.filter((item:any)=> item.id !== activeId)
+      setOffers(newData)
       toast.success("Deleted successfully!");
+
       setIsModalOpen((prev) => !prev);
     }
     return;
@@ -120,8 +138,8 @@ const AdminOffersTableT: React.FC<AdminOffersTableType> = ({
     setShowPopup(!showPopup);
   };
 
-  function changeHidden() {
-    setIsHiddenModal((prev) => !prev);
+  function changeHidden():void {
+    setIsHiddenModal((prev:boolean) => !prev);
   }
   return (
     <>

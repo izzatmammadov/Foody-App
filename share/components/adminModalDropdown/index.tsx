@@ -38,11 +38,11 @@ export const AdminModalDropdown = ({
         <option value="" disabled>
           Choose...
         </option>
-        {arr?.map((item:any, index:any) => (
+        {arr ? (arr?.map((item:any, index:any) => (
           <option key={index} value={item}>
             {item}
           </option>
-        ))}
+        ))) : ("")}
       </select>
     </div>
   );

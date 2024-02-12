@@ -44,8 +44,8 @@ export const Navbar: React.FC<NavbarProps> = ({ adminNavbar }) => {
     let parsedUser = JSON.parse(localUser);
     let fullName = parsedUser?.fullname;
     let str = " ";
-    str += parsedUser?.fullname?.split(" ")?.[0]?.[0];
-    str += parsedUser?.fullname?.split(" ")?.[1]?.[0];
+    str += parsedUser?.fullname?.split(" ")[0]?.[0] ?? "";
+    str += parsedUser?.fullname?.split(" ")[1]?.[0] ?? "";
     let avatar = str.toUpperCase();
 
     setIsFullName(fullName);
@@ -53,6 +53,8 @@ export const Navbar: React.FC<NavbarProps> = ({ adminNavbar }) => {
 
     if (parsedItem?.access_token) {
       setIsToken(true);
+    } else {
+      setIsActiveName("XX")
     }
   }, [isToken]);
 
