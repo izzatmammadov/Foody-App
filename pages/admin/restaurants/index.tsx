@@ -171,9 +171,13 @@ const restourans = () => {
     // const value = category_idRef.current?.value;
     // console.log("value", value);
     // e.target.value=value
+    if (value == "all") { 
+      setRestouranData(data2)
+      return
+    }
     let newValue = data2.filter((item: any) => item?.category_id == value);
 
-    console.log("------------------------data", newValue);
+    // console.log("------------------------data", newValue);
 
     // setData(newValue);
     setRestouranData(newValue);
@@ -260,7 +264,7 @@ const restourans = () => {
 
             <div className=" w-full sm:w-auto m-5 flex flex-wrap gap-4 justify-center">
               {restouranData.map((data: any) => (
-                <AdminRestouransCard data={data} />
+                <AdminRestouransCard key={data.id} data={data} />
               ))}
             </div>
           </section>

@@ -1,21 +1,29 @@
 import Image from "next/image";
-import { useState } from "react";
+import {  useState } from "react";
 import { useTranslation } from "react-i18next";
 
 interface Props {
   bgDark?:boolean
 }
 
-export const Langugages = ({bgDark}:Props) => {
+export const Langugages = ({ bgDark }: Props) => {
+
+  // const currentPathname = window.location.pathname;
   const { t, i18n } = useTranslation();
   const [langDropdown, setLangDropdown] = useState(false);
-  const [selectedLanguage, setSelectedLanguage] = useState("en");
+
+
+
+  const [selectedLanguage, setSelectedLanguage] = useState(i18n.language);
+
 
   const clickHandle = async (lang: string) => {
     await i18n.changeLanguage(lang);
     setSelectedLanguage(lang);
     setLangDropdown(false); 
+  
   };
+
 
   const toggleDropDown = () => {
     setLangDropdown(!langDropdown);
