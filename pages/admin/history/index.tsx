@@ -78,8 +78,8 @@ const [history,setHistory] = useState()
 
 
           <section className=" w-full">
-            <div className="m-5">
-              <AdminSecondTitle name="History"  p1="History" />
+            <div className="m-0 sm:m-5">
+              <AdminSecondTitle name="History"  p1="History" resCategoryARR={""} visibleButton={false} visibleDropwdown={false} buttonInnerText=""/>
             </div>
 
             {/* <div className=" w-full sm:w-auto m-5 flex flex-wrap gap-4 justify-center">

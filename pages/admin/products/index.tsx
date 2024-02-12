@@ -32,8 +32,8 @@ const AdminProducts: NextPage = () => {
     
 
           <section className=" w-full">
-            <div className="m-5">
-              <AdminSecondTitle  name="Products " p1="Products"/>
+            <div className="m-0 sm:m-5">
+              <AdminSecondTitle  name="Products" p1="Products" buttonInnerText="product" visibleDropwdown={true} visibleButton={false} resCategoryARR={""}/>
             </div>
 
             <div className=" w-full sm:w-auto m-5 flex flex-wrap gap-10 justify-center">
