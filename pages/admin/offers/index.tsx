@@ -43,6 +43,7 @@ const adminOffers = () => {
 
       if (res?.status == 200 || res?.status == 201) {
         toast.success("Offer added successfully!");
+        offersRender()
         if (titleOfferRef.current) titleOfferRef.current.value = "";
         if (descOfferRef.current) descOfferRef.current.value = "";
       }
@@ -113,7 +114,7 @@ const adminOffers = () => {
 
           <section className=" w-full">
             <div className="m-5">
-              <AdminSecondTitle
+              <AdminSecondTitle resCategoryARR={""}
                 onClick={changeHidden}
                 name="Offers"
                 p1="Offers"
