@@ -35,7 +35,7 @@ export interface formtype {
 }
 //* Restourans
 
-export async function updateRestourans(id: string, form: Form) {
+export async function updateRestourans(id: string, form: formtype) {
   try {
     const response = await instanceAxios.put(`/restuarants/${id}`, form);
     return response;

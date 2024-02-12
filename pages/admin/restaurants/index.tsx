@@ -255,7 +255,7 @@ const restourans = () => {
             </div>
 
             <div className=" w-full sm:w-auto m-5 flex flex-wrap gap-4 justify-center">
-              {data.map((data: any) => (
+              {restouranData.map((data: any) => (
                 <AdminRestouransCard data={data} />
               ))}
             </div>

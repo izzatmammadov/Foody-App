@@ -30,7 +30,7 @@ interface Props {
   category_idRef?: any;
   form_titleRef?: any;
   form_descRef?: any;
-  arr: any;
+  arr?: any;
 }
 
 export const AdminLeftModal = ({
@@ -147,11 +147,11 @@ export const AdminLeftModal = ({
               <div>
                 <AdminModalInput useRef={RestouransNameRef} p="Name" />
                 <AdminModalTexArea useRef={cuisineRef} p="Cuisine" />
-                <AdminModalInput
+                <AdminModalInput type="number"
                   useRef={delivery_priceRef}
                   p="Delivery Price $"
                 />
-                <AdminModalInput useRef={delivery_minRef} p="Delivery Min" />
+                <AdminModalInput type="number" useRef={delivery_minRef} p="Delivery Min" />
                 <AdminModalInput useRef={addressRef} p="Address" />
                 <AdminModalDropdown
                 arr={arr}
