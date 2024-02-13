@@ -262,3 +262,13 @@ export const deleteProduct = async (id: number | string) => {
     console.log(error);
   }
 };
+}
+export async function getProfileInfo(id:string) {
+  try {
+    const response = await instanceAxios.get(`auth/user/${id}`)
+    return response
+  } catch (err) {
+    console.log(err);
+    
+  }
+}
