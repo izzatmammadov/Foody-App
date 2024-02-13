@@ -25,6 +25,8 @@ const AdminProducts: NextPage = () => {
   const fetchProducts = async () => {
     try {
       const response = await getProducts();
+      console.log(response?.data.result.data);
+      
       setProducts(response?.data.result.data);
     } catch (error) {
       console.error("Error can't fetching products:", error);
@@ -37,12 +39,16 @@ const AdminProducts: NextPage = () => {
 
   const renderRestaurants = async () => {
     const res = await getRestourans()
-    setRestaurants(res?.data.result.data);
+    let item = res?.data.result.data.map((i:any) => i.name)
+    setRestaurants(item);
   }
 
   useEffect(() => {
       renderRestaurants()
   },[])
+
+  console.log(products);
+  
   
 
   return (
@@ -76,7 +82,7 @@ const AdminProducts: NextPage = () => {
             <div className="w-full sm:w-auto m-5 flex flex-wrap gap-10 justify-center">
               {products.map((product:Product) => (
                 <AdminCard
-                  key={product.id}
+                  key={product?.id}
                   foodname={product.name}
                   restoranname={product.rest_id}
                   foodimage={product.img_url}
