@@ -112,7 +112,6 @@ export const completeLogin = async (form: FormRegister) => {
 };
 //& ADMIN OFFER
 export type OfferValues = {
-
   titleOffer?: string | undefined;
   descOffer?: string | undefined;
 
@@ -144,20 +143,20 @@ export const getOffer = async () => {
   }
 };
 
-export const getEditOffer = async (id:string) => {
-    try {
-      const response = await instanceAxios.get(`/offer/${id}`);
-      return response;
-    } catch (error) {
-      toast.error("Can not get offer!");
-      console.log(error);
-    }
-  };
+export const getEditOffer = async (id: string) => {
+  try {
+    const response = await instanceAxios.get(`/offer/${id}`);
+    return response;
+  } catch (error) {
+    toast.error("Can not get offer!");
+    console.log(error);
+  }
+};
 
 //* PUT
 export const putOffer = async (id: string, offerValues: OfferValues) => {
   try {
-    const response = await instanceAxios.put(`/offer/${id}`,  offerValues);
+    const response = await instanceAxios.put(`/offer/${id}`, offerValues);
     return response;
   } catch (error) {
     toast.error("Can not update offer!");
@@ -215,11 +214,51 @@ export async function updateCategories(id: string, form: Form) {
 
 export async function getOrderHistory() {
   try {
-    const response  = await instanceAxios.get(`/order/history`)
-    return response
+    const response = await instanceAxios.get(`/order/history`);
+    return response;
   } catch (err) {
     console.log(err);
-    
   }
-
 }
+
+//& PRODUCTS
+
+//* GET
+export const getProducts = async () => {
+  try {
+    const response = await instanceAxios.get(`/products`);
+    return response;
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+//* CREATE
+export const createProduct = async (data: any) => {
+  try {
+    const response = await instanceAxios.post(`/products`, data);
+    return response;
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+//* EDIT
+export const updateProduct = async (id: string | number, data: any) => {
+  try {
+    const response = await instanceAxios.put(`/products/${id}`, data);
+    return response;
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+//! DELETE
+export const deleteProduct = async (id: number | string) => {
+  try {
+    const response = await instanceAxios.delete(`/products/${id}`);
+    return response;
+  } catch (error) {
+    console.log(error);
+  }
+};
