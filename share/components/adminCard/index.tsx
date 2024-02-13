@@ -4,17 +4,20 @@ import Modal from "../Modal";
 import { Button } from "../Button";
 import { useTranslation } from "react-i18next";
 import { AdminLeftModal } from "../adminLeftModal";
+import { deleteProduct } from "@/share/services/axios";
 interface cartTipe {
   foodname: string;
   restoranname: string | number;
   foodimage: string;
   foodprice: string | number;
+  food_id: any;
 }
 
 const AdminCard = ({
   foodname,
   restoranname,
   foodimage,
+  food_id,
   foodprice,
 }: cartTipe) => {
   const { t, i18n } = useTranslation();
@@ -22,9 +25,14 @@ const AdminCard = ({
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   //^ MODAL
-  const handleButtonClick = () => {
+  const handleButtonClick =  () => {
     setIsModalOpen(true);
   };
+
+  const handleButtonDelete = async () => {
+    const res = await deleteProduct(food_id);
+    console.log(res);
+  }
 
   const handleModalClose = () => {
     setIsModalOpen(false);
@@ -41,20 +49,22 @@ const AdminCard = ({
   }
   return (
     <>
-            <AdminLeftModal
-          btn="Update Product"
-          p="Edit product"
-          p2="Edit your Product description and necessary information"
-          onClickClose={changeHidden} hidden={isHiddenModal} />
+      <AdminLeftModal
+        btn="Update Product"
+        p="Edit product"
+        p2="Edit your Product description and necessary information"
+        onClickClose={changeHidden}
+        hidden={isHiddenModal}
+      />
       <div className=" rounded-lg w-52 h-72 bg-white">
-        <div className="flex  flex-col items-center">
-          <Image width="170" height="0" src={foodimage} alt="" />
+        <div className="flex  flex-col items-center mt-3">
+          <img width="170" height="158" src={foodimage} alt="" />
         </div>
-        <div className="m-4">
+        <div className="m-1 mx-5">
           <p className=" text-lg font-medium">{foodname}</p>
           <p className=" text-[#8E8E93]">{restoranname}</p>
         </div>
-        <div className=" mx-3 flex justify-between">
+        <div className=" mx-5 flex justify-between">
           <p className="text-[#00B2A9;]  font-medium">${foodprice}</p>
 
           <div className="flex mx-3 gap-3">
@@ -87,7 +97,7 @@ const AdminCard = ({
             />
           </div>
 
-          <p className=" text-grayText1 w-2/3 mx-auto text-center my-5">
+          <p  className=" text-grayText1 w-2/3 mx-auto text-center my-5">
             {t("modalDesc2")}
           </p>
 
@@ -97,10 +107,12 @@ const AdminCard = ({
               innerText={t("modalDesc3")}
               onClick={handleModalClose}
             />
-            <Button
-              className="bg-mainRed border-2 text-white py-1 px-8 rounded-md border-mainRed shadow-md hover:scale-95 transition-all duration-500"
-              innerText={t("modalDesc4")}
-            />
+            <div onClick={handleButtonDelete}>
+                <Button
+                  className="bg-mainRed border-2 text-white py-1 px-8 rounded-md border-mainRed shadow-md hover:scale-95 transition-all duration-500"
+                  innerText={t("modalDesc4")}
+                />
+            </div>
           </div>
         </Modal>
         {/* MODAL CONTENT FOR SHOW */}
