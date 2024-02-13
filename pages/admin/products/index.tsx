@@ -47,7 +47,6 @@ const AdminProducts: NextPage = () => {
       renderRestaurants()
   },[])
 
-  console.log(products);
   
   
 
@@ -83,6 +82,7 @@ const AdminProducts: NextPage = () => {
               {products.map((product:Product) => (
                 <AdminCard
                   key={product?.id}
+                  food_id={product.id}
                   foodname={product.name}
                   restoranname={product.rest_id}
                   foodimage={product.img_url}
