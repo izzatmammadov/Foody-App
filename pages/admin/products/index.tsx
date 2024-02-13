@@ -37,12 +37,15 @@ const AdminProducts: NextPage = () => {
 
   const renderRestaurants = async () => {
     const res = await getRestourans()
-    setRestaurants(res?.data.result.data);
+    let item = res?.data.result.data.map((i:any) => i.name)
+    setRestaurants(item);
   }
 
   useEffect(() => {
       renderRestaurants()
   },[])
+
+  
   
 
   return (
@@ -74,15 +77,15 @@ const AdminProducts: NextPage = () => {
             </div>
 
             <div className="w-full sm:w-auto m-5 flex flex-wrap gap-10 justify-center">
-              {products.map((product:Product) => (
+              {/* {products.map((product:Product) => (
                 <AdminCard
-                  key={product.id}
+                  key={product?.id}
                   foodname={product.name}
                   restoranname={product.rest_id}
                   foodimage={product.img_url}
                   foodprice={product.price}
                 />
-              ))}
+              ))} */}
                {/* <AdminCard
                   foodname={"Pizza"}
                   restoranname={"Papa John's"}
