@@ -6,7 +6,7 @@ import { useTranslation } from "react-i18next";
 import { AdminLeftModal } from "../adminLeftModal";
 interface cartTipe {
   foodname: string;
-  restoranname: string;
+  restoranname: string | number;
   foodimage: string;
   foodprice: string | number;
 }

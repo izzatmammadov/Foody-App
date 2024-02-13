@@ -11,6 +11,9 @@ const Provider = ({ children }) => {
   const [categoryData, setCategoryData] = useState([]);
   const [offers, setOffers] = useState([]);
   const [restouranData, setRestouranData] = useState([]);
+  const [products, setProducts] = useState([]);
+
+
   const Component = globalContext.Provider;
 
   const values = {
@@ -19,7 +22,9 @@ const Provider = ({ children }) => {
     offers,
     setOffers,
     restouranData,
-    setRestouranData
+    setRestouranData,
+    products,
+    setProducts,
   };
 
   return <Component value={values}>{children}</Component>;

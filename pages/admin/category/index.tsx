@@ -167,7 +167,8 @@ const AdminProducts: NextPage = () => {
               imgRef={imgRef}
             />
             {/* <div className=" flex  justify-between text-sm  font-semibold h-16 items-center px-8"></div> */}
-            <AdminSecondTitle resCategoryARR={""}
+            <AdminSecondTitle
+             resCategoryARR={[]}
               onClick={changeHidden}
               name="Category"
               p1="Category"
