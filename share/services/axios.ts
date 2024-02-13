@@ -316,11 +316,6 @@ export async function getProfileInfo() {
 
     return response
 
-export async function getProfileInfo(id: string) {
-  try {
-    const response = await instanceAxios.get(`auth/user/${id}`);
-    return response;
-
   } catch (err) {
     console.log(err);
   }
