@@ -1,5 +1,5 @@
 import Head from "next/head";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { Navbar } from "../../share/components/Navbar";
 import { Footer } from "../../share/components/Footer";
@@ -62,11 +62,11 @@ setUserDatas((prev:userProfileType)=>({...prev,img_url:imgUrl,[name]:value,
     setUserDatas(res?.data?.user)
   }
 
-  useState(() => {
+  useEffect(() => {
    
     getUserDatas()
     
-  })
+  },[])
   // console.log(userDatas);
   
 
