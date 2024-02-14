@@ -123,14 +123,14 @@ const Home: NextPage = () => {
 
         {/* THIRD SECTION COMPONENT */}
 
-        {data.map((item) => (
+        {data?.map((item:{name:string,description:string,img_url:string}) => (
           <section className="flex flex-col sm:flex-row justify-center items-center px-3 sm:px-11 mt-52">
             <div className="flex flex-col gap-8 w-full sm:w-1/2">
               <h4 className="text-5xl w-full sm:w-full sm:text-6xl font-black leading-tight text-center mx-auto sm:mx-0 sm:text-start">
-                {item.name}
+                {item?.name}
               </h4>
               <p className="text-xl text-grayText1 w-full mb-8 sm:mb-0 sm:w-3/5 mx-auto text-center sm:text-start sm:mx-0">
-                {item.description}
+                {item?.description}
               </p>
             </div>
             <div>
@@ -138,7 +138,7 @@ const Home: NextPage = () => {
                 className=""
                 width={400}
                 height={400}
-                src={item.img_url}
+                src={item?.img_url}
                 alt={""}
               />
             </div>
