@@ -1,19 +1,44 @@
+import { Form, getCategories } from "@/share/services/axios"
 import Image from "next/image"
+import { useEffect, useState } from "react"
 
 
 export const RestaurantAside = () => {
-    return (
-        <>
-        <div className="flex items-center gap-4 cursor-pointer p-1 hover:bg-mainRedLight transition-all">
-          <Image
-            width={40}
-            height={0}
-            src={"margaritaCard.svg"}
-            alt="margarita"
-          />
-          <p className="font-semibold text-[20px] ">Fast Food</p>
-        </div>
+  const [categories, setCategories] = useState<Form[]>([{name:"",slug:"",img_url:""}])
 
+   async function renderCategories() {
+    const res = await getCategories()
+console.log(res);
+     if (res?.status === 200) {
+      setCategories(res?.data?.result?.data)
+  
+}
+    
+}
+  useEffect(() => {
+
+    renderCategories()
+    
+  }, [])
+  console.log(categories);
+  
+    return (
+      <>
+        {categories.map((item: any) => {
+          console.log(item);
+               return <div className="flex items-center gap-4 cursor-pointer p-1 h-10 hover:bg-mainRedLight transition-all">
+                 <Image
+                   className="h-10 object-cover"
+                  width={40}
+                  height={0}
+                  src={item?.img_url}
+                  alt={item?.name}
+                />
+                  <p className="font-semibold text-[20px] ">{item.name}</p>
+              </div>
+        })}
+  
+{/* 
         <div className="flex items-center gap-4 cursor-pointer p-1 hover:bg-mainRedLight transition-all">
           <Image
             width={40}
@@ -172,7 +197,7 @@ export const RestaurantAside = () => {
             alt="margarita"
           />
           <p className="font-semibold text-[20px] ">Fast Food</p>
-        </div>
+        </div> */}
         </>
     )
 }

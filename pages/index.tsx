@@ -4,9 +4,22 @@ import Image from "next/image";
 import { Header } from "../share/components/Header";
 import { Footer } from "../share/components/Footer";
 import { useTranslation } from "react-i18next";
-
+import { useEffect, useState } from "react";
+import { getOffer } from "@/share/services/axios";
+import React from "react";
 const Home: NextPage = () => {
   const { t, i18n } = useTranslation();
+  const [data, setData] = useState([]);
+
+  async function getOfferfunction() {
+    const response = await getOffer();
+    setData(response?.data.result.data);
+  }
+
+  useEffect(() => {
+    getOfferfunction();
+    console.log(data);
+  }, []);
 
   return (
     <>
@@ -83,7 +96,7 @@ const Home: NextPage = () => {
         {/* FIRST SECTION COMPONENT END */}
 
         {/* SECOND SECTION COMPONENT */}
-        <section className="flex flex-col sm:flex-row justify-center items-center px-3 sm:px-11 mt-52">
+        {/* <section className="flex flex-col sm:flex-row justify-center items-center px-3 sm:px-11 mt-52">
           <div className="flex flex-col gap-8 w-full sm:w-1/2">
             <h4 className="text-5xl w-full sm:w-full sm:text-6xl font-black leading-tight text-center mx-auto sm:mx-0 sm:text-start">
               {t("homeDesc6")}
@@ -105,37 +118,37 @@ const Home: NextPage = () => {
               alt="kfc"
             />
           </div>
-        </section>
+        </section> */}
         {/* SECOND SECTION COMPONENT END */}
 
         {/* THIRD SECTION COMPONENT */}
-        <section className="flex flex-col sm:flex-row justify-center items-center px-3 sm:px-11 mt-52">
-          <div className="flex flex-col gap-8 w-full sm:w-1/2">
-            <h4 className="text-5xl w-full sm:w-full sm:text-6xl font-black leading-tight text-center mx-auto sm:mx-0 sm:text-start">
-              {t("homeDesc7")}
-            </h4>
-            <p className="text-xl text-grayText1 w-full mb-8 sm:mb-0 sm:w-3/5 mx-auto text-center sm:text-start sm:mx-0">
-              Lorem ipsum is placeholder text commonly used in the graphic,
-              print, and publishing industries for previewing layouts and visual
-              mockups.Lorem ipsum is placeholder text commonly used in the
-              graphic, print, and publishing industries for previewing layouts
-              and visual mockups.
-            </p>
-          </div>
-          <div>
-            <Image
-              className="w-full"
-              width={0}
-              height={0}
-              src={"mainPizza.svg"}
-              alt="pizza"
-            />
-          </div>
-        </section>
+
+        {data?.map((item:{name:string,description:string,img_url:string}) => (
+          <section className="flex flex-col sm:flex-row justify-center items-center px-3 sm:px-11 mt-52">
+            <div className="flex flex-col gap-8 w-full sm:w-1/2">
+              <h4 className="text-5xl w-full sm:w-full sm:text-6xl font-black leading-tight text-center mx-auto sm:mx-0 sm:text-start">
+                {item?.name}
+              </h4>
+              <p className="text-xl text-grayText1 w-full mb-8 sm:mb-0 sm:w-3/5 mx-auto text-center sm:text-start sm:mx-0">
+                {item?.description}
+              </p>
+            </div>
+            <div>
+              <img
+                className=""
+                width={400}
+                height={400}
+                src={item?.img_url}
+                alt={""}
+              />
+            </div>
+          </section>
+        ))}
+
         {/* THIRD SECTION COMPONENT END */}
 
         {/* FOURTH SECTION COMPONENT */}
-        <section className="flex flex-col sm:flex-row justify-center items-center px-3 sm:px-11 mt-52">
+        {/* <section className="flex flex-col sm:flex-row justify-center items-center px-3 sm:px-11 mt-52">
           <div className="flex flex-col gap-8 w-full sm:w-1/2">
             <h4 className="text-5xl w-full sm:w-full sm:text-6xl font-black leading-tight text-center mx-auto sm:mx-0 sm:text-start">
               {t("homeDesc8")}
@@ -157,11 +170,11 @@ const Home: NextPage = () => {
               alt="fries"
             />
           </div>
-        </section>
+        </section> */}
         {/* FOURTH SECTION COMPONENT END */}
 
         {/* FIFTH SECTION COMPONENT */}
-        <section className="flex flex-col gap-10 justify-center px-3 sm:px-14 mb-96">
+        <section className="flex flex-col gap-10 justify-center px-3 sm:px-14 mb-96 mt-52">
           <div className="flex flex-col gap-6 items-center text-center">
             <h3 className=" text-5xl font-black w-full mt-20 sm:mt-0 sm:w-1/3 leading-tight">
               {t("homeDesc9")}

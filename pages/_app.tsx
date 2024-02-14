@@ -9,6 +9,7 @@ function MyApp({ Component, pageProps }: AppProps) {
 
   return <div>
     <Provider>
+      <ToastContainer/>
       <Component {...pageProps} />      
       </Provider>
     </div>

@@ -50,7 +50,7 @@ export const AdminLeftModal = ({
   onClickClose,
   categoryRef,
   getImgUrl,
-  slugRef,
+  slugRef, 
   imgRef,
   RestouransNameRef,
   cuisineRef,

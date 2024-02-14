@@ -1,27 +1,41 @@
 import Head from "next/head";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { Navbar } from "../../share/components/Navbar";
 import { Footer } from "../../share/components/Footer";
 import Image from "next/image";
+import "react-toastify/dist/ReactToastify.css";
 import { UserAside } from "../../share/components/userAside";
 import { getDownloadURL, ref, uploadBytes } from "firebase/storage";
 import { fileStorage } from "@/server/configs/firebase";
+import { getProfileInfo, putProfileInfo, userProfileType } from "@/share/services/axios";
+import { ToastContainer, toast } from "react-toastify";
 
 const UserProfile = () => {
   const { t, i18n } = useTranslation();
  
-const [userDatas,setUserDatas] = useState()
+  const [userDatas, setUserDatas] = useState<userProfileType>({
+    name: '',
+  username: '',
+  "img_url": '',
+  phone: '',
+    fullname: '',
+    email: "",
+    address:""
+})
+  const [imgUrl, setImgUrl] = useState<any>("");
+  
+  const [imgOnload, setImgOnload] = useState(false);
 
-let local: any | null = null;
-let currentId: any = null;
+// let local: any | null = null;
+// let currentUser: any = null;
 
-if (typeof window !== 'undefined') {
-  local = localStorage?.getItem("userInfo") ?? null;
-  currentId = JSON.parse(local).id;
-}
+// if (typeof window !== 'undefined') {
+//   local = localStorage?.getItem("userInfo") ?? null;
+//   currentUser = JSON.parse(local);
+// }
 
-console.log(currentId);
+// console.log(currentUser);
 
 
   
@@ -29,15 +43,38 @@ console.log(currentId);
   function getValues(e: React.ChangeEvent<HTMLInputElement>) {
     const name = e.target.name;
     const value = e.target.value;
+
+setUserDatas((prev:userProfileType)=>({...prev,img_url:imgUrl,[name]:value,
+}))
+// console.log(userDatas);
+
   }
+
+  function isValidAzerbaijanPhoneNumber(phoneNumber:string) {
+    const azPhoneNumberRegex = /^994(50|51|55|70|77|10)\d{7}$/;
+
+    return azPhoneNumberRegex.test(phoneNumber);
+  }
+
+  async function getUserDatas() {
+    const res = await getProfileInfo()
+    // console.log(res?.data.user);
+    setUserDatas(res?.data?.user)
+  }
+
+  useEffect(() => {
+   
+    getUserDatas()
+    
+  },[])
+  // console.log(userDatas);
   
-  const [imgUrl, setImgUrl] = useState<any>("");
+
   //  const [imgUpload, setImageUpload]=useState()
 
   // const imgRef=useRef(null)
   // console.log(imgUrl);
 
-  const [imgOnload, setImgOnload] = useState(false);
 
   // console.log(imgOnload);
 
@@ -47,6 +84,7 @@ console.log(currentId);
       return;
     }
     const imageRef = ref(fileStorage, `files/images/${name}`);
+
 
     // setCurrentImgRef(imageRef)
 
@@ -63,9 +101,40 @@ console.log(currentId);
       });
     });
   }
-console.log();
+  function isObjectFullyFilled(obj: userProfileType) {
+   
+    
+    if (Object.values(obj).length <=5) {
+      return false
+    }
+    
+    return Object.values(obj).every(value => value !== null && value !== undefined && value !== '');
+  }
 
+  async function updateUserData() {
 
+    if (! isObjectFullyFilled(userDatas)) {
+      toast.warning("Please fill the all inputs!")
+  return
+}
+   
+    if (!isValidAzerbaijanPhoneNumber(userDatas?.phone)) {
+      
+      toast.warning("Invalid phone number!")
+      return
+
+    }
+    
+
+    const res = await putProfileInfo(userDatas)
+    if (res?.status === 200) {
+      toast.success("Your informations have been updated successfully!");
+
+      return
+    }
+  //  console.log(res);
+   
+}
   return (
     <>
       <Head>
@@ -74,6 +143,7 @@ console.log();
         <link rel="icon" href="/mainBurger.svg" />
       </Head>
       <main>
+        <ToastContainer/>
         <Navbar />
 
         <section className="m-4 sm:m-8 flex justify-center gap-10">
@@ -87,7 +157,7 @@ console.log();
             <div className=" w-full flex  justify-center ">
               <img
                 width={146}
-                height={0}
+                  height={0}
                   // src={"user-profile-upload.svg"}
                 src= {`${
                     imgOnload ? "/loadingImg.jpg" : imgUrl ? imgUrl : "/user-profile-upload.svg"
@@ -104,11 +174,13 @@ console.log();
                 <label>{t("userProfileContact")}</label>
                 <br />
                 <input
+                  onChange={getValues}
                   className=" w-[286px] sm:w-[444px] overflow-hidden h-14 p-3 rounded  bg-[#F3F4F6]  sm:bg-white"
                   type="text"
-                  name="contact"
-                  id=""
+                  name="phone"
                   placeholder="+994"
+                  value={userDatas?.phone}
+                  
                 />
               </div>
               <div className="">
@@ -120,43 +192,50 @@ console.log();
                   name="contact"
                   id=""
                   placeholder="example@gmail.com"
+                  disabled
+                  value={userDatas?.email}
                 />
               </div>
               <div className="">
                 <label>{t("userProfileUsarname")}</label>
                 <br />
                 <input
+                   onChange={getValues}
                   className="w-[286px] sm:w-[444px] overflow-hidden h-14 p-3 rounded bg-[#F3F4F6]  sm:bg-white"
                   type="text"
-                  name="contact"
-                  id=""
+                  name="username"
                   placeholder="Example Example"
+                  value={userDatas?.username}
                 />
               </div>
               <div className="">
                 <label>{t("userProfileAddress")}</label>
                 <br />
                 <input
+                   onChange={getValues}
                   className="w-[286px] sm:w-[444px] overflow-hidden h-14 p-3 rounded bg-[#F3F4F6]  sm:bg-white"
                   type="text"
-                  name="contact"
-                  id=""
+                  name="addsres"
                   placeholder="Ataturk 45 Ganclik Baku"
+                  value={userDatas?.address}
                 />
               </div>
               <div className="">
                 <label>{t("userProfileFullname")}</label>
                 <br />
                 <input
+                   onChange={getValues}
                   className="w-[286px] sm:w-[444px] overflow-hidden h-14 p-3 rounded bg-[#F3F4F6]  sm:bg-white"
                   type="text"
-                  name="contact"
-                  id=""
-                  placeholder="exampleexample"
+                  name="fullname"
+                  placeholder="example example"
+                  value={userDatas?.fullname}
                 />
               </div>
               <div className=" flex items-end ">
-                <button className=" w-[286px] sm:w-[444px] h-[53px] rounded bg-[#6FCF97] transition-transform transform duration-300 hover:scale-95">
+                <button
+                  onClick={updateUserData}
+                  className=" w-[286px] sm:w-[444px] h-[53px] rounded bg-[#6FCF97] transition-transform transform duration-300 hover:scale-95">
                   {t("userProfileSave")}
                 </button>
               </div>
