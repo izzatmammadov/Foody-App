@@ -15,10 +15,11 @@ import "react-toastify/dist/ReactToastify.css";
 const adminOffers = () => {
   const [isHiddenModal, setIsHiddenModal] = useState<boolean>(true);
   const [isOfferImage, setIsOfferImage] = useState<string>("");
-  const {offers, setOffers} = useGlobalStore();
+  const { offers, setOffers } = useGlobalStore();
 
   const titleOfferRef = useRef<HTMLInputElement>(null);
   const descOfferRef = useRef<HTMLInputElement>(null);
+  const img = useRef<HTMLInputElement>(null);
 
   function changeHidden(): void {
     setIsHiddenModal((prev: boolean) => !prev);
@@ -43,9 +44,10 @@ const adminOffers = () => {
 
       if (res?.status == 200 || res?.status == 201) {
         toast.success("Offer added successfully!");
-        offersRender()
+        offersRender();
         if (titleOfferRef.current) titleOfferRef.current.value = "";
         if (descOfferRef.current) descOfferRef.current.value = "";
+        if (img.current) img.current.src = "/noimg.png";
       }
 
       setTimeout(() => {
@@ -67,8 +69,6 @@ const adminOffers = () => {
       console.log(res);
       const offersArray = res?.data.result.data;
       setOffers(offersArray);
-
-
     } catch (err) {
       console.log(err);
     }
@@ -101,6 +101,7 @@ const adminOffers = () => {
           hidden={isHiddenModal}
           ButtonOnClick={handleCreateOffer}
           getImgUrl={handleAddNewImage}
+          imgRef={img}
         />
         <main className="flex">
           <div className=" hidden sm:block">
@@ -114,7 +115,8 @@ const adminOffers = () => {
 
           <section className=" w-full">
             <div className="m-0 sm:m-5">
-              <AdminSecondTitle resCategoryARR={""}
+              <AdminSecondTitle
+                resCategoryARR={""}
                 onClick={changeHidden}
                 name="Offers"
                 p1="Offers"

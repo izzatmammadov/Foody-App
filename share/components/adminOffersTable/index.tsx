@@ -32,7 +32,6 @@ const AdminOffersTableT: React.FC<AdminOffersTableType> = ({
   const [isHiddenModal, setIsHiddenModal] = useState<boolean>(true);
   const {offers, setOffers} = useGlobalStore();
 
-
   const form_titleRef = useRef<HTMLInputElement>(null);
   const form_descRef = useRef<HTMLInputElement>(null);
   const imgRef = useRef<HTMLInputElement>(null);

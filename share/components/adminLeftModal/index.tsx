@@ -31,6 +31,11 @@ interface Props {
   form_titleRef?: any;
   form_descRef?: any;
   arr?: any;
+  addProductName?: any;
+  addProductPrice?: any;
+  addProductRestaurant?: any;
+  addProductDesc?: any;
+  Restaurants?:any;
 }
 
 export const AdminLeftModal = ({
@@ -55,6 +60,11 @@ export const AdminLeftModal = ({
   category_idRef,
   form_titleRef,
   form_descRef,
+  addProductName,
+  addProductPrice,
+  addProductRestaurant,
+  addProductDesc,
+  Restaurants,
 }: Props) => {
   const [imgUrl, setImgUrl] = useState<any>("");
   //  const [imgUpload, setImageUpload]=useState()
@@ -87,6 +97,7 @@ export const AdminLeftModal = ({
         getImgUrl(url);
       });
     });
+
   }
   return (
     <div
@@ -133,10 +144,12 @@ export const AdminLeftModal = ({
           <div className=" w-full lg:w-2/3  pt-5 pl-5  pr-7 pb-7  rounded-2xl bg-darkBlue_5 max-h-[600px] overflow-y-auto ">
             {mod === "1" && (
               <div>
-                <AdminModalInput p="Name" />
-                <AdminModalTexArea />
-                <AdminModalInput p="Price" />
+                <AdminModalInput p="Name" useRef={addProductName}/>
+                <AdminModalTexArea useRef={addProductDesc} />
+                <AdminModalInput p="Price" useRef={addProductPrice} />
                 <AdminModalDropdown
+                  useRef={addProductRestaurant}
+                  arr={Restaurants}
                   p="Restaurants"
                   className="w-full bg-darkBlue_4 rounded-2xl font-medium text-base text-whiteLight pl-3 py-4"
                 />

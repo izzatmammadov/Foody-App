@@ -19,11 +19,9 @@ export const AdminModalDropdown = ({
   callBackValue,
   useRef,
   activeValue,
-  
 }: Props) => {
   // const [selectedValue, setSelectedValue] = useState<string | undefined>("");
   // getCategories()
-  console.log();
 
   return (
     <div className={className2}>

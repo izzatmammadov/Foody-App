@@ -2,7 +2,7 @@ import Image from "next/image";
 import { Button } from "../Button";
 import { useTranslation } from "react-i18next";
 import { useRouter } from "next/router";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Input } from "../input";
 import { RestaurantSearchModal } from "../restaurantSearchModal";
 import { NavbarAvatar } from "../navbarAvatar";
@@ -11,6 +11,10 @@ import { NavbarLangButton } from "../navbarLangButton";
 import { AdminNavbarAvatar } from "../adminNavbarAvatar";
 import { AdminAside } from "../adminAside";
 import { AdminLeftModal } from "../adminLeftModal";
+import { createProduct, getRestourans } from "@/share/services/axios";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import { useGlobalStore } from "@/share/services/provider";
 
 interface NavbarProps {
   adminNavbar?: boolean;
@@ -25,12 +29,30 @@ export const Navbar: React.FC<NavbarProps> = ({ adminNavbar }) => {
   const [isActiveName, setIsActiveName] = useState("");
   const [isFullName, setIsFullName] = useState("");
   const [isHiddenModal, setIsHiddenModal] = useState<boolean>(true);
+  const [image, setImage] = useState("");
+  const [restaurants, setRestaurants] = useState();
+  const { products, setProducts } = useGlobalStore();
+
+
+  const fetchRestaurants = async () => {
+    try {
+      const response = await getRestourans();
+      const mapRestaurant = response?.data.result.data.map(
+        (item: any) => item.name
+      );
+      setRestaurants(mapRestaurant);
+    } catch (error) {
+      console.error("Error can't fetching products:", error);
+    }
+  };
+
+  useEffect(() => {
+    fetchRestaurants();
+  }, []);
 
   function changeHidden(): void {
     setIsHiddenModal((prev: boolean) => !prev);
-    // console.log(isHiddenModal);
   }
-
 
   const toggleModal = () => {
     setModalOpen(!isModalOpen);
@@ -54,15 +76,15 @@ export const Navbar: React.FC<NavbarProps> = ({ adminNavbar }) => {
     if (parsedItem?.access_token) {
       setIsToken(true);
     } else {
-      setIsActiveName("XX")
+      setIsActiveName("XX");
     }
   }, [isToken]);
 
   const logOut = () => {
-    localStorage.removeItem("tokenObj")
-    localStorage.removeItem("userInfo")
-    navigate.push("/login")
-  }
+    localStorage.removeItem("tokenObj");
+    localStorage.removeItem("userInfo");
+    navigate.push("/login");
+  };
 
   //^ INPUT MODAL
 
@@ -74,6 +96,71 @@ export const Navbar: React.FC<NavbarProps> = ({ adminNavbar }) => {
 
   const closeInputModal = () => {
     setInputModal(false);
+  };
+
+  //* ADD PRODUCT
+
+  const addProductName = useRef<HTMLInputElement>(null);
+  const addProductPrice = useRef<HTMLInputElement>(null);
+  const addProductRestaurant = useRef<HTMLInputElement>(null);
+  const addProductDesc = useRef<HTMLInputElement>(null);
+  const img = useRef<HTMLInputElement>(null);
+
+  const addProduct = async () => {
+    const productName = addProductName.current?.value;
+    const productPrice = addProductPrice.current?.value;
+    const productRestaurant = addProductRestaurant.current?.value;
+    const productDesc = addProductDesc.current?.value;
+
+    if (
+      !productName &&
+      !productPrice &&
+      !productRestaurant &&
+      !productDesc &&
+      !image
+    ) {
+      toast.warning("Please fill the correctly!");
+      return;
+    }
+
+    const ProductValues = {
+      name: productName,
+      description: productDesc,
+      img_url: image,
+      rest_id: productRestaurant,
+      price: productPrice,
+    };
+
+    try {
+      const res = await createProduct(ProductValues);
+
+      const productValue = res?.data;
+      console.log(productValue);
+      console.log(ProductValues);
+      
+      
+      
+      if (res?.status == 201 || res?.status==200) {
+        setProducts((prev:any) => [...prev, productValue])        
+  
+        toast.success("Product added successfully!");
+        if (addProductName.current) addProductName.current.value = "";
+        if (addProductDesc.current) addProductDesc.current.value = "";
+        if (addProductPrice.current) addProductPrice.current.value = "";
+        if (addProductRestaurant.current) addProductRestaurant.current.value = "";
+        if (img.current) img.current.src = "/noimg.png";
+
+        setTimeout(() => {
+          changeHidden();
+        }, 500);
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const handleAddNewImage = (image_url: string) => {
+    setImage(image_url);
   };
 
   return (
@@ -110,20 +197,34 @@ export const Navbar: React.FC<NavbarProps> = ({ adminNavbar }) => {
         </span>
       </h1>
       <AdminLeftModal
-              onClickClose={changeHidden}
-              mod="1"
-              p="Add Product  "
-              p1="Upload  image"
-              p2="Add your Product information"
-              hidden={isHiddenModal}
-              btn="Create Product"
-              // ButtonOnClick={addCategory}
-          
-            />
+        onClickClose={changeHidden}
+        mod="1"
+        p="Add Product  "
+        p1="Upload  image"
+        p2="Add your Product information"
+        hidden={isHiddenModal}
+        btn="Create Product"
+        ButtonOnClick={addProduct}
+        addProductName={addProductName}
+        addProductPrice={addProductPrice}
+        addProductRestaurant={addProductRestaurant}
+        addProductDesc={addProductDesc}
+        getImgUrl={handleAddNewImage}
+        Restaurants={restaurants}
+        imgRef={img}
+      />
       {adminNavbar ? (
         <div className="flex gap-2 sm:gap-5">
-          <Button onClick={changeHidden} className="hidden sm:block bg-lightPurple_3 text-white text-sm font-medium px-3 rounded-full shadow-sm shadow-textGreenLight hover:scale-95 transition-all duration-500" innerText={t("addCategory")}/>
-          <Button onClick={changeHidden} className="block sm:hidden bg-lightPurple_3 text-white text-2xl font-medium px-4 rounded-full shadow-sm shadow-textGreenLight hover:scale-95 transition-all duration-500" innerText="&#43;"/>
+          <Button
+            onClick={changeHidden}
+            className="hidden sm:block bg-lightPurple_3 text-white text-sm font-medium px-3 rounded-full shadow-sm shadow-textGreenLight hover:scale-95 transition-all duration-500"
+            innerText={t("addCategory")}
+          />
+          <Button
+            onClick={changeHidden}
+            className="block sm:hidden bg-lightPurple_3 text-white text-2xl font-medium px-4 rounded-full shadow-sm shadow-textGreenLight hover:scale-95 transition-all duration-500"
+            innerText="&#43;"
+          />
           <AdminNavbarAvatar isName={isActiveName} />
         </div>
       ) : (
@@ -189,17 +290,19 @@ export const Navbar: React.FC<NavbarProps> = ({ adminNavbar }) => {
               </>
             ) : (
               <>
-              {isToken ? (
-                <Button
-                className=" w-full mt-8 mx-auto py-4 rounded-full text-2xl text-black font-medium "
-                innerText={isFullName}
-              />
-              ) : (<Button
-                className=" w-4/5 mt-8 mx-auto py-4 rounded-full bg-mainRed text-2xl text-white font-medium "
-                innerText={t("signUp")}
-                onClick={()=>navigate.push("/login")}
-              />)}
-                
+                {isToken ? (
+                  <Button
+                    className=" w-full mt-8 mx-auto py-4 rounded-full text-2xl text-black font-medium "
+                    innerText={isFullName}
+                  />
+                ) : (
+                  <Button
+                    className=" w-4/5 mt-8 mx-auto py-4 rounded-full bg-mainRed text-2xl text-white font-medium "
+                    innerText={t("signUp")}
+                    onClick={() => navigate.push("/login")}
+                  />
+                )}
+
                 <ul className="justify-around text-2xl w-full font-medium text-grayText1 flex flex-col mt-6 gap-3">
                   <li
                     onClick={() => navigate.push("/")}
@@ -271,6 +374,7 @@ export const Navbar: React.FC<NavbarProps> = ({ adminNavbar }) => {
               </>
             )}
           </div>
+          <ToastContainer />
         </div>
       )}
       {/* HAMBURGER END */}
