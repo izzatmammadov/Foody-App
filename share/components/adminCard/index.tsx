@@ -4,7 +4,12 @@ import Modal from "../Modal";
 import { Button } from "../Button";
 import { useTranslation } from "react-i18next";
 import { AdminLeftModal } from "../adminLeftModal";
-import { ProductValues, deleteProduct, updateProduct } from "@/share/services/axios";
+import {
+  ProductValues,
+  deleteProduct,
+  getProducts,
+  updateProduct,
+} from "@/share/services/axios";
 import { useGlobalStore } from "@/share/services/provider";
 import { ToastContainer, toast } from "react-toastify";
 interface cartTipe {
@@ -25,12 +30,11 @@ const AdminCard = ({
   const { t, i18n } = useTranslation();
   const [showPopup, setShowPopup] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [ image, setImage] =useState("")
+  const [image, setImage] = useState("");
   const { products, setProducts } = useGlobalStore();
 
-
   //^ MODAL
-  const handleButtonClick =  () => {
+  const handleButtonClick = () => {
     setIsModalOpen(true);
   };
 
@@ -39,23 +43,24 @@ const AdminCard = ({
   const handleButtonDelete = async () => {
     const res = await deleteProduct(food_id);
     if (res?.status == 204) {
-      let newProduct = products?.filter((item:any)=> item?.id !== food_id)
-      setProducts(newProduct)
+      let newProduct = products?.filter((item: any) => item?.id !== food_id);
+      setProducts(newProduct);
       toast.success("Deleted Successfully!");
       setIsModalOpen((prev) => !prev);
     }
-  }
-
-  //*EDIT PRODUCT
+  };
 
   function getImgUrl(url: string) {
     setImage(url);
   }
+
   const addProductName = useRef<HTMLInputElement>(null);
   const addProductPrice = useRef<HTMLInputElement>(null);
   const addProductRestaurant = useRef<HTMLInputElement>(null);
   const addProductDesc = useRef<HTMLInputElement>(null);
   const imgRef = useRef<HTMLInputElement>(null);
+
+  //*EDIT PRODUCT
 
   const editProduct = async () => {
     const productName = addProductName?.current?.value;
@@ -63,53 +68,87 @@ const AdminCard = ({
     const productDesc = addProductDesc?.current?.value;
     const productRestaurant = addProductRestaurant?.current?.value;
     const img = imgRef.current?.src;
-    
-    const productValues:ProductValues = {
+
+    const productValues: ProductValues = {
       name: productName,
       description: productDesc,
       img_url: img,
       rest_id: productRestaurant,
-      price: productPrice
-    }
-    console.log(typeof productName, typeof productDesc, typeof productPrice, typeof productRestaurant, typeof img);
-    
+      price: productPrice,
+    };
 
-    if(!isInputValid(productName, productDesc, img, productRestaurant, productPrice)) {
-      toast.warning("Please fill the correctly!")
+    if (
+      !isInputValid(
+        productName,
+        productDesc,
+        img,
+        productRestaurant,
+        productPrice
+      )
+    ) {
+      toast.warning("Please fill the correctly!");
     }
 
-    const res = await updateProduct(productValues, food_id)
-    console.log(productValues);
-    console.log(res);
-    
-    
-    if(res?.status == 200) {
-      toast.success("Edit was successfully!");
-      const updatedData = products.map((item:any) => {
+    const res = await updateProduct(productValues, food_id);
+    console.log("ramalin responsu: ", res);
+
+    if (res?.status == 200) {
+      // toast.success("Edit was successfully!"); //!error verir acma
+      const updatedData = products.map((item: any) => {
         if (item?.id === food_id) {
           return productValues;
         }
         return item;
       });
-      setProducts(updatedData)
+      setProducts(updatedData);
 
       setTimeout(() => {
         changeHidden();
       }, 500);
     }
-
-  }
+  };
 
   function isInputValid(
     name: string | undefined,
     description: string | undefined,
-    img_url: string | undefined ,
+    img_url: string | undefined,
     rest_id: string | undefined,
-    price: string | undefined 
+    price: string | undefined
   ): boolean {
     console.log(name, description, img_url, rest_id, price);
-    return !!name && !!description && !!img_url && !!rest_id && !!price; 
+    return !!name && !!description && !!img_url && !!rest_id && !!price;
   }
+
+  //& HANDLE EDIT
+
+  const handleEdit = async () => {
+    changeHidden();
+    const res: any = await getProducts();
+    if (res?.status === 200) {
+      const currentData = res?.data?.result.data;
+      const filteredProduct = currentData.filter(
+        (item: any) => item?.id == food_id
+      );
+      console.log(filteredProduct);
+
+      if (filteredProduct) {
+        (addProductName?.current as { value: string }).value =
+          filteredProduct[0]?.name || "";
+
+        (addProductDesc?.current as { value: string }).value =
+          filteredProduct[0]?.description || "";
+
+        (addProductPrice?.current as { value: string }).value =
+          filteredProduct[0]?.price || "";
+
+        (addProductRestaurant?.current as { value: string }).value =
+          filteredProduct[0]?.rest_id || "";
+
+        (imgRef?.current as { src: string }).src =
+          filteredProduct[0]?.img_url || "";
+      }
+    }
+  };
 
   const handleModalClose = () => {
     setIsModalOpen(false);
@@ -121,7 +160,8 @@ const AdminCard = ({
   };
 
   const [isHiddenModal, setIsHiddenModal] = useState<boolean>(true);
-  function changeHidden() {
+
+  async function changeHidden() {
     setIsHiddenModal((prev) => !prev);
   }
   return (
@@ -140,7 +180,7 @@ const AdminCard = ({
         getImgUrl={getImgUrl}
         ButtonOnClick={editProduct}
       />
-      <ToastContainer/>
+      <ToastContainer />
       <div className=" rounded-lg w-52 h-72 bg-white">
         <div className="flex  flex-col items-center mt-3">
           <img width="170" height="158" src={foodimage} alt="" />
@@ -159,7 +199,7 @@ const AdminCard = ({
               src="/adminMarqaritaEditButton.svg"
               alt=""
               className=" cursor-pointer"
-              onClick={changeHidden}
+              onClick={handleEdit}
             />
             <Image
               width="24"
@@ -182,7 +222,7 @@ const AdminCard = ({
             />
           </div>
 
-          <p  className=" text-grayText1 w-2/3 mx-auto text-center my-5">
+          <p className=" text-grayText1 w-2/3 mx-auto text-center my-5">
             {t("modalDesc2")}
           </p>
 
@@ -193,10 +233,10 @@ const AdminCard = ({
               onClick={handleModalClose}
             />
             <div onClick={handleButtonDelete}>
-                <Button
-                  className="bg-mainRed border-2 text-white py-1 px-8 rounded-md border-mainRed shadow-md hover:scale-95 transition-all duration-500"
-                  innerText={t("modalDesc4")}
-                />
+              <Button
+                className="bg-mainRed border-2 text-white py-1 px-8 rounded-md border-mainRed shadow-md hover:scale-95 transition-all duration-500"
+                innerText={t("modalDesc4")}
+              />
             </div>
           </div>
         </Modal>
