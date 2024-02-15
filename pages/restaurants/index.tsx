@@ -3,13 +3,22 @@ import Head from "next/head";
 import Image from "next/image";
 import { Footer } from "../../share/components/Footer";
 import { Navbar } from "../../share/components/Navbar";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import RestaurantCard from "../../share/components/restaurantCard";
-import { RestaurantAside } from "../../share/components/restaurantAside";
-import { RestaurantFilterModal } from "../../share/components/restaurantFilterModal"
+import RestaurantAside from "../../share/components/restaurantAside";
+import { RestaurantFilterModal } from "../../share/components/restaurantFilterModal";
+import { formtype, getRestourans } from "@/share/services/axios";
+import { UpperCase } from "@/share/services/upperCase";
+import { fi } from "date-fns/locale";
 
-const Restaurants: NextPage = () => {
+// const Restaurants: NextPage = ({ restaurants }: any) => {
+
+export default function Restaurants() {
   const [isFilterModalOpen, setFilterModalOpen] = useState(false);
+
+  const [restaurants, setRestaurants] = useState([]);
+
+  const [filteredRes, setFilteredRes] = useState([]);
 
   const handleOpenFilterModal = () => {
     setFilterModalOpen(true);
@@ -18,7 +27,37 @@ const Restaurants: NextPage = () => {
   const handleCloseFilterModal = () => {
     setFilterModalOpen(false);
   };
-  
+
+  function filterRes(id?: string) {
+    if (id) {
+      const filteredArr = restaurants.filter(
+        (item: any) => item.category_id === id
+      );
+      setFilteredRes(filteredArr);
+    } else {
+      setFilteredRes(restaurants);
+    }
+  }
+
+  console.log(filteredRes);
+
+  async function renderRestaurants() {
+    try {
+      const response = await getRestourans();
+      // console.log(response);
+      setRestaurants(response?.data.result.data);
+    } catch (err) {
+      console.log(err);
+    }
+  }
+  useEffect(() => {
+    renderRestaurants();
+  }, []);
+
+  useEffect(() => {
+    filterRes();
+  }, [restaurants]);
+
   return (
     <>
       <Head>
@@ -31,80 +70,38 @@ const Restaurants: NextPage = () => {
         <Navbar />
 
         <section className="mx-0 px-1 sm:px-0 sm:m-8 flex flex-col sm:flex-row justify-center gap-10">
-        <div className="hidden rounded-md sm:flex flex-col max-h-screen overflow-y-auto gap-8 bg-whiteLight1 w-1/6 p-4">
-          <RestaurantAside/>
-        </div>
+          <div className="hidden rounded-md sm:flex flex-col max-h-screen overflow-y-auto gap-8 bg-whiteLight1 w-1/6 p-4">
+            <RestaurantAside onClick={filterRes} />
+          </div>
 
-          <div className="flex sm:hidden items-center mt-4 justify-center gap-2 shadow-lg p-4" onClick={handleOpenFilterModal}>
-            <Image width={25} height={0} src={"filter.svg"} alt="filter" />
+          <div
+            className="flex sm:hidden items-center mt-4 justify-center gap-2 shadow-lg p-4"
+            onClick={handleOpenFilterModal}
+          >
+            <Image width={25} height={0} src={"/filter.svg"} alt="filter" />
             <p className="font-medium text-2xl text-grayText2">Filters</p>
           </div>
 
           {/* Modal */}
-          {isFilterModalOpen && <RestaurantFilterModal onClose={handleCloseFilterModal} />}
+          {isFilterModalOpen && (
+            <RestaurantFilterModal onClose={handleCloseFilterModal} />
+          )}
           {/* Modal END */}
 
           {/* CARDS */}
           <div className="w-full flex justify-between max-h-[740px] mb-8 sm:mb-0 overflow-y-auto flex-wrap gap-x-1 gap-y-8">
-            <RestaurantCard 
-            name="Coffee Mania"
-            cuisine="chinese, sea-food, thai, lebanese, caribbean"
-            deliveryCost={5}
-            deliveryTime="12 min."
-            imageSrc="soupCard.svg"
-            />
-            <RestaurantCard 
-            name="Burger King"
-            cuisine="chinese, sea-food, thai, lebanese, caribbean"
-            deliveryCost={8}
-            deliveryTime="10 min."
-            imageSrc="burgerKing.svg"
-            isNew
-            />
-            <RestaurantCard 
-            name="Pizza Hut"
-            cuisine="chinese, sea-food, thai, lebanese, caribbean"
-            deliveryCost={14}
-            deliveryTime="22 min."
-            imageSrc="margaritaCard.svg"
-            />
-            <RestaurantCard 
-            name="Papa John's"
-            cuisine="chinese, sea-food, thai, lebanese, caribbean"
-            deliveryCost={16}
-            deliveryTime="21 min."
-            imageSrc="papaJohns.svg"
-            />
-            <RestaurantCard 
-            name="Burger King"
-            cuisine="chinese, sea-food, thai, lebanese, caribbean"
-            deliveryCost={5}
-            deliveryTime="10 min."
-            imageSrc="burgerKing.svg"
-            />
-            <RestaurantCard 
-            name="Coffee Mania"
-            cuisine="chinese, sea-food, thai, lebanese, caribbean"
-            deliveryCost={5}
-            deliveryTime="12 min."
-            imageSrc="soupCard.svg"
-            />
-            <RestaurantCard 
-            name="Papa John's"
-            cuisine="chinese, sea-food, thai, lebanese, caribbean"
-            deliveryCost={18}
-            deliveryTime="32 min."
-            imageSrc="papaJohns.svg"
-            isNew
-            />
-            <RestaurantCard 
-            name="Pizza Hut"
-            cuisine="chinese, sea-food, thai, lebanese, caribbean"
-            deliveryCost={15}
-            deliveryTime="17 min."
-            imageSrc="margaritaCard.svg"
-            />
-            
+            {filteredRes?.map((item: formtype) => {
+              return (
+                <RestaurantCard
+                  key={item.name}
+                  name={UpperCase(item.name)}
+                  cuisine={item.cuisine}
+                  deliveryCost={item.delivery_price}
+                  deliveryTime={item.delivery_min + "min."}
+                  imageSrc={item.img_url}
+                />
+              );
+            })}
           </div>
         </section>
 
@@ -112,6 +109,26 @@ const Restaurants: NextPage = () => {
       </main>
     </>
   );
-};
+}
 
-export default Restaurants;
+// export default Restaurants;
+
+// export async function getServerSideProps() {
+//   try {
+//     const response = await getRestourans();
+//     console.log(response);
+
+//     return {
+//       props: {
+//         restaurants: response|| null,
+//       },
+//     };
+//   } catch (error) {
+//     console.error("Error fetching restaurant data:", error);
+//     return {
+//       props: {
+//         restaurants: null,
+//       },
+//     };
+//   }
+// }
