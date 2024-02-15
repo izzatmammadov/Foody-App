@@ -74,8 +74,6 @@ const AdminOffersTableT: React.FC<AdminOffersTableType> = ({
     const title = form_titleRef?.current?.value;
     const description = form_descRef?.current?.value;
     const img = imgRef.current?.src;
-    console.log();
-    
 
     const offerValues: OfferValues = {
       name: title,

@@ -1,10 +1,12 @@
 import Image from "next/image";
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
 import Modal from "../Modal";
 import { Button } from "../Button";
 import { useTranslation } from "react-i18next";
 import { AdminLeftModal } from "../adminLeftModal";
-import { deleteProduct } from "@/share/services/axios";
+import { ProductValues, deleteProduct, updateProduct } from "@/share/services/axios";
+import { useGlobalStore } from "@/share/services/provider";
+import { ToastContainer, toast } from "react-toastify";
 interface cartTipe {
   foodname: string;
   restoranname: string | number;
@@ -23,15 +25,90 @@ const AdminCard = ({
   const { t, i18n } = useTranslation();
   const [showPopup, setShowPopup] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [ image, setImage] =useState("")
+  const { products, setProducts } = useGlobalStore();
+
 
   //^ MODAL
   const handleButtonClick =  () => {
     setIsModalOpen(true);
   };
 
+  //!DELETE PRODUCT
+
   const handleButtonDelete = async () => {
     const res = await deleteProduct(food_id);
+    if (res?.status == 204) {
+      let newProduct = products?.filter((item:any)=> item?.id !== food_id)
+      setProducts(newProduct)
+      toast.success("Deleted Successfully!");
+      setIsModalOpen((prev) => !prev);
+    }
+  }
+
+  //*EDIT PRODUCT
+
+  function getImgUrl(url: string) {
+    setImage(url);
+  }
+  const addProductName = useRef<HTMLInputElement>(null);
+  const addProductPrice = useRef<HTMLInputElement>(null);
+  const addProductRestaurant = useRef<HTMLInputElement>(null);
+  const addProductDesc = useRef<HTMLInputElement>(null);
+  const imgRef = useRef<HTMLInputElement>(null);
+
+  const editProduct = async () => {
+    const productName = addProductName?.current?.value;
+    const productPrice = addProductPrice?.current?.value;
+    const productDesc = addProductDesc?.current?.value;
+    const productRestaurant = addProductRestaurant?.current?.value;
+    const img = imgRef.current?.src;
+    
+    const productValues:ProductValues = {
+      name: productName,
+      description: productDesc,
+      img_url: img,
+      rest_id: productRestaurant,
+      price: productPrice
+    }
+    console.log(typeof productName, typeof productDesc, typeof productPrice, typeof productRestaurant, typeof img);
+    
+
+    if(!isInputValid(productName, productDesc, img, productRestaurant, productPrice)) {
+      toast.warning("Please fill the correctly!")
+    }
+
+    const res = await updateProduct(productValues, food_id)
+    console.log(productValues);
     console.log(res);
+    
+    
+    if(res?.status == 200) {
+      toast.success("Edit was successfully!");
+      const updatedData = products.map((item:any) => {
+        if (item?.id === food_id) {
+          return productValues;
+        }
+        return item;
+      });
+      setProducts(updatedData)
+
+      setTimeout(() => {
+        changeHidden();
+      }, 500);
+    }
+
+  }
+
+  function isInputValid(
+    name: string | undefined,
+    description: string | undefined,
+    img_url: string | undefined ,
+    rest_id: string | undefined,
+    price: string | undefined 
+  ): boolean {
+    console.log(name, description, img_url, rest_id, price);
+    return !!name && !!description && !!img_url && !!rest_id && !!price; 
   }
 
   const handleModalClose = () => {
@@ -42,10 +119,10 @@ const AdminCard = ({
   const togglePopup = () => {
     setShowPopup(!showPopup);
   };
+
   const [isHiddenModal, setIsHiddenModal] = useState<boolean>(true);
   function changeHidden() {
     setIsHiddenModal((prev) => !prev);
-    console.log(isHiddenModal);
   }
   return (
     <>
@@ -55,7 +132,15 @@ const AdminCard = ({
         p2="Edit your Product description and necessary information"
         onClickClose={changeHidden}
         hidden={isHiddenModal}
+        imgRef={imgRef}
+        addProductName={addProductName}
+        addProductDesc={addProductDesc}
+        addProductPrice={addProductPrice}
+        addProductRestaurant={addProductRestaurant}
+        getImgUrl={getImgUrl}
+        ButtonOnClick={editProduct}
       />
+      <ToastContainer/>
       <div className=" rounded-lg w-52 h-72 bg-white">
         <div className="flex  flex-col items-center mt-3">
           <img width="170" height="158" src={foodimage} alt="" />

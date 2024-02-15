@@ -137,8 +137,7 @@ export const Navbar: React.FC<NavbarProps> = ({ adminNavbar }) => {
       const productValue = res?.data;
       console.log(productValue);
       console.log(ProductValues);
-      
-      
+    
       
       if (res?.status == 201 || res?.status==200) {
         setProducts((prev:any) => [...prev, productValue])        
