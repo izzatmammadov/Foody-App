@@ -21,16 +21,13 @@ interface Product {
 const AdminProducts: NextPage = () => {
   const { products, setProducts } = useGlobalStore();
   const [restaurants, setRestaurants] = useState()
-const [activeProduct, setActiveProduct] = useState([])
 
   //* GET PRODUCTS
   const fetchProducts = async () => {
     try {
       const response = await getProducts();
-      // console.log(response?.data.result.data);
       
       setProducts(response?.data.result.data);
-      setActiveProduct(response?.data.result.data);
 
     } catch (error) {
       console.error("Error can't fetching products:", error);

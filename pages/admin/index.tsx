@@ -34,14 +34,6 @@ const AdminDashboard: NextPage = () => {
             <OrdersChart />
             <Barchart />
           </div>
-          <section>
-            <AdminCard
-              foodname={"Marqarita"}
-              restoranname={"Papa John’s"}
-              foodimage={"adminMarqarita.svg"}
-              foodprice={16}
-            />
-          </section>
         </main>
       </div>
     </>
