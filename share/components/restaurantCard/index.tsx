@@ -7,6 +7,7 @@ interface RestaurantCardProps {
   deliveryTime: string;
   imageSrc: string;
   isNew?: boolean;
+  onClick:()=>void;
 }
 
 const RestaurantCard: React.FC<RestaurantCardProps> = ({
@@ -16,9 +17,10 @@ const RestaurantCard: React.FC<RestaurantCardProps> = ({
   deliveryTime,
   imageSrc,
   isNew = false,
+  onClick
 }) => {
   return (
-    <div className="w-[46%] relative text-center sm:text-start sm:w-1/5 h-max px-1 sm:px-4 py-7 shadow-lg flex flex-col cursor-pointer hover:scale-105 transition-all duration-500">
+    <div onClick={onClick} className="w-[46%] relative text-center sm:text-start sm:w-1/5 h-max px-1 sm:px-4 py-7 shadow-lg flex flex-col cursor-pointer hover:scale-105 transition-all duration-500">
       {isNew && (
         <span className="absolute top-0 left-0 bg-mainRed text-white px-4 py-1 text-sm font-semibold animate-pulse">
           NEW

@@ -9,11 +9,14 @@ import RestaurantAside from "../../share/components/restaurantAside";
 import { RestaurantFilterModal } from "../../share/components/restaurantFilterModal";
 import { formtype, getRestourans } from "@/share/services/axios";
 import { UpperCase } from "@/share/services/upperCase";
-import { fi } from "date-fns/locale";
+import { useRouter } from "next/router";
 
 // const Restaurants: NextPage = ({ restaurants }: any) => {
 
 export default function Restaurants() {
+
+  const { push } = useRouter()
+
   const [isFilterModalOpen, setFilterModalOpen] = useState(false);
 
   const [restaurants, setRestaurants] = useState([]);
@@ -50,6 +53,13 @@ export default function Restaurants() {
       console.log(err);
     }
   }
+
+
+  function handleClickCard(id:string) {
+  push(`/restaurants/${id}`)
+}
+
+
   useEffect(() => {
     renderRestaurants();
   }, []);
@@ -91,8 +101,11 @@ export default function Restaurants() {
           {/* CARDS */}
           <div className="w-full flex justify-between max-h-[740px] mb-8 sm:mb-0 overflow-y-auto flex-wrap gap-x-1 gap-y-8">
             {filteredRes?.map((item: formtype) => {
+              console.log(item);
+              
               return (
                 <RestaurantCard
+                  onClick={()=>handleClickCard(item.id)}
                   key={item.name}
                   name={UpperCase(item.name)}
                   cuisine={item.cuisine}
