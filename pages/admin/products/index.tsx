@@ -34,6 +34,9 @@ const AdminProducts: NextPage = () => {
     }
   };
 
+  console.log(products);
+  
+
   useEffect(() => {
     fetchProducts();
   }, []);

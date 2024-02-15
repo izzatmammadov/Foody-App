@@ -90,7 +90,7 @@ const AdminCard = ({
     }
 
     const res = await updateProduct(productValues, food_id);
-    console.log("ramalin responsu: ", res);
+    console.log("onun responsu: ", res);
 
     if (res?.status == 200) {
       // toast.success("Edit was successfully!"); //!error verir acma
@@ -190,7 +190,7 @@ const AdminCard = ({
           <p className=" text-[#8E8E93]">{restoranname}</p>
         </div>
         <div className=" mx-5 flex justify-between">
-          <p className="text-[#00B2A9;]  font-medium">${foodprice}</p>
+          <p className="text-[#00B2A9;] font-medium">${foodprice}</p>
 
           <div className="flex mx-3 gap-3">
             <Image
