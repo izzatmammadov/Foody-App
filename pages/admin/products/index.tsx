@@ -101,11 +101,11 @@ const [activeProduct, setActiveProduct] = useState([])
               {products.map((product:Product) => (
                 <AdminCard
                   key={product?.id}
-                  food_id={product.id}
-                  foodname={product.name}
-                  restoranname={product.rest_id}
-                  foodimage={product.img_url}
-                  foodprice={product.price}
+                  food_id={product?.id}
+                  foodname={product?.name}
+                  restoranname={product?.rest_id}
+                  foodimage={product?.img_url}
+                  foodprice={product?.price}
                 />
               ))}
                {/* <AdminCard

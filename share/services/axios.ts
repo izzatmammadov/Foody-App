@@ -222,6 +222,18 @@ export async function getOrderHistory() {
 }
 
 //& PRODUCTS
+export type ProductValues = {
+  productName?: string ;
+  productPrice?: string  ;
+  productDesc?: string ;
+  productRestaurant?: string ;
+
+  name?: string ;
+  description?: string ;
+  rest_id?: string  ;
+  price?: string  ;
+  img_url?: string ;
+};
 
 //* GET
 export const getProducts = async () => {
@@ -244,7 +256,7 @@ export const createProduct = async (data: any) => {
 };
 
 //* EDIT
-export const updateProduct = async (id: string | number, data: any) => {
+export const updateProduct = async (id: string | any, data: any) => {
   try {
     const response = await instanceAxios.put(`/products/${id}`, data);
     return response;
@@ -262,60 +274,49 @@ export const deleteProduct = async (id: number | string) => {
     console.log(error);
   }
 };
-export interface userProfileType{
-    name: string|undefined,
-    username: string|undefined,
-    "img_url": string|undefined,
-    phone: string,
-  fullname: string | undefined,
-  email: string | undefined,
-  address:string|undefined
+export interface userProfileType {
+  name: string | undefined;
+  username: string | undefined;
+  img_url: string | undefined;
+  phone: string;
+  fullname: string | undefined;
+  email: string | undefined;
+  address: string | undefined;
 }
 export async function getProfileInfo() {
   try {
-
-    let item :any= localStorage.getItem("userInfo")
-        let access_token = JSON.parse(item)
+    let item: any = localStorage.getItem("userInfo");
+    let access_token = JSON.parse(item);
     // const userinf: any = localStorage.getItem("userInfo")
     // const access_token: any = JSON.parse(userinf).access_token
     console.log(access_token);
-    
+
     const response = await instanceAxios.get(`/auth/user/`, {
       headers: {
         Authorization: `Bearer ${access_token.access_token}`,
-    }
-    } )
-    return response
+      },
+    });
+    return response;
   } catch (err) {
     console.log(err);
-    
   }
 }
 
-
-
-  export async function putProfileInfo(form:userProfileType) {
+export async function putProfileInfo(form: userProfileType) {
   try {
-
     let item: any = localStorage.getItem("userInfo");
 
     let access_token = JSON.parse(item);
-    
+
     const response = await instanceAxios.get(`/auth/user/`, {
+      data: form,
 
-      data:form,
-      
       headers: {
-
         Authorization: `Bearer ${access_token.access_token}`,
+      },
+    });
 
-      }
-      
-    }
-     )
-
-    return response
-
+    return response;
   } catch (err) {
     console.log(err);
   }
