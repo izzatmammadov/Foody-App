@@ -32,7 +32,7 @@ export interface formtype {
   delivery_price: number ;
   img_url: string ;
   delivery_min: string | number | undefined;
-  id:string
+  id?: string | any
   
 }
 //* Restourans

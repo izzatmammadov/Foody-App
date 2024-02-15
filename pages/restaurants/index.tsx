@@ -105,7 +105,7 @@ export default function Restaurants() {
               
               return (
                 <RestaurantCard
-                  onClick={()=>handleClickCard(item.id)}
+                  onClick={()=>handleClickCard(item?.id)}
                   key={item.name}
                   name={UpperCase(item.name)}
                   cuisine={item.cuisine}
