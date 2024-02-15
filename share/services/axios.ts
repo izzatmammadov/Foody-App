@@ -25,13 +25,15 @@ export const postCategory = async (form: Form) => {
 };
 
 export interface formtype {
-  name: string | undefined;
+  name: string;
   category_id: string | number | undefined;
-  cuisine: string | undefined;
+  cuisine: string ;
   address: string | undefined;
-  delivery_price: string | undefined;
-  img_url: string | undefined;
-  delivery_min: string | undefined;
+  delivery_price: number ;
+  img_url: string ;
+  delivery_min: string | number | undefined;
+  id:string
+  
 }
 //* Restourans
 
