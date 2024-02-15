@@ -6,7 +6,6 @@ import OrdersChart from "../../share/components/ordersChart";
 import Barchart from "../../share/components/LineChart";
 import { AdminLeftModal } from "../../share/components/adminLeftModal";
 import { useState } from "react";
-import AdminCard from "../../share/components/adminCard";
 import { Navbar } from "@/share/components/Navbar";
 
 const AdminDashboard: NextPage = () => {
