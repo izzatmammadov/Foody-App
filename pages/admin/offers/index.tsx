@@ -9,6 +9,7 @@ import { createOffer, getOffer } from "@/share/services/axios";
 import { useGlobalStore } from "@/share/services/provider";
 import Head from "next/head";
 import React, { useEffect, useRef, useState } from "react";
+import { useTranslation } from "react-i18next";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
@@ -16,6 +17,8 @@ const adminOffers = () => {
   const [isHiddenModal, setIsHiddenModal] = useState<boolean>(true);
   const [isOfferImage, setIsOfferImage] = useState<string>("");
   const { offers, setOffers } = useGlobalStore();
+  const { t } = useTranslation();
+
 
   const titleOfferRef = useRef<HTMLInputElement>(null);
   const descOfferRef = useRef<HTMLInputElement>(null);
@@ -131,9 +134,9 @@ const adminOffers = () => {
                 <thead className="h-16  text-center text-sm not-italic font-semibold leading-6">
                   <tr>
                     <td>ID</td>
-                    <td>image</td>
-                    <td>Title</td>
-                    <td>Descriptions</td>
+                    <td>{t("userOrder8")}</td>
+                    <td>{t("userOrder")}</td>
+                    <td>{t("userOrder7")}</td>
 
                     <td></td>
                   </tr>
