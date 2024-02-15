@@ -32,7 +32,7 @@ export const Navbar: React.FC<NavbarProps> = ({ adminNavbar }) => {
   const [image, setImage] = useState("");
   const [restaurants, setRestaurants] = useState();
   const { products, setProducts } = useGlobalStore();
-
+  const [filterRestouran, setFilterRestouran] = useState();
 
   const fetchRestaurants = async () => {
     try {
@@ -137,16 +137,16 @@ export const Navbar: React.FC<NavbarProps> = ({ adminNavbar }) => {
       const productValue = res?.data;
       console.log(productValue);
       console.log(ProductValues);
-    
-      
-      if (res?.status == 201 || res?.status==200) {
-        setProducts((prev:any) => [...prev, productValue])        
-  
+
+      if (res?.status == 201 || res?.status == 200) {
+        setProducts((prev: any) => [...prev, productValue]);
+
         toast.success("Product added successfully!");
         if (addProductName.current) addProductName.current.value = "";
         if (addProductDesc.current) addProductDesc.current.value = "";
         if (addProductPrice.current) addProductPrice.current.value = "";
-        if (addProductRestaurant.current) addProductRestaurant.current.value = "";
+        if (addProductRestaurant.current)
+          addProductRestaurant.current.value = "";
         if (img.current) img.current.src = "/noimg.png";
 
         setTimeout(() => {
@@ -161,6 +161,22 @@ export const Navbar: React.FC<NavbarProps> = ({ adminNavbar }) => {
   const handleAddNewImage = (image_url: string) => {
     setImage(image_url);
   };
+
+  async function searchRestauran(event: any) {
+    console.log(event.target.value);
+
+    let respons = await getRestourans();
+    let resData = respons?.data.result.data;
+    console.log(resData);
+    let filterResData = resData.filter(function (item: any) {
+      return item.name == event.target.value;
+    });
+
+    console.log(filterResData, "filterResData");
+
+    setFilterRestouran(filterResData);
+    console.log(filterRestouran, "------state");
+  }
 
   return (
     <nav
@@ -252,12 +268,13 @@ export const Navbar: React.FC<NavbarProps> = ({ adminNavbar }) => {
               <div className="w-1/5 hidden sm:block">
                 <Input
                   OnClick={toggleInputModal}
+                  OnChange={searchRestauran}
                   Type="text"
                   Placeholder="Search"
                   ClassName="w-full px-6 py-3 relative rounded-xl outline-none shadow-sm"
                 />
                 {isInputModal && (
-                  <RestaurantSearchModal onClose={closeInputModal} />
+                  <RestaurantSearchModal filterRestouran={filterRestouran} onClose={closeInputModal} />
                 )}
               </div>
               <NavbarLangButton />
