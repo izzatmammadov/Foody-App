@@ -1,7 +1,14 @@
+import { log } from "console";
 import { Button } from "../Button";
 import { RestaurantSearchModalCard } from "../restaurantSearchModalCard";
+import { useRouter } from "next/router";
 
 export const RestaurantSearchModal = ({ onClose, filterRestouran }: any) => {
+  function onclick(id: any) {
+    push(`/restaurants/${id}`);
+  }
+
+  const { query, push } = useRouter();
   return (
     <div className=" absolute top-[135px] right-[20.75%] flex flex-col justify-between rounded-lg py-5 bg-white z-50 w-[32%]">
       <Button
@@ -20,6 +27,8 @@ export const RestaurantSearchModal = ({ onClose, filterRestouran }: any) => {
             image={item.img_url}
             name={item.name}
             desc={item.cuisine}
+            onclick={onclick}
+            id={item.id}
           />
         ))}
         {/* <RestaurantSearchModalCard
