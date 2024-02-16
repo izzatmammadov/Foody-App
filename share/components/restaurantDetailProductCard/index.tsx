@@ -1,12 +1,14 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Image from "next/image";
 import { Button } from "../Button";
+import { getProducts } from "@/share/services/axios";
 
 interface DetailProductCardProps {
   name: string;
   desc?: string;
-  price: number;
+  price: any;
   imageSrc: string;
+  lokal: any;
 }
 
 export const RestDetailProductReact: React.FC<DetailProductCardProps> = ({
@@ -14,12 +16,32 @@ export const RestDetailProductReact: React.FC<DetailProductCardProps> = ({
   desc,
   price,
   imageSrc,
+  lokal,
 }) => {
   const [updatedPrice, setUpdatedPrice] = useState(price);
 
-  const handleButtonClick = () => {
-    setUpdatedPrice(updatedPrice + price);
-  };
+  // const [product, setProducts] = useState();
+
+  // const handleButtonClick = () => {
+  //   setUpdatedPrice(updatedPrice + price);
+  // };
+
+  // async function RenderProduct() {
+  //   const res = await getProducts();
+  //   let resArr = res?.data.result.data;
+  //   // console.log(resArr, "resArr-------");
+  //   // console.log(lokal, "lokal-------");
+
+  //   let focusProduct = resArr.filter(
+  //     (item: any) => item.rest_id == lokal[0].name
+  //   );
+  //   // console.log(focusProduct, "focusProduct-----------");
+  //   setProducts(focusProduct);
+  // }
+
+  // useEffect(() => {
+  //   RenderProduct();
+  // }, []);
 
   return (
     <div className="flex justify-between items-center gap-2 sm:gap-0 p-4 border-t-2 border-whiteLight2">
@@ -44,10 +66,11 @@ export const RestDetailProductReact: React.FC<DetailProductCardProps> = ({
         </p>
         <div className="flex items-center gap-2 sm:gap-8">
           <p className="font-semibold text-grayText2 text-lg">
-            ${updatedPrice.toFixed(2)}
+            {/* ${updatedPrice.toFixed(2)} */}
+            {price}
           </p>
           <Button
-            onClick={handleButtonClick}
+            // onClick={handleButtonClick}
             className="py-2 px-4 rounded-full border-2 border-whiteLight3 text-whiteLight3 text-2xl hover:border-green hover:bg-green hover:text-white transition-all duration-200"
             innerText="+"
           />
