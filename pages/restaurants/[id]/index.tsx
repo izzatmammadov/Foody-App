@@ -6,10 +6,41 @@ import { RestDetailHeader } from "../../../share/components/restaurantDetailHead
 import { RestDetailProductReact } from "../../../share/components/restaurantDetailProductCard";
 import { useTranslation } from "react-i18next";
 import { RestDetailBasket } from "@/share/components/restaurantDetailBasket";
+import { useRouter } from "next/router";
+import { getRestourans } from "@/share/services/axios";
+import React, { useEffect, useState } from "react";
 
-const RestaurantDetail: NextPage = () => {
+interface RestaurantDetailProps {
+  name?: any;
+}
+
+const RestaurantDetail: React.FC<RestaurantDetailProps> = ({ name }) => {
   const { t } = useTranslation();
+  const { asPath } = useRouter();
 
+  const [lokal, setLokal] = useState<any>([]);
+
+  // console.log(asPath.split("/")[2]);
+  let localPath = asPath.split("/")[2];
+  // console.log(" getRestourans();", getRestourans());
+
+  useEffect(() => {
+    RenderRestouran();
+  }, []);
+
+  async function RenderRestouran() {
+    const res = await getRestourans();
+    let resArrs = res?.data.result.data;
+
+    let focusRes = resArrs.filter(function (item: any) {
+      return item.id == localPath;
+    });
+    setLokal(focusRes);
+
+    return;
+  }
+
+  console.log(lokal[0], "--------");
   return (
     <>
       <Head>
@@ -22,7 +53,7 @@ const RestaurantDetail: NextPage = () => {
         <Navbar />
 
         <section className="mx-0 sm:m-8 p-2 sm:p-0 flex flex-col">
-          <RestDetailHeader />
+          <RestDetailHeader lokal={lokal} />
           <section className="flex flex-col sm:flex-row justify-between gap-5 mt-8">
             {/* PRODUCT */}
             <div className=" bg-whiteLight1 w-full sm:w-3/5">
