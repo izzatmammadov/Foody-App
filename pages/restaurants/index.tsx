@@ -1,5 +1,6 @@
 import type { NextPage } from "next";
 import Head from "next/head";
+import "react-toastify/dist/ReactToastify.css";
 import Image from "next/image";
 import { Footer } from "../../share/components/Footer";
 import { Navbar } from "../../share/components/Navbar";
@@ -10,6 +11,7 @@ import { RestaurantFilterModal } from "../../share/components/restaurantFilterMo
 import { formtype, getRestourans } from "@/share/services/axios";
 import { UpperCase } from "@/share/services/upperCase";
 import { useRouter } from "next/router";
+import { ToastContainer, toast } from "react-toastify";
 
 // const Restaurants: NextPage = ({ restaurants }: any) => {
 
@@ -32,17 +34,23 @@ export default function Restaurants() {
   };
 
   function filterRes(id?: string) {
+    handleCloseFilterModal()
     if (id) {
       const filteredArr = restaurants.filter(
         (item: any) => item.category_id === id
       );
+    
       setFilteredRes(filteredArr);
+      if (filteredArr.length===0) {
+        toast.warning("Can't find any product !")
+       
+      }
     } else {
       setFilteredRes(restaurants);
     }
   }
 
-  console.log(filteredRes);
+  // console.log(filteredRes);
 
   async function renderRestaurants() {
     try {
@@ -83,7 +91,7 @@ export default function Restaurants() {
           <div className="hidden rounded-md sm:flex flex-col max-h-screen overflow-y-auto gap-8 bg-whiteLight1 w-1/6 p-4">
             <RestaurantAside onClick={filterRes} />
           </div>
-
+<ToastContainer/>
           <div
             className="flex sm:hidden items-center mt-4 justify-center gap-2 shadow-lg p-4"
             onClick={handleOpenFilterModal}
@@ -94,14 +102,14 @@ export default function Restaurants() {
 
           {/* Modal */}
           {isFilterModalOpen && (
-            <RestaurantFilterModal onClose={handleCloseFilterModal} />
+            <RestaurantFilterModal  onClick={filterRes} onClose={handleCloseFilterModal} />
           )}
           {/* Modal END */}
 
           {/* CARDS */}
           <div className="w-full flex justify-between max-h-[740px] mb-8 sm:mb-0 overflow-y-auto flex-wrap gap-x-1 gap-y-8">
             {filteredRes?.map((item: formtype) => {
-              console.log(item);
+              // console.log(item);
               
               return (
                 <RestaurantCard
