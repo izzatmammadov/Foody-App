@@ -5,7 +5,7 @@ import React, { useState, useEffect } from "react";
 interface Props {
   img: string;
   innerText: string;
-  onClick?:any;
+  onClick?: any;
   value?: string;
 }
 
@@ -14,23 +14,18 @@ export const AdminAsideItem = ({ img, innerText, onClick, value }: Props) => {
   const query = useRouter();
 
   useEffect(() => {
-
     activeItem();
   }, []);
 
   function activeItem() {
- 
-
     let currentPath = query.asPath.split("/")[2];
 
-   
-   
     setActive(currentPath === value);
   }
 
   return (
     <div
-      onClick={()=>onClick(value)}
+      onClick={() => onClick(value)}
       className={`flex gap-6 items-center cursor-pointer p-3  hover:bg-white  hover:rounded  hover:bg-opacity-10 ${
         active ? "bg-white rounded bg-opacity-10" : ""
       } `}

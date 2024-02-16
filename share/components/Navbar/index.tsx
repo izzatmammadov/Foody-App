@@ -162,6 +162,8 @@ export const Navbar: React.FC<NavbarProps> = ({ adminNavbar }) => {
     setImage(image_url);
   };
 
+  //* Restauran search functions
+
   async function searchRestauran(event: any) {
     console.log(event.target.value);
 
@@ -169,7 +171,7 @@ export const Navbar: React.FC<NavbarProps> = ({ adminNavbar }) => {
     let resData = respons?.data.result.data;
     console.log(resData);
     let filterResData = resData.filter(function (item: any) {
-      return item.name == event.target.value;
+      return item.name.toLowerCase().includes(event.target.value.toLowerCase());
     });
 
     console.log(filterResData, "filterResData");
@@ -274,7 +276,10 @@ export const Navbar: React.FC<NavbarProps> = ({ adminNavbar }) => {
                   ClassName="w-full px-6 py-3 relative rounded-xl outline-none shadow-sm"
                 />
                 {isInputModal && (
-                  <RestaurantSearchModal filterRestouran={filterRestouran} onClose={closeInputModal} />
+                  <RestaurantSearchModal
+                    filterRestouran={filterRestouran}
+                    onClose={closeInputModal}
+                  />
                 )}
               </div>
               <NavbarLangButton />
