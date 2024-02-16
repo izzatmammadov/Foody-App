@@ -1,14 +1,15 @@
+// RestaurantDetail.tsx
 import { NextPage } from "next";
 import Head from "next/head";
 import { Navbar } from "../../../share/components/Navbar";
 import { Footer } from "../../../share/components/Footer";
 import { RestDetailHeader } from "../../../share/components/restaurantDetailHeader";
 import { RestDetailProductReact } from "../../../share/components/restaurantDetailProductCard";
-import { useTranslation } from "react-i18next";
 import { RestDetailBasket } from "@/share/components/restaurantDetailBasket";
+import { useTranslation } from "react-i18next";
 import { useRouter } from "next/router";
-import { getProducts, getRestourans } from "@/share/services/axios";
 import React, { useEffect, useState } from "react";
+import { getProducts, getRestourans } from "@/share/services/axios";
 
 interface RestaurantDetailProps {
   name?: any;
@@ -19,11 +20,9 @@ const RestaurantDetail: React.FC<RestaurantDetailProps> = ({ name }) => {
   const { asPath } = useRouter();
 
   const [lokal, setLokal] = useState<any>([]);
-  const [product, setProducts] = useState([]);
+  const [product, setProducts] = useState<any[]>([]);
 
-  // console.log(asPath.split("/")[2]);
   let localPath = asPath.split("/")[2];
-  // console.log(" getRestourans();", getRestourans());
 
   useEffect(() => {
     RenderRestouran();
@@ -41,13 +40,9 @@ const RestaurantDetail: React.FC<RestaurantDetailProps> = ({ name }) => {
     return;
   }
 
-  // console.log(lokal[0], "--------");
-
   async function RenderProduct() {
     const res = await getProducts();
     let resArr = res?.data.result.data;
-    // console.log(resArr, "resArr-------");
-    // console.log(lokal, "lokal-------");
 
     let focusProduct = resArr.filter(
       (item: any) => item.rest_id == lokal[0]?.name
@@ -58,7 +53,7 @@ const RestaurantDetail: React.FC<RestaurantDetailProps> = ({ name }) => {
 
   useEffect(() => {
     RenderProduct();
-  }, []);
+  }, [lokal]);
 
   return (
     <>
@@ -82,6 +77,7 @@ const RestaurantDetail: React.FC<RestaurantDetailProps> = ({ name }) => {
               <div className="max-h-[432px] overflow-y-auto">
                 {product?.map((item: any) => (
                   <RestDetailProductReact
+                    key={item.id}
                     lokal={lokal}
                     name={item.name}
                     desc={item.description}

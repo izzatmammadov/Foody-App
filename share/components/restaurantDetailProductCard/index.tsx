@@ -1,4 +1,5 @@
-import { useEffect, useState } from "react";
+// RestDetailProductReact.tsx
+import { useState } from "react";
 import Image from "next/image";
 import { Button } from "../Button";
 import { getProducts } from "@/share/services/axios";
