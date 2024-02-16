@@ -18,7 +18,7 @@ const Home: NextPage = () => {
 
   useEffect(() => {
     getOfferfunction();
-    console.log(data);
+    // console.log(data);
   }, []);
 
   return (
@@ -124,7 +124,7 @@ const Home: NextPage = () => {
         {/* THIRD SECTION COMPONENT */}
 
         {data?.map((item:{name:string,description:string,img_url:string}) => (
-          <section className="flex flex-col sm:flex-row justify-center items-center px-3 sm:px-11 mt-52">
+          <section key={item.name} className="flex flex-col sm:flex-row justify-center items-center px-3 sm:px-11 mt-52">
             <div className="flex flex-col gap-8 w-full sm:w-1/2">
               <h4 className="text-5xl w-full sm:w-full sm:text-6xl font-black leading-tight text-center mx-auto sm:mx-0 sm:text-start">
                 {item?.name}
