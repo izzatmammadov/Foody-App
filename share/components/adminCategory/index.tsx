@@ -22,8 +22,7 @@ interface itemP {
 }
 
 const AdminCategory = ({ item }: any) => {
-
-  const {categoryData,setCategoryData } = useGlobalStore();
+  const { categoryData, setCategoryData } = useGlobalStore();
 
   const categoryRef = useRef<HTMLInputElement>(null);
 
@@ -58,7 +57,7 @@ const AdminCategory = ({ item }: any) => {
     setActiveId(id);
     console.log(id);
   };
-  
+
   async function handleEditClick(id: string) {
     setActiveId(id);
     console.log(activeId);
@@ -71,7 +70,8 @@ const AdminCategory = ({ item }: any) => {
       if (categoryRef && slugRef && imgRef) {
         console.log(imgRef.current);
 
-        (categoryRef.current as { value: string }).value =currentData?.name || "";
+        (categoryRef.current as { value: string }).value =
+          currentData?.name || "";
 
         (slugRef.current as { value: string }).value = currentData?.slug || "";
 
@@ -103,14 +103,13 @@ const AdminCategory = ({ item }: any) => {
       toast.success("Category updated successfully!");
       changeHidden();
       console.log(res.data.data);
-      const updatedData = categoryData.map((item:any) => {
+      const updatedData = categoryData.map((item: any) => {
         if (item.id === activeId) {
           return res.data.data;
         }
         return item;
       });
-      setCategoryData(updatedData)
-      
+      setCategoryData(updatedData);
     }
     // console.log(res);
   }
@@ -118,7 +117,7 @@ const AdminCategory = ({ item }: any) => {
   function isInputValid(
     category: string | undefined,
     slug: string | undefined,
-    img: string|undefined
+    img: string | undefined
   ): boolean {
     console.log(category, slug, img);
 
@@ -133,13 +132,14 @@ const AdminCategory = ({ item }: any) => {
     const res = await deleteCategories(activeId);
     console.log(res);
     if (res?.status === 204) {
-      const updatedArr = categoryData.filter((item:any) => item.id !== activeId);
-      setCategoryData(updatedArr)
+      const updatedArr = categoryData.filter(
+        (item: any) => item.id !== activeId
+      );
+      setCategoryData(updatedArr);
 
       toast.success("Deleted successfully!");
       setIsModalOpen((prev) => !prev);
     }
-
 
     return;
   }

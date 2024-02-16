@@ -8,7 +8,6 @@ interface Props {
   callBackValue?: any;
   useRef?: any;
   activeValue?: string;
-
 }
 
 export const AdminModalDropdown = ({
@@ -33,17 +32,17 @@ export const AdminModalDropdown = ({
         onChange={callBackValue}
         defaultValue={""}
       >
-        <option value=""  disabled>
+        <option value="" disabled>
           Choose...
         </option>
-        <option value="all"  >
-       All
-        </option>
-        {arr ? (arr?.map((item:any, index:any) => (
-          <option key={index} value={item}>
-            {item}
-          </option>
-        ))) : ("")}
+        <option value="all">All</option>
+        {arr
+          ? arr?.map((item: any, index: any) => (
+              <option key={index} value={item}>
+                {item}
+              </option>
+            ))
+          : ""}
       </select>
     </div>
   );

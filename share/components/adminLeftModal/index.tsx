@@ -35,7 +35,7 @@ interface Props {
   addProductPrice?: any;
   addProductRestaurant?: any;
   addProductDesc?: any;
-  Restaurants?:any;
+  Restaurants?: any;
 }
 
 export const AdminLeftModal = ({
@@ -50,7 +50,7 @@ export const AdminLeftModal = ({
   onClickClose,
   categoryRef,
   getImgUrl,
-  slugRef, 
+  slugRef,
   imgRef,
   RestouransNameRef,
   cuisineRef,
@@ -97,7 +97,6 @@ export const AdminLeftModal = ({
         getImgUrl(url);
       });
     });
-
   }
   return (
     <div
@@ -144,7 +143,7 @@ export const AdminLeftModal = ({
           <div className=" w-full lg:w-2/3  pt-5 pl-5  pr-7 pb-7  rounded-2xl bg-darkBlue_5 max-h-[600px] overflow-y-auto ">
             {mod === "1" && (
               <div>
-                <AdminModalInput p="Name" useRef={addProductName}/>
+                <AdminModalInput p="Name" useRef={addProductName} />
                 <AdminModalTexArea useRef={addProductDesc} />
                 <AdminModalInput p="Price" useRef={addProductPrice} />
                 <AdminModalDropdown
@@ -160,14 +159,19 @@ export const AdminLeftModal = ({
               <div>
                 <AdminModalInput useRef={RestouransNameRef} p="Name" />
                 <AdminModalTexArea useRef={cuisineRef} p="Cuisine" />
-                <AdminModalInput type="number"
+                <AdminModalInput
+                  type="number"
                   useRef={delivery_priceRef}
                   p="Delivery Price $"
                 />
-                <AdminModalInput type="number" useRef={delivery_minRef} p="Delivery Min" />
+                <AdminModalInput
+                  type="number"
+                  useRef={delivery_minRef}
+                  p="Delivery Min"
+                />
                 <AdminModalInput useRef={addressRef} p="Address" />
                 <AdminModalDropdown
-                arr={arr}
+                  arr={arr}
                   useRef={category_idRef}
                   p="Category"
                   className="w-full bg-darkBlue_4 rounded-2xl font-medium text-base text-whiteLight pl-3 py-4"
