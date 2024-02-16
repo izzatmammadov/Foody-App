@@ -18,7 +18,7 @@ const AboutUs = () => {
         <Navbar />
       {/* //* for big screen --------------------------------------------------------------- */}
       <main className="hidden sm:block">
-        <section className=" flex flex-wrap p-8 mx-auto gap-[60px] justify-between">
+        <section className=" flex flex-wrap p-8 mx-auto gap-[60px]  justify-center xxl:justify-between">
           <div className="max-w-[565px] flex flex-col gap-8 ml-8">
             <p className="font-mukta text-[45px] font-semibold leading-8 tracking-tight ">
               {t("about_us")}

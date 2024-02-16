@@ -11,7 +11,7 @@ import { NavbarLangButton } from "../navbarLangButton";
 import { AdminNavbarAvatar } from "../adminNavbarAvatar";
 import { AdminAside } from "../adminAside";
 import { AdminLeftModal } from "../adminLeftModal";
-import { createProduct, getRestourans } from "@/share/services/axios";
+import { createProduct, getProfileInfo, getRestourans } from "@/share/services/axios";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { useGlobalStore } from "@/share/services/provider";
@@ -23,7 +23,30 @@ interface NavbarProps {
 export const Navbar: React.FC<NavbarProps> = ({ adminNavbar }) => {
   const { t } = useTranslation();
   const navigate = useRouter();
+  async function ReLogin() {
+    try {
+      const res =  await getProfileInfo()
+      // console.log(res);
+    } catch (err: any) {
+      console.log(err.response.status === 401);
+      if (err.response.status == 401) {
+        setTimeout(() => {
+        navigate.push("/login")
+          
+        }, 60000)
+        setTimeout(() => {
+     toast.error("Your browsing session has expired !")
+            
+          },59300)
+        toast.warning("You will be logged out from the site in the next 1 minutes.!")
+      }
+      
+    }
 
+  }
+  useEffect(() => {
+    ReLogin()
+  },[])
   const [isModalOpen, setModalOpen] = useState(false);
   const [isToken, setIsToken] = useState(false);
   const [isActiveName, setIsActiveName] = useState("");

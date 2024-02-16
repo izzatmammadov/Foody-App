@@ -287,22 +287,26 @@ export interface userProfileType {
   address: string | undefined;
 }
 export async function getProfileInfo() {
-  try {
+  // try {
     let item: any = localStorage.getItem("userInfo");
     let access_token = JSON.parse(item);
     // const userinf: any = localStorage.getItem("userInfo")
     // const access_token: any = JSON.parse(userinf).access_token
-    console.log(access_token);
+    // console.log(access_token);
 
     const response = await instanceAxios.get(`/auth/user/`, {
       headers: {
         Authorization: `Bearer ${access_token.access_token}`,
       },
     });
+    console.log(response);
+    
     return response;
-  } catch (err) {
-    console.log(err);
-  }
+  // } catch (err) {
+    // console.log(err);
+    // useReLogin(err)
+
+  // }
 }
 
 export async function putProfileInfo(form: userProfileType) {
