@@ -1,14 +1,15 @@
+// RestaurantDetail.tsx
 import { NextPage } from "next";
 import Head from "next/head";
 import { Navbar } from "../../../share/components/Navbar";
 import { Footer } from "../../../share/components/Footer";
 import { RestDetailHeader } from "../../../share/components/restaurantDetailHeader";
 import { RestDetailProductReact } from "../../../share/components/restaurantDetailProductCard";
-import { useTranslation } from "react-i18next";
 import { RestDetailBasket } from "@/share/components/restaurantDetailBasket";
+import { useTranslation } from "react-i18next";
 import { useRouter } from "next/router";
-import { getRestourans } from "@/share/services/axios";
 import React, { useEffect, useState } from "react";
+import { getProducts, getRestourans } from "@/share/services/axios";
 
 interface RestaurantDetailProps {
   name?: any;
@@ -19,10 +20,9 @@ const RestaurantDetail: React.FC<RestaurantDetailProps> = ({ name }) => {
   const { asPath } = useRouter();
 
   const [lokal, setLokal] = useState<any>([]);
+  const [product, setProducts] = useState<any[]>([]);
 
-  // console.log(asPath.split("/")[2]);
   let localPath = asPath.split("/")[2];
-  // console.log(" getRestourans();", getRestourans());
 
   useEffect(() => {
     RenderRestouran();
@@ -40,7 +40,21 @@ const RestaurantDetail: React.FC<RestaurantDetailProps> = ({ name }) => {
     return;
   }
 
-  console.log(lokal[0], "--------");
+  async function RenderProduct() {
+    const res = await getProducts();
+    let resArr = res?.data.result.data;
+
+    let focusProduct = resArr.filter(
+      (item: any) => item.rest_id == lokal[0]?.name
+    );
+    console.log(focusProduct, "focusProduct-----------");
+    setProducts(focusProduct);
+  }
+
+  useEffect(() => {
+    RenderProduct();
+  }, [lokal]);
+
   return (
     <>
       <Head>
@@ -61,39 +75,16 @@ const RestaurantDetail: React.FC<RestaurantDetailProps> = ({ name }) => {
                 {t("detailDesc3")}
               </p>
               <div className="max-h-[432px] overflow-y-auto">
-                <RestDetailProductReact
-                  name="Papa John's Margarita"
-                  desc="Prepared with a patty, a slice of cheese and special sauce"
-                  price={17.9}
-                  imageSrc="/margaritaCard.svg"
-                />
-                <RestDetailProductReact
-                  name="Papa John's Roll"
-                  desc="Prepared with a patty, a slice of cheese and special sauce"
-                  price={11.5}
-                  imageSrc="/papaRoll.svg"
-                />
-
-                <RestDetailProductReact
-                  name="Papa John's Coffee"
-                  desc="Caramel Syrop"
-                  price={5.4}
-                  imageSrc="/papaCoffee.svg"
-                />
-
-                <RestDetailProductReact
-                  name="Coca Cola"
-                  desc="Classic"
-                  price={2.8}
-                  imageSrc="/cocaCola.svg"
-                />
-
-                <RestDetailProductReact
-                  name="Papa John's Fries"
-                  desc="Prepared with hot soucases"
-                  price={9.9}
-                  imageSrc="/friesAnimation.svg"
-                />
+                {product?.map((item: any) => (
+                  <RestDetailProductReact
+                    key={item.id}
+                    lokal={lokal}
+                    name={item.name}
+                    desc={item.description}
+                    price={item.price}
+                    imageSrc={item.img_url}
+                  />
+                ))}
               </div>
             </div>
             {/* BASKET */}
