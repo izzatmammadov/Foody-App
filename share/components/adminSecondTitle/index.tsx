@@ -44,7 +44,7 @@ const AdminSecondTitle: React.FC<AdminSecondTitleProps> = ({
           arr={resCategoryARR}
             callBackValue={callBackValue}
             p={p1}
-            className="w-full bg-darkBlue_4 rounded-2xl font-medium text-base text-whiteLight "
+            className=" bg-darkBlue_4 rounded-2xl font-medium text-base text-whiteLight w-[150px] overflow-x-auto"
             className2="flex  bg-darkBlue_4  gap-3  rounded-2xl  p-1 px-3 "
           />) : ("")}
           {visibleButton ? (<Button

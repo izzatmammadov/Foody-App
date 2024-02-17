@@ -38,6 +38,7 @@ const AdminProducts: NextPage = () => {
     fetchProducts();
   }, []);
 
+  //* RENDER RESTAURANTS FOR PRODUCT
   const renderRestaurants = async () => {
     const res = await getRestourans();
     let item = res?.data.result.data.map((i: any) => i.name);

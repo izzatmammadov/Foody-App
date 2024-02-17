@@ -30,7 +30,7 @@ interface Props {
   category_idRef?: any;
   form_titleRef?: any;
   form_descRef?: any;
-  arr?: any;
+  arr?: string[];
   addProductName?: any;
   addProductPrice?: any;
   addProductRestaurant?: any;
@@ -148,7 +148,7 @@ export const AdminLeftModal = ({
                 <AdminModalInput p="Price" useRef={addProductPrice} />
                 <AdminModalDropdown
                   useRef={addProductRestaurant}
-                  arr={Restaurants}
+                  arr={arr}
                   p="Restaurants"
                   className="w-full bg-darkBlue_4 rounded-2xl font-medium text-base text-whiteLight pl-3 py-4"
                 />

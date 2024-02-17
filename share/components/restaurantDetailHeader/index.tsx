@@ -1,6 +1,5 @@
 import { useRouter } from "next/router";
 import { Button } from "../Button";
-import styles from "./restaurantDetail.module.css";
 import { useTranslation } from "react-i18next";
 
 interface RestDetailHeaderProps {
@@ -14,7 +13,6 @@ export const RestDetailHeader: React.FC<RestDetailHeaderProps> = ({
   const navigate = useRouter();
   return (
     <>
-      {/* <div className={styles.bg}></div> */}
       <div className=" flex justify-center">
         <img src={lokal[0]?.img_url} alt="" />
       </div>
@@ -37,7 +35,7 @@ export const RestDetailHeader: React.FC<RestDetailHeaderProps> = ({
             <div className="flex items-center gap-2">
               <Button
                 className="py-3 px-2 border-2 border-mainRed text-mainRed rounded-md shadow-md"
-                innerText={lokal[0]?.delivery_price}
+                innerText={"$ " + lokal[0]?.delivery_price + " Delivery"}
               />
               <Button
                 className="hidden sm:block py-3 px-5 text-white border-2 border-mainRed bg-mainRed rounded-md shadow-md hover:scale-95 transition-all duration-500"

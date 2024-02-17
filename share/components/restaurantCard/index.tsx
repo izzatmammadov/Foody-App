@@ -2,10 +2,10 @@ import Image from "next/image";
 
 interface RestaurantCardProps {
   name: string;
-  cuisine: string;
+  cuisine: string | undefined;
   deliveryCost: number;
   deliveryTime: string;
-  imageSrc: string;
+  imageSrc: string | undefined | any;
   isNew?: boolean;
   onClick:()=>void;
 }
