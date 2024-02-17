@@ -18,7 +18,6 @@ const Home: NextPage = () => {
 
   useEffect(() => {
     getOfferfunction();
-    // console.log(data);
   }, []);
 
   return (
@@ -123,8 +122,29 @@ const Home: NextPage = () => {
 
         {/* THIRD SECTION COMPONENT */}
 
-        {data?.map((item:{name:string,description:string,img_url:string}) => (
-          <section key={item.name} className="flex flex-col sm:flex-row justify-center items-center px-3 sm:px-11 mt-52">
+        {data?.map((item:{name:string,description:string,img_url:string},index:number) => {
+          if(index % 2 == 1){
+              return <section key={item.name}  className="flex flex-col sm:flex-row-reverse gap-0 sm:gap-16 justify-center items-center px-3 sm:px-11 mt-52">
+              <div className="flex flex-col gap-8 w-full sm:w-1/2">
+                <h4 className="text-5xl w-full sm:w-full sm:text-6xl font-black leading-tight text-center mx-auto sm:mx-0 sm:text-start">
+                {item?.name}
+                </h4>
+                <p className="text-xl text-grayText1 w-full mb-8 sm:mb-0 sm:w-3/5 mx-auto text-center sm:text-start sm:mx-0">
+                {item?.description}
+                </p>
+              </div>
+              <div>
+                <Image
+                className=" rounded-xl"
+                  width={400}
+                  height={400}
+                  src={item?.img_url}
+                  alt="fries"
+                />
+              </div>
+            </section>
+          } 
+          return <section key={item.name} className="flex flex-col sm:flex-row justify-center items-center px-3 sm:px-11 mt-52">
             <div className="flex flex-col gap-8 w-full sm:w-1/2">
               <h4 className="text-5xl w-full sm:w-full sm:text-6xl font-black leading-tight text-center mx-auto sm:mx-0 sm:text-start">
                 {item?.name}
@@ -135,15 +155,15 @@ const Home: NextPage = () => {
             </div>
             <div>
               <img
-                className=""
+                className=" rounded-xl"
                 width={400}
                 height={400}
                 src={item?.img_url}
-                alt={""}
+                alt={"img"}
               />
             </div>
           </section>
-        ))}
+})}
 
         {/* THIRD SECTION COMPONENT END */}
 

@@ -135,10 +135,7 @@ const adminOffers = () => {
                     <td>ID</td>
                     <td>{t("userOrder")}</td>
                     <td>{t("userOrder8")}</td>
-
                     <td>{t("userOrder7")}</td>
-
-                    <td></td>
                   </tr>
                 </thead>
                 <tbody className="">

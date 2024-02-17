@@ -1,5 +1,5 @@
 import Image from "next/image";
-import React, { useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import Modal from "../Modal";
 import { Button } from "../Button";
 import { useTranslation } from "react-i18next";
@@ -8,6 +8,7 @@ import {
   ProductValues,
   deleteProduct,
   getProducts,
+  getRestourans,
   updateProduct,
 } from "@/share/services/axios";
 import { useGlobalStore } from "@/share/services/provider";
@@ -32,6 +33,8 @@ const AdminCard = ({
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [image, setImage] = useState("");
   const { products, setProducts } = useGlobalStore();
+  const [restaurants, setRestaurants] = useState();
+
 
   //^ MODAL
   const handleButtonClick = () => {
@@ -59,6 +62,7 @@ const AdminCard = ({
   const addProductRestaurant = useRef<HTMLInputElement>(null);
   const addProductDesc = useRef<HTMLInputElement>(null);
   const imgRef = useRef<HTMLInputElement>(null);
+
 
   //*EDIT PRODUCT
 
@@ -89,11 +93,10 @@ const AdminCard = ({
       toast.warning("Please fill the correctly!");
     }
 
-    const res = await updateProduct(productValues, food_id);
-    console.log("onun responsu: ", res);
+    const res = await updateProduct(food_id, productValues);
 
     if (res?.status == 200) {
-      // toast.success("Edit was successfully!"); //!error verir acma
+      toast.success("Edit was successfully!"); //!error verir 
       const updatedData = products.map((item: any) => {
         if (item?.id === food_id) {
           return productValues;
@@ -115,9 +118,22 @@ const AdminCard = ({
     rest_id: string | undefined,
     price: string | undefined
   ): boolean {
-    console.log(name, description, img_url, rest_id, price);
     return !!name && !!description && !!img_url && !!rest_id && !!price;
   }
+
+   //* RENDER RESTAURANTS FOR PRODUCT
+
+   const renderRestaurants = async () => {
+    const res = await getRestourans();
+    let item = res?.data.result.data.map((i: any) => i.name);
+    setRestaurants(item);
+  };
+
+
+
+  useEffect(() => {
+    renderRestaurants();
+  }, []);
 
   //& HANDLE EDIT
 
@@ -129,7 +145,6 @@ const AdminCard = ({
       const filteredProduct = currentData.filter(
         (item: any) => item?.id == food_id
       );
-      console.log(filteredProduct);
 
       if (filteredProduct) {
         (addProductName?.current as { value: string }).value =
@@ -148,7 +163,9 @@ const AdminCard = ({
           filteredProduct[0]?.img_url || "";
       }
     }
+
   };
+
 
   const handleModalClose = () => {
     setIsModalOpen(false);
@@ -179,6 +196,7 @@ const AdminCard = ({
         addProductRestaurant={addProductRestaurant}
         getImgUrl={getImgUrl}
         ButtonOnClick={editProduct}
+        arr={restaurants}
       />
       <ToastContainer />
       <div className=" rounded-lg w-52 h-72 bg-white">
