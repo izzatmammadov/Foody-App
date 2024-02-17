@@ -89,7 +89,7 @@ const RestaurantDetail: React.FC<RestaurantDetailProps> = ({ name }) => {
             </div>
             {/* BASKET */}
             <div className="flex flex-col bg-whiteLight1 p-4 w-full sm:w-2/5">
-              <RestDetailBasket itemCount={0} />
+              <RestDetailBasket itemCount={1} />
             </div>
           </section>
         </section>

@@ -90,34 +90,6 @@ const AdminProducts: NextPage = () => {
     // console.log(isHiddenModal);
   }
 
-  // let categoryData: CategoryType[] = [
-  //   {
-  //     id: 2000,
-  //     image: "/adminMarqarita.svg",
-  //     name: "pizza",
-  //     slug: "Yummy-pizza",
-  //   },
-  //   {
-  //     id: 2001,
-  //     image: "/adminMarqarita.svg",
-  //     name: "hotdog",
-  //     slug: "Yummy-pizza",
-  //   },
-  //   {
-  //     id: 2002,
-  //     image: "/adminMarqarita.svg",
-  //     name: "pizza",
-  //     slug: "Yummy-pizza",
-  //   },
-  //   {
-  //     id: 2003,
-  //     image: "/adminMarqarita.svg",
-  //     name: "pizza",
-  //     slug: "Yummy-pizza",
-  //   },
-  // ];
-  // console.log("categoryData", categoryData);
-
   async function categoriesRender() {
     try {
       const res = await getCategories();
@@ -166,9 +138,9 @@ const AdminProducts: NextPage = () => {
               slugRef={slugRef}
               imgRef={imgRef}
             />
-            {/* <div className=" flex  justify-between text-sm  font-semibold h-16 items-center px-8"></div> */}
+
             <AdminSecondTitle
-             resCategoryARR={[]}
+              resCategoryARR={[]}
               onClick={changeHidden}
               name="Category"
               p1="Category"

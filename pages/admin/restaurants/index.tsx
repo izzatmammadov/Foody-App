@@ -171,9 +171,9 @@ const restourans = () => {
     // const value = category_idRef.current?.value;
     // console.log("value", value);
     // e.target.value=value
-    if (value == "all") { 
-      setRestouranData(data2)
-      return
+    if (value == "all") {
+      setRestouranData(data2);
+      return;
     }
     let newValue = data2.filter((item: any) => item?.category_id == value);
 
@@ -181,7 +181,6 @@ const restourans = () => {
 
     // setData(newValue);
     setRestouranData(newValue);
-
   }
 
   const [resCategoryARR, setResCategoryARR] = useState();

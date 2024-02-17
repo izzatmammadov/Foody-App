@@ -28,8 +28,8 @@ export const Navbar: React.FC<NavbarProps> = ({ adminNavbar }) => {
       const res =  await getProfileInfo()
       // console.log(res);
     } catch (err: any) {
-      console.log(err.response.status === 401);
-      if (err.response.status == 401) {
+      console.log(err?.response?.status === 401);
+      if (err?.response?.status == 401) {
         setTimeout(() => {
         navigate.push("/login")
           

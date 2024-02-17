@@ -30,7 +30,7 @@ const AdminOffersTableT: React.FC<AdminOffersTableType> = ({
   const [activeId, setActiveId] = useState("");
   const [imgUrl, setImgUrl] = useState<string>("");
   const [isHiddenModal, setIsHiddenModal] = useState<boolean>(true);
-  const {offers, setOffers} = useGlobalStore();
+  const { offers, setOffers } = useGlobalStore();
 
   const form_titleRef = useRef<HTMLInputElement>(null);
   const form_descRef = useRef<HTMLInputElement>(null);
@@ -41,7 +41,7 @@ const AdminOffersTableT: React.FC<AdminOffersTableType> = ({
   }
 
   //^ MODAL
-  const handleButtonClick = (id:string) => {
+  const handleButtonClick = (id: string) => {
     setIsModalOpen(true);
     setActiveId(data.id);
   };
@@ -58,15 +58,17 @@ const AdminOffersTableT: React.FC<AdminOffersTableType> = ({
     if (res?.status === 200) {
       const currentData = res?.data.result.data;
       console.log("currentData ", currentData);
-      
+
       if (form_descRef && form_titleRef && imgRef) {
-      (form_descRef.current as { value: string }).value = currentData?.description || "";
+        (form_descRef.current as { value: string }).value =
+          currentData?.description || "";
 
-      (form_titleRef.current as { value: string }).value = currentData?.name || "";
+        (form_titleRef.current as { value: string }).value =
+          currentData?.name || "";
 
-      (imgRef.current as { src: string }).src = currentData?.img_url || "";
-    }}
-    
+        (imgRef.current as { src: string }).src = currentData?.img_url || "";
+      }
+    }
   }
 
   //* EDIT OFFER
@@ -88,17 +90,17 @@ const AdminOffersTableT: React.FC<AdminOffersTableType> = ({
 
     const res = await putOffer(activeId, offerValues);
     console.log(offerValues);
-    
+
     console.log(res);
     if (res?.status === 200) {
       toast.success("Edit was successfully!");
-      const updatedData = offers.map((item:any) => {
+      const updatedData = offers.map((item: any) => {
         if (item.id === activeId) {
           return res.data.data;
         }
         return item;
       });
-      setOffers(updatedData)
+      setOffers(updatedData);
 
       setTimeout(() => {
         changeHidden();
@@ -120,8 +122,8 @@ const AdminOffersTableT: React.FC<AdminOffersTableType> = ({
     const res = await deleteOffer(activeId);
     console.log(offers);
     if (res?.status === 204) {
-    let newData = offers?.filter((item:any)=> item.id !== activeId)
-      setOffers(newData)
+      let newData = offers?.filter((item: any) => item.id !== activeId);
+      setOffers(newData);
       toast.success("Deleted successfully!");
 
       setIsModalOpen((prev) => !prev);
@@ -134,8 +136,8 @@ const AdminOffersTableT: React.FC<AdminOffersTableType> = ({
     setShowPopup(!showPopup);
   };
 
-  function changeHidden():void {
-    setIsHiddenModal((prev:boolean) => !prev);
+  function changeHidden(): void {
+    setIsHiddenModal((prev: boolean) => !prev);
   }
   return (
     <>
@@ -154,31 +156,23 @@ const AdminOffersTableT: React.FC<AdminOffersTableType> = ({
         form_titleRef={form_titleRef}
       />
       <tr className="h-14 text-center  border-slate-700  border-y text-gray-900 text-sm not-italic font-normal leading-5 ">
-        <td>
-          {/* <div>
-            <p className=" border-slate-700  border rounded-lg ml-2"> */}
-          {data.id}
-          {/* </p>
-          </div> */}
-        </td>
+        <td>{data.id}</td>
         <td className=" flex justify-center items-center">
-          {/* <div className="flex justify-center">
-          /adminMarqarita.svg
-            <p className=" border-slate-700  border rounded-lg px-2 "> */}
-
           <img
             width="60"
             height="0"
             src={data.img_url}
             alt=""
             className=" cursor-pointer"
-            onClick={()=>handleButtonClick(data.id)}
+            onClick={() => handleButtonClick(data.id)}
           />
-          {/* </p>
-          </div> */}
         </td>
         <td>{data.name}</td>
-        <td>{data.description} </td>
+        <td>
+          <p className="whitespace-nowrap overflow-x-scroll  max-w-56 ">
+            {data.description}
+          </p>
+        </td>
 
         <td className=" h-14 flex  align-middle justify-evenly">
           <img
@@ -187,7 +181,7 @@ const AdminOffersTableT: React.FC<AdminOffersTableType> = ({
             src="/adminOffersEditimg.svg"
             alt=""
             className=" cursor-pointer"
-            onClick={()=>handleEditClick(data.id)}
+            onClick={() => handleEditClick(data.id)}
           />
           <img
             width="24"
@@ -195,10 +189,11 @@ const AdminOffersTableT: React.FC<AdminOffersTableType> = ({
             src="/adminMarqaritaDeleteButton.svg"
             alt=""
             className=" cursor-pointer"
-            onClick={()=>handleButtonClick(data.id)}
+            onClick={() => handleButtonClick(data.id)}
           />
         </td>
       </tr>
+      {/* modal */}
       <Modal isOpen={isModalOpen} onClose={handleModalClose}>
         <div className="flex justify-between items-center">
           <p className="mx-auto text-3xl font-medium">{t("modalDesc")}</p>
@@ -232,4 +227,3 @@ const AdminOffersTableT: React.FC<AdminOffersTableType> = ({
 };
 
 export default AdminOffersTableT;
-

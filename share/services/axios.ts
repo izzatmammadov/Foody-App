@@ -25,15 +25,14 @@ export const postCategory = async (form: Form) => {
 };
 
 export interface formtype {
-  name: string;
+  name: string | any;
   category_id: string | number | undefined;
-  cuisine: string ;
+  cuisine: string | undefined;
   address: string | undefined;
-  delivery_price: number ;
-  img_url: string ;
+  delivery_price: number | any;
+  img_url: string | undefined;
   delivery_min: string | number | undefined;
-  id?: string | any
-  
+  id?: string | any;
 }
 //* Restourans
 
@@ -225,16 +224,16 @@ export async function getOrderHistory() {
 
 //& PRODUCTS
 export type ProductValues = {
-  productName?: string ;
-  productPrice?: string  ;
-  productDesc?: string ;
-  productRestaurant?: string ;
+  productName?: string;
+  productPrice?: string;
+  productDesc?: string;
+  productRestaurant?: string;
 
-  name?: string ;
-  description?: string ;
-  rest_id?: string  ;
-  price?: string  ;
-  img_url?: string ;
+  name?: string;
+  description?: string;
+  rest_id?: string;
+  price?: string;
+  img_url?: string;
 };
 
 //* GET
@@ -246,7 +245,6 @@ export const getProducts = async () => {
     console.log(error);
   }
 };
-
 
 //* CREATE
 export const createProduct = async (data: any) => {
@@ -288,23 +286,23 @@ export interface userProfileType {
 }
 export async function getProfileInfo() {
   // try {
-    let item: any = localStorage.getItem("userInfo");
-    let access_token = JSON.parse(item);
-    // const userinf: any = localStorage.getItem("userInfo")
-    // const access_token: any = JSON.parse(userinf).access_token
-    // console.log(access_token);
+  let item: any = localStorage.getItem("userInfo");
+  let access_token = JSON.parse(item);
+  // const userinf: any = localStorage.getItem("userInfo")
+  // const access_token: any = JSON.parse(userinf).access_token
+  // console.log(access_token);
 
-    const response = await instanceAxios.get(`/auth/user/`, {
-      headers: {
-        Authorization: `Bearer ${access_token.access_token}`,
-      },
-    });
-    console.log(response);
-    
-    return response;
+  const response = await instanceAxios.get(`/auth/user/`, {
+    headers: {
+      Authorization: `Bearer ${access_token.access_token}`,
+    },
+  });
+  console.log(response);
+
+  return response;
   // } catch (err) {
-    // console.log(err);
-    // useReLogin(err)
+  // console.log(err);
+  // useReLogin(err)
 
   // }
 }
