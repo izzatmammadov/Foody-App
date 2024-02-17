@@ -17,56 +17,52 @@ interface Product {
   name: string;
 }
 
-
 const AdminProducts: NextPage = () => {
   const { products, setProducts } = useGlobalStore();
-  const [restaurants, setRestaurants] = useState()
+  const [restaurants, setRestaurants] = useState();
 
   //* GET PRODUCTS
   const fetchProducts = async () => {
     try {
       const response = await getProducts();
-      
-      setProducts(response?.data.result.data);
 
+      setProducts(response?.data.result.data);
     } catch (error) {
       console.error("Error can't fetching products:", error);
     }
   };
 
   console.log(products);
-  
 
   useEffect(() => {
     fetchProducts();
   }, []);
 
   const renderRestaurants = async () => {
-    const res = await getRestourans()
-    let item = res?.data.result.data.map((i:any) => i.name)
+    const res = await getRestourans();
+    let item = res?.data.result.data.map((i: any) => i.name);
     setRestaurants(item);
-  }
+  };
 
   useEffect(() => {
-      renderRestaurants()
-  },[])
+    renderRestaurants();
+  }, []);
 
   //* FILTER PRODUCTS
 
- const filterProduct = async (title: Product): Promise<void> => {
-  try {
-    const response = await getProducts();
-    const restaurant = response?.data.result.data.filter((item: any) => item?.rest_id === title);
+  const filterProduct = async (title: Product): Promise<void> => {
+    try {
+      const response = await getProducts();
+      const restaurant = response?.data.result.data.filter(
+        (item: any) => item?.rest_id === title
+      );
 
-    setProducts(restaurant) 
-    console.log(response);
-
-  } catch (error) {
-    console.error(error);
-  }
-};
-  
-  
+      setProducts(restaurant);
+      console.log(response);
+    } catch (error) {
+      console.error(error);
+    }
+  };
 
   return (
     <>
@@ -98,7 +94,7 @@ const AdminProducts: NextPage = () => {
             </div>
 
             <div className="w-full sm:w-auto m-5 flex flex-wrap gap-10 justify-center">
-              {products.map((product:Product) => (
+              {products.map((product: Product) => (
                 <AdminCard
                   key={product?.id}
                   food_id={product?.id}
@@ -108,13 +104,6 @@ const AdminProducts: NextPage = () => {
                   foodprice={product?.price}
                 />
               ))}
-               {/* <AdminCard
-                  foodname={"Pizza"}
-                  restoranname={"Papa John's"}
-                  foodimage={"/margaritaCard.svg"}
-                  foodprice={15}
-                /> */}
-
             </div>
           </section>
         </main>

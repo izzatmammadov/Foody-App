@@ -19,7 +19,6 @@ const adminOffers = () => {
   const { offers, setOffers } = useGlobalStore();
   const { t } = useTranslation();
 
-
   const titleOfferRef = useRef<HTMLInputElement>(null);
   const descOfferRef = useRef<HTMLInputElement>(null);
   const img = useRef<HTMLInputElement>(null);
@@ -134,8 +133,9 @@ const adminOffers = () => {
                 <thead className="h-16  text-center text-sm not-italic font-semibold leading-6">
                   <tr>
                     <td>ID</td>
-                    <td>{t("userOrder8")}</td>
                     <td>{t("userOrder")}</td>
+                    <td>{t("userOrder8")}</td>
+
                     <td>{t("userOrder7")}</td>
 
                     <td></td>

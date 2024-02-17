@@ -23,9 +23,9 @@ export const RestDetailProductReact: React.FC<DetailProductCardProps> = ({
 
   // const [product, setProducts] = useState();
 
-  // const handleButtonClick = () => {
-  //   setUpdatedPrice(updatedPrice + price);
-  // };
+  const handleButtonClick = () => {
+    setUpdatedPrice(updatedPrice + price);
+  };
 
   // async function RenderProduct() {
   //   const res = await getProducts();
@@ -71,7 +71,7 @@ export const RestDetailProductReact: React.FC<DetailProductCardProps> = ({
             {price}
           </p>
           <Button
-            // onClick={handleButtonClick}
+            onClick={handleButtonClick}
             className="py-2 px-4 rounded-full border-2 border-whiteLight3 text-whiteLight3 text-2xl hover:border-green hover:bg-green hover:text-white transition-all duration-200"
             innerText="+"
           />

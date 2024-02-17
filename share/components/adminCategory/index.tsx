@@ -34,8 +34,6 @@ const AdminCategory = ({ item }: any) => {
 
   const [imgUrl, setImgUrl] = useState<string>("");
 
-  // const [showPopup, setShowPopup] = useState(false);
-
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   const [activeId, setActiveId] = useState("");
@@ -48,7 +46,6 @@ const AdminCategory = ({ item }: any) => {
 
   function changeHidden(): void {
     setIsHiddenModal((prev: boolean) => !prev);
-    // console.log(isHiddenModal);
   }
 
   //^ MODAL
@@ -77,7 +74,6 @@ const AdminCategory = ({ item }: any) => {
 
         (imgRef.current as { src: string }).src = currentData?.img_url || "";
       }
-      // console.log(currentData);
     }
   }
 
@@ -96,7 +92,6 @@ const AdminCategory = ({ item }: any) => {
       toast.warning("Please fill all the inputs!");
       return;
     }
-    // console.log(activeId);
 
     const res = await updateCategories(activeId, form);
     if (res?.status === 200) {
@@ -111,7 +106,6 @@ const AdminCategory = ({ item }: any) => {
       });
       setCategoryData(updatedData);
     }
-    // console.log(res);
   }
 
   function isInputValid(
@@ -173,10 +167,18 @@ const AdminCategory = ({ item }: any) => {
           </div>
         </td>
         <td className="flex justify-center items-center">
-          <Image width="50" height="40" src={item.img_url} alt="" />
+          <Image className=" object-cover" width="50" height="40" src={item.img_url} alt="" />
         </td>
-        <td>{item.name}</td>
-        <td>{item.slug}</td>
+        <td className="max-w-56 text-center ">
+          <p className="whitespace-nowrap overflow-x-scroll  max-w-56  text-center ">
+            {item.name}
+          </p>
+        </td>
+        <td className="max-w-56 ">
+          <p className="whitespace-nowrap overflow-x-scroll  max-w-56 ">
+            {item.slug}
+          </p>
+        </td>
         <td>
           <div className="flex justify-center items-right mx-3 gap-3">
             <Image
@@ -195,19 +197,6 @@ const AdminCategory = ({ item }: any) => {
               className=" cursor-pointer"
               onClick={() => handleButtonClick(item.id)}
             />
-            {/* {showPopup && (
-              <div className="absolute right-0 w-max bg-whiteLight1 shadow-md rounded-md p-2 flex flex-col items-center justify-center gap-1">
-                <Button
-                  className="text-[#14ae5c] cursor-pointer hover:text-[#109850]"
-                  innerText={t("userDesc11")}
-                />
-                <hr className="w-full text-grayText1" />
-                <Button
-                  className="text-lightRed cursor-pointer hover:text-mainRed"
-                  innerText={t("userDesc12")}
-                />
-              </div>
-            )} */}
           </div>
         </td>
       </tr>

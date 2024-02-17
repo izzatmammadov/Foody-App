@@ -165,12 +165,10 @@ const AdminRestouransCard: FC<AdminRestouransCard> = ({ data }: any) => {
     const response = await updateRestourans(activeId, form);
 
     if (response?.status === 200 || response?.status === 201) {
-      
       setTimeout(() => {
         changeHidden();
       }, 500);
       toast.success("Category updated successfully!");
-
 
       const updatedData = restouranData.map((item: any) => {
         if (item.id === activeId) {
@@ -190,11 +188,8 @@ const AdminRestouransCard: FC<AdminRestouransCard> = ({ data }: any) => {
     const res = await deleteRestourans(activeId);
     // console.log(res);
     if (res?.status === 204) {
-
       const updatedArr = restouranData.filter(
-      
         (item: any) => item.id !== activeId
-
       );
       setRestouranData(updatedArr);
 
@@ -204,10 +199,9 @@ const AdminRestouransCard: FC<AdminRestouransCard> = ({ data }: any) => {
     }
     // console.log("delete res");
     return;
-
   }
   const [resCategoryARR, setResCategoryARR] = useState();
-  
+
   async function categoriesRender2() {
     try {
       const response = await getCategories();
@@ -215,21 +209,20 @@ const AdminRestouransCard: FC<AdminRestouransCard> = ({ data }: any) => {
       const categoryArry = response?.data.result.data;
 
       let items = categoryArry.map((item: any) => item.name);
-      // console.log("categoryArry-------------",categoryArry);
 
       setResCategoryARR(items);
     } catch (error) {
       console.log(error);
     }
   }
-  // console.log("category", resCategoryARR);
+
   useEffect(() => {
     categoriesRender2();
   }, []);
 
   return (
     <>
-       <ToastContainer />
+      <ToastContainer />
       <AdminLeftModal
         arr={resCategoryARR}
         p="Edit Restuarant  "
@@ -249,21 +242,21 @@ const AdminRestouransCard: FC<AdminRestouransCard> = ({ data }: any) => {
         ButtonOnClick={UpdateRestouran}
         getImgUrl={getImgUrl}
       />
-     
+
       <div className=" bg-white w-72 h-20 rounded-md">
         <div className=" flex  w-72 h-20 items-center justify-between">
           <img
-            className=" ml-3  h-16"
+            className=" ml-3  h-16  object-cover"
             width="65"
             height="30"
             src={data?.img_url}
             alt=""
           />
           <div>
-            <p className="text-gray-900 text-lg not-italic font-medium leading-6">
+            <p className="text-gray-900 text-lg not-italic font-medium leading-6  whitespace-nowrap overflow-x-scroll  max-w-40 px-2 ">
               {data.name}
             </p>
-            <p className="text-sm not-italic font-medium leading-6 ">
+            <p className="text-sm not-italic font-medium leading-6 whitespace-nowrap overflow-x-scroll  max-w-40 px-2   ">
               {data.category_id}
             </p>
           </div>

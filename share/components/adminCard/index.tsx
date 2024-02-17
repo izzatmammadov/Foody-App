@@ -182,8 +182,8 @@ const AdminCard = ({
       />
       <ToastContainer />
       <div className=" rounded-lg w-52 h-72 bg-white">
-        <div className="flex  flex-col items-center mt-3">
-          <img width="170" height="158" src={foodimage} alt="" />
+        <div className="flex  flex-col items-center mt-3 py-2">
+          <img className="h-40 object-cover" width="170" height="158" src={foodimage} alt="" />
         </div>
         <div className="m-1 mx-5">
           <p className=" text-lg font-medium">{foodname}</p>
