@@ -32,7 +32,7 @@ export const Navbar: React.FC<NavbarProps> = ({ adminNavbar }) => {
       if (err?.response?.status == 401) {
         setTimeout(() => {
         navigate.push("/login")
-          
+          localStorage.removeItem("userInfo")
         }, 60000)
         setTimeout(() => {
      toast.error("Your browsing session has expired !")

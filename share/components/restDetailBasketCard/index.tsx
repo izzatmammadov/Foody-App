@@ -10,6 +10,9 @@ interface DetailBasketCardProps {
   price: number;
   count: number;
   imageSrc: string;
+  increaseCount?: () => void,
+  decreaseCount?: () => void
+  clearBasket?: any
 }
 
 export const RestDetailBasketCard: React.FC<DetailBasketCardProps> = ({
@@ -18,22 +21,23 @@ export const RestDetailBasketCard: React.FC<DetailBasketCardProps> = ({
   price,
   count,
   imageSrc,
+  increaseCount,
+  decreaseCount,
+  clearBasket,
+
 }) => {
   const { t } = useTranslation();
-  const [itemCount, setItemCount] = useState(1);
+
   const [isModalOpen, setIsModalOpen] = useState(false);
 
-  const increaseCount = () => {
-    setItemCount(itemCount + 1);
-  };
 
-  const decreaseCount = () => {
-    if (itemCount > 1) {
-      setItemCount(itemCount - 1);
-    }
-  };
 
-  const updatedPrice = (price * itemCount).toFixed(2);
+
+  function clearButton() {
+    clearBasket()
+    handleModalClose()
+  }
+
 
   //^ MODAL
   const handleButtonClick = () => {
@@ -48,16 +52,16 @@ export const RestDetailBasketCard: React.FC<DetailBasketCardProps> = ({
       <div className="flex justify-between items-center mt-4 gap-2 sm:gap-0 pt-4 border-t-2 border-whiteLight2">
         <div className="flex items-center gap-4">
           <Image
-            className="hidden sm:block"
-            width={60}
-            height={0}
+            className="hidden sm:block h-11 object-cover w-11"
+            width={45}
+            height={45}
             src={imageSrc}
             alt={imageSrc}
           />
           <div className="flex flex-col gap-1">
             <p className="text-grayText2 font-semibold text-xl">{name}</p>
             <p className="text-grayText1 text-sm sm:text-md font-medium">
-              ${updatedPrice}
+              ${price}
             </p>
           </div>
         </div>
@@ -68,7 +72,7 @@ export const RestDetailBasketCard: React.FC<DetailBasketCardProps> = ({
               innerText="+"
               onClick={increaseCount}
             />
-            <p className="text-lg font-semibold">{itemCount}</p>
+            <p className="text-lg font-semibold">{count}</p>
             <Button
               className=" text-3xl"
               innerText="-"
@@ -109,6 +113,7 @@ export const RestDetailBasketCard: React.FC<DetailBasketCardProps> = ({
           <Button
             className="bg-mainRed border-2 text-white py-1 px-8 rounded-md border-mainRed shadow-md hover:scale-95 transition-all duration-500"
             innerText={t("modalDesc4")}
+            onClick={clearButton}
           />
         </div>
       </Modal>
