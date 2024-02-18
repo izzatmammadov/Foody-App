@@ -9,7 +9,8 @@ import { RestDetailBasket } from "@/share/components/restaurantDetailBasket";
 import { useTranslation } from "react-i18next";
 import { useRouter } from "next/router";
 import React, { useEffect, useState } from "react";
-import { getProducts, getRestourans } from "@/share/services/axios";
+import { getProducts, getRestourans, postProductForBasket } from "@/share/services/axios";
+import { useGlobalStore } from "@/share/services/provider";
 
 interface RestaurantDetailProps {
   name?: any;
@@ -21,7 +22,7 @@ const RestaurantDetail: React.FC<RestaurantDetailProps> = ({ name }) => {
 
   const [lokal, setLokal] = useState<any>([]);
   const [product, setProducts] = useState<any[]>([]);
-
+  const {basketData, setBasketData } = useGlobalStore();
   let localPath = asPath.split("/")[2];
 
   useEffect(() => {
@@ -47,13 +48,28 @@ const RestaurantDetail: React.FC<RestaurantDetailProps> = ({ name }) => {
     let focusProduct = resArr.filter(
       (item: any) => item.rest_id == lokal[0]?.name
     );
-    console.log(focusProduct, "focusProduct-----------");
+    // console.log(focusProduct, "focusProduct-----------");
     setProducts(focusProduct);
   }
 
   useEffect(() => {
     RenderProduct();
   }, [lokal]);
+
+
+
+
+async function handleButtonClick  (id: string | number) {
+    // console.log(id);
+   const res = await postProductForBasket(id)
+   if (res?.status === 201) {
+     setBasketData(res?.data)
+   }
+   console.log(res);
+
+   
+    
+  };
 
   return (
     <>
@@ -75,21 +91,22 @@ const RestaurantDetail: React.FC<RestaurantDetailProps> = ({ name }) => {
                 {t("detailDesc3")}
               </p>
               <div className="max-h-[432px] overflow-y-auto">
-                {product?.map((item: any) => (
-                  <RestDetailProductReact
+                {product?.map((item: any) => {
+               return   <RestDetailProductReact
                     key={item.id}
                     lokal={lokal}
                     name={item.name}
                     desc={item.description}
                     price={item.price}
                     imageSrc={item.img_url}
+                    onClick={() => handleButtonClick(item?.id)}
                   />
-                ))}
+                })}
               </div>
             </div>
             {/* BASKET */}
             <div className="flex flex-col bg-whiteLight1 p-4 w-full sm:w-2/5">
-              <RestDetailBasket itemCount={1} />
+              <RestDetailBasket  />
             </div>
           </section>
         </section>

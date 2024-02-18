@@ -326,3 +326,95 @@ export async function putProfileInfo(form: userProfileType) {
     console.log(err);
   }
 }
+
+
+
+export async function postProductForBasket(id:string|number) {
+  try {
+    let item: any = localStorage.getItem("userInfo");
+
+    let access_token = JSON.parse(item);
+console.log(access_token);
+
+    const response = await instanceAxios.post(`/basket/add/`,{
+      "product_id": id
+    }, {
+      // product_id:id,
+      headers: {
+        // product_id:id,
+        Authorization: `Bearer ${access_token.access_token}`,
+      },
+    });
+
+    return response;
+  } catch (err) {
+    console.log(err);
+  }
+}
+
+export async function getProductForBasket() {
+  try {
+    let item: any = localStorage.getItem("userInfo");
+
+    let access_token = JSON.parse(item);
+
+console.log(access_token);
+
+    const response = await instanceAxios.get(`/basket/`,{
+      headers: {
+        Authorization: `Bearer ${access_token.access_token}`,
+      },
+    });
+
+    return response;
+  } catch (err) {
+    console.log(err);
+  }
+}
+
+
+
+
+export async function deleteProductForBasket(id: string | number) {
+  try {
+    let item: any = localStorage.getItem("userInfo");
+    let access_token = JSON.parse(item);
+
+    console.log(access_token);
+
+    const response = await instanceAxios.delete(`/basket/delete/`, {
+      headers: {
+        Authorization: `Bearer ${access_token.access_token}`,
+      },
+      data: {
+        product_id: id,
+      },
+    });
+
+    return response;
+  } catch (err) {
+    console.log(err);
+  }
+}
+export async function clearProductForBasket(id: string | number) {
+  try {
+    let item: any = localStorage.getItem("userInfo");
+    let access_token = JSON.parse(item);
+
+    console.log(access_token);
+
+    const response = await instanceAxios.delete(`/basket/clear/`, {
+      headers: {
+        Authorization: `Bearer ${access_token.access_token}`,
+      },
+      data: {
+        "basket_id": id,
+      },
+    });
+
+    return response;
+  } catch (err) {
+    console.log(err);
+  }
+}
+

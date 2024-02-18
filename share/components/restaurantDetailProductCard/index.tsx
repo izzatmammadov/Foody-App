@@ -10,6 +10,7 @@ interface DetailProductCardProps {
   price: any;
   imageSrc: string;
   lokal: any;
+  onClick?: any
 }
 
 export const RestDetailProductReact: React.FC<DetailProductCardProps> = ({
@@ -18,14 +19,13 @@ export const RestDetailProductReact: React.FC<DetailProductCardProps> = ({
   price,
   imageSrc,
   lokal,
+  onClick
+  
 }) => {
-  const [updatedPrice, setUpdatedPrice] = useState(price);
+  // const [updatedPrice, setUpdatedPrice] = useState(price);
 
   // const [product, setProducts] = useState();
 
-  const handleButtonClick = () => {
-    setUpdatedPrice(updatedPrice + price);
-  };
 
   // async function RenderProduct() {
   //   const res = await getProducts();
@@ -67,11 +67,11 @@ export const RestDetailProductReact: React.FC<DetailProductCardProps> = ({
         </p>
         <div className="flex items-center gap-2 sm:gap-8">
           <p className="font-semibold text-grayText2 text-lg">
-            {/* ${updatedPrice.toFixed(2)} */}
+            {/* ${updatedPrice.toFixed(2)} */}$
             {price}
           </p>
           <Button
-            onClick={handleButtonClick}
+            onClick={onClick}
             className="py-2 px-4 rounded-full border-2 border-whiteLight3 text-whiteLight3 text-2xl hover:border-green hover:bg-green hover:text-white transition-all duration-200"
             innerText="+"
           />
