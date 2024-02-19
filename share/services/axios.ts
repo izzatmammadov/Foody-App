@@ -1,5 +1,6 @@
 import axios from "axios";
 import { toast } from "react-toastify";
+import { dataType } from "../components/userCheckForm";
 const baseUrl = "/api";
 
 const instanceAxios = axios.create({
@@ -334,7 +335,7 @@ export async function postProductForBasket(id:string|number) {
     let item: any = localStorage.getItem("userInfo");
 
     let access_token = JSON.parse(item);
-console.log(access_token);
+// console.log(access_token);
 
     const response = await instanceAxios.post(`/basket/add/`,{
       "product_id": id
@@ -358,7 +359,7 @@ export async function getProductForBasket() {
 
     let access_token = JSON.parse(item);
 
-console.log(access_token);
+// console.log(access_token);
 
     const response = await instanceAxios.get(`/basket/`,{
       headers: {
@@ -380,7 +381,7 @@ export async function deleteProductForBasket(id: string | number) {
     let item: any = localStorage.getItem("userInfo");
     let access_token = JSON.parse(item);
 
-    console.log(access_token);
+    // console.log(access_token);
 
     const response = await instanceAxios.delete(`/basket/delete/`, {
       headers: {
@@ -401,7 +402,7 @@ export async function clearProductForBasket(id: string | number) {
     let item: any = localStorage.getItem("userInfo");
     let access_token = JSON.parse(item);
 
-    console.log(access_token);
+    // console.log(access_token);
 
     const response = await instanceAxios.delete(`/basket/clear/`, {
       headers: {
@@ -418,3 +419,24 @@ export async function clearProductForBasket(id: string | number) {
   }
 }
 
+
+export async function postOrder( data:dataType) {
+  try {
+    let item: any = localStorage.getItem("userInfo");
+
+    let access_token = JSON.parse(item);
+
+// console.log(access_token);
+
+    const response = await instanceAxios.post(`/order/`, data,{
+      // data:data,
+      headers: {
+        Authorization: `Bearer ${access_token.access_token}`,
+      },
+    });
+
+    return response;
+  } catch (err) {
+    console.log(err);
+  }
+}

@@ -1,14 +1,26 @@
 import { useTranslation } from "react-i18next";
 import { Button } from "../Button";
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import { UserCheckoutAside } from "../userCheckoutAside";
 import { useRouter } from "next/router";
-
+import { getProductForBasket, postOrder } from "@/share/services/axios";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+export interface dataType{
+  "basket_id": string,
+  "delivery_address": string|undefined,
+  "contact": string|undefined|number,
+  "payment_method": string
+}
 export const UserCheckoutForm = () => {
   const { t } = useTranslation();
   const [isChecked1, setIsChecked1] = useState(false);
   const [isChecked2, setIsChecked2] = useState(false);
+  const [radioBtn, setRadioBtn] = useState("");
+  const addressRef = useRef<HTMLInputElement>(null)
+  const numberRef = useRef<HTMLInputElement>(null)
+  
   const [formCompleted, setFormCompleted] = useState(false);
   const [showCheck, setShowCheck] = useState(false);
   const navigate = useRouter()
@@ -22,16 +34,79 @@ export const UserCheckoutForm = () => {
     setIsChecked2((prev) => !prev);
     setIsChecked1(false);
   };
+  function radioValue() {
+    if (isChecked1 === true) {
+      setRadioBtn("0")
+      return
+    }
+    setRadioBtn("1")
+    return
+  }
+  useEffect(() => { radioValue() }, [isChecked1])
+  console.log(radioBtn);
+  const [basket , setBasket] = useState<any>({})
 
-  const handleCheckout = () => {
-    setFormCompleted(true);
-    setTimeout(() => {
-      navigate.push("/restaurants");
-    }, 1500);
+  async function renderBasket() {
+    const res = await getProductForBasket()
+    console.log(res);
+    if (res?.status === 200) {
+      setBasket(res.data.result.data)
+    }
+  }
+  useEffect(() => {
+    renderBasket()
+  }, [])
+
+  function isValidAzerbaijanPhoneNumber(phoneNumber:string ) {
+    const azPhoneNumberRegex = /^994(50|51|55|70|77|10)\d{7}$/;
+
+    return azPhoneNumberRegex.test(phoneNumber);
+  }
+  const validateEmail = (email: string): boolean => {
+    const emailRegex = /^[\w\-\.]+@([\w-]+\.)+[\w-]{2,}$/;
+    return emailRegex.test(email);
+  };
+  
+
+  const  handleCheckout = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault()
+
+
+      const addresValue = addressRef?.current?.value
+    const numberValue: any = numberRef?.current?.value
+    
+    if (!addresValue || !numberValue || !radioBtn) {
+toast.warning("Please fill the all inputs!")
+      return
+    }
+    if (!isValidAzerbaijanPhoneNumber(numberValue)) {
+toast.warning("Invalid phone number!")
+     return
+    }
+
+    const data:dataType= {
+      contact: numberValue,
+      basket_id: basket.id,
+      delivery_address: addresValue,
+      payment_method:radioBtn
+    }
+    console.log(data);
+    const res = await postOrder(data)
+    console.log(res);
+    
+    if (res?.status === 201) {
+      setFormCompleted(true);
+      setTimeout(() => {
+        navigate.push("/restaurants");
+      }, 1500);
+}
+    
+
   };
 
   return (
     <>
+      <ToastContainer/>
       {formCompleted ? (
         <div className="w-full flex justify-center items-center bg-white sm:bg-whiteLight1">
           <div className="flex my-28 flex-col items-center justify-center gap-9">
@@ -52,7 +127,8 @@ export const UserCheckoutForm = () => {
                 <label className="text-lg font-semibold text-grayText2">
                   {t("userCheck")}
                 </label>
-                <input
+                  <input
+                    ref={addressRef}
                   className="p-4 rounded-md shadow-sm"
                   type="text"
                   placeholder="Your Street Name"
@@ -62,7 +138,8 @@ export const UserCheckoutForm = () => {
                 <label className="text-lg font-semibold text-grayText2">
                   {t("userCheck2")}
                 </label>
-                <input
+                  <input
+                    ref={numberRef}
                   className="p-4 rounded-md shadow-sm"
                   type="number"
                   placeholder="+994"
