@@ -4,13 +4,13 @@ import { Button } from "../Button";
 import { useEffect, useState } from "react";
 import { clearProductForBasket, deleteProductForBasket, getProductForBasket, postProductForBasket } from "@/share/services/axios";
 import { useGlobalStore } from "@/share/services/provider";
+import { useRouter } from "next/router";
 
 
 
 export const RestDetailBasket = () => {
   const [showBasket, setShowBasket] = useState(true);
-
-
+const { push } = useRouter()
   const {basketData, setBasketData } = useGlobalStore();
   const toggleShowBasket = () => {
     setShowBasket(!showBasket);
@@ -181,9 +181,10 @@ async function handleIncreasButtonClick  (id: string | number) {
               imageSrc="/margaritaCard.svg"
             /> */}
           </div>
-          <div className="flex rounded-full mt-auto items-center justify-between p-2 bg-mainRed">
+          <div    onClick={()=>push("/userCheckout")}   className="flex rounded-full  cursor-pointer mt-auto items-center justify-between p-2 bg-mainRed">
             <p className="text-white text-lg font-medium ml-4">Checkout</p>
-            <Button
+              <Button
+           
               className="bg-white text-mainRed font-medium py-1 px-10 rounded-full shadow-md hover:scale-95 transition-all duration-500"
               innerText={basketData?.total_amount+" $"}
             />
