@@ -12,7 +12,7 @@ export const UserBasketDetail: React.FC<UserBasketDetailProps> = ({
   itemsCount,
 }) => {
   const { t } = useTranslation();
-  const navigate = useRouter()
+  const navigate = useRouter();
 
   return (
     <>
@@ -41,7 +41,13 @@ export const UserBasketDetail: React.FC<UserBasketDetailProps> = ({
                 src={"/emptyGray.svg"}
                 alt="empty"
               />
-              <Button onClick={()=>{navigate.push("/restaurants")}} className="text-lightRed font-medium text-xl hover:-translate-x-1 transition-all duration-200" innerText="&#10094; Restaurants"/>
+              <Button
+                onClick={() => {
+                  navigate.push("/restaurants");
+                }}
+                className="text-lightRed font-medium text-xl hover:-translate-x-1 transition-all duration-200"
+                innerText="&#10094; Restaurants"
+              />
             </div>
 
             <div className="bg-whiteLight3 text-white flex items-center mt-8 justify-between pl-10 pr-2 py-2 rounded-full shadow-md">

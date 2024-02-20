@@ -31,16 +31,7 @@ export const RestaurantSearchModal = ({ onClose, filterRestouran }: any) => {
             id={item.id}
           />
         ))}
-        {/* <RestaurantSearchModalCard
-          image="/mcdonalds.svg"
-          name="Mc Donald's"
-          desc="Delicious and fresh"
-        />
-        <RestaurantSearchModalCard
-          image="/mcdonalds.svg"
-          name="Mc Donald's"
-          desc="Delicious and fresh"
-        /> */}
+
         <Button
           className="text-lg font-light text-grayText2 w-full"
           innerText="More &#10141;"

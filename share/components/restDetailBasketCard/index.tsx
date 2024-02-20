@@ -10,9 +10,9 @@ interface DetailBasketCardProps {
   price: number;
   count: number;
   imageSrc: string;
-  increaseCount?: () => void,
-  decreaseCount?: () => void
-  clearBasket?: any
+  increaseCount?: () => void;
+  decreaseCount?: () => void;
+  clearBasket?: any;
 }
 
 export const RestDetailBasketCard: React.FC<DetailBasketCardProps> = ({
@@ -24,20 +24,15 @@ export const RestDetailBasketCard: React.FC<DetailBasketCardProps> = ({
   increaseCount,
   decreaseCount,
   clearBasket,
-
 }) => {
   const { t } = useTranslation();
 
   const [isModalOpen, setIsModalOpen] = useState(false);
 
-
-
-
   function clearButton() {
-    clearBasket()
-    handleModalClose()
+    clearBasket();
+    handleModalClose();
   }
-
 
   //^ MODAL
   const handleButtonClick = () => {
@@ -92,7 +87,9 @@ export const RestDetailBasketCard: React.FC<DetailBasketCardProps> = ({
 
       <Modal isOpen={isModalOpen} onClose={handleModalClose}>
         <div className="flex justify-between items-center">
-          <p className="mx-auto text-2xl sm:text-3xl font-medium">{t("modalDesc")}</p>
+          <p className="mx-auto text-2xl sm:text-3xl font-medium">
+            {t("modalDesc")}
+          </p>
           <Button
             className="text-mainRed text-lg"
             innerText="&#10006;"

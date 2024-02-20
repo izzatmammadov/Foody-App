@@ -7,23 +7,23 @@ import { useRouter } from "next/router";
 import { getProductForBasket, postOrder } from "@/share/services/axios";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-export interface dataType{
-  "basket_id": string,
-  "delivery_address": string|undefined,
-  "contact": string|undefined|number,
-  "payment_method": string
+export interface dataType {
+  basket_id: string;
+  delivery_address: string | undefined;
+  contact: string | undefined | number;
+  payment_method: string;
 }
 export const UserCheckoutForm = () => {
   const { t } = useTranslation();
   const [isChecked1, setIsChecked1] = useState(false);
   const [isChecked2, setIsChecked2] = useState(false);
   const [radioBtn, setRadioBtn] = useState("");
-  const addressRef = useRef<HTMLInputElement>(null)
-  const numberRef = useRef<HTMLInputElement>(null)
-  
+  const addressRef = useRef<HTMLInputElement>(null);
+  const numberRef = useRef<HTMLInputElement>(null);
+
   const [formCompleted, setFormCompleted] = useState(false);
   const [showCheck, setShowCheck] = useState(false);
-  const navigate = useRouter()
+  const navigate = useRouter();
 
   const toggleButton1 = () => {
     setIsChecked1((prev) => !prev);
@@ -36,28 +36,30 @@ export const UserCheckoutForm = () => {
   };
   function radioValue() {
     if (isChecked1 === true) {
-      setRadioBtn("0")
-      return
+      setRadioBtn("0");
+      return;
     }
-    setRadioBtn("1")
-    return
+    setRadioBtn("1");
+    return;
   }
-  useEffect(() => { radioValue() }, [isChecked1])
+  useEffect(() => {
+    radioValue();
+  }, [isChecked1]);
   console.log(radioBtn);
-  const [basket , setBasket] = useState<any>({})
+  const [basket, setBasket] = useState<any>({});
 
   async function renderBasket() {
-    const res = await getProductForBasket()
+    const res = await getProductForBasket();
     console.log(res);
     if (res?.status === 200) {
-      setBasket(res.data.result.data)
+      setBasket(res.data.result.data);
     }
   }
   useEffect(() => {
-    renderBasket()
-  }, [])
+    renderBasket();
+  }, []);
 
-  function isValidAzerbaijanPhoneNumber(phoneNumber:string ) {
+  function isValidAzerbaijanPhoneNumber(phoneNumber: string) {
     const azPhoneNumberRegex = /^994(50|51|55|70|77|10)\d{7}$/;
 
     return azPhoneNumberRegex.test(phoneNumber);
@@ -66,47 +68,43 @@ export const UserCheckoutForm = () => {
     const emailRegex = /^[\w\-\.]+@([\w-]+\.)+[\w-]{2,}$/;
     return emailRegex.test(email);
   };
-  
 
-  const  handleCheckout = async (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault()
+  const handleCheckout = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
 
+    const addresValue = addressRef?.current?.value;
+    const numberValue: any = numberRef?.current?.value;
 
-      const addresValue = addressRef?.current?.value
-    const numberValue: any = numberRef?.current?.value
-    
     if (!addresValue || !numberValue || !radioBtn) {
-toast.warning("Please fill the all inputs!")
-      return
+      toast.warning("Please fill the all inputs!");
+      return;
     }
     if (!isValidAzerbaijanPhoneNumber(numberValue)) {
-toast.warning("Invalid phone number!")
-     return
+      toast.warning("Invalid phone number!");
+      return;
     }
 
-    const data:dataType= {
+    const data: dataType = {
       contact: numberValue,
       basket_id: basket.id,
       delivery_address: addresValue,
-      payment_method:radioBtn
-    }
+      payment_method: radioBtn,
+    };
     console.log(data);
-    const res = await postOrder(data)
+    const res = await postOrder(data);
     console.log(res);
-    
+
     if (res?.status === 201) {
       setFormCompleted(true);
       setTimeout(() => {
         navigate.push("/restaurants");
       }, 1500);
-}
-    
-
+    }
   };
 
   return (
     <>
-      <ToastContainer/>
+      <ToastContainer />
       {formCompleted ? (
         <div className="w-full flex justify-center items-center bg-white sm:bg-whiteLight1">
           <div className="flex my-28 flex-col items-center justify-center gap-9">
@@ -127,8 +125,8 @@ toast.warning("Invalid phone number!")
                 <label className="text-lg font-semibold text-grayText2">
                   {t("userCheck")}
                 </label>
-                  <input
-                    ref={addressRef}
+                <input
+                  ref={addressRef}
                   className="p-4 rounded-md shadow-sm"
                   type="text"
                   placeholder="Your Street Name"
@@ -138,8 +136,8 @@ toast.warning("Invalid phone number!")
                 <label className="text-lg font-semibold text-grayText2">
                   {t("userCheck2")}
                 </label>
-                  <input
-                    ref={numberRef}
+                <input
+                  ref={numberRef}
                   className="p-4 rounded-md shadow-sm"
                   type="number"
                   placeholder="+994"
