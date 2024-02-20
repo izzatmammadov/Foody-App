@@ -1,8 +1,39 @@
 import { useTranslation } from "react-i18next";
 import { TableData } from "../orderTableData";
+import { getOrder } from "@/share/services/axios";
+import { useState } from "react";
 
 export const Table = () => {
   const { t, i18n } = useTranslation();
+  const [orderState, setOrderState] = useState([]);
+
+  // async function RenderOrder() {
+  //   try {
+  //     const res = await getOrder();
+  //     const result = res?.data.result.data || [];
+  //     setOrderState(result);
+  //   } catch (error) {
+  //     console.error("Error fetching order:", error);
+  //   }
+  // }
+  // console.log(orderState);
+
+  // useEffect(() => {
+  //   RenderOrder();
+  // }, []);
+
+  const fetchOrder = async () => {
+    try {
+      const res = await getOrder();
+      const result = res?.data.result.data || [];
+      setOrderState(result);
+    } catch (error) {
+      console.error("Error fetching order:", error);
+    }
+  };
+
+  // Fetch order data when the component mounts
+  fetchOrder();
 
   return (
     <section className="max-w-full overflow-x-auto">
@@ -29,32 +60,18 @@ export const Table = () => {
           </tr>
         </thead>
         <tbody>
-          <TableData
-            id="0001"
-            time="12:50"
-            adress="29 Eve Street, 543 Evenue Road, Ny 87876"
-            amount={50.25}
-            payment="Credit Card"
-            contact={994509998877}
-          />
-
-          <TableData
-            id="0001"
-            time="12:50"
-            adress="29 Eve Street, 543 Evenue Road, Ny 87876"
-            amount={50.25}
-            payment="Credit Card"
-            contact={994509998877}
-          />
-
-          <TableData
-            id="0001"
-            time="12:50"
-            adress="29 Eve Street, 543 Evenue Road, Ny 87876"
-            amount={50.25}
-            payment="Credit Card"
-            contact={994509998877}
-          />
+          {orderState?.map((item: any, index: number) => (
+            <TableData
+              key={`tableData_${index}`}
+              id={`${index + 1}`}
+              time="12:50"
+              adress={item.delivery_address}
+              amount={item.amount}
+              payment={item.payment_method == 0 ? "Credit Card" : "Pay Cash"}
+              // payment="Credit Card"
+              contact={item.contact}
+            />
+          ))}
         </tbody>
       </table>
     </section>

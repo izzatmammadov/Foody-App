@@ -6,9 +6,12 @@ import { Navbar } from "../../share/components/Navbar";
 import { Table } from "../../share/components/orderTable/index";
 import { useTranslation } from "react-i18next";
 import { UserAside } from "../../share/components/userAside";
+import { getOrder } from "@/share/services/axios";
 
 const UserOrder: NextPage = () => {
   const { t, i18n } = useTranslation();
+
+  getOrder();
 
   return (
     <>
