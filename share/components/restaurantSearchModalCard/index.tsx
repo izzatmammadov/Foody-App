@@ -22,8 +22,12 @@ export const RestaurantSearchModalCard = ({
     >
       <Image width={60} height={0} src={image} alt={image} />
       <div className="flex flex-col w-full ">
-        <p className=" font-semibold whitespace-nowrap overflow-x-auto">{name}</p>
-        <p className=" text-grayText2 whitespace-nowrap overflow-x-auto">{desc}</p>
+        <p className=" font-semibold whitespace-nowrap overflow-x-auto">
+          {name}
+        </p>
+        <p className=" text-grayText2 whitespace-nowrap overflow-x-auto">
+          {desc}
+        </p>
       </div>
     </div>
   );

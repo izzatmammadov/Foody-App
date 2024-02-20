@@ -10,7 +10,7 @@ interface DetailProductCardProps {
   price: any;
   imageSrc: string;
   lokal: any;
-  onClick?: any
+  onClick?: any;
 }
 
 export const RestDetailProductReact: React.FC<DetailProductCardProps> = ({
@@ -19,31 +19,8 @@ export const RestDetailProductReact: React.FC<DetailProductCardProps> = ({
   price,
   imageSrc,
   lokal,
-  onClick
-  
+  onClick,
 }) => {
-  // const [updatedPrice, setUpdatedPrice] = useState(price);
-
-  // const [product, setProducts] = useState();
-
-
-  // async function RenderProduct() {
-  //   const res = await getProducts();
-  //   let resArr = res?.data.result.data;
-  //   // console.log(resArr, "resArr-------");
-  //   // console.log(lokal, "lokal-------");
-
-  //   let focusProduct = resArr.filter(
-  //     (item: any) => item.rest_id == lokal[0].name
-  //   );
-  //   // console.log(focusProduct, "focusProduct-----------");
-  //   setProducts(focusProduct);
-  // }
-
-  // useEffect(() => {
-  //   RenderProduct();
-  // }, []);
-
   return (
     <div className="flex justify-between items-center gap-2 sm:gap-0 p-4 border-t-2 border-whiteLight2">
       <div className="flex items-center gap-8">
@@ -67,8 +44,7 @@ export const RestDetailProductReact: React.FC<DetailProductCardProps> = ({
         </p>
         <div className="flex items-center gap-2 sm:gap-8">
           <p className="font-semibold text-grayText2 text-lg">
-            {/* ${updatedPrice.toFixed(2)} */}$
-            {price}
+            {/* ${updatedPrice.toFixed(2)} */}${price}
           </p>
           <Button
             onClick={onClick}
