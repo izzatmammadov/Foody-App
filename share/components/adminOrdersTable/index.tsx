@@ -7,12 +7,12 @@ import Image from "next/image";
 interface AdminOrdersTableType {
   data: {
     id: number | string;
-    customerId: number | string;
-    Time: string;
-    Address: string;
-    Amount: string;
-    Payment: string;
-    Contact: string;
+    customer_id: number | string;
+    created: string;
+    delivery_adress: string;
+    amount: string;
+    payment: string;
+    contact: string;
   };
 }
 
@@ -48,15 +48,15 @@ const AdminOrdersTable: FC<AdminOrdersTableType> = ({ data }:any) => {
         <td>
           <div className="flex justify-center">
             <p className=" border-slate-700  border rounded-lg px-2 ">
-              {data.customerId}
+              {data.customer_id}
             </p>
           </div>
         </td>
-        <td>{data.Time}</td>
-        <td>{data.Address} </td>
-        <td>{data.Payment}</td>
-        <td>{data.Amount}</td>
-        <td>{data.Contact}</td>
+        <td>{data.created}</td>
+        <td>{data.delivery_address} </td>
+        <td>{data.payment_method}</td>
+        <td>{data.amount}$</td>
+        <td>{data.contact}</td>
         <td>
           <Image
             width="24"

@@ -440,3 +440,28 @@ export async function postOrder( data:dataType) {
     console.log(err);
   }
 }
+
+//& ADMIN ORDERS
+
+export async function getOrder() {
+  try {
+    let item: any = localStorage.getItem("userInfo");
+    let access_token = JSON.parse(item);
+
+    console.log("ACCESS TOKEN ",access_token);
+    
+
+
+    const response = await instanceAxios.get(`/order/`,{
+      headers: {
+        Authorization: `Bearer ${access_token.access_token}`,
+      },
+    });
+
+
+    return response
+
+  } catch (err){
+    console.log("order's error: ",err);
+  }
+}
