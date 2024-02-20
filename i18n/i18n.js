@@ -97,6 +97,7 @@ const resources = {
       userOrder7: "Description",
       userOrder8: "Title",
       addCategory: "+ ADD PRODUCT",
+      adminOrder1: "Customer ID",
     },
   },
   az: {
@@ -195,6 +196,7 @@ const resources = {
       userOrder7: "Təsvir",
       userOrder8: "Başlıq",
       addCategory: "+ MƏHSUL ƏLAVƏ ET",
+      adminOrder1: "Müştəri ID",
     },
   },
 };
