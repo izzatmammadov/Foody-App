@@ -6,9 +6,11 @@ import { AdminLeftModal } from "@/share/components/adminLeftModal";
 import AdminOrdersTable from "@/share/components/adminOrdersTable";
 import AdminSecondTitle from "@/share/components/adminSecondTitle";
 import { getOrder } from "@/share/services/axios";
+import { useGlobalStore } from "@/share/services/provider";
 import Head from "next/head";
 import React, { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
+import { ToastContainer, toast } from "react-toastify";
 
 // const item = [
 //   {
@@ -52,14 +54,14 @@ import { useTranslation } from "react-i18next";
 const adminOrders = () => {
   const { t } = useTranslation();
   const [isHiddenModal, setIsHiddenModal] = useState<boolean>(true);
-  const [orders, setOrders] = useState<any[]>([]);
+  const { orders, setOrders } = useGlobalStore()
+
 
   function changeHidden() {
     setIsHiddenModal((prev) => !prev);
   }
 
-  //* GET ORDERS
-
+//* GET ORDERS
   const fetchOrders = async () => {
     try {
       const response = await getOrder();
@@ -75,6 +77,21 @@ const adminOrders = () => {
     fetchOrders();
   }, []);
 
+//* DELETE ORDERS
+  const deleteOrder = async (id:any) => {
+    console.log(id);
+    
+    const orderObj = {
+      order_id: id
+    }
+    
+    const res:any = await deleteOrder(orderObj)
+    fetchOrders()
+    if(res.status == 204){
+      toast.success("Order deleted successfully!")
+    };
+  }
+
   return (
     <>
       <Head>
@@ -85,7 +102,7 @@ const adminOrders = () => {
       <div className=" bg-textBlack min-h-screen px-4">
         <Navbar adminNavbar={true}/>
         
-
+        <ToastContainer/>
         <AdminLeftModal onClickClose={changeHidden} hidden={isHiddenModal} />
         <main className="flex">
           <div className=" hidden sm:block">
@@ -111,7 +128,7 @@ const adminOrders = () => {
                   </tr>
                 </thead>
                 <tbody className="">
-                  {orders?.map((data) => (
+                  {orders?.map((data:any) => (
                     <AdminOrdersTable data={data} />
                   ))}
                 </tbody>
