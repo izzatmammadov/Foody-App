@@ -214,15 +214,6 @@ export async function updateCategories(id: string, form: Form) {
   }
 }
 
-export async function getOrderHistory() {
-  try {
-    const response = await instanceAxios.get(`/order/history`);
-    return response;
-  } catch (err) {
-    console.log(err);
-  }
-}
-
 //& PRODUCTS
 export type ProductValues = {
   productName?: string;
@@ -450,7 +441,7 @@ export async function getOrder() {
     let item: any = localStorage.getItem("userInfo");
     let access_token = JSON.parse(item);
     // console.log("ACCESS TOKEN ",access_token);
-    const response = await instanceAxios.get(`/order/`,{
+    const response = await instanceAxios.get(`/order`,{
       headers: {
         Authorization: `Bearer ${access_token.access_token}`,
       },
@@ -464,13 +455,52 @@ export async function getOrder() {
 
 //! DELETE ORDERS
 
-export const deleteOrder = async (data:any) => {
+export const deleteOrder = async (id:string | number) => {
   try {
       let item: any = localStorage.getItem("userInfo")
       let acsess_token = JSON.parse(item)
       
-      const response = await instanceAxios.delete(`/order/`, {
-          data:data,
+      const response = await instanceAxios.delete(`/order`, {
+          data: {
+            "order_id": id,
+          },
+          headers: {
+              Authorization: `Bearer ${acsess_token.access_token}`,
+          }
+      });
+      return response;
+  } catch (error) {
+      console.log(error)
+  }
+}
+
+//& ADMIN HISTORY
+
+export const getHistory = async () => {
+  try {
+      let item: any = localStorage.getItem("userInfo")
+      let acsess_token = JSON.parse(item)
+      
+      const response = await instanceAxios.get('/order/history', {
+          headers: {
+              Authorization: `Bearer ${acsess_token.access_token}`,
+          }
+      });
+      return response;
+  } catch (error) {
+      console.log(error)
+  }
+}
+
+export const deleteOrderHistory = async (id:string | number) => {
+  try {
+      let item: any = localStorage.getItem("userInfo")
+      let acsess_token = JSON.parse(item)
+      
+      const response = await instanceAxios.delete('/api/order', {
+        data: {
+          "order_id": id,
+        },
           headers: {
               Authorization: `Bearer ${acsess_token.access_token}`,
           }
