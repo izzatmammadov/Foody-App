@@ -4,6 +4,8 @@ import { useTranslation } from "react-i18next";
 import { Button } from "../Button";
 import Modal from "../Modal";
 import { OrderTableDetail } from "../orderTableDetail";
+import { deleteOrder } from "@/share/services/axios";
+import { useGlobalStore } from "@/share/services/provider";
 
 interface TableDatailProps {
   id: number | string;
@@ -26,6 +28,17 @@ export const TableData: React.FC<TableDatailProps> = ({
   const [showPopup, setShowPopup] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isModalOpen2, setIsModalOpen2] = useState(false);
+  const { orderData, setOrderData } = useGlobalStore();
+
+  async function inDeleteOrder() {
+    const response = await deleteOrder(id);
+    console.log("response", response);
+    if (response?.status == 204) {
+      let newdata = orderData.filter((item: any) => item.id !== id);
+      setOrderData(newdata);
+      handleModalClose();
+    }
+  }
 
   //^ MODAL1
   const handleButtonClick = () => {
@@ -117,6 +130,7 @@ export const TableData: React.FC<TableDatailProps> = ({
             onClick={handleModalClose}
           />
           <Button
+            onClick={inDeleteOrder}
             className="bg-mainRed border-2 text-white py-1 px-8 rounded-md border-mainRed shadow-md hover:scale-95 transition-all duration-500"
             innerText={t("modalDesc4")}
           />
