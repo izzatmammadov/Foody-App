@@ -443,25 +443,40 @@ export async function postOrder( data:dataType) {
 
 //& ADMIN ORDERS
 
+//* GET ORDERS
+
 export async function getOrder() {
   try {
     let item: any = localStorage.getItem("userInfo");
     let access_token = JSON.parse(item);
-
-    console.log("ACCESS TOKEN ",access_token);
-    
-
-
+    // console.log("ACCESS TOKEN ",access_token);
     const response = await instanceAxios.get(`/order/`,{
       headers: {
         Authorization: `Bearer ${access_token.access_token}`,
       },
     });
-
-
     return response
 
-  } catch (err){
-    console.log("order's error: ",err);
+  } catch (error){
+    console.log("order's error: ",error);
+  }
+}
+
+//! DELETE ORDERS
+
+export const deleteOrder = async (data:any) => {
+  try {
+      let item: any = localStorage.getItem("userInfo")
+      let acsess_token = JSON.parse(item)
+      
+      const response = await instanceAxios.delete(`/order/`, {
+          data:data,
+          headers: {
+              Authorization: `Bearer ${acsess_token.access_token}`,
+          }
+      });
+      return response;
+  } catch (error) {
+      console.log(error)
   }
 }

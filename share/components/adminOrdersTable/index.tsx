@@ -16,8 +16,30 @@ interface AdminOrdersTableType {
   };
 }
 
+//& DATE
+
+const formatDate = (timestamp:any) => {
+  const currentDate = new Date();
+  const date = new Date(timestamp);
+  const timeDifference = currentDate.getTime() - date.getTime();
+  const seconds = Math.floor(timeDifference / 1000);
+  const minutes = Math.floor(seconds / 60);
+  const hours = Math.floor(minutes / 60);
+  const days = Math.floor(hours / 24);
+
+  if (days > 0) {
+    return `${days} day${days > 1 ? 's' : ''} ago`;
+  } else if (hours > 0) {
+    return `${hours} hour${hours > 1 ? 's' : ''} ago`;
+  } else if (minutes > 0) {
+    return `${minutes} minute${minutes > 1 ? 's' : ''} ago`;
+  } else {
+    return `${seconds} second${seconds > 1 ? 's' : ''} ago`;
+  }
+};
+
 const AdminOrdersTable: FC<AdminOrdersTableType> = ({ data }:any) => {
-  const { t, i18n } = useTranslation();
+  const { t } = useTranslation();
   const [showPopup, setShowPopup] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
 
@@ -34,6 +56,7 @@ const AdminOrdersTable: FC<AdminOrdersTableType> = ({ data }:any) => {
   const togglePopup = () => {
     setShowPopup(!showPopup);
   };
+
 
   return (
     <>
@@ -52,7 +75,7 @@ const AdminOrdersTable: FC<AdminOrdersTableType> = ({ data }:any) => {
             </p>
           </div>
         </td>
-        <td>{data.created}</td>
+        <td>{formatDate(data.created)}</td>
         <td>{data.delivery_address} </td>
         <td>{data.payment_method}</td>
         <td>{data.amount}$</td>
@@ -91,6 +114,7 @@ const AdminOrdersTable: FC<AdminOrdersTableType> = ({ data }:any) => {
           <Button
             className="bg-mainRed border-2 text-white py-1 px-8 rounded-md border-mainRed shadow-md hover:scale-95 transition-all duration-500"
             innerText={t("modalDesc4")}
+           
           />
         </div>
       </Modal>
