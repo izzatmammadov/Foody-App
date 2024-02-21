@@ -3,17 +3,46 @@ import { Button } from "../Button";
 import { UserBasketCard } from "../userBasketCard/intex";
 import Image from "next/image";
 import { useRouter } from "next/router";
+import { clearProductForBasket, deleteProductForBasket, postProductForBasket } from "@/share/services/axios";
+import { useGlobalStore } from "@/share/services/provider";
+import { toast } from "react-toastify";
 
 interface UserBasketDetailProps {
   itemsCount: number;
+  data:any
 }
 
 export const UserBasketDetail: React.FC<UserBasketDetailProps> = ({
   itemsCount,
+  data
 }) => {
   const { t } = useTranslation();
   const navigate = useRouter();
+  const { basketData, setBasketData } = useGlobalStore();
 
+  async function handleIncreasButtonClick(id: string | number) {
+    // console.log(id);
+    const res = await postProductForBasket(id);
+    if (res?.status === 201) {
+      setBasketData(res?.data);
+    }
+    console.log(res);
+  }
+  async function handleDecreaseButtonClick(id: string | number) {
+    const res = await deleteProductForBasket(id);
+    console.log(res);
+    if (res?.status === 200) {
+      setBasketData(res?.data);
+    }
+  }
+  async function handleClearButtonClick(id: string | number) {
+    const res = await clearProductForBasket(id);
+    console.log(res);
+    if (res?.status === 200) {
+      setBasketData(res?.data);
+      toast.success("Basket cleared successfully!")
+    }
+  }
   return (
     <>
       {itemsCount === 0 ? (
@@ -78,13 +107,18 @@ export const UserBasketDetail: React.FC<UserBasketDetailProps> = ({
             </div>
 
             <div className="mb-5 max-h-[189px] overflow-y-auto">
-              <UserBasketCard
-                name="Papa John's Pizza"
-                price={17.9}
-                count={1}
-                imageSrc="/margaritaCard.svg"
-              />
-
+                {data?.items?.map((item: any,index:number|string) => {
+                  return <UserBasketCard key={index}
+                    clearBasket={()=>handleClearButtonClick(data.id)}
+                    decreaseBtn={()=>handleDecreaseButtonClick(item.id)}
+              increasBtn={()=>handleIncreasButtonClick(item.id)}
+            name={item.name}
+            price={item.amount}
+            count={item.count}
+            imageSrc={item.img_url}
+          />
+          })}  
+{/* 
               <UserBasketCard
                 name="Papa John's Fries"
                 price={9.9}
@@ -97,14 +131,15 @@ export const UserBasketDetail: React.FC<UserBasketDetailProps> = ({
                 price={4.9}
                 count={1}
                 imageSrc="/cocaCola.svg"
-              />
+              /> */}
             </div>
 
             <div className="bg-mainRed text-white flex items-center mt-8 justify-between pl-10 pr-2 py-2 rounded-full shadow-md">
               <p className="font-medium text-xl">{t("userDesc4")}</p>
-              <Button
+                <Button
+                  onClick={()=>navigate.push("/userCheckout")}
                 className="bg-white text-mainRed rounded-full py-1 px-14 font-medium text-lg hover:scale-95 transition-all duration-500"
-                innerText="$17.90"
+                innerText={`$ ${data.total_amount}`}
               />
             </div>
           </div>

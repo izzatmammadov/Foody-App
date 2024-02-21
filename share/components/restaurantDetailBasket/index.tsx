@@ -10,6 +10,7 @@ import {
 } from "@/share/services/axios";
 import { useGlobalStore } from "@/share/services/provider";
 import { useRouter } from "next/router";
+import { ToastContainer, toast } from "react-toastify";
 
 export const RestDetailBasket = () => {
   const [showBasket, setShowBasket] = useState(true);
@@ -27,7 +28,7 @@ export const RestDetailBasket = () => {
   useEffect(() => {
     renderBasketProducts();
   }, []);
-  console.log(basketData);
+  // console.log(basketData);
   async function handleIncreasButtonClick(id: string | number) {
     // console.log(id);
     const res = await postProductForBasket(id);
@@ -48,6 +49,7 @@ export const RestDetailBasket = () => {
     console.log(res);
     if (res?.status === 200) {
       setBasketData(res?.data);
+      toast.success("Basket cleared successfully!")
     }
   }
 
@@ -153,10 +155,12 @@ export const RestDetailBasket = () => {
               {basketData?.total_item} items
             </p>
           </div>
-          <div className="mb-5">
-            {basketData?.items?.map((item: any) => {
+            <div className="mb-5">
+              <ToastContainer/>
+            {basketData?.items?.map((item: any,index:string|number) => {
               return (
                 <RestDetailBasketCard
+                  key={index}
                   increaseCount={() => handleIncreasButtonClick(item.id)}
                   decreaseCount={() => handleDecreaseButtonClick(item.id)}
                   clearBasket={() => handleClearButtonClick(basketData.id)}
