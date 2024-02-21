@@ -34,7 +34,7 @@ export const OrderTableDetail = () => {
           amount={35.8}
         />
 
-        <OrderTableDetailData
+        {/* <OrderTableDetailData
           image="/cocaCola.svg"
           name="Coca Cola"
           price={7.9}
@@ -48,7 +48,7 @@ export const OrderTableDetail = () => {
           price={9.9}
           count={2}
           amount={19.8}
-        />
+        /> */}
       </tbody>
     </table>
   );

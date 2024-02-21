@@ -1,39 +1,40 @@
 import { useTranslation } from "react-i18next";
 import { TableData } from "../orderTableData";
 import { getOrder } from "@/share/services/axios";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { useGlobalStore } from "@/share/services/provider";
 
 export const Table = () => {
   const { t, i18n } = useTranslation();
-  const [orderState, setOrderState] = useState([]);
+  const { orderData, setOrderData } = useGlobalStore();
 
   // async function RenderOrder() {
   //   try {
   //     const res = await getOrder();
   //     const result = res?.data.result.data || [];
-  //     setOrderState(result);
+  //     setOrderData(result);
   //   } catch (error) {
   //     console.error("Error fetching order:", error);
   //   }
   // }
   // console.log(orderState);
 
-  // useEffect(() => {
-  //   RenderOrder();
-  // }, []);
-
   const fetchOrder = async () => {
     try {
       const res = await getOrder();
       const result = res?.data.result.data || [];
-      setOrderState(result);
+      setOrderData(result);
     } catch (error) {
       console.error("Error fetching order:", error);
     }
   };
 
   // Fetch order data when the component mounts
-  fetchOrder();
+  // fetchOrder();
+
+  useEffect(() => {
+    fetchOrder();
+  }, []);
 
   return (
     <section className="max-w-full overflow-x-auto">
@@ -60,10 +61,10 @@ export const Table = () => {
           </tr>
         </thead>
         <tbody>
-          {orderState?.map((item: any, index: number) => (
+          {orderData?.map((item: any, index: number) => (
             <TableData
               key={`tableData_${index}`}
-              id={`${index + 1}`}
+              id={item.id}
               time="12:50"
               adress={item.delivery_address}
               amount={item.amount}
