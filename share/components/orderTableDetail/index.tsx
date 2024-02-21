@@ -1,8 +1,17 @@
 import { useTranslation } from "react-i18next";
 import { OrderTableDetailData } from "../orderTableDetailData";
+import { useGlobalStore } from "@/share/services/provider";
+import { log } from "console";
 
-export const OrderTableDetail = () => {
+export const OrderTableDetail = (id: any) => {
   const { t } = useTranslation();
+  const { orderForShow, setOrderForShow } = useGlobalStore();
+  console.log(id.id, "+++++");
+  let FilteredData = orderForShow.data.result.data.filter(
+    (item: any) => item.id == id.id
+  );
+
+  console.log(FilteredData);
 
   return (
     <table className="min-w-full bg-white text-center">
@@ -26,13 +35,22 @@ export const OrderTableDetail = () => {
         </tr>
       </thead>
       <tbody>
-        <OrderTableDetailData
+        {FilteredData[0]?.products?.map((item: any) => (
+          <OrderTableDetailData
+            image={item.img_url}
+            name={item.name}
+            price={item.price}
+            count={item.count}
+            amount={item.amount}
+          />
+        ))}
+        {/* <OrderTableDetailData
           image="/margaritaCard.svg"
-          name="Papa John's Pizza"
+          name="peyser John's Pizza"
           price={17.9}
           count={2}
           amount={35.8}
-        />
+        /> */}
 
         {/* <OrderTableDetailData
           image="/cocaCola.svg"
