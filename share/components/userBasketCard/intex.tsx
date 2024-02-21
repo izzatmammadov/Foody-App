@@ -3,12 +3,17 @@ import { useState } from "react";
 import { useTranslation } from "react-i18next";
 import Modal from "../Modal";
 import { Button } from "../Button";
+import { ToastContainer } from "react-toastify";
 
 interface UserBasketCardProps {
   name: string;
   price: number;
   count: number;
   imageSrc: string;
+  increasBtn: () => void,
+  decreaseBtn: () => void,
+  clearBasket:()=>void
+
 }
 
 export const UserBasketCard: React.FC<UserBasketCardProps> = ({
@@ -16,22 +21,17 @@ export const UserBasketCard: React.FC<UserBasketCardProps> = ({
   price,
   count,
   imageSrc,
+  increasBtn,
+  decreaseBtn,
+  clearBasket
 }) => {
   const { t, i18n } = useTranslation();
-  const [itemCount, setItemCount] = useState(1);
+
   const [isModalOpen, setIsModalOpen] = useState(false);
 
-  const increaseCount = () => {
-    setItemCount(itemCount + 1);
-  };
 
-  const decreaseCount = () => {
-    if (itemCount > 1) {
-      setItemCount(itemCount - 1);
-    }
-  };
 
-  const updatedPrice = (price * itemCount).toFixed(2);
+
 
   const handleButtonClick = () => {
     setIsModalOpen(true);
@@ -43,20 +43,21 @@ export const UserBasketCard: React.FC<UserBasketCardProps> = ({
 
   return (
     <>
+      <ToastContainer/>
       <div className="flex relative sm:pr-9 justify-between items-center border-b-2 border-whiteLight2 py-8">
         <Image width={96} height={0} src={imageSrc} alt={imageSrc} />
 
         <div className="flex flex-col w-full pl-7">
           <p className="font-medium text-grayText2 text-2xl">{name}</p>
-          <p className="font-medium text-lg">${updatedPrice}</p>
+          <p className="font-medium text-lg">${price}</p>
         </div>
 
         <div className="flex flex-col bg-whiteLight1 sm:bg-white py-1 px-3 rounded-full gap-3 items-center">
-          <button onClick={increaseCount}>
+          <button onClick={increasBtn}>
             <Image width={30} height={0} src={"/add.svg"} alt="add" />
           </button>
-          <p className="text-lg font-medium">{itemCount}</p>
-          <button onClick={decreaseCount}>
+          <p className="text-lg font-medium">{count}</p>
+          <button onClick={decreaseBtn}>
             <Image width={30} height={0} src={"/remove.svg"} alt="remove" />
           </button>
         </div>
@@ -98,6 +99,7 @@ export const UserBasketCard: React.FC<UserBasketCardProps> = ({
           <Button
             className="bg-mainRed border-2 text-white py-1 px-8 rounded-md border-mainRed shadow-md hover:scale-95 transition-all duration-500"
             innerText={t("modalDesc4")}
+            onClick={clearBasket}
           />
         </div>
       </Modal>

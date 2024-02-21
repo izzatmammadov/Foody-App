@@ -35,7 +35,8 @@
     "react-text-typing": "^0.2.0",
     "react-toastify": "^10.0.4",
     "swagger-jsdoc": "^6.2.8",
-    "swagger-ui-react": "^5.3.1"
+    "swagger-ui-react": "^5.3.1",
+    "toastify": "^2.0.1"
   },
   "devDependencies": {
     "@types/node": "20.7.0",

@@ -6,9 +6,24 @@ import { Navbar } from "../../share/components/Navbar";
 import { UserAside } from "../../share/components/userAside";
 import { useTranslation } from "react-i18next";
 import { UserBasketDetail } from "@/share/components/userBasketDetail";
+import { getProductForBasket } from "@/share/services/axios";
+import { useGlobalStore } from "@/share/services/provider";
+import { useEffect } from "react";
+import { ToastContainer } from "react-toastify";
 
 const UserBasket: NextPage = () => {
   const { t } = useTranslation();
+  const { basketData, setBasketData } = useGlobalStore();
+  async function renderBasketProducts() {
+    const res = await getProductForBasket();
+    console.log(res);
+    setBasketData(res?.data.result.data);
+  }
+  useEffect(() => {
+    renderBasketProducts();
+  }, []);
+  console.log(basketData);
+  
 
   return (
     <>
@@ -22,8 +37,9 @@ const UserBasket: NextPage = () => {
         <Navbar/>
 
         <section className="mx-0 sm:m-8 flex justify-center gap-10">
+          <ToastContainer/>
           <UserAside />
-          <UserBasketDetail itemsCount={0} />
+          <UserBasketDetail data={basketData} itemsCount={basketData.total_item} />
         </section>
 
         <Footer isTop={false} />
