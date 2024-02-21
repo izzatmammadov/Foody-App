@@ -7,6 +7,7 @@ import { useGlobalStore } from "@/share/services/provider";
 export const Table = () => {
   const { t, i18n } = useTranslation();
   const { orderData, setOrderData } = useGlobalStore();
+  const { orderForShow, setOrderForShow } = useGlobalStore();
 
   // async function RenderOrder() {
   //   try {
@@ -23,6 +24,8 @@ export const Table = () => {
     try {
       const res = await getOrder();
       const result = res?.data.result.data || [];
+      console.log(res, "res--------------");
+      setOrderForShow(res)
       setOrderData(result);
     } catch (error) {
       console.error("Error fetching order:", error);
