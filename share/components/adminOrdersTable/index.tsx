@@ -3,13 +3,16 @@ import { useTranslation } from "react-i18next";
 import Modal from "../Modal";
 import { Button } from "../Button";
 import Image from "next/image";
+import { deleteOrder } from "@/share/services/axios";
+import { ToastContainer, toast } from "react-toastify";
+import { useGlobalStore } from "@/share/services/provider";
 
 interface AdminOrdersTableType {
   data: {
     id: number | string;
     customer_id: number | string;
     created: string;
-    delivery_adress: string;
+    delivery_adress: string ;
     amount: string;
     payment: string;
     contact: string;
@@ -38,10 +41,12 @@ const formatDate = (timestamp:any) => {
   }
 };
 
-const AdminOrdersTable: FC<AdminOrdersTableType> = ({ data }:any) => {
+const AdminOrdersTable: FC<AdminOrdersTableType> = ( {data}:any ) => {
   const { t } = useTranslation();
   const [showPopup, setShowPopup] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const { orders, setOrders } = useGlobalStore();
+
 
   //^ MODAL
   const handleButtonClick = () => {
@@ -57,9 +62,24 @@ const AdminOrdersTable: FC<AdminOrdersTableType> = ({ data }:any) => {
     setShowPopup(!showPopup);
   };
 
+   //* DELETE ORDER
+
+   const deleteOrderData = async() => {
+
+    const response = await deleteOrder(data?.id)
+    console.log("RESPONSE", response);
+
+    if(response?.status === 204){
+      let filteredOrder = orders.filter((item:any)=> item.id !== data?.id)
+      setOrders(filteredOrder)
+      toast.success("Order deleted successfully!")
+      handleModalClose()
+    }
+}
 
   return (
     <>
+    <ToastContainer/>
       <tr className="h-14 text-center  border-slate-700  border-y text-gray-900 text-sm not-italic font-normal leading-5">
         <td>
           <div>
@@ -114,7 +134,7 @@ const AdminOrdersTable: FC<AdminOrdersTableType> = ({ data }:any) => {
           <Button
             className="bg-mainRed border-2 text-white py-1 px-8 rounded-md border-mainRed shadow-md hover:scale-95 transition-all duration-500"
             innerText={t("modalDesc4")}
-           
+            onClick={deleteOrderData}
           />
         </div>
       </Modal>

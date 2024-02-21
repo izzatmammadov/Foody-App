@@ -5,63 +5,23 @@ import { AdminHeader } from "@/share/components/adminHeader";
 import { AdminLeftModal } from "@/share/components/adminLeftModal";
 import AdminOrdersTable from "@/share/components/adminOrdersTable";
 import AdminSecondTitle from "@/share/components/adminSecondTitle";
-import { getOrder } from "@/share/services/axios";
+import { deleteOrder, getOrder } from "@/share/services/axios";
 import { useGlobalStore } from "@/share/services/provider";
 import Head from "next/head";
 import React, { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { ToastContainer, toast } from "react-toastify";
 
-// const item = [
-//   {
-//     id: 9177,
-//     customerId: 22401,
-//     Time: "25 Dec 2021",
-//     Address: "29 Eve Street, 543 Evenue Road, Ny 87876",
-//     Amount: "$249.7",
-//     Payment: "Cash",
-//     Contact: "994-51-410-3130",
-//   },
-//   {
-//     id: 9178,
-//     customerId: 22401,
-//     Time: "25 Dec 2021",
-//     Address: "29 Eve Street, 543 Evenue Road, Ny 87876",
-//     Amount: "$249.7",
-//     Payment: "Cash",
-//     Contact: "994-51-410-3130",
-//   },
-//   {
-//     id: 9179,
-//     customerId: 22401,
-//     Time: "25 Dec 2021",
-//     Address: "29 Eve Street, 543 Evenue Road, Ny 87876",
-//     Amount: "$249.7",
-//     Payment: "Cash",
-//     Contact: "994-51-410-3130",
-//   },
-//   {
-//     id: 9200,
-//     customerId: 22401,
-//     Time: "25 Dec 2021",
-//     Address: "29 Eve Street, 543 Evenue Road, Ny 87876",
-//     Amount: "$249.7",
-//     Payment: "Cash",
-//     Contact: "994-51-410-3130",
-//   },
-// ];
-
 const adminOrders = () => {
   const { t } = useTranslation();
   const [isHiddenModal, setIsHiddenModal] = useState<boolean>(true);
-  const { orders, setOrders } = useGlobalStore()
-
+  const { orders, setOrders } = useGlobalStore();
 
   function changeHidden() {
     setIsHiddenModal((prev) => !prev);
   }
 
-//* GET ORDERS
+  //* GET ORDERS
   const fetchOrders = async () => {
     try {
       const response = await getOrder();
@@ -71,26 +31,13 @@ const adminOrders = () => {
     }
   };
 
-  console.log("ORDERS ",orders);
+  console.log("ORDERS ", orders);
 
   useEffect(() => {
     fetchOrders();
   }, []);
 
-//* DELETE ORDERS
-  const deleteOrder = async (id:any) => {
-    console.log(id);
-    
-    const orderObj = {
-      order_id: id
-    }
-    
-    const res:any = await deleteOrder(orderObj)
-    fetchOrders()
-    if(res.status == 204){
-      toast.success("Order deleted successfully!")
-    };
-  }
+ 
 
   return (
     <>
@@ -100,9 +47,9 @@ const adminOrders = () => {
         <link rel="icon" href="/admin-icon.png" />
       </Head>
       <div className=" bg-textBlack min-h-screen px-4">
-        <Navbar adminNavbar={true}/>
-        
-        <ToastContainer/>
+        <Navbar adminNavbar={true} />
+
+        <ToastContainer />
         <AdminLeftModal onClickClose={changeHidden} hidden={isHiddenModal} />
         <main className="flex">
           <div className=" hidden sm:block">
@@ -111,7 +58,14 @@ const adminOrders = () => {
 
           <section className=" w-full">
             <div className="m-0 sm:m-5">
-              <AdminSecondTitle name="Orders"  p1="Orders" resCategoryARR={""} visibleButton={false} visibleDropwdown={false} buttonInnerText=""/>
+              <AdminSecondTitle
+                name="Orders"
+                p1="Orders"
+                resCategoryARR={""}
+                visibleButton={false}
+                visibleDropwdown={false}
+                buttonInnerText=""
+              />
             </div>
 
             <div className="p-5 max-w-full overflow-x-auto">
@@ -128,8 +82,8 @@ const adminOrders = () => {
                   </tr>
                 </thead>
                 <tbody className="">
-                  {orders?.map((data:any) => (
-                    <AdminOrdersTable data={data} />
+                  {orders?.map((data: any) => (
+                    <AdminOrdersTable data={data}  />
                   ))}
                 </tbody>
               </table>
