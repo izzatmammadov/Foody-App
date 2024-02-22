@@ -497,7 +497,7 @@ export const deleteOrderHistory = async (id:string | number) => {
       let item: any = localStorage.getItem("userInfo")
       let acsess_token = JSON.parse(item)
       
-      const response = await instanceAxios.delete('/api/order', {
+      const response = await instanceAxios.delete('/order', {
         data: {
           "order_id": id,
         },

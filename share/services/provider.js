@@ -16,6 +16,8 @@ const Provider = ({ children }) => {
   const [orders, setOrders] = useState([]);
   const [orderData, setOrderData] = useState([]);
   const [orderForShow, setOrderForShow] = useState([]);
+  const [history, setHistory] = useState([]);
+
 
   const Component = globalContext.Provider;
 
@@ -36,6 +38,8 @@ const Provider = ({ children }) => {
     setOrderData,
     orderForShow,
     setOrderForShow,
+    history,
+    setHistory
   };
 
   return <Component value={values}>{children}</Component>;
