@@ -1,4 +1,3 @@
-import { log } from "console";
 import { Button } from "../Button";
 import { RestaurantSearchModalCard } from "../restaurantSearchModalCard";
 import { useRouter } from "next/router";
@@ -17,11 +16,6 @@ export const RestaurantSearchModal = ({ onClose, filterRestouran }: any) => {
         innerText="&#10006;"
       />
       <div className="max-h-[180px] overflow-y-auto overflow-x-hidden">
-        {/* <RestaurantSearchModalCard
-          image="/mcdonalds.svg"
-          name="Mc Donald's"
-          desc="Delicious and fresh"
-        /> */}
         {filterRestouran?.map((item: any) => (
           <RestaurantSearchModalCard
             image={item.img_url}

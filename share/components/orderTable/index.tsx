@@ -9,31 +9,17 @@ export const Table = () => {
   const { orderData, setOrderData } = useGlobalStore();
   const { orderForShow, setOrderForShow } = useGlobalStore();
 
-  // async function RenderOrder() {
-  //   try {
-  //     const res = await getOrder();
-  //     const result = res?.data.result.data || [];
-  //     setOrderData(result);
-  //   } catch (error) {
-  //     console.error("Error fetching order:", error);
-  //   }
-  // }
-  // console.log(orderState);
-
   const fetchOrder = async () => {
     try {
       const res = await getOrder();
       const result = res?.data.result.data || [];
-      console.log(res, "res--------------");
-      setOrderForShow(res)
+
+      setOrderForShow(res);
       setOrderData(result);
     } catch (error) {
       console.error("Error fetching order:", error);
     }
   };
-
-  // Fetch order data when the component mounts
-  // fetchOrder();
 
   useEffect(() => {
     fetchOrder();
