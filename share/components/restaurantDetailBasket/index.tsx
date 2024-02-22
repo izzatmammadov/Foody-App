@@ -22,34 +22,32 @@ export const RestDetailBasket = () => {
 
   async function renderBasketProducts() {
     const res = await getProductForBasket();
-    console.log(res);
+
     setBasketData(res?.data.result.data);
   }
   useEffect(() => {
     renderBasketProducts();
   }, []);
-  // console.log(basketData);
+
   async function handleIncreasButtonClick(id: string | number) {
-    // console.log(id);
     const res = await postProductForBasket(id);
     if (res?.status === 201) {
       setBasketData(res?.data);
     }
-    console.log(res);
   }
   async function handleDecreaseButtonClick(id: string | number) {
     const res = await deleteProductForBasket(id);
-    console.log(res);
+
     if (res?.status === 200) {
       setBasketData(res?.data);
     }
   }
   async function handleClearButtonClick(id: string | number) {
     const res = await clearProductForBasket(id);
-    console.log(res);
+
     if (res?.status === 200) {
       setBasketData(res?.data);
-      toast.success("Basket cleared successfully!")
+      toast.success("Basket cleared successfully!");
     }
   }
 
@@ -155,9 +153,9 @@ export const RestDetailBasket = () => {
               {basketData?.total_item} items
             </p>
           </div>
-            <div className="mb-5">
-              <ToastContainer/>
-            {basketData?.items?.map((item: any,index:string|number) => {
+          <div className="mb-5">
+            <ToastContainer />
+            {basketData?.items?.map((item: any, index: string | number) => {
               return (
                 <RestDetailBasketCard
                   key={index}

@@ -90,9 +90,8 @@ export const UserCheckoutForm = () => {
       delivery_address: addresValue,
       payment_method: radioBtn,
     };
-    console.log(data);
+
     const res = await postOrder(data);
-    console.log(res);
 
     if (res?.status === 201) {
       setFormCompleted(true);

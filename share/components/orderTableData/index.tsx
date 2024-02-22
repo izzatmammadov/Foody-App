@@ -32,7 +32,7 @@ export const TableData: React.FC<TableDatailProps> = ({
 
   async function inDeleteOrder() {
     const response = await deleteOrder(id);
-    console.log("response", response);
+    
     if (response?.status == 204) {
       let newdata = orderData.filter((item: any) => item.id !== id);
       setOrderData(newdata);

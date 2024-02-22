@@ -5,16 +5,16 @@ import { NavbarAvatarList } from "../navbarAvatarList";
 import { useState } from "react";
 import { Langugages } from "../Languages";
 
-export const NavbarAvatar = ({isName}:any) => {
+export const NavbarAvatar = ({ isName }: any) => {
   const navigate = useRouter();
-  const [isNvbarList, setNavbarList] = useState(false)
+  const [isNvbarList, setNavbarList] = useState(false);
 
   const toggleNavbarList = () => {
-    setNavbarList(!isNvbarList)
-  }
+    setNavbarList(!isNvbarList);
+  };
   return (
     <div className="flex items-center gap-7 relative">
-      <Langugages/>
+      <Langugages />
       <Image
         className="cursor-pointer hover:scale-95 transition-all duration-500"
         width={40}
@@ -30,7 +30,7 @@ export const NavbarAvatar = ({isName}:any) => {
         innerText={isName}
         onClick={toggleNavbarList}
       />
-      {isNvbarList &&  <NavbarAvatarList/>}
+      {isNvbarList && <NavbarAvatarList />}
     </div>
   );
 };

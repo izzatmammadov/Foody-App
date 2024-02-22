@@ -10,10 +10,9 @@ interface UserBasketCardProps {
   price: number;
   count: number;
   imageSrc: string;
-  increasBtn: () => void,
-  decreaseBtn: () => void,
-  clearBasket:()=>void
-
+  increasBtn: () => void;
+  decreaseBtn: () => void;
+  clearBasket: () => void;
 }
 
 export const UserBasketCard: React.FC<UserBasketCardProps> = ({
@@ -23,15 +22,11 @@ export const UserBasketCard: React.FC<UserBasketCardProps> = ({
   imageSrc,
   increasBtn,
   decreaseBtn,
-  clearBasket
+  clearBasket,
 }) => {
   const { t, i18n } = useTranslation();
 
   const [isModalOpen, setIsModalOpen] = useState(false);
-
-
-
-
 
   const handleButtonClick = () => {
     setIsModalOpen(true);
@@ -43,7 +38,7 @@ export const UserBasketCard: React.FC<UserBasketCardProps> = ({
 
   return (
     <>
-      <ToastContainer/>
+      <ToastContainer />
       <div className="flex relative sm:pr-9 justify-between items-center border-b-2 border-whiteLight2 py-8">
         <Image width={96} height={0} src={imageSrc} alt={imageSrc} />
 

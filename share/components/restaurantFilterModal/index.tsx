@@ -21,12 +21,10 @@ export const RestaurantFilterModal: FC<RestaurantFilterModalProps> = ({
 
   async function renderCategories() {
     const res = await getCategories();
-    console.log(res);
     if (res?.status === 200) {
       setCategories(res?.data?.result?.data);
     }
   }
-  console.log(categories);
 
   useEffect(() => {
     renderCategories();

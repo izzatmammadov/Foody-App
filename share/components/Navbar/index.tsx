@@ -11,7 +11,11 @@ import { NavbarLangButton } from "../navbarLangButton";
 import { AdminNavbarAvatar } from "../adminNavbarAvatar";
 import { AdminAside } from "../adminAside";
 import { AdminLeftModal } from "../adminLeftModal";
-import { createProduct, getProfileInfo, getRestourans } from "@/share/services/axios";
+import {
+  createProduct,
+  getProfileInfo,
+  getRestourans,
+} from "@/share/services/axios";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { useGlobalStore } from "@/share/services/provider";
@@ -25,28 +29,25 @@ export const Navbar: React.FC<NavbarProps> = ({ adminNavbar }) => {
   const navigate = useRouter();
   async function ReLogin() {
     try {
-      const res =  await getProfileInfo()
-      // console.log(res);
+      const res = await getProfileInfo();
     } catch (err: any) {
-      console.log(err?.response?.status === 401);
       if (err?.response?.status == 401) {
         setTimeout(() => {
-        navigate.push("/login")
-          localStorage.removeItem("userInfo")
-        }, 60000)
+          navigate.push("/login");
+          localStorage.removeItem("userInfo");
+        }, 60000);
         setTimeout(() => {
-     toast.error("Your browsing session has expired !")
-            
-          },59300)
-        toast.warning("You will be logged out from the site in the next 1 minutes.!")
+          toast.error("Your browsing session has expired !");
+        }, 59300);
+        toast.warning(
+          "You will be logged out from the site in the next 1 minutes.!"
+        );
       }
-      
     }
-
   }
   useEffect(() => {
-    ReLogin()
-  },[])
+    ReLogin();
+  }, []);
   const [isModalOpen, setModalOpen] = useState(false);
   const [isToken, setIsToken] = useState(false);
   const [isActiveName, setIsActiveName] = useState("");
@@ -158,8 +159,6 @@ export const Navbar: React.FC<NavbarProps> = ({ adminNavbar }) => {
       const res = await createProduct(ProductValues);
 
       const productValue = res?.data;
-      console.log(productValue);
-      console.log(ProductValues);
 
       if (res?.status == 201 || res?.status == 200) {
         setProducts((prev: any) => [...prev, productValue]);
@@ -188,19 +187,14 @@ export const Navbar: React.FC<NavbarProps> = ({ adminNavbar }) => {
   //* Restauran search functions
 
   async function searchRestauran(event: any) {
-    console.log(event.target.value);
-
     let respons = await getRestourans();
     let resData = respons?.data.result.data;
-    console.log(resData);
+
     let filterResData = resData.filter(function (item: any) {
       return item.name.toLowerCase().includes(event.target.value.toLowerCase());
     });
 
-    console.log(filterResData, "filterResData");
-
     setFilterRestouran(filterResData);
-    console.log(filterRestouran, "------state");
   }
 
   return (

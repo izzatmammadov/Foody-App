@@ -9,7 +9,7 @@ const RestaurantAside = ({ onClick }: { onClick: (id: string) => void }) => {
 
   async function renderCategories() {
     const res = await getCategories();
-    // console.log(res);
+
     if (res?.status === 200) {
       setCategories(res?.data?.result?.data);
     }
@@ -17,7 +17,6 @@ const RestaurantAside = ({ onClick }: { onClick: (id: string) => void }) => {
   useEffect(() => {
     renderCategories();
   }, []);
-  // console.log(categories);
 
   return (
     <>
@@ -52,39 +51,7 @@ const RestaurantAside = ({ onClick }: { onClick: (id: string) => void }) => {
           </div>
         );
       })}
-
-      {/* <div className="flex items-center gap-4 cursor-pointer p-1 hover:bg-mainRedLight transition-all">
-          <Image
-            width={40}
-            height={0}
-            src={"friesAnimation.svg"}
-            alt="margarita"
-          />
-          <p className="font-semibold text-[20px] ">Special</p>
-        </div> */}
     </>
   );
 };
 export default RestaurantAside;
-
-// export async function getServerSideProps() {
-
-//   try {
-
-//     const response = await getCategories();
-
-//     console.log(response);
-
-//     if (!response) return { props: { categories: null } }
-
-//       return {
-//         props: {
-//           categories: response,
-//         },
-//       };
-//   } catch (err) {
-
-//     console.log(err);
-
-//   }
-// }
