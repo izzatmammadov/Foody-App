@@ -1,16 +1,13 @@
-import Barchart from "@/share/components/LineChart";
 import { Navbar } from "@/share/components/Navbar";
 import { AdminAside } from "@/share/components/adminAside";
-import { AdminHeader } from "@/share/components/adminHeader";
 import { AdminLeftModal } from "@/share/components/adminLeftModal";
 import AdminOrdersTable from "@/share/components/adminOrdersTable";
 import AdminSecondTitle from "@/share/components/adminSecondTitle";
-import { deleteOrder, getOrder } from "@/share/services/axios";
+import { getOrder } from "@/share/services/axios";
 import { useGlobalStore } from "@/share/services/provider";
 import Head from "next/head";
 import React, { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
-import { ToastContainer, toast } from "react-toastify";
 
 const adminOrders = () => {
   const { t } = useTranslation();
@@ -49,7 +46,6 @@ const adminOrders = () => {
       <div className=" bg-textBlack min-h-screen px-4">
         <Navbar adminNavbar={true} />
 
-        <ToastContainer />
         <AdminLeftModal onClickClose={changeHidden} hidden={isHiddenModal} />
         <main className="flex">
           <div className=" hidden sm:block">
@@ -68,7 +64,7 @@ const adminOrders = () => {
               />
             </div>
 
-            <div className="p-5 max-w-full overflow-x-auto">
+            <div className="p-5 max-w-full overflow-x-auto  max-h-[500px] overflow-y-auto">
               <table className=" min-w-full bg-white ">
                 <thead className="h-16  text-center text-sm not-italic font-semibold leading-6">
                   <tr>
