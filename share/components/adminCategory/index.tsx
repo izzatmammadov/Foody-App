@@ -52,21 +52,17 @@ const AdminCategory = ({ item }: any) => {
   const handleButtonClick = (id: string) => {
     setIsModalOpen(true);
     setActiveId(id);
-    console.log(id);
   };
 
   async function handleEditClick(id: string) {
     setActiveId(id);
-    console.log(activeId);
 
     changeHidden();
     const res = await getEditCategories(id);
-    console.log(res);
+
     if (res?.status === 200) {
       const currentData = res?.data.result.data;
       if (categoryRef && slugRef && imgRef) {
-        console.log(imgRef.current);
-
         (categoryRef.current as { value: string }).value =
           currentData?.name || "";
 
@@ -97,7 +93,6 @@ const AdminCategory = ({ item }: any) => {
     if (res?.status === 200) {
       toast.success("Category updated successfully!");
       changeHidden();
-      console.log(res.data.data);
       const updatedData = categoryData.map((item: any) => {
         if (item.id === activeId) {
           return res.data.data;
@@ -113,8 +108,6 @@ const AdminCategory = ({ item }: any) => {
     slug: string | undefined,
     img: string | undefined
   ): boolean {
-    console.log(category, slug, img);
-
     return !!category && !!slug && !!img;
   }
 
@@ -124,7 +117,7 @@ const AdminCategory = ({ item }: any) => {
 
   async function deleteCategory() {
     const res = await deleteCategories(activeId);
-    console.log(res);
+
     if (res?.status === 204) {
       const updatedArr = categoryData.filter(
         (item: any) => item.id !== activeId
@@ -167,7 +160,13 @@ const AdminCategory = ({ item }: any) => {
           </div>
         </td>
         <td className="flex justify-center items-center">
-          <Image className=" object-cover" width="50" height="40" src={item.img_url} alt="" />
+          <Image
+            className=" object-cover"
+            width="50"
+            height="40"
+            src={item.img_url}
+            alt=""
+          />
         </td>
         <td className="max-w-56 text-center ">
           <p className="whitespace-nowrap overflow-x-scroll  max-w-56  text-center ">

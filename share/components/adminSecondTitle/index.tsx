@@ -10,7 +10,7 @@ interface AdminSecondTitleProps {
   resCategoryARR: any;
   buttonInnerText: string;
   visibleDropwdown: boolean;
-  visibleButton: boolean
+  visibleButton: boolean;
 }
 
 const AdminSecondTitle: React.FC<AdminSecondTitleProps> = ({
@@ -21,18 +21,8 @@ const AdminSecondTitle: React.FC<AdminSecondTitleProps> = ({
   resCategoryARR,
   buttonInnerText,
   visibleDropwdown,
-  visibleButton
+  visibleButton,
 }) => {
-  // const [isHiddenModal, setIsHiddenModal] = useState<boolean>(true);
-
-  // const onClickButton = (): void => {
-  //   setIsHiddenModal((prev: boolean) => !prev);
-  //   console.log(isHiddenModal);
-  // };
-  // const callBackValuef = (value) => {
-  //   callBackValue(value);
-  // };
-
   return (
     <>
       <div className=" bg-darkBlue_3 rounded-2xl flex flex-col sm:flex-row justify-between items-center p-8">
@@ -40,26 +30,27 @@ const AdminSecondTitle: React.FC<AdminSecondTitleProps> = ({
           {name}
         </div>
         <div className="mt-3 sm:mt-0 flex flex-col sm:flex-row gap-5 ">
-          {visibleDropwdown ? (<AdminModalDropdown
-          arr={resCategoryARR}
-            callBackValue={callBackValue}
-            p={p1}
-            className=" bg-darkBlue_4 rounded-2xl font-medium text-base text-whiteLight w-[150px] overflow-x-auto"
-            className2="flex  bg-darkBlue_4  gap-3  rounded-2xl  p-1 px-3 "
-          />) : ("")}
-          {visibleButton ? (<Button
-            onClick={onClick}
-            className="bg-lightPurple_3 py-2 px-8 text-white font-bold text-sm rounded-[14px]"
-            innerText={buttonInnerText}
-          />) : (<></>)}
-          {/* <Button
-            onClick={onClick}
-            className="bg-lightPurple_3 py-2 px-8 text-white font-bold text-sm rounded-[14px]"
-            innerText={buttonInnerText}
-          /> */}
+          {visibleDropwdown ? (
+            <AdminModalDropdown
+              arr={resCategoryARR}
+              callBackValue={callBackValue}
+              p={p1}
+              className=" bg-darkBlue_4 rounded-2xl font-medium text-base text-whiteLight w-[150px] overflow-x-auto"
+              className2="flex  bg-darkBlue_4  gap-3  rounded-2xl  p-1 px-3 "
+            />
+          ) : (
+            ""
+          )}
+          {visibleButton ? (
+            <Button
+              onClick={onClick}
+              className="bg-lightPurple_3 py-2 px-8 text-white font-bold text-sm rounded-[14px]"
+              innerText={buttonInnerText}
+            />
+          ) : (
+            <></>
+          )}
         </div>
-
-        {/* <AdminLeftModal onClickClose={onClick} mod={mod} hidden={hidden} /> */}
       </div>
     </>
   );

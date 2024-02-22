@@ -7,7 +7,6 @@ interface Props {
   ClassName?: string;
   disabled?: boolean;
   Capitalize?: boolean;
-  
 }
 export const Input = ({
   Type = "text",

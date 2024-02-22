@@ -35,7 +35,6 @@ const AdminCard = ({
   const { products, setProducts } = useGlobalStore();
   const [restaurants, setRestaurants] = useState();
 
-
   //^ MODAL
   const handleButtonClick = () => {
     setIsModalOpen(true);
@@ -62,7 +61,6 @@ const AdminCard = ({
   const addProductRestaurant = useRef<HTMLInputElement>(null);
   const addProductDesc = useRef<HTMLInputElement>(null);
   const imgRef = useRef<HTMLInputElement>(null);
-
 
   //*EDIT PRODUCT
 
@@ -96,7 +94,7 @@ const AdminCard = ({
     const res = await updateProduct(food_id, productValues);
 
     if (res?.status == 200) {
-      toast.success("Edit was successfully!"); //!error verir 
+      toast.success("Edit was successfully!"); //!error verir
       const updatedData = products.map((item: any) => {
         if (item?.id === food_id) {
           return productValues;
@@ -121,15 +119,13 @@ const AdminCard = ({
     return !!name && !!description && !!img_url && !!rest_id && !!price;
   }
 
-   //* RENDER RESTAURANTS FOR PRODUCT
+  //* RENDER RESTAURANTS FOR PRODUCT
 
-   const renderRestaurants = async () => {
+  const renderRestaurants = async () => {
     const res = await getRestourans();
     let item = res?.data.result.data.map((i: any) => i.name);
     setRestaurants(item);
   };
-
-
 
   useEffect(() => {
     renderRestaurants();
@@ -163,9 +159,7 @@ const AdminCard = ({
           filteredProduct[0]?.img_url || "";
       }
     }
-
   };
-
 
   const handleModalClose = () => {
     setIsModalOpen(false);
@@ -201,7 +195,13 @@ const AdminCard = ({
       <ToastContainer />
       <div className=" rounded-lg w-52 h-72 bg-white">
         <div className="flex  flex-col items-center mt-3 py-2">
-          <img className="h-40 object-cover" width="170" height="158" src={foodimage} alt="" />
+          <img
+            className="h-40 object-cover"
+            width="170"
+            height="158"
+            src={foodimage}
+            alt=""
+          />
         </div>
         <div className="m-1 mx-5">
           <p className=" text-lg font-medium">{foodname}</p>

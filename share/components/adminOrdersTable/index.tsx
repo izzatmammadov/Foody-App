@@ -12,7 +12,7 @@ interface AdminOrdersTableType {
     id: number | string;
     customer_id: number | string;
     created: string;
-    delivery_adress: string ;
+    delivery_adress: string;
     amount: string;
     payment: string;
     contact: string;
@@ -21,7 +21,7 @@ interface AdminOrdersTableType {
 
 //& DATE
 
-const formatDate = (timestamp:any) => {
+const formatDate = (timestamp: any) => {
   const currentDate = new Date();
   const date = new Date(timestamp);
   const timeDifference = currentDate.getTime() - date.getTime();
@@ -31,22 +31,21 @@ const formatDate = (timestamp:any) => {
   const days = Math.floor(hours / 24);
 
   if (days > 0) {
-    return `${days} day${days > 1 ? 's' : ''} ago`;
+    return `${days} day${days > 1 ? "s" : ""} ago`;
   } else if (hours > 0) {
-    return `${hours} hour${hours > 1 ? 's' : ''} ago`;
+    return `${hours} hour${hours > 1 ? "s" : ""} ago`;
   } else if (minutes > 0) {
-    return `${minutes} minute${minutes > 1 ? 's' : ''} ago`;
+    return `${minutes} minute${minutes > 1 ? "s" : ""} ago`;
   } else {
-    return `${seconds} second${seconds > 1 ? 's' : ''} ago`;
+    return `${seconds} second${seconds > 1 ? "s" : ""} ago`;
   }
 };
 
-const AdminOrdersTable: FC<AdminOrdersTableType> = ( {data}:any ) => {
+const AdminOrdersTable: FC<AdminOrdersTableType> = ({ data }: any) => {
   const { t } = useTranslation();
   const [showPopup, setShowPopup] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const { orders, setOrders } = useGlobalStore();
-
 
   //^ MODAL
   const handleButtonClick = () => {
@@ -62,24 +61,23 @@ const AdminOrdersTable: FC<AdminOrdersTableType> = ( {data}:any ) => {
     setShowPopup(!showPopup);
   };
 
-   //* DELETE ORDER
+  //* DELETE ORDER
 
-   const deleteOrderData = async() => {
+  const deleteOrderData = async () => {
+    const response = await deleteOrder(data?.id);
+   
 
-    const response = await deleteOrder(data?.id)
-    console.log("RESPONSE", response);
-
-    if(response?.status === 204){
-      let filteredOrder = orders.filter((item:any)=> item.id !== data?.id)
-      setOrders(filteredOrder)
-      toast.success("Order deleted successfully!")
-      handleModalClose()
+    if (response?.status === 204) {
+      let filteredOrder = orders.filter((item: any) => item.id !== data?.id);
+      setOrders(filteredOrder);
+      toast.success("Order deleted successfully!");
+      handleModalClose();
     }
-}
+  };
 
   return (
     <>
-    <ToastContainer/>
+      <ToastContainer />
       <tr className="h-14 text-center  border-slate-700  border-y text-gray-900 text-sm not-italic font-normal leading-5">
         <td>
           <div>

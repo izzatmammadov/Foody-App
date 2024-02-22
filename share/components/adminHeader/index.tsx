@@ -6,7 +6,6 @@ export const AdminHeader = () => {
   const [isHiddenModal, setIsHiddenModal] = useState<boolean>(true);
   function changeHidden(): void {
     setIsHiddenModal((prev: boolean) => !prev);
-    console.log(isHiddenModal);
   }
 
   return (

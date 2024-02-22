@@ -13,18 +13,30 @@ export const Footer = ({ isTop }: FooterParamTypes) => {
 
       {isTop ? (
         <section className="w-3/4 flex justify-around bg-blackLight absolute -top-44 items-center rounded-3xl py-12 px-0 sm:px-9 text-white ">
-          <Image className="hidden sm:block" width={200} height={0} src={"footerPizza.svg"} alt="footer" />
+          <Image
+            className="hidden sm:block"
+            width={200}
+            height={0}
+            src={"footerPizza.svg"}
+            alt="footer"
+          />
 
           <div className="flex flex-col items-center gap-5">
             <p className=" font-medium text-xl sm:text-4xl w-9/12 text-center leading-tight">
-            {t("footerDesc")}
+              {t("footerDesc")}
             </p>
             <button className=" bg-orange px-12 py-4 font-medium text-md rounded-full hover:scale-95 transition-all duration-500">
-            {t("footerDesc2")}
+              {t("footerDesc2")}
             </button>
           </div>
 
-          <Image className="hidden sm:block" width={250} height={0} src={"/mainBurger.svg"} alt="burger" />
+          <Image
+            className="hidden sm:block"
+            width={250}
+            height={0}
+            src={"/mainBurger.svg"}
+            alt="burger"
+          />
         </section>
       ) : (
         <></>
