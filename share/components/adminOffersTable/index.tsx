@@ -57,7 +57,6 @@ const AdminOffersTableT: React.FC<AdminOffersTableType> = ({
     const res = await getEditOffer(id);
     if (res?.status === 200) {
       const currentData = res?.data.result.data;
-      console.log("currentData ", currentData);
 
       if (form_descRef && form_titleRef && imgRef) {
         (form_descRef.current as { value: string }).value =
@@ -89,9 +88,7 @@ const AdminOffersTableT: React.FC<AdminOffersTableType> = ({
     }
 
     const res = await putOffer(activeId, offerValues);
-    console.log(offerValues);
 
-    console.log(res);
     if (res?.status === 200) {
       toast.success("Edit was successfully!");
       const updatedData = offers.map((item: any) => {
@@ -113,14 +110,13 @@ const AdminOffersTableT: React.FC<AdminOffersTableType> = ({
     description: string | undefined,
     img: string | undefined
   ): boolean {
-    console.log(title, description, img);
     return !!title && !!description && !!img;
   }
 
   //! DELETE OFFER
   async function removeOffer() {
     const res = await deleteOffer(activeId);
-    console.log(offers);
+
     if (res?.status === 204) {
       let newData = offers?.filter((item: any) => item.id !== activeId);
       setOffers(newData);

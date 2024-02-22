@@ -19,9 +19,6 @@ export const AdminModalDropdown = ({
   useRef,
   activeValue,
 }: Props) => {
-  // const [selectedValue, setSelectedValue] = useState<string | undefined>("");
-  // getCategories()
-
   return (
     <div className={className2}>
       <p className="text-white font-medium text-base">{p}</p>

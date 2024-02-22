@@ -26,8 +26,6 @@ interface AdminRestouransCard {
 const AdminRestouransCard: FC<AdminRestouransCard> = ({ data }: any) => {
   const { restouranData, setRestouranData } = useGlobalStore();
 
-  // console.log(data);
-
   const { t, i18n } = useTranslation();
 
   const [showPopup, setShowPopup] = useState(false);
@@ -50,12 +48,10 @@ const AdminRestouransCard: FC<AdminRestouransCard> = ({ data }: any) => {
   const category_idRef = useRef<HTMLInputElement>(null);
 
   const imgRef = useRef<HTMLInputElement>(null);
-  // console.log("imgRef", imgRef.current?.src);
 
   const [imgUrl, setImgUrl] = useState<string>("");
 
   function getImgUrl(url: string): void {
-    //  console.log(url);
     setImgUrl(url);
   }
 
@@ -63,7 +59,6 @@ const AdminRestouransCard: FC<AdminRestouransCard> = ({ data }: any) => {
   const handleButtonClick = (id: string) => {
     setIsModalOpen(true);
     setActiveId(id);
-    console.log(id);
   };
 
   const handleModalClose = () => {
@@ -77,21 +72,16 @@ const AdminRestouransCard: FC<AdminRestouransCard> = ({ data }: any) => {
   const [isHiddenModal, setIsHiddenModal] = useState<boolean>(true);
   function changeHidden() {
     setIsHiddenModal((prev) => !prev);
-    // console.log(isHiddenModal);
   }
-
-  // console.log(data.id);
 
   async function handleEditClick(id: string) {
     setActiveId(id);
-    // console.log(activeId);
 
     changeHidden();
     const res = await getEditRestourans(id);
-    // console.log("res", res);
+
     if (res?.status === 200) {
       const currentData = res?.data.result.data;
-      // console.log("currentData", currentData);
 
       if (
         RestouransNameRef &&
@@ -102,8 +92,6 @@ const AdminRestouransCard: FC<AdminRestouransCard> = ({ data }: any) => {
         category_idRef &&
         imgRef
       ) {
-        // (RestouransNameRef.current as { value: string }).value = currentData?.name || "";
-        // (RestouransNameRef.current as { value: string }).value = currentData?.name || "";
         (RestouransNameRef.current as HTMLInputElement).value =
           currentData?.name || "";
         (cuisineRef.current as HTMLInputElement).value =
@@ -117,17 +105,6 @@ const AdminRestouransCard: FC<AdminRestouransCard> = ({ data }: any) => {
         (category_idRef.current as HTMLInputElement).value =
           currentData?.category_id || "";
         (imgRef.current as HTMLInputElement).src = currentData?.img_url || "";
-
-        // setTimeout(() => {
-        //   if (currentData?.name && RestouransNameRef.current) {
-        //     RestouransNameRef.current.value = currentData?.name;
-        //   }
-
-        //   // (RestouransNameRef.current as { value: string }).value =
-        //   //   currentData?.name || "";
-
-        //   console.log("loooooooooooooooooo");
-        // }, 5000);
       }
     }
   }
@@ -160,7 +137,6 @@ const AdminRestouransCard: FC<AdminRestouransCard> = ({ data }: any) => {
       category_id: rescategory_id,
       img_url: resimgRef,
     };
-    // console.log("form", form);
 
     const response = await updateRestourans(activeId, form);
 
@@ -178,15 +154,11 @@ const AdminRestouransCard: FC<AdminRestouransCard> = ({ data }: any) => {
       });
       setRestouranData(updatedData);
     }
-
-    // console.log(response);
-
-    // console.log("response", response);
   }
 
   async function deleteRestouransfunction() {
     const res = await deleteRestourans(activeId);
-    // console.log(res);
+
     if (res?.status === 204) {
       const updatedArr = restouranData.filter(
         (item: any) => item.id !== activeId
@@ -197,7 +169,7 @@ const AdminRestouransCard: FC<AdminRestouransCard> = ({ data }: any) => {
 
       setIsModalOpen((prev) => !prev);
     }
-    // console.log("delete res");
+
     return;
   }
   const [resCategoryARR, setResCategoryARR] = useState();

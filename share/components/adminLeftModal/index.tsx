@@ -67,14 +67,8 @@ export const AdminLeftModal = ({
   Restaurants,
 }: Props) => {
   const [imgUrl, setImgUrl] = useState<any>("");
-  //  const [imgUpload, setImageUpload]=useState()
-
-  // const imgRef=useRef(null)
-  // console.log(imgUrl);
 
   const [imgOnload, setImgOnload] = useState(false);
-
-  // console.log(imgOnload);
 
   function getİmage(e: React.ChangeEvent<HTMLInputElement>) {
     const name = e?.target?.files?.[0]?.name;
@@ -82,8 +76,6 @@ export const AdminLeftModal = ({
       return;
     }
     const imageRef = ref(fileStorage, `files/images/${name}`);
-
-    // setCurrentImgRef(imageRef)
 
     const file = e?.target?.files?.[0];
     if (!file) {

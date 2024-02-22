@@ -5,31 +5,34 @@ import { useTranslation } from "react-i18next";
 import { Button } from "../Button";
 import { useRouter } from "next/router";
 
-
 export const Header = () => {
   const { t, i18n } = useTranslation();
-  const navigate = useRouter()
+  const navigate = useRouter();
 
   return (
     <header className="m-0 sm:m-8 flex-col rounded-md bg-whiteLight1">
-      <Navbar/>
+      <Navbar />
 
       {/* MAIN SECTION */}
       <section className="flex flex-col-reverse sm:flex-row justify-center items-center h-screen px-1 sm:px-11 -mt-24">
         <div className="w-full sm:w-1/2 flex flex-col gap-10">
-        <h2 className="text-4xl text-center sm:text-5xl font-black leading-tight sm:text-start">{t("homeDesc")}</h2>
-          <p className="sm:block hidden sm:text-xl text-grayText1 w-3/4 ">{t("homeDesc2")}</p>
+          <h2 className="text-4xl text-center sm:text-5xl font-black leading-tight sm:text-start">
+            {t("homeDesc")}
+          </h2>
+          <p className="sm:block hidden sm:text-xl text-grayText1 w-3/4 ">
+            {t("homeDesc2")}
+          </p>
           <div className="mx-auto sm:mx-0 flex gap-10 w-max">
             <Button
               className="px-8 py-3 rounded-3xl bg-mainRed text-white text-2xl font-medium shadow-md hover:bg-red-700 hover:scale-95 transition-all duration-500"
               innerText={t("homeDesc3")}
-              onClick={()=> navigate.push("/login")}
+              onClick={() => navigate.push("/login")}
             />
 
             <Button
               className="px-6 py-3 rounded-3xl border-2 border-grayText1 text-grayText1 text-2xl font-medium shadow-md hover:scale-95 transition-all duration-500"
               innerText={t("homeDesc4")}
-              onClick={()=>navigate.push("/restaurants")}
+              onClick={() => navigate.push("/restaurants")}
             />
           </div>
         </div>
