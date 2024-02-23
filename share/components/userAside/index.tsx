@@ -9,6 +9,7 @@ export const UserAside = () => {
 
   const logOut = () => {
     localStorage.removeItem("tokenObj");
+    localStorage.removeItem("userInfo");
     navigate.push("/login");
   };
 

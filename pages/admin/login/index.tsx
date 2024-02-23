@@ -75,7 +75,8 @@ let tokenObj: token = JSON.parse(
         "access_token": res.data.user.access_token ,
         "refresh_token": res.data.user.refresh_token
       }
-      localStorage.setItem("tokenObj",JSON.stringify(tokenObj))
+      localStorage.setItem("tokenObj", JSON.stringify(tokenObj))
+      localStorage.setItem("userInfo", JSON.stringify(res?.data.user));
       // console.log(tokenObj);
       
       if (emailRef.current && passwordRef.current) {

@@ -12,9 +12,9 @@ interface AdminOffersTableType {
     id: number | string;
     customer_id: number | string;
     created: string;
-    delivery_adress: string;
+    delivery_address: string;
     amount: string;
-    payment: string;
+    payment_method: string;
     contact: string;
   };
 }
@@ -46,6 +46,7 @@ const AdminOrderHistoryTable: FC<AdminOffersTableType> = ({ data }) => {
   const [showPopup, setShowPopup] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const { history, setHistory} = useGlobalStore()
+console.log(data);
 
 
   //^ MODAL
@@ -95,9 +96,9 @@ const AdminOrderHistoryTable: FC<AdminOffersTableType> = ({ data }) => {
           </div>
         </td>
         <td>{formatDate(data.created)}</td>
-        <td>{data.delivery_adress} </td>
+        <td>{data.delivery_address} </td>   
+        <td>{data.payment_method}</td>
         <td>{data.amount}</td>
-        <td>{data.payment}</td>
         <td>{data.contact}</td>
         <td>
           <Image

@@ -10,10 +10,11 @@ import { getDownloadURL, ref, uploadBytes } from "firebase/storage";
 import { fileStorage } from "@/server/configs/firebase";
 import { getProfileInfo, putProfileInfo, userProfileType } from "@/share/services/axios";
 import { ToastContainer, toast } from "react-toastify";
+import { useRouter } from "next/router";
 
 const UserProfile = () => {
   const { t, i18n } = useTranslation();
- 
+  const { push } = useRouter()
   const [userDatas, setUserDatas] = useState<userProfileType>({
     name: '',
   username: '',
@@ -46,10 +47,10 @@ const UserProfile = () => {
 
 setUserDatas((prev:userProfileType)=>({...prev,img_url:imgUrl,[name]:value,
 }))
-// console.log(userDatas);
+
 
   }
-
+  // console.log(userDatas);
   function isValidAzerbaijanPhoneNumber(phoneNumber:string) {
     const azPhoneNumberRegex = /^994(50|51|55|70|77|10)\d{7}$/;
 
@@ -127,9 +128,18 @@ setUserDatas((prev:userProfileType)=>({...prev,img_url:imgUrl,[name]:value,
     
 
     const res = await putProfileInfo(userDatas)
+    // console.log(res);
+    const localUser: any = localStorage?.getItem("userInfo");
+    
+    
     if (res?.status === 200) {
       toast.success("Your informations have been updated successfully!");
-
+      const newProfil = JSON.parse(localUser)
+      newProfil.username = res.data.user.username
+      newProfil.fullname = res.data.user.fullname
+      console.log(newProfil);
+      localStorage.setItem("userInfo", JSON.stringify(newProfil))
+      push("/")
       return
     }
   //  console.log(res);

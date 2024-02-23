@@ -57,7 +57,7 @@ export const Table = () => {
               time="12:50"
               adress={item.delivery_address}
               amount={item.amount}
-              payment={item.payment_method == 0 ? "Credit Card" : "Pay Cash"}
+              payment={item.payment_method == 1 ? "Credit Card" : "Pay Cash"}
               // payment="Credit Card"
               contact={item.contact}
             />
