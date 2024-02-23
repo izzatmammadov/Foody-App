@@ -17,6 +17,11 @@ export const ClientLogInForm = () => {
   const emailRef = useRef<HTMLInputElement>(null);
   const passwordRef = useRef<HTMLInputElement>(null);
 
+  let date:Date | any= new Date()
+
+ 
+
+  
   type token = {
     access_token: string;
     refresh_token: string;
@@ -71,7 +76,7 @@ export const ClientLogInForm = () => {
     const username = usernameRef.current?.value;
     const email = emailRef.current?.value;
     const password = passwordRef.current?.value;
-
+  
     const form = {
       fullname,
       username,
@@ -95,6 +100,9 @@ export const ClientLogInForm = () => {
     console.log(res);
 
     if (res?.status === 200) {
+      console.log(date.getTime());
+      
+      localStorage.setItem("loginDate", date.getTime());
       toast.success("Logged in successfully!");
       tokenObj = {
         access_token: res.data.user.access_token,

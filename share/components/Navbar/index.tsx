@@ -27,27 +27,48 @@ interface NavbarProps {
 export const Navbar: React.FC<NavbarProps> = ({ adminNavbar }) => {
   const { t } = useTranslation();
   const navigate = useRouter();
-  async function ReLogin() {
-    try {
-      const res = await getProfileInfo();
-    } catch (err: any) {
-      if (err?.response?.status == 401) {
-        setTimeout(() => {
-          navigate.push("/login");
-          localStorage.removeItem("userInfo");
-        }, 60000);
-        setTimeout(() => {
-          toast.error("Your browsing session has expired !");
-        }, 59300);
-        toast.warning(
-          "You will be logged out from the site in the next 1 minutes.!"
-        );
-      }
-    }
-  }
-  useEffect(() => {
-    ReLogin();
-  }, []);
+  const [ time , setTime] = useState("")
+const date:Date | any = new Date();
+
+//   // async function ReLogin() {
+//   //   try {
+//   //     const res = await getProfileInfo();
+//   //   } catch (err: any) {
+//   //     if (err?.response?.status == 401) {
+//   //       setTimeout(() => {
+//   //         navigate.push("/login");
+//   //         localStorage.removeItem("userInfo");
+//   //       }, 60000);
+//   //       setTimeout(() => {
+//   //         toast.error("Your browsing session has expired !");
+//   //       }, 59300);
+//   //       toast.warning(
+//   //         "You will be logged out from the site in the next 1 minutes.!"
+//   //       );
+//   //     }
+//   //   }
+//   // }
+//   // useEffect(() => {
+//   //   ReLogin();
+  //   // }, []);
+  
+
+
+
+//   function reLogin() {
+//     // console.log(date.getMinutes());
+
+//     setTime(date.getMinutes())
+    
+//   }
+// console.log(time);
+
+//   useEffect(() => {
+//     reLogin()
+//   },[date.getMinutes()]);
+
+  
+  
   const [isModalOpen, setModalOpen] = useState(false);
   const [isToken, setIsToken] = useState(false);
   const [isActiveName, setIsActiveName] = useState("");
@@ -57,6 +78,7 @@ export const Navbar: React.FC<NavbarProps> = ({ adminNavbar }) => {
   const [restaurants, setRestaurants] = useState();
   const { products, setProducts } = useGlobalStore();
   const [filterRestouran, setFilterRestouran] = useState();
+
 
   const fetchRestaurants = async () => {
     try {
@@ -69,6 +91,8 @@ export const Navbar: React.FC<NavbarProps> = ({ adminNavbar }) => {
       console.error("Error can't fetching products:", error);
     }
   };
+
+
 
   useEffect(() => {
     fetchRestaurants();
@@ -244,7 +268,8 @@ export const Navbar: React.FC<NavbarProps> = ({ adminNavbar }) => {
         addProductRestaurant={addProductRestaurant}
         addProductDesc={addProductDesc}
         getImgUrl={handleAddNewImage}
-        Restaurants={restaurants}
+       
+        arr={restaurants}
         imgRef={img}
       />
       {adminNavbar ? (

@@ -299,15 +299,13 @@ export async function getProfileInfo() {
   // }
 }
 
-export async function putProfileInfo(form: userProfileType) {
+export async function putProfileInfo(data: userProfileType) {
   try {
-    let item: any = localStorage.getItem("userInfo");
+     let item: any = localStorage.getItem("userInfo");
 
-    let access_token = JSON.parse(item);
+     let access_token = JSON.parse(item);
 
-    const response = await instanceAxios.get(`/auth/user/`, {
-      data: form,
-
+     const response = await instanceAxios.put(`/auth/user`,data, {
       headers: {
         Authorization: `Bearer ${access_token.access_token}`,
       },
