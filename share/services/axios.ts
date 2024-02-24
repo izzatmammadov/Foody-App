@@ -140,7 +140,7 @@ export const getOffer = async () => {
     const response = await instanceAxios.get("/offer");
     return response;
   } catch (error) {
-    toast.error("Can not get offer!");
+    // toast.error("Can not get offer!");
     console.log(error);
   }
 };

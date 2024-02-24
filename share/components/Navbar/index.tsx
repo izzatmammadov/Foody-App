@@ -27,8 +27,7 @@ interface NavbarProps {
 export const Navbar: React.FC<NavbarProps> = ({ adminNavbar }) => {
   const { t } = useTranslation();
   const navigate = useRouter();
-  const [ time , setTime] = useState("")
-const date:Date | any = new Date();
+
 
 //   // async function ReLogin() {
 //   //   try {
@@ -53,21 +52,40 @@ const date:Date | any = new Date();
   //   // }, []);
   
 
+  const date: Date = new Date();
 
-
-//   function reLogin() {
-//     // console.log(date.getMinutes());
-
-//     setTime(date.getMinutes())
-    
-//   }
-// console.log(time);
-
-//   useEffect(() => {
-//     reLogin()
-//   },[date.getMinutes()]);
-
+  function reLogin() {
+    const loginDate: number | null = parseInt(localStorage.getItem("loginDate") || "", 10);
+    const currentSecond: number = date.getTime();
+    const timeDifference: number = currentSecond - (loginDate || 0);
   
+    // console.log(timeDifference / 1000);
+  if ((timeDifference / 1000) >= 3600) {
+      toast.error("Your browsing session has expired !");
+      setTimeout(() => {
+        navigate.push("/login");
+      }, 750);
+      localStorage.removeItem("userInfo");
+      localStorage.removeItem("tokenObj");
+    } else if((timeDifference / 1000) >= 3540){
+      toast.warning("You will be logged out from the site in the next 1 minutes.!");
+      
+    }
+
+    return
+  }
+  
+  useEffect(() => {
+    reLogin();
+  
+    const intervalId = setInterval(() => {
+      reLogin();
+    }, 300000);
+  
+    return () => {
+      clearInterval(intervalId);
+    };
+  }, []);
   
   const [isModalOpen, setModalOpen] = useState(false);
   const [isToken, setIsToken] = useState(false);
