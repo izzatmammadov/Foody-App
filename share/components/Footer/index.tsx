@@ -12,7 +12,7 @@ export const Footer = ({ isTop }: FooterParamTypes) => {
       {/* UPPER FOOTER */}
 
       {isTop ? (
-        <section className="w-3/4 flex justify-around bg-blackLight absolute -top-44 items-center rounded-3xl py-12 px-0 sm:px-9 text-white ">
+        <section data-aos="fade-bottom" className="w-3/4 flex justify-around bg-blackLight absolute -top-44 items-center rounded-3xl py-12 px-0 sm:px-9 text-white ">
           <Image
             className="hidden sm:block"
             width={200}

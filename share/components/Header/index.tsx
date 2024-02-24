@@ -15,7 +15,9 @@ export const Header = () => {
 
       {/* MAIN SECTION */}
       <section className="flex flex-col-reverse sm:flex-row justify-center items-center h-screen px-1 sm:px-11 -mt-24">
-        <div className="w-full sm:w-1/2 flex flex-col gap-10">
+        <div className="w-full sm:w-1/2 flex flex-col gap-10" data-aos="fade-right"
+     data-aos-offset="300"
+     data-aos-easing="ease-in-sine">
           <h2 className="text-4xl text-center sm:text-5xl font-black leading-tight sm:text-start">
             {t("homeDesc")}
           </h2>
@@ -57,7 +59,7 @@ export const Header = () => {
             />
             <p className=" w-1/2 text-center">Pizza Hut Yummy...</p>
           </div>
-          <div className={`${styles.little_animation_div3}`}>
+          <div  className={`${styles.little_animation_div3}`}>
             <Image
               width={70}
               height={0}
@@ -71,7 +73,7 @@ export const Header = () => {
             width={0}
             height={0}
             src={"mainBurger.svg"}
-            alt="burger"
+            alt="burger" 
           />
         </div>
       </section>

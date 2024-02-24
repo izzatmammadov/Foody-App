@@ -114,7 +114,7 @@ export const UserCheckoutForm = () => {
           </div>
         </div>
       ) : (
-        <div className="w-full flex flex-col sm:flex-row justify-between">
+        <div data-aos="fade-left" className="w-full flex flex-col sm:flex-row justify-between">
           <div className=" w-full sm:w-[58%] flex flex-col px-3 sm:px-8 py-10 flex-wrap gap-0 sm:bg-whiteLight1">
             <h2 className="font-semibold text-3xl text-grayText2">
               {t("userDesc4")}
