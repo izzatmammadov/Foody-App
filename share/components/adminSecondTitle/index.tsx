@@ -29,14 +29,14 @@ const AdminSecondTitle: React.FC<AdminSecondTitleProps> = ({
         <div className="text-white text-xl not-italic font-medium leading-5">
           {name}
         </div>
-        <div className="mt-3 sm:mt-0 flex flex-col sm:flex-row gap-5 ">
+        <div className="mt-3 sm:mt-0 flex flex-col items-center    sm:flex-row gap-5 ">
           {visibleDropwdown ? (
             <AdminModalDropdown
               arr={resCategoryARR}
               callBackValue={callBackValue}
               p={p1}
-              className=" bg-darkBlue_4 rounded-2xl font-medium text-base text-whiteLight w-[150px] overflow-x-auto"
-              className2="flex  bg-darkBlue_4  gap-3  rounded-2xl  p-1 px-3 "
+              className=" bg-darkBlue_4 rounded-2xl font-medium text-base  text-whiteLight w-[150px] overflow-x-auto"
+              className2="flex  bg-darkBlue_4  gap-3   rounded-2xl  p-1 px-3 "
             />
           ) : (
             ""

@@ -156,8 +156,11 @@ export const Navbar: React.FC<NavbarProps> = ({ adminNavbar }) => {
 
   const [isInputModal, setInputModal] = useState(false);
 
-  const toggleInputModal = () => {
+  const toggleInputModal = async () => {
     setInputModal(!isInputModal);
+    let respons = await getRestourans();
+    let resData = respons?.data.result.data; 
+    setFilterRestouran(resData);
   };
 
   const closeInputModal = () => {
@@ -228,14 +231,17 @@ export const Navbar: React.FC<NavbarProps> = ({ adminNavbar }) => {
 
   //* Restauran search functions
 
-  async function searchRestauran(event: any) {
+  async function searchRestauran(e:React.ChangeEvent<HTMLInputElement>) {
     let respons = await getRestourans();
-    let resData = respons?.data.result.data;
-
+    let resData = respons?.data.result.data; 
+    console.log(e.target.value);
+    
     let filterResData = resData.filter(function (item: any) {
-      return item.name.toLowerCase().includes(event.target.value.toLowerCase());
+      return item.name.toLowerCase().includes(e.target.value.toLowerCase());
     });
-
+    // console.log(filterResData);
+    console.log(filterResData);
+    
     setFilterRestouran(filterResData);
   }
 
@@ -312,13 +318,14 @@ export const Navbar: React.FC<NavbarProps> = ({ adminNavbar }) => {
 
               <div className="w-1/5 hidden sm:block">
                 <Input
-                  OnClick={toggleInputModal}
+                    OnClick={toggleInputModal}
+                    OnChange={searchRestauran}
                   Type="text"
                   Placeholder="Search"
                   ClassName="w-full px-6 py-3 relative rounded-xl outline-none shadow-sm"
                 />
                 {isInputModal && (
-                  <RestaurantSearchModal onClose={closeInputModal} />
+                  <RestaurantSearchModal filterRestouran={filterRestouran}  onClose={closeInputModal} />
                 )}
               </div>
               <NavbarAvatar isName={isActiveName} />

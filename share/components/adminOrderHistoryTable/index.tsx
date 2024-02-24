@@ -14,7 +14,7 @@ interface AdminOffersTableType {
     created: string;
     delivery_address: string;
     amount: string;
-    payment_method: string;
+    payment_method: string|number;
     contact: string;
   };
 }
@@ -97,7 +97,7 @@ console.log(data);
         </td>
         <td>{formatDate(data.created)}</td>
         <td>{data.delivery_address} </td>   
-        <td>{data.payment_method}</td>
+        <td>{data.payment_method == 1 ? "Credit Card" : "Pay Cash"}</td>
         <td>{data.amount}</td>
         <td>{data.contact}</td>
         <td>
