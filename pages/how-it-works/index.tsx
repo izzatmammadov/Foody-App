@@ -20,7 +20,7 @@ const HowItWorks = () => {
       <Navbar />
       <main>
         <section className=" ">
-          <div className="text-center">
+          <div data-aos="fade-right" className="text-center">
             <p className=" text-4xl sm:text-5xl font-semibold leading-8 tracking-widest">
               {t("how_it_works")}
             </p>
@@ -35,7 +35,7 @@ const HowItWorks = () => {
             </p>
           </div>
         </section>
-        <section className="hidden sm:block">
+        <section data-aos="fade-left" className="hidden sm:block">
           <div className="flex justify-center mt-7 relative">
             <Image
               className=" z-40"

@@ -47,7 +47,7 @@ export const UserBasketDetail: React.FC<UserBasketDetailProps> = ({
     <>
       {itemsCount === 0 ? (
         <>
-          <div className="w-full flex flex-col px-3 sm:px-8 py-10 flex-wrap gap-0 sm:bg-whiteLight1">
+          <div data-aos="fade-left" className="w-full flex flex-col px-3 sm:px-8 py-10 flex-wrap gap-0 sm:bg-whiteLight1">
             <h2 className="font-semibold text-3xl text-grayText2">
               {t("userDesc2")}
             </h2>

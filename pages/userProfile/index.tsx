@@ -3,7 +3,6 @@ import React, { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { Navbar } from "../../share/components/Navbar";
 import { Footer } from "../../share/components/Footer";
-import Image from "next/image";
 import "react-toastify/dist/ReactToastify.css";
 import { UserAside } from "../../share/components/userAside";
 import { getDownloadURL, ref, uploadBytes } from "firebase/storage";
@@ -26,20 +25,7 @@ const UserProfile = () => {
 })
   const [imgUrl, setImgUrl] = useState<any>("");
   
-  const [imgOnload, setImgOnload] = useState(false);
-
-// let local: any | null = null;
-// let currentUser: any = null;
-
-// if (typeof window !== 'undefined') {
-//   local = localStorage?.getItem("userInfo") ?? null;
-//   currentUser = JSON.parse(local);
-// }
-
-// console.log(currentUser);
-
-
-  
+  const [imgOnload, setImgOnload] = useState(false);  
   
   function getValues(e: React.ChangeEvent<HTMLInputElement>) {
     const name = e.target.name;
@@ -68,16 +54,6 @@ setUserDatas((prev:userProfileType)=>({...prev,img_url:imgUrl,[name]:value,
     getUserDatas()
     
   },[])
-  // console.log(userDatas);
-  
-
-  //  const [imgUpload, setImageUpload]=useState()
-
-  // const imgRef=useRef(null)
-  // console.log(imgUrl);
-
-
-  // console.log(imgOnload);
 
   function getİmage(e: React.ChangeEvent<HTMLInputElement>) {
     const name = e?.target?.files?.[0]?.name;
@@ -86,8 +62,6 @@ setUserDatas((prev:userProfileType)=>({...prev,img_url:imgUrl,[name]:value,
     }
     const imageRef = ref(fileStorage, `files/images/${name}`);
 
-
-    // setCurrentImgRef(imageRef)
 
     const file = e?.target?.files?.[0];
     if (!file) {
@@ -157,9 +131,10 @@ setUserDatas((prev:userProfileType)=>({...prev,img_url:imgUrl,[name]:value,
         <Navbar />
 
         <section className="m-4 sm:m-8 flex justify-center gap-10">
+         
           <UserAside/>
 
-          <div className="w-full flex  flex-col  sm:px-8 sm:py-10 flex-wrap gap-x-1 gap-y-8 bg-white sm:bg-whiteLight1">
+          <div data-aos="fade-left" className="w-full flex  flex-col  sm:px-8 sm:py-10 flex-wrap gap-x-1 gap-y-8 bg-white sm:bg-whiteLight1">
             <h2 className=" font-semibold text-3xl text-grayText2">{t("userDesc")}</h2>
 
             <input onChange={getİmage} type="file" id="file" accept="image/*"  className=" hidden" />

@@ -14,7 +14,6 @@ const adminOrdersHistory = () => {
 
   //* GET HISTORY
 
-
   const renderOrders = async () => {
     const res = await getHistory()
     setHistory(res?.data.result.data)
@@ -39,7 +38,6 @@ const adminOrdersHistory = () => {
           <div className=" hidden sm:block">
             <AdminAside />
           </div>
-
 
           <section className=" w-full">
             <div className="m-0 sm:m-5">

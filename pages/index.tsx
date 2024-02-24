@@ -33,7 +33,7 @@ const Home: NextPage = () => {
 
         {/* FIRST SECTION COMPONENT */}
         <section className="flex flex-col gap-10 justify-center my-14 px-3 sm:px-14">
-          <div className="flex flex-col gap-6 items-center text-center">
+          <div className="flex flex-col gap-6 items-center text-center" data-aos="fade-left">
             <h3 className=" text-5xl font-black">{t("homeDesc5")}</h3>
             <p className="w-full sm:w-2/3 text-2xl text-grayText1">
               Lorem ipsum is placeholder text commonly used in the graphic,
@@ -125,7 +125,7 @@ const Home: NextPage = () => {
         {data?.map((item:{name:string,description:string,img_url:string},index:number) => {
           if(index % 2 == 1){
               return <section key={item.name}  className="flex flex-col sm:flex-row-reverse gap-0 sm:gap-16 justify-center items-center px-3 sm:px-11 mt-52">
-              <div className="flex flex-col gap-8 w-full sm:w-1/2">
+              <div data-aos="fade-left" className="flex flex-col gap-8 w-full sm:w-1/2">
                 <h4 className="text-5xl w-full sm:w-full sm:text-6xl font-black leading-tight text-center mx-auto sm:mx-0 sm:text-start">
                 {item?.name}
                 </h4>
@@ -133,7 +133,7 @@ const Home: NextPage = () => {
                 {item?.description}
                 </p>
               </div>
-              <div>
+              <div data-aos="fade-right">
                 <Image
                 className=" rounded-xl"
                   width={400}
@@ -145,7 +145,7 @@ const Home: NextPage = () => {
             </section>
           } 
           return <section key={item.name} className="flex flex-col sm:flex-row justify-center items-center px-3 sm:px-11 mt-52">
-            <div className="flex flex-col gap-8 w-full sm:w-1/2">
+            <div data-aos="fade-right" className="flex flex-col gap-8 w-full sm:w-1/2">
               <h4 className="text-5xl w-full sm:w-full sm:text-6xl font-black leading-tight text-center mx-auto sm:mx-0 sm:text-start">
                 {item?.name}
               </h4>
@@ -153,7 +153,7 @@ const Home: NextPage = () => {
                 {item?.description}
               </p>
             </div>
-            <div>
+            <div data-aos="fade-left">
               <img
                 className=" rounded-xl"
                 width={400}
@@ -195,7 +195,7 @@ const Home: NextPage = () => {
 
         {/* FIFTH SECTION COMPONENT */}
         <section className="flex flex-col gap-10 justify-center px-3 sm:px-14 mb-96 mt-52">
-          <div className="flex flex-col gap-6 items-center text-center">
+          <div data-aos="fade-left" className="flex flex-col gap-6 items-center text-center">
             <h3 className=" text-5xl font-black w-full mt-20 sm:mt-0 sm:w-1/3 leading-tight">
               {t("homeDesc9")}
             </h3>
