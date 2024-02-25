@@ -159,7 +159,7 @@ const AdminCategory = ({ item }: any) => {
             <p className="  border px-2 rounded-lg  ">{item.id}</p>
           </div>
         </td>
-        <td className="flex justify-center items-center">
+        <td className="flex justify-center items-center h-16">
           <Image
             className=" object-cover"
             width="50"

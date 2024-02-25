@@ -95,7 +95,7 @@ const AdminOrdersTable: FC<AdminOrdersTableType> = ({ data }: any) => {
         </td>
         <td>{formatDate(data.created)}</td>
         <td>{data.delivery_address} </td>
-        <td>{data.payment_method}</td>
+        <td>{data.payment_method== 1 ? "Credit Card" : "Pay Cash"}</td>
         <td>{data.amount}$</td>
         <td>{data.contact}</td>
         <td>
