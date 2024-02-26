@@ -150,7 +150,7 @@ export const getEditOffer = async (id: string) => {
     const response = await instanceAxios.get(`/offer/${id}`);
     return response;
   } catch (error) {
-    toast.error("Can not get offer!");
+    // toast.error("Can not get offer!");
     console.log(error);
   }
 };
@@ -161,7 +161,7 @@ export const putOffer = async (id: string, offerValues: OfferValues) => {
     const response = await instanceAxios.put(`/offer/${id}`, offerValues);
     return response;
   } catch (error) {
-    toast.error("Can not update offer!");
+    // toast.error("Can not update offer!");
     console.log(error);
   }
 };
@@ -172,7 +172,7 @@ export const deleteOffer = async (id: string) => {
     const response = await instanceAxios.delete(`/offer/${id}`);
     return response;
   } catch (error) {
-    toast.error("Can not delete offer!");
+    // toast.error("Can not delete offer!");
     console.log(error);
   }
 };

@@ -56,6 +56,7 @@ const RestaurantDetail: React.FC<RestaurantDetailProps> = ({ name }) => {
   }
 
   useEffect(() => {
+    console.log(5);
     RenderProduct();
   }, [lokal]);
 
