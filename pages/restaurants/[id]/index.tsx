@@ -68,6 +68,14 @@ const RestaurantDetail: React.FC<RestaurantDetailProps> = ({ name }) => {
     const loginDate: number | null = parseInt(localStorage.getItem("loginDate") || "", 10);
     const currentSecond: number = date.getTime();
     const timeDifference: number = currentSecond - (loginDate || 0);
+
+    if (!localStorage.getItem("userInfo")) {
+      toast.error("You need to be logged in !");
+      setTimeout(() => {
+      push("/login");
+      }, 750);
+      return;
+    }
   
     // console.log(timeDifference / 1000);
   if ((timeDifference / 1000) >= 3600) {
