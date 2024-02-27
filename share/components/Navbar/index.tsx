@@ -53,40 +53,40 @@ export const Navbar: React.FC<NavbarProps> = ({ adminNavbar }) => {
   //   // }, []);
   
 
-  const date: Date = new Date();
+  // const date: Date = new Date();
 
-  function reLogin() {
-    const loginDate: number | null = parseInt(localStorage.getItem("loginDate") || "", 10);
-    const currentSecond: number = date.getTime();
-    const timeDifference: number = currentSecond - (loginDate || 0);
+  // function reLogin() {
+  //   const loginDate: number | null = parseInt(localStorage.getItem("loginDate") || "", 10);
+  //   const currentSecond: number = date.getTime();
+  //   const timeDifference: number = currentSecond - (loginDate || 0);
   
-    // console.log(timeDifference / 1000);
-  if ((timeDifference / 1000) >= 3600) {
-      toast.error("Your browsing session has expired !");
-      setTimeout(() => {
-        navigate.push("/login");
-      }, 750);
-      localStorage.removeItem("userInfo");
-      localStorage.removeItem("tokenObj");
-    } else if((timeDifference / 1000) >= 3540){
-      toast.warning("You will be logged out from the site in the next 1 minutes.!");
+  //   // console.log(timeDifference / 1000);
+  // if ((timeDifference / 1000) >= 3600) {
+  //     toast.error("Your browsing session has expired !");
+  //     setTimeout(() => {
+  //       navigate.push("/login");
+  //     }, 750);
+  //     localStorage.removeItem("userInfo");
+  //     localStorage.removeItem("tokenObj");
+  //   } else if((timeDifference / 1000) >= 3540){
+  //     toast.warning("You will be logged out from the site in the next 1 minutes.!");
       
-    }
+  //   }
 
-    return
-  }
+  //   return
+  // }
   
-  useEffect(() => {
-    reLogin();
+  // useEffect(() => {
+  //   reLogin();
   
-    const intervalId = setInterval(() => {
-      reLogin();
-    }, 300000);
+  //   const intervalId = setInterval(() => {
+  //     reLogin();
+  //   }, 300000);
   
-    return () => {
-      clearInterval(intervalId);
-    };
-  }, []);
+  //   return () => {
+  //     clearInterval(intervalId);
+  //   };
+  // }, []);
   
   const [isModalOpen, setModalOpen] = useState(false);
   const [isToken, setIsToken] = useState(false);
