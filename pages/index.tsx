@@ -129,7 +129,7 @@ const Home: NextPage = () => {
                 <h4 className="text-5xl w-full sm:w-full sm:text-6xl font-black leading-tight text-center mx-auto sm:mx-0 sm:text-start">
                 {item?.name}
                 </h4>
-                <p className="text-xl text-grayText1 w-full mb-8 sm:mb-0 sm:w-3/5 mx-auto text-center sm:text-start sm:mx-0">
+                <p className="text-xl text-grayText1 w-full mb-8 sm:mb-0 sm:w-4/5 mx-auto text-center sm:text-start sm:mx-0">
                 {item?.description}
                 </p>
               </div>
@@ -144,12 +144,12 @@ const Home: NextPage = () => {
               </div>
             </section>
           } 
-          return <section key={item.name} className="flex flex-col sm:flex-row justify-center items-center px-3 sm:px-11 mt-52">
+          return <section key={item.name} className="flex flex-col sm:flex-row justify-center items-center px-3 sm:px-0 mt-52">
             <div data-aos="fade-right" className="flex flex-col gap-8 w-full sm:w-1/2">
               <h4 className="text-5xl w-full sm:w-full sm:text-6xl font-black leading-tight text-center mx-auto sm:mx-0 sm:text-start">
                 {item?.name}
               </h4>
-              <p className="text-xl text-grayText1 w-full mb-8 sm:mb-0 sm:w-3/5 mx-auto text-center sm:text-start sm:mx-0">
+              <p className="text-xl text-grayText1 w-full mb-8 sm:mb-0 sm:w-4/5 mx-auto text-center sm:text-start sm:mx-0">
                 {item?.description}
               </p>
             </div>
