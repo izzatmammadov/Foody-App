@@ -53,7 +53,7 @@ export const RestDetailBasket = () => {
 
   return (
     <>
-      {basketData?.total_item?basketData.total_item:0 === 0 ? (
+      {(basketData?.total_item?basketData.total_item:0 )=== 0 ? (
         <>
           {/* FOR WEB EMPTY BASKET */}
           <div className="hidden sm:flex flex-col justify-between h-full">
