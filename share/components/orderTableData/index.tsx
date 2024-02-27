@@ -76,7 +76,7 @@ export const TableData: React.FC<TableDatailProps> = ({
         <td className="py-2 px-4 border-b border-whiteLight3">{payment}</td>
         <td className="py-2 px-4 border-b border-whiteLight3">+{contact}</td>
         <td className="py-2 px-4 border-b border-whiteLight3">
-          <div className="relative inline-block">
+          <div className="realtive z-50 m-auto">
             <Image
               className="cursor-pointer absolute sm:left-0 sm:relative"
               width={5}
@@ -88,7 +88,7 @@ export const TableData: React.FC<TableDatailProps> = ({
 
             {/* Popup */}
             {showPopup && (
-              <div className="absolute right-2 w-max bg-whiteLight1 shadow-md rounded-md p-2 flex flex-col items-center justify-center gap-1">
+              <div className="fixed right-16 w-max bg-whiteLight1 shadow-md rounded-md p-2 flex flex-col items-center justify-center gap-1">
                 <Button
                   className="text-[#14ae5c] cursor-pointer hover:text-[#109850]"
                   innerText={t("userDesc11")}

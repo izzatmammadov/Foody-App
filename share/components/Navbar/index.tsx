@@ -13,6 +13,7 @@ import { AdminAside } from "../adminAside";
 import { AdminLeftModal } from "../adminLeftModal";
 import {
   createProduct,
+  getProductForBasket,
   getProfileInfo,
   getRestourans,
 } from "@/share/services/axios";
