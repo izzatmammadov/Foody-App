@@ -1,4 +1,3 @@
-
 import Head from "next/head";
 import { Navbar } from "../../../share/components/Navbar";
 import { Footer } from "../../../share/components/Footer";
@@ -23,95 +22,94 @@ interface RestaurantDetailProps {
 
 const RestaurantDetail: React.FC<RestaurantDetailProps> = ({ name }) => {
   const { t } = useTranslation();
-  const { asPath , push} = useRouter();
+  const { asPath, push } = useRouter();
 
   const [lokal, setLokal] = useState<any>([]);
   const [product, setProducts] = useState<any[]>([]);
   const { basketData, setBasketData } = useGlobalStore();
-  let localPath = asPath.split("/")[2]; 
+  let localPath = asPath.split("/")[2];
 
-  async function RenderRestouran() {
-    const res = await getRestourans();
-    let resArrs = res?.data.result.data;
+  async function fetchRestouran() {
+    try {
+      const res = await getRestourans();
+      const resArrs = res?.data.result.data;
 
-    let focusRes = resArrs.filter(function (item: any) {
-      return item.id == localPath;
-    });
-    setLokal(focusRes);
+      const focusRes = resArrs.find((item: any) => item.id === localPath);
+      setLokal(focusRes);
+    } catch (error) {
+      console.error("Error fetching restaurant:", error);
+    }
+  }
 
-    return;
+  async function fetchProducts() {
+    try {
+      const res = await getProducts();
+      const resArr = res?.data.result.data;
+
+      const focusProduct = resArr.filter(
+        (item: any) => item.rest_id === lokal?.name
+      );
+      setProducts(focusProduct);
+    } catch (error) {
+      console.error("Error fetching products:", error);
+    }
   }
 
   useEffect(() => {
-    RenderRestouran();
-  }, [lokal]);
-
-  async function RenderProduct() {
-    const res = await getProducts();
-    let resArr = res?.data.result.data;
-
-    let focusProduct = resArr.filter(
-      (item: any) => item.rest_id == lokal[0]?.name
-    );
-    setProducts(focusProduct);
-  }
+    fetchRestouran();
+  }, [localPath]);
 
   useEffect(() => {
-    console.log(5);
-    RenderProduct();
+    if (lokal) {
+      fetchProducts();
+    }
   }, [lokal]);
-
 
   const date: Date = new Date();
 
   function reLogin() {
-    const loginDate: number | null = parseInt(localStorage.getItem("loginDate") || "", 10);
+    const loginDate: number | null = parseInt(
+      localStorage.getItem("loginDate") || "",
+      10
+    );
     const currentSecond: number = date.getTime();
     const timeDifference: number = currentSecond - (loginDate || 0);
 
     if (!localStorage.getItem("userInfo")) {
       toast.error("You need to be logged in !");
       setTimeout(() => {
-      push("/login");
+        push("/login");
       }, 750);
       return;
     }
-  
-    // console.log(timeDifference / 1000);
-  if ((timeDifference / 1000) >= 3600) {
+
+    if (timeDifference / 1000 >= 3600) {
       toast.error("Your browsing session has expired !");
       setTimeout(() => {
-      push("/login");
+        push("/login");
       }, 750);
       localStorage.removeItem("userInfo");
       localStorage.removeItem("tokenObj");
-    } else if((timeDifference / 1000) >= 3540){
-      toast.warning("You will be logged out from the site in the next 1 minutes.!");
-      
+    } else if (timeDifference / 1000 >= 3540) {
+      toast.warning(
+        "You will be logged out from the site in the next 1 minutes.!"
+      );
     }
-
-    return
   }
-  
-  // useEffect(() => {
-  //   reLogin();
-  
-  //   const intervalId = setInterval(() => {
-  //     reLogin();
-  //   }, 300000);
-  
-  //   return () => {
-  //     clearInterval(intervalId);
-  //   };
-  // }, []);
 
   async function handleButtonClick(id: string | number) {
-    const res = await postProductForBasket(id);
-    reLogin();
-    if (res?.status === 201) {
-      setBasketData(res?.data);
+    try {
+      const res = await postProductForBasket(id);
+      reLogin();
+      if (res?.status === 201) {
+        setBasketData(res?.data);
+      }
+    } catch (error) {
+      console.error("Error adding product to basket:", error);
     }
-  }  
+  }
+
+  console.log(lokal);
 
   return (
     <>
@@ -147,7 +145,7 @@ const RestaurantDetail: React.FC<RestaurantDetailProps> = ({ name }) => {
                   );
                 })}
               </div>
-              <ToastContainer/>
+              <ToastContainer />
             </div>
             {/* BASKET */}
             <div className="flex flex-col bg-whiteLight1 p-4 w-full sm:w-2/5">
