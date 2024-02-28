@@ -29,7 +29,7 @@ export const RestDetailBasket = () => {
     renderBasketProducts();
   }, []);
 
-  async function handleIncreasButtonClick(id: string | number) {
+  async function handleIncreasButtonClick(id: string | number) { 
     const res = await postProductForBasket(id);
     if (res?.status === 201) {
       setBasketData(res?.data);
