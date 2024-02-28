@@ -38,7 +38,7 @@ const UserBasket: NextPage = () => {
         <section className="mx-0 sm:m-8 flex justify-center gap-10">
           
           <UserAside />
-          <UserBasketDetail data={basketData} itemsCount={basketData.total_item} />
+          <UserBasketDetail data={basketData} itemsCount={basketData?.total_item} />
         </section>
 
         <Footer isTop={false} />
