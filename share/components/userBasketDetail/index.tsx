@@ -111,13 +111,13 @@ export const UserBasketDetail: React.FC<UserBasketDetailProps> = ({
                 return (
                   <UserBasketCard
                     key={index}
-                    clearBasket={() => handleClearButtonClick(data.id)}
-                    decreaseBtn={() => handleDecreaseButtonClick(item.id)}
-                    increasBtn={() => handleIncreasButtonClick(item.id)}
-                    name={item.name}
-                    price={item.amount}
-                    count={item.count}
-                    imageSrc={item.img_url}
+                    clearBasket={() => handleClearButtonClick(data?.id)}
+                    decreaseBtn={() => handleDecreaseButtonClick(item?.id)}
+                    increasBtn={() => handleIncreasButtonClick(item?.id)}
+                    name={item?.name}
+                    price={item?.amount}
+                    count={item?.count}
+                    imageSrc={item?.img_url}
                   />
                 );
               })}
@@ -142,7 +142,7 @@ export const UserBasketDetail: React.FC<UserBasketDetailProps> = ({
               <Button
                 onClick={() => navigate.push("/userCheckout")}
                 className="bg-white text-mainRed rounded-full py-1 px-14 font-medium text-lg hover:scale-95 transition-all duration-500"
-                innerText={`$ ${data.total_amount}`}
+                innerText={`$ ${data?.total_amount}`}
               />
             </div>
           </div>
