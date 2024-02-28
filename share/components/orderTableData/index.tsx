@@ -138,7 +138,7 @@ export const TableData: React.FC<TableDatailProps> = ({
       </Modal>
 
       {/* Show Modal */}
-      <Modal isOpen={isModalOpen2} onClose={handleModalClose2}>
+      <Modal  isOpen={isModalOpen2} onClose={handleModalClose2}>
         <OrderTableDetail id={id} />
 
         <Button
