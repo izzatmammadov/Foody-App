@@ -36,6 +36,39 @@ setUserDatas((prev:userProfileType)=>({...prev,img_url:imgUrl,[name]:value,
 
 
   }
+
+  const date: Date = new Date();
+
+  function reLogin() {
+    const loginDate: number | null = parseInt(
+      localStorage.getItem("loginDate") || "",
+      10
+    );
+    const currentSecond: number = date.getTime();
+    const timeDifference: number = currentSecond - (loginDate || 0);
+
+    if (!localStorage.getItem("userInfo")) {
+      toast.error("You need to be logged in !");
+      setTimeout(() => {
+        push("/login");
+      }, 750);
+      return;
+    }
+
+    if (timeDifference / 1000 >= 3600) {
+      toast.error("Your browsing session has expired !");
+      setTimeout(() => {
+        push("/login");
+      }, 750);
+      localStorage.removeItem("userInfo");
+      localStorage.removeItem("tokenObj");
+    } else if (timeDifference / 1000 >= 3540) {
+      toast.warning(
+        "You will be logged out from the site in the next 1 minutes.!"
+      );
+    }
+  }
+
   // console.log(userDatas);
   function isValidAzerbaijanPhoneNumber(phoneNumber:string) {
     const azPhoneNumberRegex = /^994(50|51|55|70|77|10)\d{7}$/;
@@ -52,7 +85,7 @@ setUserDatas((prev:userProfileType)=>({...prev,img_url:imgUrl,[name]:value,
   useEffect(() => {
    
     getUserDatas()
-    
+    reLogin()
   },[])
 
   function getİmage(e: React.ChangeEvent<HTMLInputElement>) {
@@ -76,6 +109,11 @@ setUserDatas((prev:userProfileType)=>({...prev,img_url:imgUrl,[name]:value,
       });
     });
   }
+
+
+
+
+
   function isObjectFullyFilled(obj: userProfileType) {
    
     
