@@ -206,10 +206,12 @@ export const Navbar: React.FC<NavbarProps> = ({ adminNavbar }) => {
 
       const productValue = res?.data;
 
-      if (res?.status == 201 || res?.status == 200) {
+      if (res?.status === 201 ) {
         setProducts((prev: any) => [...prev, productValue]);
 
-        toast.success("Product added successfully!");
+        // toast.success("Product added successfully!");
+     
+
         if (addProductName.current) addProductName.current.value = "";
         if (addProductDesc.current) addProductDesc.current.value = "";
         if (addProductPrice.current) addProductPrice.current.value = "";

@@ -13,8 +13,8 @@ export const RestDetailHeader: React.FC<RestDetailHeaderProps> = ({
   const navigate = useRouter();
   return (
     <>
-      <div className=" flex justify-center">
-        <img src={lokal?.img_url} alt="" />
+      <div className=" flex   justify-center">
+        <img className=" h-[448px] w-full object-cover" src={lokal?.img_url} alt="restourantImg" />
       </div>
 
       <div className="pb-0 sm:pb-6 border-b-0 sm:border-b-2 items-center border-b-whiteLight1">
