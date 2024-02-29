@@ -64,7 +64,7 @@ export const RestDetailBasket = () => {
                 src={"/basketIconGray.svg"}
                 alt="basket"
               />
-              <p className="font-medium text-whiteLight3 text-lg">
+              <p className="font-medium text-whiteLight3 text-lg mt-2">
                 {basketData?.total_item} items
               </p>
             </div>
@@ -132,7 +132,7 @@ export const RestDetailBasket = () => {
                       src={"/basketIcon.svg"}
                       alt="basket"
                     />
-                    <p className="font-medium text-mainRed text-lg">
+                    <p className="font-medium mt-2 text-mainRed text-lg ">
                       {basketData?.total_item} items
                     </p>
                   </div>
@@ -149,7 +149,7 @@ export const RestDetailBasket = () => {
         <>
           <div className="flex items-center gap-1">
             <Image width={30} height={0} src={"/basketIcon.svg"} alt="basket" />
-            <p className="font-medium text-mainRed text-lg">
+            <p className="font-medium text-mainRed mt-1 text-lg">
               {basketData?.total_item} items
             </p>
           </div>
