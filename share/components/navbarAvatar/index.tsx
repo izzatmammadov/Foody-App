@@ -25,6 +25,11 @@ export const NavbarAvatar = ({ isName }: any) => {
           navigate.push("/userBasket");
         }}
       />
+      <span className="w-4 h-4 flex justify-center items-center text-[12px] font-bold text-white absolute right-[-4px] top-[-4px] bg-[#9d251a] z-10 rounded-full">
+        {basketData?.length}
+      </span>
+      
+      </div>
       <Button
         className="rounded-full w-10 h-10 text-lg text-white shadow-md bg-mainRed font-semibold hover:scale-95 transition-all duration-500"
         innerText={isName}
