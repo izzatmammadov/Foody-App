@@ -3,17 +3,17 @@ import React, { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { Navbar } from "../../share/components/Navbar";
 import { Footer } from "../../share/components/Footer";
-import Image from "next/image";
 import "react-toastify/dist/ReactToastify.css";
 import { UserAside } from "../../share/components/userAside";
 import { getDownloadURL, ref, uploadBytes } from "firebase/storage";
 import { fileStorage } from "@/server/configs/firebase";
 import { getProfileInfo, putProfileInfo, userProfileType } from "@/share/services/axios";
 import { ToastContainer, toast } from "react-toastify";
+import { useRouter } from "next/router";
 
 const UserProfile = () => {
   const { t, i18n } = useTranslation();
- 
+  const { push } = useRouter()
   const [userDatas, setUserDatas] = useState<userProfileType>({
     name: '',
   username: '',
@@ -25,20 +25,7 @@ const UserProfile = () => {
 })
   const [imgUrl, setImgUrl] = useState<any>("");
   
-  const [imgOnload, setImgOnload] = useState(false);
-
-// let local: any | null = null;
-// let currentUser: any = null;
-
-// if (typeof window !== 'undefined') {
-//   local = localStorage?.getItem("userInfo") ?? null;
-//   currentUser = JSON.parse(local);
-// }
-
-// console.log(currentUser);
-
-
-  
+  const [imgOnload, setImgOnload] = useState(false);  
   
   function getValues(e: React.ChangeEvent<HTMLInputElement>) {
     const name = e.target.name;
@@ -46,10 +33,43 @@ const UserProfile = () => {
 
 setUserDatas((prev:userProfileType)=>({...prev,img_url:imgUrl,[name]:value,
 }))
-// console.log(userDatas);
+
 
   }
 
+  const date: Date = new Date();
+
+  function reLogin() {
+    const loginDate: number | null = parseInt(
+      localStorage.getItem("loginDate") || "",
+      10
+    );
+    const currentSecond: number = date.getTime();
+    const timeDifference: number = currentSecond - (loginDate || 0);
+
+    if (!localStorage.getItem("userInfo")) {
+      toast.error("You need to be logged in !");
+      setTimeout(() => {
+        push("/login");
+      }, 750);
+      return;
+    }
+
+    if (timeDifference / 1000 >= 3600) {
+      toast.error("Your browsing session has expired !");
+      setTimeout(() => {
+        push("/login");
+      }, 750);
+      localStorage.removeItem("userInfo");
+      localStorage.removeItem("tokenObj");
+    } else if (timeDifference / 1000 >= 3540) {
+      toast.warning(
+        "You will be logged out from the site in the next 1 minutes.!"
+      );
+    }
+  }
+
+  // console.log(userDatas);
   function isValidAzerbaijanPhoneNumber(phoneNumber:string) {
     const azPhoneNumberRegex = /^994(50|51|55|70|77|10)\d{7}$/;
 
@@ -65,18 +85,8 @@ setUserDatas((prev:userProfileType)=>({...prev,img_url:imgUrl,[name]:value,
   useEffect(() => {
    
     getUserDatas()
-    
+    reLogin()
   },[])
-  // console.log(userDatas);
-  
-
-  //  const [imgUpload, setImageUpload]=useState()
-
-  // const imgRef=useRef(null)
-  // console.log(imgUrl);
-
-
-  // console.log(imgOnload);
 
   function getİmage(e: React.ChangeEvent<HTMLInputElement>) {
     const name = e?.target?.files?.[0]?.name;
@@ -85,8 +95,6 @@ setUserDatas((prev:userProfileType)=>({...prev,img_url:imgUrl,[name]:value,
     }
     const imageRef = ref(fileStorage, `files/images/${name}`);
 
-
-    // setCurrentImgRef(imageRef)
 
     const file = e?.target?.files?.[0];
     if (!file) {
@@ -101,6 +109,11 @@ setUserDatas((prev:userProfileType)=>({...prev,img_url:imgUrl,[name]:value,
       });
     });
   }
+
+
+
+
+
   function isObjectFullyFilled(obj: userProfileType) {
    
     
@@ -127,9 +140,18 @@ setUserDatas((prev:userProfileType)=>({...prev,img_url:imgUrl,[name]:value,
     
 
     const res = await putProfileInfo(userDatas)
+    // console.log(res);
+    const localUser: any = localStorage?.getItem("userInfo");
+    
+    
     if (res?.status === 200) {
       toast.success("Your informations have been updated successfully!");
-
+      const newProfil = JSON.parse(localUser)
+      newProfil.username = res.data.user.username
+      newProfil.fullname = res.data.user.fullname
+      console.log(newProfil);
+      localStorage.setItem("userInfo", JSON.stringify(newProfil))
+      push("/")
       return
     }
   //  console.log(res);
@@ -147,9 +169,10 @@ setUserDatas((prev:userProfileType)=>({...prev,img_url:imgUrl,[name]:value,
         <Navbar />
 
         <section className="m-4 sm:m-8 flex justify-center gap-10">
+         
           <UserAside/>
 
-          <div className="w-full flex  flex-col  sm:px-8 sm:py-10 flex-wrap gap-x-1 gap-y-8 bg-white sm:bg-whiteLight1">
+          <div data-aos="fade-left" className="w-full flex  flex-col  sm:px-8 sm:py-10 flex-wrap gap-x-1 gap-y-8 bg-white sm:bg-whiteLight1">
             <h2 className=" font-semibold text-3xl text-grayText2">{t("userDesc")}</h2>
 
             <input onChange={getİmage} type="file" id="file" accept="image/*"  className=" hidden" />

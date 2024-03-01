@@ -41,7 +41,7 @@ export default async function handler(req, res) {
 
   if (req.method === "PUT") {
     try {
-      const { email, username, fullname, img_url, phone } = req.body ?? {};
+      const { email, username, fullname, img_url, phone ,address} = req.body ?? {};
 
       if (!email || !username || !fullname || !phone) {
         res.status(404).json({ error: "Please fill to fields" });
@@ -56,6 +56,7 @@ export default async function handler(req, res) {
         fullname,
         img_url,
         phone,
+        address
       };
 
       await admin.auth().updateUser(decodedToken.userId, updateUser);

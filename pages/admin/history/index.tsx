@@ -2,49 +2,26 @@ import { Navbar } from "@/share/components/Navbar";
 import { AdminAside } from "@/share/components/adminAside";
 import AdminOrderHistoryTable from "@/share/components/adminOrderHistoryTable";
 import AdminSecondTitle from "@/share/components/adminSecondTitle";
+import { getHistory } from "@/share/services/axios";
+import { useGlobalStore } from "@/share/services/provider";
 import Head from "next/head";
-import React, { useEffect, useState } from "react";
-
-const item = [
-  {
-    id: 9177,
-    customerId: 22401,
-    Time: "25 Dec 2021",
-    Address: "29 Eve Street, 543 Evenue Road, Ny 87876",
-    Amount: "$249.7",
-    Payment: "Cash",
-    Contact: "994-51-410-3130",
-  },
-  {
-    id: 9178,
-    customerId: 22401,
-    Time: "25 Dec 2021",
-    Address: "29 Eve Street, 543 Evenue Road, Ny 87876",
-    Amount: "$249.7",
-    Payment: "Cash",
-    Contact: "994-51-410-3130",
-  },
-  {
-    id: 9179,
-    customerId: 22401,
-    Time: "25 Dec 2021",
-    Address: "29 Eve Street, 543 Evenue Road, Ny 87876",
-    Amount: "$249.7",
-    Payment: "Cash",
-    Contact: "994-51-410-3130",
-  },
-  {
-    id: 9200,
-    customerId: 22401,
-    Time: "25 Dec 2021",
-    Address: "29 Eve Street, 543 Evenue Road, Ny 87876",
-    Amount: "$249.7",
-    Payment: "Cash",
-    Contact: "994-51-410-3130",
-  },
-];
+import React, { useEffect } from "react";
+import { useTranslation } from "react-i18next";
 
 const adminOrdersHistory = () => {
+  const { t } = useTranslation();
+  const { history, setHistory} = useGlobalStore()
+
+  //* GET HISTORY
+
+  const renderOrders = async () => {
+    const res = await getHistory()
+    setHistory(res?.data.result.data)
+  }
+
+  useEffect(() => {
+    renderOrders()
+  },[])
 
   return (
     <>
@@ -62,34 +39,26 @@ const adminOrdersHistory = () => {
             <AdminAside />
           </div>
 
-
           <section className=" w-full">
             <div className="m-0 sm:m-5">
               <AdminSecondTitle name="History"  p1="History" resCategoryARR={""} visibleButton={false} visibleDropwdown={false} buttonInnerText=""/>
             </div>
 
-            {/* <div className=" w-full sm:w-auto m-5 flex flex-wrap gap-4 justify-center">
-              {item.map((data) => (
-                <AdminRestouransCard data={data} />
-              ))}
-            </div> */}
-            <div className="p-5">
-              <table className=" w-full bg-white ">
-                <thead className="h-16  text-center text-sm not-italic font-semibold leading-6">
+            <div className="p-5 max-h-[500px] overflow-y-auto">
+              <table className="w-full bg-white">
+                <thead className="h-16 text-center text-sm not-italic font-semibold leading-6">
                 <tr>
                     <td>ID</td>
-                    <td>Customer ID</td>
-                    <td>Time</td>
-                    <td>Delivery Address</td>
-                    <td>Amount</td>
-                    <td>Payment Method</td>
-                    <td>Contact</td>
-                    <td></td>
+                    <td>{t("adminOrder1")}</td>
+                    <td>{t("userDesc6")}</td>
+                    <td>{t("userDesc7")}</td>
+                    <td>{t("userDesc9")}</td>
+                    <td>{t("userDesc8")}</td>
+                    <td>{t("userDesc10")}</td>
                   </tr>
                 </thead>
                 <tbody className="">
-                  {item.map((data) => (
-                    // <AdminOrdersTable data={data} />
+                  {history?.map((data:any) => (
                     <AdminOrderHistoryTable data={data} />
                   ))}
                 </tbody>

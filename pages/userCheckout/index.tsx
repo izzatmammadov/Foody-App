@@ -3,15 +3,12 @@ import Head from "next/head";
 import { Navbar } from "../../share/components/Navbar";
 import { Footer } from "../../share/components/Footer";
 import { UserAside } from "../../share/components/userAside";
-import { Button } from "../../share/components/Button";
 import { useTranslation } from "react-i18next";
-import { UserCheckoutAside } from "../../share/components/userCheckoutAside";
 import { UserCheckoutForm } from "../../share/components/userCheckForm";
 
 const UserCheckout: NextPage = () => {
   const { t } = useTranslation();
   
-   
     return (
         <>
         <Head>
@@ -27,8 +24,6 @@ const UserCheckout: NextPage = () => {
             <UserAside/>
             <UserCheckoutForm/>
         </section>
-      
-      
       
         <Footer isTop={false} />
         </main>

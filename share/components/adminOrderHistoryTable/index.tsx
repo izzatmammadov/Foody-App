@@ -3,23 +3,51 @@ import { useTranslation } from "react-i18next";
 import Modal from "../Modal";
 import { Button } from "../Button";
 import Image from "next/image";
+import { deleteOrderHistory } from "@/share/services/axios";
+import { useGlobalStore } from "@/share/services/provider";
+import { ToastContainer, toast } from "react-toastify";
 
 interface AdminOffersTableType {
   data: {
     id: number | string;
-    customerId: number | string;
-    Time: string;
-    Address: string;
-    Amount: string;
-    Payment: string;
-    Contact: string;
+    customer_id: number | string;
+    created: string;
+    delivery_address: string;
+    amount: string;
+    payment_method: string|number;
+    contact: string;
   };
 }
+
+//& DATE
+
+const formatDate = (timestamp: any) => {
+  const currentDate = new Date();
+  const date = new Date(timestamp);
+  const timeDifference = currentDate.getTime() - date.getTime();
+  const seconds = Math.floor(timeDifference / 1000);
+  const minutes = Math.floor(seconds / 60);
+  const hours = Math.floor(minutes / 60);
+  const days = Math.floor(hours / 24);
+
+  if (days > 0) {
+    return `${days} day${days > 1 ? "s" : ""} ago`;
+  } else if (hours > 0) {
+    return `${hours} hour${hours > 1 ? "s" : ""} ago`;
+  } else if (minutes > 0) {
+    return `${minutes} minute${minutes > 1 ? "s" : ""} ago`;
+  } else {
+    return `${seconds} second${seconds > 1 ? "s" : ""} ago`;
+  }
+};
 
 const AdminOrderHistoryTable: FC<AdminOffersTableType> = ({ data }) => {
   const { t, i18n } = useTranslation();
   const [showPopup, setShowPopup] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const { history, setHistory} = useGlobalStore()
+console.log(data);
+
 
   //^ MODAL
   const handleButtonClick = () => {
@@ -35,8 +63,23 @@ const AdminOrderHistoryTable: FC<AdminOffersTableType> = ({ data }) => {
     setShowPopup(!showPopup);
   };
 
+  //* DELETE ORDER
+
+  const deleteOrderData = async () => {
+    const response = await deleteOrderHistory(data?.id);
+   
+
+    if (response?.status === 204) {
+      let filteredOrder = history.filter((item: any) => item.id !== data?.id);
+      setHistory(filteredOrder);
+      toast.success("Order deleted successfully!");
+      handleModalClose();
+    }
+  };
+
   return (
     <>
+    <ToastContainer/>
       <tr className="h-14 text-center  border-slate-700  border-y text-gray-900 text-sm not-italic font-normal leading-5">
         <td>
           <div>
@@ -48,15 +91,15 @@ const AdminOrderHistoryTable: FC<AdminOffersTableType> = ({ data }) => {
         <td>
           <div className="flex justify-center">
             <p className=" border-slate-700  border rounded-lg px-2 ">
-              {data.customerId}
+              {data.customer_id}
             </p>
           </div>
         </td>
-        <td>{data.Time}</td>
-        <td>{data.Address} </td>
-        <td>{data.Amount}</td>
-        <td>{data.Payment}</td>
-        <td>{data.Contact}</td>
+        <td>{formatDate(data.created)}</td>
+        <td>{data.delivery_address} </td>   
+        <td>{data.payment_method == 1 ? "Credit Card" : "Pay Cash"}</td>
+        <td>{data.amount}</td>
+        <td>{data.contact}</td>
         <td>
           <Image
             width="24"
@@ -91,6 +134,7 @@ const AdminOrderHistoryTable: FC<AdminOffersTableType> = ({ data }) => {
           <Button
             className="bg-mainRed border-2 text-white py-1 px-8 rounded-md border-mainRed shadow-md hover:scale-95 transition-all duration-500"
             innerText={t("modalDesc4")}
+            onClick={deleteOrderData}
           />
         </div>
       </Modal>

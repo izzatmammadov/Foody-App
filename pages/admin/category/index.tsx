@@ -87,7 +87,6 @@ const AdminProducts: NextPage = () => {
 
   function changeHidden(): void {
     setIsHiddenModal((prev: boolean) => !prev);
-    // console.log(isHiddenModal);
   }
 
   async function categoriesRender() {

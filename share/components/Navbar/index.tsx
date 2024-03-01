@@ -13,6 +13,7 @@ import { AdminAside } from "../adminAside";
 import { AdminLeftModal } from "../adminLeftModal";
 import {
   createProduct,
+  getProductForBasket,
   getProfileInfo,
   getRestourans,
 } from "@/share/services/axios";
@@ -27,27 +28,66 @@ interface NavbarProps {
 export const Navbar: React.FC<NavbarProps> = ({ adminNavbar }) => {
   const { t } = useTranslation();
   const navigate = useRouter();
-  async function ReLogin() {
-    try {
-      const res = await getProfileInfo();
-    } catch (err: any) {
-      if (err?.response?.status == 401) {
-        setTimeout(() => {
-          navigate.push("/login");
-          localStorage.removeItem("userInfo");
-        }, 60000);
-        setTimeout(() => {
-          toast.error("Your browsing session has expired !");
-        }, 59300);
-        toast.warning(
-          "You will be logged out from the site in the next 1 minutes.!"
-        );
-      }
-    }
-  }
-  useEffect(() => {
-    ReLogin();
-  }, []);
+
+
+//   // async function ReLogin() {
+//   //   try {
+//   //     const res = await getProfileInfo();
+//   //   } catch (err: any) {
+//   //     if (err?.response?.status == 401) {
+//   //       setTimeout(() => {
+//   //         navigate.push("/login");
+//   //         localStorage.removeItem("userInfo");
+//   //       }, 60000);
+//   //       setTimeout(() => {
+//   //         toast.error("Your browsing session has expired !");
+//   //       }, 59300);
+//   //       toast.warning(
+//   //         "You will be logged out from the site in the next 1 minutes.!"
+//   //       );
+//   //     }
+//   //   }
+//   // }
+//   // useEffect(() => {
+//   //   ReLogin();
+  //   // }, []);
+  
+
+  // const date: Date = new Date();
+
+  // function reLogin() {
+  //   const loginDate: number | null = parseInt(localStorage.getItem("loginDate") || "", 10);
+  //   const currentSecond: number = date.getTime();
+  //   const timeDifference: number = currentSecond - (loginDate || 0);
+  
+  //   // console.log(timeDifference / 1000);
+  // if ((timeDifference / 1000) >= 3600) {
+  //     toast.error("Your browsing session has expired !");
+  //     setTimeout(() => {
+  //       navigate.push("/login");
+  //     }, 750);
+  //     localStorage.removeItem("userInfo");
+  //     localStorage.removeItem("tokenObj");
+  //   } else if((timeDifference / 1000) >= 3540){
+  //     toast.warning("You will be logged out from the site in the next 1 minutes.!");
+      
+  //   }
+
+  //   return
+  // }
+  
+  // useEffect(() => {
+  //   reLogin();
+  
+  //   const intervalId = setInterval(() => {
+  //     reLogin();
+  //   }, 300000);
+  
+  //   return () => {
+  //     clearInterval(intervalId);
+  //   };
+  // }, []);
+  
   const [isModalOpen, setModalOpen] = useState(false);
   const [isToken, setIsToken] = useState(false);
   const [isActiveName, setIsActiveName] = useState("");
@@ -57,6 +97,7 @@ export const Navbar: React.FC<NavbarProps> = ({ adminNavbar }) => {
   const [restaurants, setRestaurants] = useState();
   const { products, setProducts } = useGlobalStore();
   const [filterRestouran, setFilterRestouran] = useState();
+
 
   const fetchRestaurants = async () => {
     try {
@@ -69,6 +110,8 @@ export const Navbar: React.FC<NavbarProps> = ({ adminNavbar }) => {
       console.error("Error can't fetching products:", error);
     }
   };
+
+
 
   useEffect(() => {
     fetchRestaurants();
@@ -114,8 +157,11 @@ export const Navbar: React.FC<NavbarProps> = ({ adminNavbar }) => {
 
   const [isInputModal, setInputModal] = useState(false);
 
-  const toggleInputModal = () => {
+  const toggleInputModal = async () => {
     setInputModal(!isInputModal);
+    let respons = await getRestourans();
+    let resData = respons?.data.result.data; 
+    setFilterRestouran(resData);
   };
 
   const closeInputModal = () => {
@@ -160,10 +206,12 @@ export const Navbar: React.FC<NavbarProps> = ({ adminNavbar }) => {
 
       const productValue = res?.data;
 
-      if (res?.status == 201 || res?.status == 200) {
+      if (res?.status === 201 ) {
         setProducts((prev: any) => [...prev, productValue]);
 
-        toast.success("Product added successfully!");
+        // toast.success("Product added successfully!");
+     
+
         if (addProductName.current) addProductName.current.value = "";
         if (addProductDesc.current) addProductDesc.current.value = "";
         if (addProductPrice.current) addProductPrice.current.value = "";
@@ -186,14 +234,17 @@ export const Navbar: React.FC<NavbarProps> = ({ adminNavbar }) => {
 
   //* Restauran search functions
 
-  async function searchRestauran(event: any) {
+  async function searchRestauran(e:React.ChangeEvent<HTMLInputElement>) {
     let respons = await getRestourans();
-    let resData = respons?.data.result.data;
-
+    let resData = respons?.data.result.data; 
+    console.log(e.target.value);
+    
     let filterResData = resData.filter(function (item: any) {
-      return item.name.toLowerCase().includes(event.target.value.toLowerCase());
+      return item.name.toLowerCase().includes(e.target.value.toLowerCase());
     });
-
+    // console.log(filterResData);
+    console.log(filterResData);
+    
     setFilterRestouran(filterResData);
   }
 
@@ -244,7 +295,8 @@ export const Navbar: React.FC<NavbarProps> = ({ adminNavbar }) => {
         addProductRestaurant={addProductRestaurant}
         addProductDesc={addProductDesc}
         getImgUrl={handleAddNewImage}
-        Restaurants={restaurants}
+       
+        arr={restaurants}
         imgRef={img}
       />
       {adminNavbar ? (
@@ -269,13 +321,14 @@ export const Navbar: React.FC<NavbarProps> = ({ adminNavbar }) => {
 
               <div className="w-1/5 hidden sm:block">
                 <Input
-                  OnClick={toggleInputModal}
+                    OnClick={toggleInputModal}
+                    OnChange={searchRestauran}
                   Type="text"
                   Placeholder="Search"
                   ClassName="w-full px-6 py-3 relative rounded-xl outline-none shadow-sm"
                 />
                 {isInputModal && (
-                  <RestaurantSearchModal onClose={closeInputModal} />
+                  <RestaurantSearchModal filterRestouran={filterRestouran}  onClose={closeInputModal} />
                 )}
               </div>
               <NavbarAvatar isName={isActiveName} />

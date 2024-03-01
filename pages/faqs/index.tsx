@@ -23,9 +23,9 @@ const Faq = () => {
 
       <Navbar />
       <main className=" flex flex-col items-center gap-5 mb-8">
-        <p className=" text-5xl font-medium pb-5">F.A.Q</p>
+        <p data-aos="fade-right" className=" text-5xl font-medium pb-5">F.A.Q</p>
 
-        <div className=" p-6 w-3/4 mx-auto  bg-white shadow-md">
+        <div data-aos="fade-left" className=" p-6 w-3/4 mx-auto bg-white shadow-md">
           <div className="flex justify-between mb-3">
             <p className=" text-2xl font-medium">
 
@@ -51,7 +51,7 @@ const Faq = () => {
           )}
         </div>
 
-        <div className=" p-6 w-3/4 mx-auto  bg-white shadow-md">
+        <div data-aos="fade-right" className=" p-6 w-3/4 mx-auto  bg-white shadow-md">
           <div className="flex justify-between mb-3">
             <p className=" text-2xl font-medium">
 
@@ -78,7 +78,7 @@ const Faq = () => {
           )}
         </div>
 
-        <div className=" p-6 w-3/4 mx-auto  bg-white shadow-md">
+        <div data-aos="fade-left" className=" p-6 w-3/4 mx-auto  bg-white shadow-md">
           <div className="flex justify-between mb-3">
             <p className=" text-2xl font-medium">
 
@@ -104,7 +104,7 @@ const Faq = () => {
           )}
         </div>
 
-        <div className=" p-6 w-3/4 mx-auto  bg-white shadow-md">
+        <div data-aos="fade-right" className=" p-6 w-3/4 mx-auto  bg-white shadow-md">
           <div className="flex justify-between mb-3">
             <p className=" text-2xl font-medium"> {t("faqDesc4")}</p>
             <button onClick={toggleContent}>
@@ -125,7 +125,7 @@ const Faq = () => {
           )}
         </div>
 
-        <div className=" p-6 w-3/4 mx-auto  bg-white shadow-md">
+        <div data-aos="fade-left" className=" p-6 w-3/4 mx-auto  bg-white shadow-md">
           <div className="flex justify-between mb-3">
             <p className=" text-2xl font-medium">
 

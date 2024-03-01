@@ -1,20 +1,20 @@
 import React from "react";
-interface Props {
-  Type?: string;
-  Placeholder?: string;
-  OnClick?: any;
-  OnChange?: any;
-  ClassName?: string;
-  disabled?: boolean;
-  Capitalize?: boolean;
+interface Props { 
+  Type?: string; 
+  Placeholder?: string; 
+  OnClick?: () => void;
+  OnChange?: any; 
+  ClassName?: string; 
+  disabled?: boolean; 
+  Capitalize?: boolean; 
 }
-export const Input = ({
-  Type = "text",
-  Placeholder,
-  OnChange,
-  OnClick,
-  ClassName,
-  disabled = false,
+export const Input = ({ 
+  Type = "text", 
+  Placeholder, 
+  OnChange, 
+  OnClick, 
+  ClassName, 
+  disabled = false, 
   Capitalize = true,
 }: Props) => {
   return (

@@ -5,7 +5,7 @@ import AdminCard from "../../../share/components/adminCard";
 import AdminSecondTitle from "../../../share/components/adminSecondTitle";
 import { Navbar } from "@/share/components/Navbar";
 import { useGlobalStore } from "@/share/services/provider";
-import { useEffect, useState } from "react";
+import { ChangeEvent, useEffect, useState } from "react";
 import { getProducts, getRestourans } from "@/share/services/axios";
 
 interface Product {
@@ -32,7 +32,7 @@ const AdminProducts: NextPage = () => {
     }
   };
 
-  console.log(products);
+  // console.log(products);
 
   useEffect(() => {
     fetchProducts();
@@ -51,15 +51,25 @@ const AdminProducts: NextPage = () => {
 
   //* FILTER PRODUCTS
 
-  const filterProduct = async (title: Product): Promise<void> => {
+  const filterProduct = async (e:React.ChangeEvent<HTMLInputElement>): Promise<void> => {
+    // console.log(e?.target?.value);
+    const value = e.target.value
+  
     try {
       const response = await getProducts();
-      const restaurant = response?.data.result.data.filter(
-        (item: any) => item?.rest_id === title
-      );
 
-      setProducts(restaurant);
-      console.log(response);
+      if (value === "all") {
+        setProducts(response?.data?.result?.data);
+      } else {
+  
+      const filteredProd = response?.data.result.data.filter(
+        (item: any) => item?.rest_id === value
+      );
+      // console.log(filteredProd);
+    
+      setProducts(filteredProd);
+    }
+      // console.log(response);
     } catch (error) {
       console.error(error);
     }

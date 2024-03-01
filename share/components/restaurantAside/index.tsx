@@ -38,10 +38,10 @@ const RestaurantAside = ({ onClick }: { onClick: (id: string) => void }) => {
           <div
             key={item.slug}
             onClick={() => onClick(item.name)}
-            className="flex items-center gap-4 cursor-pointer whitespace-nowrap w-full overflow-x-auto overflow-y-hidden p-1 h-10 hover:bg-mainRedLight transition-all"
+            className="flex items-center gap-4 cursor-pointer  whitespace-nowrap w-full overflow-x-auto overflow-y-hidden p-1 h-10 hover:bg-mainRedLight transition-all"
           >
             <Image
-              className="h-10 object-cover"
+              className="h-10 object-cover rounded-full"
               width={40}
               height={0}
               src={item?.img_url}

@@ -1,6 +1,5 @@
 import type { NextPage } from "next";
 import Head from "next/head";
-import Image from "next/image";
 import { Footer } from "../../share/components/Footer";
 import { Navbar } from "../../share/components/Navbar";
 import { UserAside } from "../../share/components/userAside";
@@ -35,9 +34,9 @@ const UserBasket: NextPage = () => {
 
       <main>
         <Navbar/>
-
+<ToastContainer/>
         <section className="mx-0 sm:m-8 flex justify-center gap-10">
-          <ToastContainer/>
+          
           <UserAside />
           <UserBasketDetail data={basketData} itemsCount={basketData?.total_item} />
         </section>

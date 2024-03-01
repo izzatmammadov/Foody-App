@@ -1,5 +1,3 @@
-// RestaurantDetail.tsx
-import { NextPage } from "next";
 import Head from "next/head";
 import { Navbar } from "../../../share/components/Navbar";
 import { Footer } from "../../../share/components/Footer";
@@ -9,8 +7,14 @@ import { RestDetailBasket } from "@/share/components/restaurantDetailBasket";
 import { useTranslation } from "react-i18next";
 import { useRouter } from "next/router";
 import React, { useEffect, useState } from "react";
-import { getProducts, getRestourans, postProductForBasket } from "@/share/services/axios";
+import {
+  getProducts,
+  getRestourans,
+  postProductForBasket,
+} from "@/share/services/axios";
 import { useGlobalStore } from "@/share/services/provider";
+import restourans from "@/pages/admin/restaurants";
+import { ToastContainer, toast } from "react-toastify";
 
 interface RestaurantDetailProps {
   name?: any;
@@ -18,58 +22,94 @@ interface RestaurantDetailProps {
 
 const RestaurantDetail: React.FC<RestaurantDetailProps> = ({ name }) => {
   const { t } = useTranslation();
-  const { asPath } = useRouter();
+  const { asPath, push } = useRouter();
 
   const [lokal, setLokal] = useState<any>([]);
   const [product, setProducts] = useState<any[]>([]);
-  const {basketData, setBasketData } = useGlobalStore();
+  const { basketData, setBasketData } = useGlobalStore();
   let localPath = asPath.split("/")[2];
 
-  useEffect(() => {
-    RenderRestouran();
-  }, []);
+  async function fetchRestouran() {
+    try {
+      const res = await getRestourans();
+      const resArrs = res?.data.result.data;
 
-  async function RenderRestouran() {
-    const res = await getRestourans();
-    let resArrs = res?.data.result.data;
-
-    let focusRes = resArrs.filter(function (item: any) {
-      return item.id == localPath;
-    });
-    setLokal(focusRes);
-
-    return;
+      const focusRes = resArrs.find((item: any) => item.id === localPath);
+      setLokal(focusRes);
+    } catch (error) {
+      console.error("Error fetching restaurant:", error);
+    }
   }
 
-  async function RenderProduct() {
-    const res = await getProducts();
-    let resArr = res?.data.result.data;
+  async function fetchProducts() {
+    try {
+      const res = await getProducts();
+      const resArr = res?.data.result.data;
 
-    let focusProduct = resArr.filter(
-      (item: any) => item.rest_id == lokal[0]?.name
-    );
-    // console.log(focusProduct, "focusProduct-----------");
-    setProducts(focusProduct);
+      const focusProduct = resArr.filter(
+        (item: any) => item.rest_id === lokal?.name
+      );
+      setProducts(focusProduct);
+    } catch (error) {
+      console.error("Error fetching products:", error);
+    }
   }
 
   useEffect(() => {
-    RenderProduct();
+    fetchRestouran();
+  }, [localPath]);
+
+  useEffect(() => {
+    if (lokal) {
+      fetchProducts();
+    }
   }, [lokal]);
 
+  const date: Date = new Date();
 
+  function reLogin() {
+    const loginDate: number | null = parseInt(
+      localStorage.getItem("loginDate") || "",
+      10
+    );
+    const currentSecond: number = date.getTime();
+    const timeDifference: number = currentSecond - (loginDate || 0);
 
+    if (!localStorage.getItem("userInfo")) {
+      toast.error("You need to be logged in !");
+      setTimeout(() => {
+        push("/login");
+      }, 750);
+      return;
+    }
 
-async function handleButtonClick  (id: string | number) {
-    // console.log(id);
-   const res = await postProductForBasket(id)
-   if (res?.status === 201) {
-     setBasketData(res?.data)
-   }
-   console.log(res);
+    if (timeDifference / 1000 >= 3600) {
+      toast.error("Your browsing session has expired !");
+      setTimeout(() => {
+        push("/login");
+      }, 750);
+      localStorage.removeItem("userInfo");
+      localStorage.removeItem("tokenObj");
+    } else if (timeDifference / 1000 >= 3540) {
+      toast.warning(
+        "You will be logged out from the site in the next 1 minutes.!"
+      );
+    }
+  }
 
-   
-    
-  };
+  async function handleButtonClick(id: string | number) {
+    try {
+      const res = await postProductForBasket(id);
+      reLogin();
+      if (res?.status === 201) {
+        setBasketData(res?.data);
+      }
+    } catch (error) {
+      console.error("Error adding product to basket:", error);
+    }
+  }
+
+  console.log(lokal);
 
   return (
     <>
@@ -92,21 +132,24 @@ async function handleButtonClick  (id: string | number) {
               </p>
               <div className="max-h-[432px] overflow-y-auto">
                 {product?.map((item: any) => {
-               return   <RestDetailProductReact
-                    key={item.id}
-                    lokal={lokal}
-                    name={item.name}
-                    desc={item.description}
-                    price={item.price}
-                    imageSrc={item.img_url}
-                    onClick={() => handleButtonClick(item?.id)}
-                  />
+                  return (
+                    <RestDetailProductReact
+                      key={item.id}
+                      lokal={lokal}
+                      name={item.name}
+                      desc={item.description}
+                      price={item.price}
+                      imageSrc={item.img_url}
+                      onClick={() => handleButtonClick(item?.id)}
+                    />
+                  );
                 })}
               </div>
+              <ToastContainer />
             </div>
             {/* BASKET */}
             <div className="flex flex-col bg-whiteLight1 p-4 w-full sm:w-2/5">
-              <RestDetailBasket  />
+              <RestDetailBasket />
             </div>
           </section>
         </section>

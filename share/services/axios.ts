@@ -140,7 +140,7 @@ export const getOffer = async () => {
     const response = await instanceAxios.get("/offer");
     return response;
   } catch (error) {
-    toast.error("Can not get offer!");
+    // toast.error("Can not get offer!");
     console.log(error);
   }
 };
@@ -150,7 +150,7 @@ export const getEditOffer = async (id: string) => {
     const response = await instanceAxios.get(`/offer/${id}`);
     return response;
   } catch (error) {
-    toast.error("Can not get offer!");
+    // toast.error("Can not get offer!");
     console.log(error);
   }
 };
@@ -161,7 +161,7 @@ export const putOffer = async (id: string, offerValues: OfferValues) => {
     const response = await instanceAxios.put(`/offer/${id}`, offerValues);
     return response;
   } catch (error) {
-    toast.error("Can not update offer!");
+    // toast.error("Can not update offer!");
     console.log(error);
   }
 };
@@ -172,7 +172,7 @@ export const deleteOffer = async (id: string) => {
     const response = await instanceAxios.delete(`/offer/${id}`);
     return response;
   } catch (error) {
-    toast.error("Can not delete offer!");
+    // toast.error("Can not delete offer!");
     console.log(error);
   }
 };
@@ -299,15 +299,13 @@ export async function getProfileInfo() {
   // }
 }
 
-export async function putProfileInfo(form: userProfileType) {
+export async function putProfileInfo(data: userProfileType) {
   try {
-    let item: any = localStorage.getItem("userInfo");
+     let item: any = localStorage.getItem("userInfo");
 
-    let access_token = JSON.parse(item);
+     let access_token = JSON.parse(item);
 
-    const response = await instanceAxios.get(`/auth/user/`, {
-      data: form,
-
+     const response = await instanceAxios.put(`/auth/user`,data, {
       headers: {
         Authorization: `Bearer ${access_token.access_token}`,
       },
@@ -497,7 +495,7 @@ export const deleteOrderHistory = async (id:string | number) => {
       let item: any = localStorage.getItem("userInfo")
       let acsess_token = JSON.parse(item)
       
-      const response = await instanceAxios.delete('/api/order', {
+      const response = await instanceAxios.delete('/order', {
         data: {
           "order_id": id,
         },

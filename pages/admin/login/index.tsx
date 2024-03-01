@@ -20,6 +20,8 @@ export default function AdminLogin() {
 
   const passwordRef = useRef<HTMLInputElement>(null);
 
+  const date:Date|any = new Date()
+
 type token = {
   "access_token": string,
   "refresh_token": string
@@ -69,13 +71,14 @@ let tokenObj: token = JSON.parse(
 
     if (res?.status === 200) {
       setIsLoading(false);
-
+      localStorage.setItem("loginDate", date.getTime());
       toast.success("Logged in successfully!");
       tokenObj = {
         "access_token": res.data.user.access_token ,
         "refresh_token": res.data.user.refresh_token
       }
-      localStorage.setItem("tokenObj",JSON.stringify(tokenObj))
+      localStorage.setItem("tokenObj", JSON.stringify(tokenObj))
+      localStorage.setItem("userInfo", JSON.stringify(res?.data.user));
       // console.log(tokenObj);
       
       if (emailRef.current && passwordRef.current) {

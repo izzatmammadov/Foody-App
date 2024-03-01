@@ -19,7 +19,7 @@ const AboutUs = () => {
       {/* //* for big screen --------------------------------------------------------------- */}
       <main className="hidden sm:block">
         <section className=" flex flex-wrap p-8 mx-auto gap-[60px]  justify-center xxl:justify-between">
-          <div className="max-w-[565px] flex flex-col gap-8 ml-8">
+          <div data-aos="fade-right" className="max-w-[565px] flex flex-col gap-8 ml-8">
             <p className="font-mukta text-[45px] font-semibold leading-8 tracking-tight ">
               {t("about_us")}
             </p>
@@ -33,7 +33,7 @@ const AboutUs = () => {
               layouts and visual mockups.
             </p>
           </div>
-          <div className=" relative w-[634px] h-[789px] mr-[50px] ">
+          <div data-aos="fade-left" className=" relative w-[634px] h-[789px] mr-[50px] ">
             <Image
               width={680}
               className=""
