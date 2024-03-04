@@ -83,14 +83,14 @@ const AdminOffersTableT: React.FC<AdminOffersTableType> = ({
     };
 
     if (!isInputValid(title, description, img)) {
-      toast.warning("Please fill all the inputs!");
+      // toast.warning("Please fill all the inputs!");
       return;
     }
 
     const res = await putOffer(activeId, offerValues);
 
     if (res?.status === 200) {
-      toast.success("Edit was successfully!");
+      // toast.success("Edit was successfully!");
       const updatedData = offers.map((item: any) => {
         if (item.id === activeId) {
           return res.data.data;
@@ -120,7 +120,7 @@ const AdminOffersTableT: React.FC<AdminOffersTableType> = ({
     if (res?.status === 204) {
       let newData = offers?.filter((item: any) => item.id !== activeId);
       setOffers(newData);
-      toast.success("Deleted successfully!");
+      // toast.success("Deleted successfully!");
 
       setIsModalOpen((prev) => !prev);
     }
