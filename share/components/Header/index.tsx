@@ -15,7 +15,7 @@ export const Header = () => {
 
       {/* MAIN SECTION */}
       <section className="flex flex-col-reverse sm:flex-row justify-center items-center h-screen px-1 sm:px-11 -mt-24">
-        <div className="w-full sm:w-1/2 flex flex-col gap-10" data-aos="fade-right"
+        <div className="w-full sm:w-1/2 flex flex-col gap-10" data-aos="zoom-in"
      data-aos-offset="300"
      data-aos-easing="ease-in-sine">
           <h2 className="text-4xl text-center sm:text-5xl font-black leading-tight sm:text-start">
